@@ -4,7 +4,7 @@ using static MunicipalityMobilitySystem.Data.DataConstants.Car;
 
 namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
 {
-    public class Truck
+    public class Truck : Vehicle
     {
         [Required]
         [MaxLength(EngineTypeMaxLength)]
