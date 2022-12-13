@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MunicipalityMobilitySystem", "MunicipalityMobilitySystem\MunicipalityMobilitySystem.csproj", "{7548C933-DDAD-4F40-9763-BA3124ADE050}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityMobilitySystem", "MunicipalityMobilitySystem\MunicipalityMobilitySystem.csproj", "{7548C933-DDAD-4F40-9763-BA3124ADE050}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MunicipalityMobilitySystem.Infrasructure", "MunicipalityMobilitySystem.Infrasructure\MunicipalityMobilitySystem.Infrasructure.csproj", "{395E73D0-D63C-4523-98E6-94EECD481C20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MunicipalityMobilitySystem.Core", "MunicipalityMobilitySystem.Core\MunicipalityMobilitySystem.Core.csproj", "{0C9712AC-AD9F-41A8-B622-BC558B2F9998}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{7548C933-DDAD-4F40-9763-BA3124ADE050}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7548C933-DDAD-4F40-9763-BA3124ADE050}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7548C933-DDAD-4F40-9763-BA3124ADE050}.Release|Any CPU.Build.0 = Release|Any CPU
+		{395E73D0-D63C-4523-98E6-94EECD481C20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{395E73D0-D63C-4523-98E6-94EECD481C20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{395E73D0-D63C-4523-98E6-94EECD481C20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{395E73D0-D63C-4523-98E6-94EECD481C20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C9712AC-AD9F-41A8-B622-BC558B2F9998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C9712AC-AD9F-41A8-B622-BC558B2F9998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C9712AC-AD9F-41A8-B622-BC558B2F9998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C9712AC-AD9F-41A8-B622-BC558B2F9998}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
