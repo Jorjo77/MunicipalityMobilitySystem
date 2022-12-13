@@ -4,9 +4,9 @@ using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 
 namespace MunicipalityMobilitySystem.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class MunicipalityMobilitySystemDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public MunicipalityMobilitySystemDbContext(DbContextOptions<MunicipalityMobilitySystemDbContext> options)
             : base(options)
         {
         }
