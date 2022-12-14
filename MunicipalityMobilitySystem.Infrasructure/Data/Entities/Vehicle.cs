@@ -1,14 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static MunicipalityMobilitySystem.Data.DataConstants.Vehicle;
 
 namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
 {
-    public class Vehicle
+    public abstract class Vehicle
     {
-        [Key]
-        public int Id { get; set; }
 
         [Required]
         [MaxLength(TypeMaxLength)]
@@ -34,7 +33,11 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         [Required]
         [Precision(12, 2)]
         public decimal PricePerHour { get; set; }
-        public string? RenterId { get; set; }
+
+        [ForeignKey(nameof(User))]
+        public string UserId { get; set; } = null!;
+
+        public IdentityUser? User { get; set; }
 
         public bool IsForRepearing { get; set; } = false;
 

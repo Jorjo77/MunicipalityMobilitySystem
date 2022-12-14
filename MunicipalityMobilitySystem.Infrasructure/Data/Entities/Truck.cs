@@ -6,6 +6,9 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
 {
     public class Truck : Vehicle
     {
+        [Key]
+        public int Id { get; set; }
+
         [Required]
         [MaxLength(EngineTypeMaxLength)]
         public string EngineType { get; set; } = null!;
