@@ -137,6 +137,24 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3de65bc5-d44c-418c-ad58-c01d4d9e6b52",
+                            Email = "guest@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "guest@mail.com",
+                            NormalizedUserName = "guest@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPK7wMgYdMAQQNce6BuQ8i/8m/IHOUApmhQ1SjWqsaTTydIAKVlt24naANq9IzjfJA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "27ed42d5-b1bf-4dbb-b913-68c3137f8403",
+                            TwoFactorEnabled = false,
+                            UserName = "guest@mail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -281,6 +299,23 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.HasIndex("VehicleParkId");
 
                     b.ToTable("Bikes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 2,
+                            Description = "A very good transport solution for sport people.",
+                            ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fpassati.com%2Fimages%2Fstories%2Fvirtuemart%2Fproduct%2FEGBERT27.5-29%2520DISK%2520BLUE%2520Front.jpg&imgrefurl=https%3A%2F%2Fpassati.com%2Findex.php%3Foption%3Dcom_virtuemart%26view%3Dproductdetails%26virtuemart_product_id%3D203%26virtuemart_category_id%3D2%26lang%3Dbg&tbnid=F1pd6OQdaNHHfM&vet=12ahUKEwia-avZ5vj7AhUunv0HHSr8DY8QMygHegUIARDLAQ..i&docid=zUMwW1b5u_0RHM&w=4750&h=3123&q=passati%20%D0%BA%D0%BE%D0%BB%D0%B5%D0%BB%D0%BE&ved=2ahUKEwia-avZ5vj7AhUunv0HHSr8DY8QMygHegUIARDLAQ",
+                            IsForCleaning = false,
+                            IsForRepearing = false,
+                            IsNeedDayExchangeVehicleCard = false,
+                            IsNeedHelmet = false,
+                            PricePerHour = 8.00m,
+                            Rating = 4,
+                            Type = "Passati",
+                            VehicleParkId = 1
+                        });
                 });
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Car", b =>
@@ -342,6 +377,23 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.HasIndex("VehicleParkId");
 
                     b.ToTable("Cars");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 2,
+                            Description = "A realy good and luxury transport solution.",
+                            EngineType = "Petrol",
+                            ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F5%2F52%2FMercedes-Benz_C_200_Avantgarde_%2528W_205%2529_%25E2%2580%2593_Frontansicht%252C_26._April_2014%252C_D%25C3%25BCsseldorf.jpg&imgrefurl=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMercedes-Benz_C-Class_(W205)&tbnid=wz3T3Jbg3NRb1M&vet=12ahUKEwjw97il6fj7AhUunv0HHSr8DY8QMygCegUIARDGAQ..i&docid=W-hhnTTjUDZfoM&w=3418&h=1711&q=mercedes%20c%20class%20w205&ved=2ahUKEwjw97il6fj7AhUunv0HHSr8DY8QMygCegUIARDGAQ",
+                            IsForCleaning = false,
+                            IsForRepearing = false,
+                            IsNeedDayBlueCard = false,
+                            PricePerHour = 20.00m,
+                            Rating = 6,
+                            Type = "Mercedes C 180",
+                            VehicleParkId = 1
+                        });
                 });
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Category", b =>
@@ -363,6 +415,26 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categorys");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Small",
+                            Size = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Middle",
+                            Size = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Large",
+                            Size = 0
+                        });
                 });
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Scooter", b =>
@@ -427,6 +499,25 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.HasIndex("VehicleParkId");
 
                     b.ToTable("Scooters");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Description = "A realy good transport solution for a city center.",
+                            EngineType = "Electric",
+                            ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fbg.e-scooter.co%2Fwp-content%2Fuploads%2F2021%2F06%2Fcuckgo.com_-e1623030797433.jpeg&imgrefurl=https%3A%2F%2Fbg.e-scooter.co%2Fpiaggio-one%2F&tbnid=xM2wRoaEPhPNHM&vet=12ahUKEwiD_cOT5Pj7AhVxyrsIHaqtCpUQMygBegUIARC6AQ..i&docid=zsJorUwAg6RoyM&w=753&h=771&q=Piaggio&ved=2ahUKEwiD_cOT5Pj7AhVxyrsIHaqtCpUQMygBegUIARC6AQ",
+                            IsForCleaning = false,
+                            IsForRepearing = false,
+                            IsNeedDayExchangeVehicleCard = false,
+                            IsNeedHelmet = false,
+                            PricePerHour = 10.00m,
+                            Rating = 6,
+                            RenterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            Type = "Piaggo",
+                            VehicleParkId = 1
+                        });
                 });
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Truck", b =>
@@ -488,6 +579,23 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.HasIndex("VehicleParkId");
 
                     b.ToTable("Trucks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 3,
+                            Description = "A realy good transport solution for a big cargo.",
+                            EngineType = "Diesel",
+                            ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.volvotrucks.us%2F-%2Fmedia%2Fvtna%2Fimages%2Fshared%2Ftab-content%2Fvnl%2Ftabbed-feature%2Fvolvo-vnl-25th-aerodynamics.jpg%3Fh%3D410%26w%3D725%26rev%3D4a1b9e19a65e418ba2bcffc4b952005a%26hash%3D78C61F2B39C62E7464AAA1FC051487C0&imgrefurl=https%3A%2F%2Fwww.volvotrucks.us%2Ftrucks%2Fvnl%2F&tbnid=4lteSbMPeJB2jM&vet=12ahUKEwj3jKWa6vj7AhUykv0HHaDKC88QMygPegUIARDgAQ..i&docid=cXhpx2BnsyvK8M&w=725&h=410&q=volvo%20truck%202021&ved=2ahUKEwj3jKWa6vj7AhUykv0HHaDKC88QMygPegUIARDgAQ",
+                            IsForCleaning = false,
+                            IsForRepearing = false,
+                            IsNeedDayBlueCard = false,
+                            PricePerHour = 40.00m,
+                            Rating = 5,
+                            Type = "Volvo",
+                            VehicleParkId = 1
+                        });
                 });
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.VehiclePark", b =>
@@ -506,6 +614,13 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("VehicleParks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ParkName = "Central"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
