@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MunicipalityMobilitySystem.Models;
+using MunicipalityMobilitySystem.Models.Home;
 using System.Diagnostics;
 
 namespace MunicipalityMobilitySystem.Controllers
@@ -8,7 +9,7 @@ namespace MunicipalityMobilitySystem.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View(new IndexViewModel());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
