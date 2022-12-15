@@ -1,19 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-using static MunicipalityMobilitySystem.Data.DataConstants.Category;
+using static MunicipalityMobilitySystem.Data.DataConstants.VehiclePark;
+
 namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
 {
-    public class Category
+    public class VehiclePark
     {
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(NameMaxLength)]
-        public string Name { get; set; } = null!;
-
-        [Required]
-        public int Size { get; set; }
+        [MaxLength(ParkNameMaxLength)]
+        public string ParkName { get; set; } = null!;
         public IEnumerable<Bike> Bikes { get; set; } = new List<Bike>();
         public IEnumerable<Scooter> Scooters { get; set; } = new List<Scooter>();
         public IEnumerable<Car> Cars { get; set; } = new List<Car>();
