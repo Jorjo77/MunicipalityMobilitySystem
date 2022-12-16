@@ -1,6 +1,6 @@
 ﻿namespace MunicipalityMobilitySystem.Models.Bikes
 {
-    public class AllTrucksQueryModel
+    public class AllBikesQueryModel
     {
     }
 }

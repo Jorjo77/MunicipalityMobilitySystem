@@ -1,5 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MunicipalityMobilitySystem.Core.Contracts.Bike;
+using MunicipalityMobilitySystem.Core.Contracts.Car;
+using MunicipalityMobilitySystem.Core.Contracts.Scooter;
+using MunicipalityMobilitySystem.Core.Contracts.Truck;
+using MunicipalityMobilitySystem.Core.Services;
 using MunicipalityMobilitySystem.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +26,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
+builder.Services.AddApplicationServices();
+
+builder.Services.AddResponseCaching();
+
+WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {

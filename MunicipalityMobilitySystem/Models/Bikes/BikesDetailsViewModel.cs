@@ -1,6 +1,6 @@
 ﻿namespace MunicipalityMobilitySystem.Models.Bikes
 {
-    public class TrucksDetailsViewModel
+    public class BikesDetailsViewModel
     {
     }
 }

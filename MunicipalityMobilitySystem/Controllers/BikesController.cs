@@ -10,17 +10,17 @@ namespace MunicipalityMobilitySystem.Controllers
         [AllowAnonymous]
         public IActionResult All()
         {
-            return View(new AllTrucksQueryModel());
+            return View(new AllBikesQueryModel());
         }
 
         public IActionResult Mine()
         {
-            return View(new AllTrucksQueryModel());
+            return View(new AllBikesQueryModel());
         }
 
         public IActionResult Details(int Id)
         {
-            return View(new TrucksDetailsViewModel());
+            return View(new BikesDetailsViewModel());
         }
 
         [HttpPost]

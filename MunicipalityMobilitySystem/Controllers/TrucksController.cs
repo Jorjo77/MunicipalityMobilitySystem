@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MunicipalityMobilitySystem.Models.Bikes;
+using MunicipalityMobilitySystem.Models.Trucks;
 
 namespace MunicipalityMobilitySystem.Controllers
 {
@@ -10,17 +11,17 @@ namespace MunicipalityMobilitySystem.Controllers
         [AllowAnonymous]
         public IActionResult All()
         {
-            return View(new AllCarsQueryModel());
+            return View(new AllTrucksQueryModel());
         }
 
         public IActionResult Mine()
         {
-            return View(new AllCarsQueryModel());
+            return View(new AllTrucksQueryModel());
         }
 
         public IActionResult Details(int Id)
         {
-            return View(new ScootersDetailsViewModel());
+            return View(new TrucksDetailsViewModel());
         }
 
         [HttpPost]
