@@ -4,7 +4,7 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Bike
 {
     public interface IBikeService
     {
-        Task<IEnumerable<BikeHomeModel>> LastOneBike();
+        Task<IEnumerable<VehicleHomeModel>> LastOneBike();
 
     }
 }

@@ -1,9 +1,9 @@
-﻿using MunicipalityMobilitySystem.Core.Models.Car;
+﻿using MunicipalityMobilitySystem.Core.Models;
 
-namespace MunicipalityMobilitySystem.Core.Contracts.Car
+namespace MunicipalityMobilitySystem.Core.Contracts
 {
     public interface ICarService
     {
-        Task<IEnumerable<CarHomeModel>> LastOneCar();
+        Task<IEnumerable<VehicleHomeModel>> LastOneCar();
     }
 }

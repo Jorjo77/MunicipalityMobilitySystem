@@ -1,6 +1,6 @@
-﻿using MunicipalityMobilitySystem.Core.Contracts.Bike;
+﻿using MunicipalityMobilitySystem.Core.Contracts;
 
-namespace MunicipalityMobilitySystem.Core.Models.Bike
+namespace MunicipalityMobilitySystem.Core.Models
 {
     public class VehicleHomeModel : IVehicleModel
     {

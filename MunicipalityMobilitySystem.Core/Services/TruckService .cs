@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MunicipalityMobilitySystem.Core.Contracts.Truck;
-using MunicipalityMobilitySystem.Core.Exceptions;
-using MunicipalityMobilitySystem.Core.Models.Truck;
+using MunicipalityMobilitySystem.Core.Models;
 using MunicipalityMobilitySystem.Data;
 
 namespace MunicipalityMobilitySystem.Core.Services
@@ -21,10 +20,10 @@ namespace MunicipalityMobilitySystem.Core.Services
             this.logger = logger;
         }
 
-        public async Task<IEnumerable<TruckHomeModel>> LastOneTruck()
+        public async Task<IEnumerable<VehicleHomeModel>> LastOneTruck()
         {
             var result = await context.Trucks.OrderByDescending(t => t.Id)
-                .Select(t=> new TruckHomeModel
+                .Select(t=> new VehicleHomeModel
                 {
                     Id = t.Id,
                     Type= t.Type,

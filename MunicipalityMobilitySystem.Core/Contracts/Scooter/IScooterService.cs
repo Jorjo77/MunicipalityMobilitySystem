@@ -1,9 +1,9 @@
-﻿using MunicipalityMobilitySystem.Core.Models.Scooter;
+﻿using MunicipalityMobilitySystem.Core.Models;
 
 namespace MunicipalityMobilitySystem.Core.Contracts.Scooter
 {
     public interface IScooterService
     {
-        Task<IEnumerable<ScooterHomeModel>> LastOneScooter();
+        Task<IEnumerable<VehicleHomeModel>> LastOneScooter();
     }
 }

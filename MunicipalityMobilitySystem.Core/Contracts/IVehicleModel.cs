@@ -1,4 +1,4 @@
-﻿namespace MunicipalityMobilitySystem.Core.Contracts.Bike
+﻿namespace MunicipalityMobilitySystem.Core.Contracts
 {
     internal interface IVehicleModel
     {

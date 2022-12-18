@@ -1,45 +1,92 @@
-﻿@{
-    ViewBag.Title = "Home";
-}
+﻿@model IEnumerable<VehicleHomeModel>
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
+@{
+    ViewData["Title"] = "Home Page";
+    var vehicles = Model.ToList();
+}
+
 <div class="text-center">
     <h1 class="display-4">Select the type of the vehicle you are interested:</h1>
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <figure class="figure">
-                    <img src="@ViewBag.Car.ImageUrl" figure-img img-fluid rounded" alt="Car">
-                    <figcaption class="figure-caption">@ViewBag.Car.Rating</figcaption>
-                    <a class="btn btn-warning" asp-controller="Car" asp-action="All">Cars</a>
-                </figure>
-            </div>
-            <div class="col">
-                <figure class="figure">
-                    <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.volvotrucks.us%2F-%2Fmedia%2Fvtna%2Fimages%2Fshared%2Ftab-content%2Fvnl%2Ftabbed-feature%2Fvolvo-vnl-25th-aerodynamics.jpg%3Fh%3D410%26w%3D725%26rev%3D4a1b9e19a65e418ba2bcffc4b952005a%26hash%3D78C61F2B39C62E7464AAA1FC051487C0&imgrefurl=https%3A%2F%2Fwww.volvotrucks.us%2Ftrucks%2Fvnl%2F&tbnid=4lteSbMPeJB2jM&vet=12ahUKEwj3jKWa6vj7AhUykv0HHaDKC88QMygPegUIARDgAQ..i&docid=cXhpx2BnsyvK8M&w=725&h=410&q=volvo%20truck%202021&ved=2ahUKEwj3jKWa6vj7AhUykv0HHaDKC88QMygPegUIARDgAQ" class="figure-img img-fluid rounded" alt="Truck">
-                    <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                        <a class="btn btn-warning" asp-controller="Truck" asp-action="All">Trucks</a>
-                </figure>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <figure class="figure">
-                    <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fpassati.com%2Fimages%2Fstories%2Fvirtuemart%2Fproduct%2FEGBERT27.5-29%2520DISK%2520BLUE%2520Front.jpg&imgrefurl=https%3A%2F%2Fpassati.com%2Findex.php%3Foption%3Dcom_virtuemart%26view%3Dproductdetails%26virtuemart_product_id%3D203%26virtuemart_category_id%3D2%26lang%3Dbg&tbnid=F1pd6OQdaNHHfM&vet=12ahUKEwia-avZ5vj7AhUunv0HHSr8DY8QMygHegUIARDLAQ..i&docid=zUMwW1b5u_0RHM&w=4750&h=3123&q=passati%20%D0%BA%D0%BE%D0%BB%D0%B5%D0%BB%D0%BE&ved=2ahUKEwia-avZ5vj7AhUunv0HHSr8DY8QMygHegUIARDLAQ" class="figure-img img-fluid rounded" alt="Bike">
-                    <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                        <a class="btn btn-warning" asp-controller="Bike" asp-action="All">Bikes</a>
-                </figure>
-            </div>
-            <div class="col">
-                <figure class="figure">
-                    <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fbg.e-scooter.co%2Fwp-content%2Fuploads%2F2021%2F06%2Fcuckgo.com_-e1623030797433.jpeg&imgrefurl=https%3A%2F%2Fbg.e-scooter.co%2Fpiaggio-one%2F&tbnid=xM2wRoaEPhPNHM&vet=12ahUKEwiD_cOT5Pj7AhVxyrsIHaqtCpUQMygBegUIARC6AQ..i&docid=zsJorUwAg6RoyM&w=753&h=771&q=Piaggio&ved=2ahUKEwiD_cOT5Pj7AhVxyrsIHaqtCpUQMygBegUIARC6AQ" class="figure-img img-fluid rounded" alt="Scooter">
-                    <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                        <a class="btn btn-warning" asp-controller="Scooter" asp-action="All">Scooters</a>
-                </figure>
-            </div>
-        </div>
+        <a class="btn btn-warning" asp-controller="Bike" asp-action="All">Bikes</a>
+        <a class="btn btn-warning" asp-controller="Scooter" asp-action="All">Scooters</a>
+        <a class="btn btn-warning" asp-controller="Car" asp-action="All">Cars</a>
+        <a class="btn btn-warning" asp-controller="Truck" asp-action="All">Trucks</a>
     </div>
+
+<div class="mb-5"></div>
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        @for (int i = 0; i < vehicles.Count(); i++)
+        {
+                var vehicle = vehicles[i];
+            <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
+                <img class="d-block w-100" style="height:500px"
+                    src="@vehicle.ImageUrl" alt="@vehicle.Type">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>
+                        <a class="btn btn-primary" asp-controller="Houses" asp-action="Details"
+                            asp-route-id="@vehicle.Id"> @vehicle.Type</a>
+                    </h5>
+                </div>
+            </div>
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+@*    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @foreach (var vehicle in Model)
+            {
+                <div class="carousel-item">
+
+                    <img class="d-block w-100" style="height:500px"
+                     src="@vehicle.ImageUrl" alt="@vehicle.Type">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>
+                            <a class="btn btn-primary" asp-controller="Home" asp-action="Details"
+                           asp-route-id="@vehicle.Id"> @vehicle.Type</a>
+                        </h5>
+                    </div>
+                </div>
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>*@
+
+    @*<div class="container">
+        <div class="row">
+            @foreach (var vehicle in Model)
+            {
+             <div class="col">
+                <figure class="figure">
+                    <img src="@vehicle.ImageUrl" figure-img img-fluid rounded" alt="Car">
+                    <figcaption class="figure-caption">@vehicle.Rating</figcaption>
+                </figure>
+            </div>
+            }
+        </div>
+
+    </div>*@
 </div>

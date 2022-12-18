@@ -1,31 +1,19 @@
-﻿using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
-using MunicipalityMobilitySystem.Core.Contracts.Bike;
-using MunicipalityMobilitySystem.Core.Contracts.Car;
-using MunicipalityMobilitySystem.Core.Contracts.Scooter;
-using MunicipalityMobilitySystem.Core.Contracts.Truck;
+﻿using Microsoft.AspNetCore.Mvc;
+using MunicipalityMobilitySystem.Core.Contracts;
+using MunicipalityMobilitySystem.Core.Models;
 using MunicipalityMobilitySystem.Models;
-using MunicipalityMobilitySystem.Models.Home;
 using System.Diagnostics;
 
 namespace MunicipalityMobilitySystem.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IBikeService bikeService;
-        private readonly IScooterService scooterService;
-        private readonly ICarService carService;
-        private readonly ITruckService truckService;
+        private readonly IHomeService homeService;
 
-        public HomeController(IBikeService bikeService,
-            IScooterService scooterService,
-            ICarService carService,
-            ITruckService truckService)
+        public HomeController(
+            IHomeService homeService)
         {
-            this.bikeService = bikeService;
-            this.scooterService = scooterService;
-            this.carService = carService;
-            this.truckService = truckService;
+            this.homeService = homeService;
         }
         public async Task<IActionResult> Index()
         {
@@ -34,19 +22,9 @@ namespace MunicipalityMobilitySystem.Controllers
             //    return RedirectToAction("Index", "Admin", new { area = "Admin" });
             //}
 
+            var models = await homeService.LastTopRankedVehicles();
 
-            var bikeModel = await bikeService.LastOneBike();
-            var scooterModel = await scooterService.LastOneScooter();
-            var carModel = await carService.LastOneCar();
-            var truckModel = await truckService.LastOneTruck();
-
-            ViewBag.Bike = bikeModel;
-            ViewBag.Scooter = scooterModel;
-            ViewBag.Car = carModel;
-            ViewBag.Truck = truckModel;
-
-            return View(ViewBag);
-
+            return View(models);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

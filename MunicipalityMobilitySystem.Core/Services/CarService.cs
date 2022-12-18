@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MunicipalityMobilitySystem.Core.Contracts.Car;
-using MunicipalityMobilitySystem.Core.Exceptions;
-
-using MunicipalityMobilitySystem.Core.Models.Car;
+using MunicipalityMobilitySystem.Core.Contracts;
+using MunicipalityMobilitySystem.Core.Models;
 using MunicipalityMobilitySystem.Data;
 
 namespace MunicipalityMobilitySystem.Core.Services
@@ -21,10 +19,10 @@ namespace MunicipalityMobilitySystem.Core.Services
             this.context = context;
             this.logger = logger;
         }
-        public async Task<IEnumerable<CarHomeModel>> LastOneCar()
+        public async Task<IEnumerable<VehicleHomeModel>> LastOneCar()
         {
             var result = await context.Cars.OrderByDescending(c => c.Id)
-                .Select(c => new CarHomeModel
+                .Select(c => new VehicleHomeModel
                 {
                     Id = c.Id,
                     Type = c.Type,

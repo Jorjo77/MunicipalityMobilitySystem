@@ -1,9 +1,9 @@
-﻿using MunicipalityMobilitySystem.Core.Models.Truck;
+﻿using MunicipalityMobilitySystem.Core.Models;
 
 namespace MunicipalityMobilitySystem.Core.Contracts.Truck
 {
     public interface ITruckService
     {
-        Task<IEnumerable<TruckHomeModel>> LastOneTruck();
+        Task<IEnumerable<VehicleHomeModel>> LastOneTruck();
     }
 }
