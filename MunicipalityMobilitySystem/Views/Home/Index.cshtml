@@ -1,92 +1,83 @@
-﻿@model IEnumerable<VehicleHomeModel>
+﻿@{
+    ViewBag.Title = "Index";
+}
 
 @{
-    ViewData["Title"] = "Home Page";
+    var bike = ViewBag.Bike;
+    var scooter = ViewBag.Scooter;
+    var car = ViewBag.Car;
+    var truck = ViewBag.Truck;
 }
 
 @{
     ViewData["Title"] = "Home Page";
-    var vehicles = Model.ToList();
 }
 
 <div class="text-center">
-    <h1 class="display-4">Select the type of the vehicle you are interested:</h1>
-    <div class="container">
-        <a class="btn btn-warning" asp-controller="Bike" asp-action="All">Bikes</a>
-        <a class="btn btn-warning" asp-controller="Scooter" asp-action="All">Scooters</a>
-        <a class="btn btn-warning" asp-controller="Car" asp-action="All">Cars</a>
-        <a class="btn btn-warning" asp-controller="Truck" asp-action="All">Trucks</a>
-    </div>
 
-<div class="mb-5"></div>
 
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        @for (int i = 0; i < vehicles.Count(); i++)
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+        @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
         {
-                var vehicle = vehicles[i];
-            <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
-                <img class="d-block w-100" style="height:500px"
-                    src="@vehicle.ImageUrl" alt="@vehicle.Type">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>
-                        <a class="btn btn-primary" asp-controller="Houses" asp-action="Details"
-                            asp-route-id="@vehicle.Id"> @vehicle.Type</a>
-                    </h5>
-                </div>
-            </div>
+            <h1 class="display-4">Select the type of the vehicle you are interested to rent:</h1>
+        }
+        else
+        {
+            <h1 class="display-4">Login to find all our vehicles for a rent:</h1>
         }
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
+    <div class="mb-5"></div>
 
-
-@*    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            @foreach (var vehicle in Model)
-            {
-                <div class="carousel-item">
-
-                    <img class="d-block w-100" style="height:500px"
-                     src="@vehicle.ImageUrl" alt="@vehicle.Type">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>
-                            <a class="btn btn-primary" asp-controller="Home" asp-action="Details"
-                           asp-route-id="@vehicle.Id"> @vehicle.Type</a>
-                        </h5>
-                    </div>
-                </div>
-            }
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>*@
-
-    @*<div class="container">
+    <div class="container">
         <div class="row">
-            @foreach (var vehicle in Model)
-            {
-             <div class="col">
+            <div class="col">
                 <figure class="figure">
-                    <img src="@vehicle.ImageUrl" figure-img img-fluid rounded" alt="Car">
-                    <figcaption class="figure-caption">@vehicle.Rating</figcaption>
+                    <img src="@bike.ImageUrl" figure-img img-fluid rounded" alt="@bike.Type">
                 </figure>
+                <div class="col-12 text-center">
+                    @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn btn-primary" asp-controller="Bike" asp-action="All">All Bikes</a>
+                    }
+                </div>
             </div>
-            }
+            <div class="col">
+                <figure class="figure">
+                    <img src="@scooter.ImageUrl" figure-img img-fluid rounded" alt="@scooter.Type">
+                </figure>
+                <div class="col-12 text-center">
+                    @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn btn-primary" asp-controller="Scooter" asp-action="All">All Scooters</a>
+                    }
+                </div>
+            </div>
         </div>
-
-    </div>*@
+        <hr />
+        <div class="row">
+            <div class="col">
+                <figure class="figure">
+                    <img src="@car.ImageUrl" figure-img img-fluid rounded" alt="@car.Type">
+                </figure>
+                <div class="col-12 text-center">
+                    @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn btn-primary" asp-controller="Car" asp-action="All">All Cars</a>
+                    }
+                </div>
+            </div>
+            <div class="col">
+                <figure class="figure">
+                    <img src="@truck.ImageUrl" figure-img img-fluid rounded" alt="@truck.Type">
+                </figure>
+                <div class="col-12 text-center">
+                    @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn btn-primary" asp-controller="Truck" asp-action="All">All Trucks</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

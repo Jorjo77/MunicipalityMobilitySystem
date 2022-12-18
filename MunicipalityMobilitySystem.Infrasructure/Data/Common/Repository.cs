@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using MunicipalityMobilitySystem.Data;
 using System.Linq.Expressions;
 
 namespace MunicipalityMobilitySystem.Infrastructure.Data.Common
@@ -26,7 +27,7 @@ namespace MunicipalityMobilitySystem.Infrastructure.Data.Common
             return this.Context.Set<T>();
         }
 
-        public Repository(ApplicationDbContext context)
+        public Repository(MunicipalityMobilitySystemDbContext context)
         {
             Context = context;
         }

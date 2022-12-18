@@ -26,9 +26,17 @@ namespace MunicipalityMobilitySystem.Data
         private Category LargeCategory { get; set; } = null!;
         private VehiclePark CentralPark { get; set; } = null!;
         private Scooter FirstScooter { get; set; } = null!;
+        private Scooter SecondScooter { get; set; } = null!;
+        private Scooter ThirdScooter { get; set; } = null!;
         private Bike FirstBike { get; set; } = null!;
+        private Bike SecondBike { get; set; } = null!;
+        private Bike ThirdBike { get; set; } = null!;
         private Car FirstCar { get; set; } = null!;
+        private Car SecondCar { get; set; } = null!;
+        private Car ThirdCar { get; set; } = null!;
         private Truck FirstTruck { get; set; } = null!;
+        private Truck SecondTruck { get; set; } = null!;
+        private Truck ThirdTruck { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -46,21 +54,30 @@ namespace MunicipalityMobilitySystem.Data
             builder.Entity<VehiclePark>()
                 .HasData(this.CentralPark);
 
-            SeedScooter();
+            SeedScooters();
             builder.Entity<Scooter>()
-                .HasData(this.FirstScooter);
+                .HasData(this.FirstScooter,
+                this.SecondScooter,
+                this.ThirdScooter);
 
-            SeedBike();
+            SeedBikes();
             builder.Entity<Bike>()
-                .HasData(this.FirstBike);
+                .HasData(this.FirstBike,
+                this.SecondBike,
+                this.ThirdBike);
 
-            SeedCar();
+            SeedCars();
             builder.Entity<Car>()
-                .HasData(this.FirstCar);
+                .HasData(this.FirstCar,
+                this.SecondCar,
+                this.ThirdCar);
 
-            SeedTruck();
+            SeedTrucks();
             builder.Entity<Truck>()
-                .HasData(this.FirstTruck);
+                .HasData(this.FirstTruck,
+                this.SecondTruck,
+                this.ThirdTruck
+                );
 
             base.OnModelCreating(builder);
         }
@@ -110,67 +127,170 @@ namespace MunicipalityMobilitySystem.Data
                 ParkName = "Central"
             };
         }
-        private void SeedScooter()
+        private void SeedScooters()
         {
             this.FirstScooter = new Scooter()
             {
                 Id = 1,
-                EngineType = "Electric",
-                Type = "Piaggo",
+                EngineType = "Petrol",
+                Type = "Vespa",
                 Rating = 6,
+                PricePerHour = 9.00M,
+                CategoryId = this.SmallCategory.Id,
+                VehicleParkId = 1,
+                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4TbIp4RJgECS2py-M_zNjwLrXYIbcZ07XQA&usqp=CAU",
+                Description = "A very good transport solution for a city center.",
+                RenterId = this.GuestUser.Id,
+            };
+
+            this.SecondScooter = new Scooter()
+            {
+                Id = 2,
+                EngineType = "Petrol",
+                Type = "Piaggo",
+                Rating = 5,
                 PricePerHour = 10.00M,
                 CategoryId = this.SmallCategory.Id,
                 VehicleParkId = 1,
-                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fbg.e-scooter.co%2Fwp-content%2Fuploads%2F2021%2F06%2Fcuckgo.com_-e1623030797433.jpeg&imgrefurl=https%3A%2F%2Fbg.e-scooter.co%2Fpiaggio-one%2F&tbnid=xM2wRoaEPhPNHM&vet=12ahUKEwiD_cOT5Pj7AhVxyrsIHaqtCpUQMygBegUIARC6AQ..i&docid=zsJorUwAg6RoyM&w=753&h=771&q=Piaggio&ved=2ahUKEwiD_cOT5Pj7AhVxyrsIHaqtCpUQMygBegUIARC6AQ",
+                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.motor1.com%2Fimages%2Fmgl%2FP3GnXX%2Fs3%2F2022-vespa-elettrica-red---main.jpg&imgrefurl=https%3A%2F%2Fwww.rideapart.com%2Fnews%2F562600%2Fvespa-brand-906million-euros%2F&tbnid=CPQTR3BmwOmqPM&vet=12ahUKEwiTi8mXn4P8AhUYxgIHHRheDBwQMygQegUIARDWAQ..i&docid=oNKLqZ2kpDMT7M&w=1280&h=720&q=Piaggo&ved=2ahUKEwiTi8mXn4P8AhUYxgIHHRheDBwQMygQegUIARDWAQ",
                 Description = "A realy good transport solution for a city center.",
+                RenterId = this.GuestUser.Id,
+            };
+            this.ThirdScooter = new Scooter()
+            {
+                Id = 3,
+                EngineType = "Electric",
+                Type = "Piaggo",
+                Rating = 5,
+                PricePerHour = 11.00M,
+                CategoryId = this.MiddleCategory.Id,
+                VehicleParkId = 1,
+                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fbg.e-scooter.co%2Fi%2F96%2F0c%2F0a%2F95d8f798a27fb6ad77c11b8ec2.jpg&imgrefurl=https%3A%2F%2Fbg.e-scooter.co%2Fpiaggio-one%2F&tbnid=5Mt_ltA3Pdl3sM&vet=12ahUKEwiTi8mXn4P8AhUYxgIHHRheDBwQMygBegUIARC3AQ..i&docid=zsJorUwAg6RoyM&w=753&h=771&q=Piaggo&ved=2ahUKEwiTi8mXn4P8AhUYxgIHHRheDBwQMygBegUIARC3AQ",
+                Description = "Exellent transport solution for a city center.",
                 RenterId = this.GuestUser.Id,
             };
         }
 
-        private void SeedBike()
+        private void SeedBikes()
         {
             this.FirstBike = new Bike()
             {
                 Id = 1,
                 Type = "Passati",
                 Rating = 4,
-                PricePerHour = 8.00M,
+                PricePerHour = 4.00M,
                 CategoryId = this.MiddleCategory.Id,
                 VehicleParkId = 1,
-                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fpassati.com%2Fimages%2Fstories%2Fvirtuemart%2Fproduct%2FEGBERT27.5-29%2520DISK%2520BLUE%2520Front.jpg&imgrefurl=https%3A%2F%2Fpassati.com%2Findex.php%3Foption%3Dcom_virtuemart%26view%3Dproductdetails%26virtuemart_product_id%3D203%26virtuemart_category_id%3D2%26lang%3Dbg&tbnid=F1pd6OQdaNHHfM&vet=12ahUKEwia-avZ5vj7AhUunv0HHSr8DY8QMygHegUIARDLAQ..i&docid=zUMwW1b5u_0RHM&w=4750&h=3123&q=passati%20%D0%BA%D0%BE%D0%BB%D0%B5%D0%BB%D0%BE&ved=2ahUKEwia-avZ5vj7AhUunv0HHSr8DY8QMygHegUIARDLAQ",
+                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.home-max.bg%2Fstatic%2Fmedia%2Fups%2Fproducts%2Fmain%2F06054168_y.JPG%3Fv%3D0.31&imgrefurl=https%3A%2F%2Fwww.home-max.bg%2Faluminiev-mtb-velosiped-passati-24%2F&tbnid=2yQM2U2uluMNsM&vet=12ahUKEwiCgv78nYP8AhWFIMUKHXm7AhMQMygGegUIARDNAQ..i&docid=18h343pFLn71EM&w=4613&h=2843&q=Passaty&ved=2ahUKEwiCgv78nYP8AhWFIMUKHXm7AhMQMygGegUIARDNAQ",
                 Description = "A very good transport solution for sport people.",
                 RenterId = null,
             };
+            this.SecondBike = new Bike()
+            {
+                Id = 2,
+                Type = "Cross",
+                Rating = 5,
+                PricePerHour = 5.00M,
+                CategoryId = this.MiddleCategory.Id,
+                VehicleParkId = 1,
+                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuinQIdRNjDVnCddYQFkMkFIkt3cyXVfVqPA&usqp=CAU",
+                Description = "A realy good transport solution for sport people.",
+                RenterId = null,
+            };
+            this.ThirdBike = new Bike()
+            {
+                Id = 3,
+                Type = "Pinarello",
+                Rating = 6,
+                PricePerHour = 7.00M,
+                CategoryId = this.MiddleCategory.Id,
+                VehicleParkId = 1,
+                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcyclist.b-cdn.net%2Fsites%2Fcyclist%2Ffiles%2Fstyles%2Farticle_main_wide_image%2Fpublic%2F2021%2F11%2Fpinarello-dogma-f-1.jpg%3Fitok%3DhYRlGtTu&imgrefurl=https%3A%2F%2Fwww.cyclist.co.uk%2Fin-depth%2F10256%2Fwhat-is-a-road-bike&tbnid=_oCCGbIDpZdqDM&vet=12ahUKEwihuZSjnoP8AhUBtaQKHckKCJ4QMygDegUIARDMAQ..i&docid=zcxxLnqOLHXrGM&w=1240&h=698&q=road%20bike&ved=2ahUKEwihuZSjnoP8AhUBtaQKHckKCJ4QMygDegUIARDMAQ",
+                Description = "A very good luxury transport solution for beasy people.",
+                RenterId = null,
+            };
         }
-        private void SeedCar()
+        private void SeedCars()
         {
             this.FirstCar = new Car()
             {
                 Id = 1,
                 EngineType = "Petrol",
-                Type = "Mercedes C 180",
+                Type = "Mercedes CLS 180",
                 Rating = 6,
-                PricePerHour = 20.00M,
+                PricePerHour = 25.00M,
                 CategoryId = this.MiddleCategory.Id,
                 VehicleParkId = 1,
-                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F5%2F52%2FMercedes-Benz_C_200_Avantgarde_%2528W_205%2529_%25E2%2580%2593_Frontansicht%252C_26._April_2014%252C_D%25C3%25BCsseldorf.jpg&imgrefurl=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMercedes-Benz_C-Class_(W205)&tbnid=wz3T3Jbg3NRb1M&vet=12ahUKEwjw97il6fj7AhUunv0HHSr8DY8QMygCegUIARDGAQ..i&docid=W-hhnTTjUDZfoM&w=3418&h=1711&q=mercedes%20c%20class%20w205&ved=2ahUKEwjw97il6fj7AhUunv0HHSr8DY8QMygCegUIARDGAQ",
+                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFiWMRzQZJ4dYjRVlv-l25KWCVweGaWbIJOA&usqp=CAU",
                 Description = "A realy good and luxury transport solution.",
                 RenterId = null,
             };
+            this.SecondCar = new Car()
+            {
+                Id = 2,
+                EngineType = "Diesel",
+                Type = "VW Touran",
+                Rating = 5,
+                PricePerHour = 23.00M,
+                CategoryId = this.LargeCategory.Id,
+                VehicleParkId = 1,
+                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fkolalok.com%2Fnewimage%2Fsmall%2F2015-touran-ii-volkswagen.jpg&imgrefurl=https%3A%2F%2Fkolalok.com%2Fgabariti%2Fvolkswagen%2Ftouran.html&tbnid=vv3QuTgJq6H87M&vet=12ahUKEwicyeOinIP8AhXFwQIHHR6MAcIQMygNegUIARDbAQ..i&docid=Cv2JajDnUh_gbM&w=322&h=215&q=Wv%20toaran&ved=2ahUKEwicyeOinIP8AhXFwQIHHR6MAcIQMygNegUIARDbAQ",
+                Description = "A realy good and transport solution for a big family.",
+                RenterId = null,
+            };
+            this.ThirdCar = new Car()
+            {
+                Id = 3,
+                EngineType = "Electric",
+                Type = "Hynday EON",
+                Rating = 4,
+                PricePerHour = 20.00M,
+                CategoryId = this.SmallCategory.Id,
+                VehicleParkId = 1,
+                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.ultimatespecs.com%2Fcargallery%2F67%2F4854%2Fw400_Hyundai-Eon-2.jpg&imgrefurl=https%3A%2F%2Fwww.ultimatespecs.com%2Fbg%2Fcar-specs%2FHyundai%2F14708%2FHyundai-Eon-08-MPi.html&tbnid=2p0LKtPnAW8CPM&vet=12ahUKEwjzidSanYP8AhWSNewKHTg5CxIQMygCegUIARC9AQ..i&docid=ZGGa2cS6QA17DM&w=400&h=225&itg=1&q=hunday%20eon&ved=2ahUKEwjzidSanYP8AhWSNewKHTg5CxIQMygCegUIARC9AQ",
+                Description = "A very good and transport solution for a city center.",
+                RenterId = null,
+            };
         }
-        private void SeedTruck()
+        private void SeedTrucks()
         {
             this.FirstTruck = new Truck()
             {
                 Id = 1,
                 EngineType = "Diesel",
-                Type = "Volvo",
+                Type = "Scania",
                 Rating = 5,
                 PricePerHour = 40.00M,
                 CategoryId = this.LargeCategory.Id,
                 VehicleParkId = 1,
-                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.volvotrucks.us%2F-%2Fmedia%2Fvtna%2Fimages%2Fshared%2Ftab-content%2Fvnl%2Ftabbed-feature%2Fvolvo-vnl-25th-aerodynamics.jpg%3Fh%3D410%26w%3D725%26rev%3D4a1b9e19a65e418ba2bcffc4b952005a%26hash%3D78C61F2B39C62E7464AAA1FC051487C0&imgrefurl=https%3A%2F%2Fwww.volvotrucks.us%2Ftrucks%2Fvnl%2F&tbnid=4lteSbMPeJB2jM&vet=12ahUKEwj3jKWa6vj7AhUykv0HHaDKC88QMygPegUIARDgAQ..i&docid=cXhpx2BnsyvK8M&w=725&h=410&q=volvo%20truck%202021&ved=2ahUKEwj3jKWa6vj7AhUykv0HHaDKC88QMygPegUIARDgAQ",
-                Description = "A realy good transport solution for a big cargo.",
+                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb4pdFmd8vMzEsFxaFaonBFAQhs3EA2P9r_Q&usqp=CAU",
+                Description = "A realy good transport solution for a big cargos.",
+                RenterId = null,
+            };
+            this.SecondTruck = new Truck()
+            {
+                Id = 2,
+                EngineType = "Diesel",
+                Type = "Mercedes",
+                Rating = 6,
+                PricePerHour = 50.00M,
+                CategoryId = this.LargeCategory.Id,
+                VehicleParkId = 1,
+                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.kamioni.bg%2Fpictures%2F29618_2_scania%2Bbev2-650.jpg&imgrefurl=https%3A%2F%2Fwww.kamioni.bg%2Fmenu%2F10%2Fpost%2F29618%2FScania-predstavq-nova-gama-e-kamioni-za-regionalen-transport&tbnid=jkhfmffUYxtEHM&vet=12ahUKEwjcu_iPmIP8AhW2lv0HHavxCNsQMygGegUIARDOAQ..i&docid=iugoRchY4ROK5M&w=650&h=438&q=Scania&ved=2ahUKEwjcu_iPmIP8AhW2lv0HHavxCNsQMygGegUIARDOAQ",
+                Description = "Excelent transport solution for a big cargos.",
+                RenterId = null,
+            };
+            this.ThirdTruck = new Truck()
+            {
+                Id = 3,
+                EngineType = "Diesel",
+                Type = "Volvo",
+                Rating = 4,
+                PricePerHour = 35.00M,
+                CategoryId = this.LargeCategory.Id,
+                VehicleParkId = 1,
+                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.volvotrucks.us%2F-%2Fmedia%2Fvtna%2Fimages%2Fshared%2Ftab-content%2Fvnl%2Ftabbed-feature%2Fvolvo-vnl-25th-aerodynamics.jpg%3Fh%3D410%26w%3D725%26rev%3D4a1b9e19a65e418ba2bcffc4b952005a%26hash%3D78C61F2B39C62E7464AAA1FC051487C0&imgrefurl=https%3A%2F%2Fwww.volvotrucks.us%2Ftrucks%2Fvnl%2F&tbnid=4lteSbMPeJB2jM&vet=12ahUKEwjSvPvKmYP8AhU5nP0HHaRzDFsQMygPegUIARDkAQ..i&docid=cXhpx2BnsyvK8M&w=725&h=410&q=volvo%20truck%202021&ved=2ahUKEwjSvPvKmYP8AhU5nP0HHaRzDFsQMygPegUIARDkAQ",
+                Description = "A very good transport solution for a big cargos.",
                 RenterId = null,
             };
         }

@@ -6,6 +6,7 @@ using MunicipalityMobilitySystem.Core.Models;
 using MunicipalityMobilitySystem.Data;
 using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
+using System.Net.WebSockets;
 using System.Security.Cryptography.X509Certificates;
 
 namespace MunicipalityMobilitySystem.Core.Services
@@ -28,67 +29,91 @@ namespace MunicipalityMobilitySystem.Core.Services
             this.guard = guard;
         }
 
-        public async Task<IEnumerable<VehicleHomeModel>> LastTopRankedVehicles()
-        {
-
-
-            return await repo.VehicleParks
-                .SelectMany(x => x.Cars)
-                .Include(x => x.VehiclePark.Trucks)
-                .Include(x => x.VehiclePark.Bikes)
-                .Include(x => x.VehiclePark.Scooters)
-                .OrderByDescending(x => x.Id)
-                .ThenByDescending(x => x.Rating)
-                .Select(v => new VehicleHomeModel
-                {
-                    Id = v.Id,
-                    Type = v.Type,
-                    ImageUrl = v.ImageUrl,
-                    Rating = v.Rating
-                }).Take(4)
-                .ToListAsync();
-
-        }
-
         public async Task<VehicleHomeModel> LastTopRankedBike()
         {
-  
-                var topByke = await repo.AllReadonly<Bike>()
-                .OrderByDescending(b => b.Id)
-                .ThenByDescending(b => b.Rating)
-                .Select(b => new VehicleHomeModel
-                {
-                    Id = b.Id,
-                    Type = b.Type,
-                    Rating = b.Rating,
-                    ImageUrl = b.ImageUrl
-                })
-                .Take(1)
-                .FirstOrDefaultAsync();
+
+
+
+            var topByke = await repo.AllReadonly<Bike>()
+            .OrderByDescending(b => b.Id)
+            .ThenByDescending(b => b.Rating)
+            .Select(b => new VehicleHomeModel
+            {
+                Id = b.Id,
+                Type = b.Type,
+                Rating = b.Rating,
+                ImageUrl = b.ImageUrl
+            })
+            .Take(1)
+            .FirstOrDefaultAsync();
 
             guard.AgainstNull(topByke, "Bike can not be found");
 
-             return topByke=null!;
+            return topByke;
         }
 
-        public Task<IEnumerable<VehicleHomeModel>> LastTopRankedVehicles(VehicleHomeModel topBike, VehicleHomeModel topScooter, VehicleHomeModel topCar, VehicleHomeModel topTruck)
+        public async Task<VehicleHomeModel> LastTopRankedScooter()
         {
-            throw new NotImplementedException();
+
+            var topScooter = await repo.AllReadonly<Scooter>()
+            .OrderByDescending(s => s.Id)
+            .ThenByDescending(b => b.Rating)
+            .Select(b => new VehicleHomeModel
+            {
+                Id = b.Id,
+                Type = b.Type,
+                Rating = b.Rating,
+                ImageUrl = b.ImageUrl
+            })
+            .Take(1)
+            .FirstOrDefaultAsync();
+
+            guard.AgainstNull(topScooter, "Scoorer can not be found");
+
+            return topScooter;
         }
 
-        public Task<VehicleHomeModel> LastTopRankedScooter()
+        public async Task<VehicleHomeModel> LastTopRankedCar()
         {
-            throw new NotImplementedException();
+
+            var topCar = await repo.AllReadonly<Car>()
+            .OrderByDescending(s => s.Id)
+            .ThenByDescending(b => b.Rating)
+            .Select(b => new VehicleHomeModel
+            {
+                Id = b.Id,
+                Type = b.Type,
+                Rating = b.Rating,
+                ImageUrl = b.ImageUrl
+            })
+            .Take(1)
+            .FirstOrDefaultAsync();
+
+            guard.AgainstNull(topCar, "Car can not be found");
+
+            return topCar;
         }
 
-        public Task<VehicleHomeModel> LastTopRankedCar()
+        public async Task<VehicleHomeModel> LastTopRankedTruck()
         {
-            throw new NotImplementedException();
+
+            var topTruck = await repo.AllReadonly<Truck>()
+            .OrderByDescending(s => s.Id)
+            .ThenByDescending(b => b.Rating)
+            .Select(b => new VehicleHomeModel
+            {
+                Id = b.Id,
+                Type = b.Type,
+                Rating = b.Rating,
+                ImageUrl = b.ImageUrl
+            })
+            .Take(1)
+            .FirstOrDefaultAsync();
+
+            guard.AgainstNull(topTruck, "Truck can not be found");
+
+            return topTruck;
         }
 
-        public Task<VehicleHomeModel> LastTopRankedTruck()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

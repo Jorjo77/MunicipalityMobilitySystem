@@ -22,9 +22,17 @@ namespace MunicipalityMobilitySystem.Controllers
             //    return RedirectToAction("Index", "Admin", new { area = "Admin" });
             //}
 
-            var models = await homeService.LastTopRankedVehicles();
+            var bikeModel = await homeService.LastTopRankedBike();
+            var scooterModel = await homeService.LastTopRankedScooter();
+            var carModel = await homeService.LastTopRankedCar();
+            var truckModel = await homeService.LastTopRankedTruck();
 
-            return View(models);
+            ViewBag.Bike = bikeModel;
+            ViewBag.Scooter = scooterModel;
+            ViewBag.Car = carModel;
+            ViewBag.Truck = truckModel;
+
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
