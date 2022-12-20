@@ -29,7 +29,7 @@ namespace MunicipalityMobilitySystem.Core.Services
             this.guard = guard;
         }
 
-        public async Task<VehicleHomeModel> LastTopRankedBike()
+        public async Task<AllScootersQueryModel> LastTopRankedBike()
         {
 
 
@@ -37,7 +37,7 @@ namespace MunicipalityMobilitySystem.Core.Services
             var topByke = await repo.AllReadonly<Bike>()
             .OrderByDescending(b => b.Id)
             .ThenByDescending(b => b.Rating)
-            .Select(b => new VehicleHomeModel
+            .Select(b => new AllScootersQueryModel
             {
                 Id = b.Id,
                 Type = b.Type,
@@ -52,13 +52,13 @@ namespace MunicipalityMobilitySystem.Core.Services
             return topByke;
         }
 
-        public async Task<VehicleHomeModel> LastTopRankedScooter()
+        public async Task<AllScootersQueryModel> LastTopRankedScooter()
         {
 
             var topScooter = await repo.AllReadonly<Scooter>()
             .OrderByDescending(s => s.Id)
             .ThenByDescending(b => b.Rating)
-            .Select(b => new VehicleHomeModel
+            .Select(b => new AllScootersQueryModel
             {
                 Id = b.Id,
                 Type = b.Type,
@@ -73,13 +73,13 @@ namespace MunicipalityMobilitySystem.Core.Services
             return topScooter;
         }
 
-        public async Task<VehicleHomeModel> LastTopRankedCar()
+        public async Task<AllScootersQueryModel> LastTopRankedCar()
         {
 
             var topCar = await repo.AllReadonly<Car>()
             .OrderByDescending(s => s.Id)
             .ThenByDescending(b => b.Rating)
-            .Select(b => new VehicleHomeModel
+            .Select(b => new AllScootersQueryModel
             {
                 Id = b.Id,
                 Type = b.Type,
@@ -94,13 +94,13 @@ namespace MunicipalityMobilitySystem.Core.Services
             return topCar;
         }
 
-        public async Task<VehicleHomeModel> LastTopRankedTruck()
+        public async Task<AllScootersQueryModel> LastTopRankedTruck()
         {
 
             var topTruck = await repo.AllReadonly<Truck>()
             .OrderByDescending(s => s.Id)
             .ThenByDescending(b => b.Rating)
-            .Select(b => new VehicleHomeModel
+            .Select(b => new AllScootersQueryModel
             {
                 Id = b.Id,
                 Type = b.Type,

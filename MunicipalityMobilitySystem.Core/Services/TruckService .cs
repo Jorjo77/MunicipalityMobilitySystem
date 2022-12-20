@@ -20,10 +20,10 @@ namespace MunicipalityMobilitySystem.Core.Services
             this.logger = logger;
         }
 
-        public async Task<IEnumerable<VehicleHomeModel>> LastOneTruck()
+        public async Task<IEnumerable<AllScootersQueryModel>> LastOneTruck()
         {
             var result = await context.Trucks.OrderByDescending(t => t.Id)
-                .Select(t=> new VehicleHomeModel
+                .Select(t=> new AllScootersQueryModel
                 {
                     Id = t.Id,
                     Type= t.Type,

@@ -7,7 +7,7 @@ namespace MunicipalityMobilitySystem.Controllers
     [Authorize]
     public class CarController : Controller
     {
-        [AllowAnonymous]
+
         public IActionResult All()
         {
             return View(new AllScootersQueryModel());

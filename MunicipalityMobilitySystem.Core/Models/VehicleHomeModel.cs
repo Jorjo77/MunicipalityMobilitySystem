@@ -2,7 +2,7 @@
 
 namespace MunicipalityMobilitySystem.Core.Models
 {
-    public class VehicleHomeModel : IVehicleModel
+    public class AllScootersQueryModel : IVehicleModel
     {
         public int Id { get; set; }
 

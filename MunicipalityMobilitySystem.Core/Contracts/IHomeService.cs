@@ -4,9 +4,9 @@ namespace MunicipalityMobilitySystem.Core.Contracts
 {
     public interface IHomeService
     {
-        Task<VehicleHomeModel> LastTopRankedBike();
-        Task<VehicleHomeModel> LastTopRankedScooter();
-        Task<VehicleHomeModel> LastTopRankedCar();
-        Task<VehicleHomeModel> LastTopRankedTruck();
+        Task<AllScootersQueryModel> LastTopRankedBike();
+        Task<AllScootersQueryModel> LastTopRankedScooter();
+        Task<AllScootersQueryModel> LastTopRankedCar();
+        Task<AllScootersQueryModel> LastTopRankedTruck();
     }
 }
