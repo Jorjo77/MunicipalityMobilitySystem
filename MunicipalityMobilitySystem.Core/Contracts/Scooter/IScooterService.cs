@@ -4,6 +4,6 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Scooter
 {
     public interface IScooterService
     {
-        Task<IEnumerable<AllScootersQueryModel>> AllScooters();
+        Task<IEnumerable<VehicleHomeModel>> AllScooters();
     }
 }

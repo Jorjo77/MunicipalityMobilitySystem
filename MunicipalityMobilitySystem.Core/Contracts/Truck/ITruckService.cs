@@ -4,6 +4,6 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Truck
 {
     public interface ITruckService
     {
-        Task<IEnumerable<AllScootersQueryModel>> LastOneTruck();
+        Task<IEnumerable<VehicleHomeModel>> LastOneTruck();
     }
 }

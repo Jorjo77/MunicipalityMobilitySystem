@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using MunicipalityMobilitySystem.Core.Contracts.Scooter;
 using MunicipalityMobilitySystem.Core.Models;
 using MunicipalityMobilitySystem.Data;
+using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
 
 namespace MunicipalityMobilitySystem.Core.Services
@@ -21,10 +22,11 @@ namespace MunicipalityMobilitySystem.Core.Services
             this.logger = logger;
         }
 
-        public async Task<IEnumerable<AllScootersQueryModel>> LastOneScooter()
+        public async Task<IEnumerable<VehicleHomeModel>> AllScooters()
         {
-            var result = await repo.Scooters.OrderByDescending(s=>s.Id)
-                .Select(s=> new AllScootersQueryModel
+            var result = await repo.AllReadonly<Scooter>()
+                .OrderByDescending(s=>s.Id)
+                .Select(s=> new VehicleHomeModel
                 {
                     Id = s.Id,
                     Type= s.Type,

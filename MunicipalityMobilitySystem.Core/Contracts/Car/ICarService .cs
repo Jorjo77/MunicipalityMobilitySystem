@@ -4,6 +4,6 @@ namespace MunicipalityMobilitySystem.Core.Contracts
 {
     public interface ICarService
     {
-        Task<IEnumerable<AllScootersQueryModel>> LastOneCar();
+        Task<IEnumerable<VehicleHomeModel>> LastOneCar();
     }
 }

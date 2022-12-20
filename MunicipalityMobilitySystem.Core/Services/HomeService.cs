@@ -29,15 +29,12 @@ namespace MunicipalityMobilitySystem.Core.Services
             this.guard = guard;
         }
 
-        public async Task<AllScootersQueryModel> LastTopRankedBike()
+        public async Task<VehicleHomeModel> LastTopRankedBike()
         {
-
-
-
             var topByke = await repo.AllReadonly<Bike>()
             .OrderByDescending(b => b.Id)
             .ThenByDescending(b => b.Rating)
-            .Select(b => new AllScootersQueryModel
+            .Select(b => new VehicleHomeModel
             {
                 Id = b.Id,
                 Type = b.Type,
@@ -52,13 +49,13 @@ namespace MunicipalityMobilitySystem.Core.Services
             return topByke;
         }
 
-        public async Task<AllScootersQueryModel> LastTopRankedScooter()
+        public async Task<VehicleHomeModel> LastTopRankedScooter()
         {
 
             var topScooter = await repo.AllReadonly<Scooter>()
             .OrderByDescending(s => s.Id)
             .ThenByDescending(b => b.Rating)
-            .Select(b => new AllScootersQueryModel
+            .Select(b => new VehicleHomeModel
             {
                 Id = b.Id,
                 Type = b.Type,
@@ -73,13 +70,13 @@ namespace MunicipalityMobilitySystem.Core.Services
             return topScooter;
         }
 
-        public async Task<AllScootersQueryModel> LastTopRankedCar()
+        public async Task<VehicleHomeModel> LastTopRankedCar()
         {
 
             var topCar = await repo.AllReadonly<Car>()
             .OrderByDescending(s => s.Id)
             .ThenByDescending(b => b.Rating)
-            .Select(b => new AllScootersQueryModel
+            .Select(b => new VehicleHomeModel
             {
                 Id = b.Id,
                 Type = b.Type,
@@ -94,13 +91,13 @@ namespace MunicipalityMobilitySystem.Core.Services
             return topCar;
         }
 
-        public async Task<AllScootersQueryModel> LastTopRankedTruck()
+        public async Task<VehicleHomeModel> LastTopRankedTruck()
         {
 
             var topTruck = await repo.AllReadonly<Truck>()
             .OrderByDescending(s => s.Id)
             .ThenByDescending(b => b.Rating)
-            .Select(b => new AllScootersQueryModel
+            .Select(b => new VehicleHomeModel
             {
                 Id = b.Id,
                 Type = b.Type,

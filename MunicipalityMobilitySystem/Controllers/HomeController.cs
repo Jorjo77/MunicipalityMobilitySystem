@@ -27,6 +27,7 @@ namespace MunicipalityMobilitySystem.Controllers
             var carModel = await homeService.LastTopRankedCar();
             var truckModel = await homeService.LastTopRankedTruck();
 
+            //IndexViewModel is not used, here may have to use it!????????????
             ViewBag.Bike = bikeModel;
             ViewBag.Scooter = scooterModel;
             ViewBag.Car = carModel;
