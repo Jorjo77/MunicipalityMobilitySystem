@@ -1,14 +1,9 @@
-﻿using MunicipalityMobilitySystem.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MunicipalityMobilitySystem.Core.Models.Category;
 
 namespace MunicipalityMobilitySystem.Core.Contracts
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<VehicleCategoryServiceModel>> AllCategories();
+        Task<IEnumerable<CategoryServiceModel>> AllCategories();
     }
 }

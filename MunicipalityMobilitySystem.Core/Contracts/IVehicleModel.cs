@@ -4,7 +4,7 @@
     {
         public int Id { get; }
 
-        public string Type { get; }
+        public string Model { get; }
 
         public string ImageUrl { get; }
 

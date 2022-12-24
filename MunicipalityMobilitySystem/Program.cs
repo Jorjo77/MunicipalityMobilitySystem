@@ -1,10 +1,5 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MunicipalityMobilitySystem.Core.Contracts.Bike;
-using MunicipalityMobilitySystem.Core.Contracts.Car;
-using MunicipalityMobilitySystem.Core.Contracts.Scooter;
-using MunicipalityMobilitySystem.Core.Contracts.Truck;
-using MunicipalityMobilitySystem.Core.Services;
 using MunicipalityMobilitySystem.Data;
 
 var builder = WebApplication.CreateBuilder(args);

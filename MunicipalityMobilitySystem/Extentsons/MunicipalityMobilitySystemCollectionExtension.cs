@@ -1,7 +1,4 @@
 ﻿using MunicipalityMobilitySystem.Core.Contracts;
-using MunicipalityMobilitySystem.Core.Contracts.Bike;
-using MunicipalityMobilitySystem.Core.Contracts.Scooter;
-using MunicipalityMobilitySystem.Core.Contracts.Truck;
 using MunicipalityMobilitySystem.Core.Exceptions;
 using MunicipalityMobilitySystem.Core.Services;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
@@ -14,11 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IGuard, Guard>();
-            services.AddScoped<IBikeService, BikeService>();
-            services.AddScoped<IScooterService, ScooterService>();
-            services.AddScoped<ICarService, CarService>();
-            services.AddScoped<ITruckService, TruckService>();
-            services.AddScoped<IHomeService, HomeService>();
+            services.AddScoped<IVehicleService, VehicleService>();
 
 
             return services;
