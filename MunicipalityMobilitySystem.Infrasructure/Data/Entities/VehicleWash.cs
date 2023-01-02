@@ -5,6 +5,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
 {
     public class VehicleWash
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -14,7 +15,6 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         [Required]
         [ForeignKey(nameof(VehiclePark))]
         public int VehicleParkId { get; set; }
-        [Required]
         public VehiclePark VehiclePark { get; set; } = null!;
 
         public IEnumerable<Vehicle> Vehicles { get; set; } = new List<Vehicle>();

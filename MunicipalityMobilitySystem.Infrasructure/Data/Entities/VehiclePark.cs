@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 using static MunicipalityMobilitySystem.Data.DataConstants.VehiclePark;
 
 namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
@@ -26,15 +26,14 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         public string Adress { get; set; } = null!;
 
         [Required]
-        public int ServiceId { get; set; }
-        [Required]
-        public Service Service { get; set; } = null!;
+        public string ImageUrl { get; set; } = null!;
 
         [Required]
-        public int VehicleWashId { get; set; }
-        [Required]
-        public VehicleWash VehicleWash { get; set; } = null!;
+        [MaxLength(DescriptionMaxLength)]
+        public string Description { get; set; } = null!;
 
+        public IEnumerable<Service> Services { get; set; } = new List<Service>();
+        public IEnumerable<VehicleWash> VehicleWashes { get; set; } = new List<VehicleWash>();
         public IEnumerable<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
     }
 }

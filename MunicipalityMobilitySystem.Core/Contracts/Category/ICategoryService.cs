@@ -1,6 +1,6 @@
 ﻿using MunicipalityMobilitySystem.Core.Models.Category;
 
-namespace MunicipalityMobilitySystem.Core.Contracts
+namespace MunicipalityMobilitySystem.Core.Contracts.Category
 {
     public interface ICategoryService
     {

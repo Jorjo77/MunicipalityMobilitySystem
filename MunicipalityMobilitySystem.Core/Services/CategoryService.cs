@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MunicipalityMobilitySystem.Core.Contracts;
+using MunicipalityMobilitySystem.Core.Contracts.Category;
 using MunicipalityMobilitySystem.Core.Models.Category;
 using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;

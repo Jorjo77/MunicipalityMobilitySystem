@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Types";
+}
+
+@{
+    var bike = ViewBag.Bike;
+    var scooter = ViewBag.Scooter;
+    var car = ViewBag.Car;
+}
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+
+
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+        @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+        {
+            <h1 class="display-4">Select the type of the vehicle you are interested to rent:</h1>
+        }
+        else
+        {
+            <h1 class="display-4">Login to find all our vehicles for a rent:</h1>
+        }
+    </div>
+    <div class="mb-5"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <figure class="figure">
+                    <img src="@bike.ImageUrl" figure-img img-fluid rounded" alt="@bike.Model">
+                </figure>
+                <div class="col-12 text-center">
+                    @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn btn-primary" asp-controller="Bike" asp-action="All">All Bikes</a>
+                    }
+                </div>
+            </div>
+            <div class="col">
+                <figure class="figure">
+                    <img src="@scooter.ImageUrl" figure-img img-fluid rounded" alt="@scooter.Model">
+                </figure>
+                <div class="col-12 text-center">
+                    @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn btn-primary" asp-controller="Scooter" asp-action="All">All Scooters</a>
+                    }
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col">
+                <figure class="figure">
+                    <img src="@car.ImageUrl" figure-img img-fluid rounded" alt="@car.Model">
+                </figure>
+                <div class="col-12 text-center">
+                    @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn btn-primary" asp-controller="Car" asp-action="All">All Cars</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

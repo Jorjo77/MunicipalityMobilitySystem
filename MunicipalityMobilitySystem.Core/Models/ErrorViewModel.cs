@@ -1,4 +1,4 @@
-namespace MunicipalityMobilitySystem.Models
+namespace MunicipalityMobilitySystem.Core.Models
 {
     public class ErrorViewModel
     {

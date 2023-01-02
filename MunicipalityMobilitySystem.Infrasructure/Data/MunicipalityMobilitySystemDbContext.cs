@@ -20,6 +20,8 @@ namespace MunicipalityMobilitySystem.Data
         private Category Scooter { get; set; } = null!;
         private Category Car { get; set; } = null!;
         private VehiclePark CentralPark { get; set; } = null!;
+        private VehiclePark EasternPark { get; set; } = null!;
+        private VehiclePark WesternPark { get; set; } = null!;
         private Vehicle FirstScooter { get; set; } = null!;
         private Vehicle SecondScooter { get; set; } = null!;
         private Vehicle ThirdScooter { get; set; } = null!;
@@ -44,7 +46,9 @@ namespace MunicipalityMobilitySystem.Data
 
             SeedVehiclePark();
             builder.Entity<VehiclePark>()
-                .HasData(this.CentralPark);
+                .HasData(this.CentralPark,
+                this.EasternPark,
+                this.WesternPark);
 
             SeedScooters();
             builder.Entity<Vehicle>()
@@ -109,10 +113,32 @@ namespace MunicipalityMobilitySystem.Data
             this.CentralPark = new VehiclePark()
             {
                 Id = 1,
-                Name = "Central", 
-                Adress = "Bulgaria, Sofia City, Iskar Str. 36",
-                Email = "vehicles_for_rent@abv.bg",
-                Phone = "+359878128344"
+                Name = "Eastern Park", 
+                Adress = "Bulgaria Sofia City Mladost 4",
+                Email = "eastern_rent@abv.bg",
+                Phone = "+359878128343", 
+                ImageUrl = "https://travelwest.info/app/uploads/2022/04/Portway-Park-Ride-Car-Park-1349x900.jpg.webp",
+                Description = "Your eastern oportunity to find out the best ranting offer!"
+            };
+            this.EasternPark = new VehiclePark()
+            {
+                Id = 2,
+                Name = "Central Park",
+                Adress = "Bulgaria Sofia City Iskar Str. 36",
+                Email = "central_rent@abv.bg",
+                Phone = "+359878128344",
+                ImageUrl = "https://s.driving-tests.org/wp-content/uploads/2012/02/back-parking.webp",
+                Description = "Your central oportunity to find out the best ranting offer!"
+            };
+            this.WesternPark = new VehiclePark()
+            {
+                Id = 3,
+                Name = "Western Park",
+                Adress = "Bulgaria Sofia City Lulin 2",
+                Email = "estern_rent@abv.bg",
+                Phone = "+359878128345",
+                ImageUrl = "https://d193ppza2qrruo.cloudfront.net/production/images/Multi-storey-car-park-tips.jpg",
+                Description = "Your western oportunity to find out the best ranting offer!",
             };
         }
         private void SeedScooters()
@@ -125,8 +151,8 @@ namespace MunicipalityMobilitySystem.Data
                 Rating = 5,
                 PricePerHour = 11.00M,
                 CategoryId = this.Scooter.Id,
-                VehicleParkId = 1,
-                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fbg.e-scooter.co%2Fi%2F17%2F72%2Fed%2Fd5015b9723a5397c924e7b797d.jpg&imgrefurl=https%3A%2F%2Fbg.e-scooter.co%2Fpiaggio-one-active%2F&tbnid=yaQ2lq0vl1LETM&vet=12ahUKEwiGv_ypyIX8AhX9l_0HHZzBBOYQMygZegUIARCZAg..i&docid=LeZmqaBlOwjRIM&w=474&h=415&q=Piaggio&ved=2ahUKEwiGv_ypyIX8AhX9l_0HHZzBBOYQMygZegUIARCZAg",
+                VehicleParkId = 2,
+                ImageUrl = "https://bg.e-scooter.co/i/17/72/ed/d5015b9723a5397c924e7b797d.jpg",
                 Description = "Exellent transport solution for a city center.",
                 RenterId = this.GuestUser.Id,
 
@@ -141,8 +167,8 @@ namespace MunicipalityMobilitySystem.Data
                 PricePerHour = 10.00M,
                 CategoryId = this.Scooter.Id,
                 VehicleParkId = 1,
-                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages.piaggio.com%2Fpiaggio%2Fvehicles%2Fnclp000u15%2Fnclp8znu15%2Fnclp8znu15-01-s.png&imgrefurl=https%3A%2F%2Fwww.piaggio.com%2Fbg_BG%2Fmodels%2Fliberty%2Fliberty-50-4s3v-2021%2F&tbnid=dIb-qyhP2vh5mM&vet=12ahUKEwiGv_ypyIX8AhX9l_0HHZzBBOYQMygFegUIARDsAQ..i&docid=un13zXQdXG3kwM&w=750&h=500&q=Piaggio&ved=2ahUKEwiGv_ypyIX8AhX9l_0HHZzBBOYQMygFegUIARDsAQ",
-                Description = "A realy good transport solution for a city center.",
+                ImageUrl = "https://images.piaggio.com/piaggio/vehicles/nclp000u15/nclp8znu15/nclp8znu15-01-s.png",
+                Description = "A realy good transport solution for a city.",
                 RenterId = this.GuestUser.Id,
             };
             this.ThirdScooter = new Vehicle()
@@ -153,9 +179,9 @@ namespace MunicipalityMobilitySystem.Data
                 Rating = 6,
                 PricePerHour = 9.00M,
                 CategoryId = this.Scooter.Id,
-                VehicleParkId = 1,
+                VehicleParkId = 3,
                 ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4TbIp4RJgECS2py-M_zNjwLrXYIbcZ07XQA&usqp=CAU",
-                Description = "A very good transport solution for a city center.",
+                Description = "A very good transport solution for a city and center.",
                 RenterId = this.GuestUser.Id,
             };
         }
@@ -170,7 +196,7 @@ namespace MunicipalityMobilitySystem.Data
                 PricePerHour = 4.00M,
                 CategoryId = this.Bike.Id,
                 VehicleParkId = 1,
-                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.home-max.bg%2Fstatic%2Fmedia%2Fups%2Fcached%2F781e8afa44a58ec261abdd83455444f5c203f4c5.jpg&imgrefurl=https%3A%2F%2Fwww.home-max.bg%2Fvelosiped-passati-26-mtb-3700%2F&tbnid=kA6ZVlURPKhh4M&vet=12ahUKEwj8q-zhyYX8AhXlxwIHHRaND0gQMygBegUIARC1AQ..i&docid=CRixMubXhzLYzM&w=640&h=480&q=Passati&ved=2ahUKEwj8q-zhyYX8AhXlxwIHHRaND0gQMygBegUIARC1AQ",
+                ImageUrl = "https://www.home-max.bg/static/media/ups/cached/781e8afa44a58ec261abdd83455444f5c203f4c5.jpg",
                 Description = "A very good transport solution for sport people.",
                 RenterId = null,
             };
@@ -181,8 +207,8 @@ namespace MunicipalityMobilitySystem.Data
                 Rating = 6,
                 PricePerHour = 7.00M,
                 CategoryId = this.Bike.Id,
-                VehicleParkId = 1,
-                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fhips.hearstapps.com%2Fhmg-prod%2Fimages%2Fpinarello-dogma-f-tested-1624463882.jpg&imgrefurl=https%3A%2F%2Fwww.bicycling.com%2Fbikes-gear%2Fa36815265%2Fpinarello-dogma-f-review%2F&tbnid=gkQMZzUwYV_bTM&vet=12ahUKEwjNk57LyYX8AhXdxgIHHYRAAgwQMygBegUIARDdAQ..i&docid=w0vXcmsF9jyIAM&w=7030&h=4912&q=Pinarello&ved=2ahUKEwjNk57LyYX8AhXdxgIHHYRAAgwQMygBegUIARDdAQ",
+                VehicleParkId = 2,
+                ImageUrl = "https://hips.hearstapps.com/hmg-prod/images/pinarello-dogma-f-tested-1624463882.jpg?crop=1.00xw:0.807xh;0,0.0629xh&resize=2048:*",
                 Description = "A very good luxury transport solution for beasy people.",
                 RenterId = null,
 
@@ -194,7 +220,7 @@ namespace MunicipalityMobilitySystem.Data
                 Rating = 5,
                 PricePerHour = 5.00M,
                 CategoryId = this.Bike.Id,
-                VehicleParkId = 1,
+                VehicleParkId = 3,
                 ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuinQIdRNjDVnCddYQFkMkFIkt3cyXVfVqPA&usqp=CAU",
                 Description = "A realy good transport solution for sport people.",
                 RenterId = null,
@@ -211,7 +237,7 @@ namespace MunicipalityMobilitySystem.Data
                 PricePerHour = 20.00M,
                 CategoryId = this.Car.Id,
                 VehicleParkId = 1,
-                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Ffichasmotor.com%2Fimages%2Fhyundai%2Fhyundai-eon-0-8-56-cv.webp&imgrefurl=https%3A%2F%2Ffichasmotor.com%2Fen%2Fhyundai%2Fhyundai-eon-0-8-56-cv%2F&tbnid=b5rmBwPhiJED7M&vet=12ahUKEwjonf6Hy4X8AhXSQeUKHaRRCAsQMygTegUIARCHAg..i&docid=VCMCK7OUZxeDiM&w=960&h=542&q=Hynday%20EON&ved=2ahUKEwjonf6Hy4X8AhXSQeUKHaRRCAsQMygTegUIARCHAg",
+                ImageUrl = "https://imgd.aeplcdn.com/1056x594/cw/ec/9692/Hyundai-Eon-Right-Front-Three-Quarter-94097.jpg?v=201711021421&q=75&wm=1",
                 Description = "A very good and transport solution for a city center.",
                 RenterId = null,
             };
@@ -223,8 +249,8 @@ namespace MunicipalityMobilitySystem.Data
                 Rating = 5,
                 PricePerHour = 23.00M,
                 CategoryId = this.Car.Id,
-                VehicleParkId = 1,
-                ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fm.atcdn.co.uk%2Fect%2Fmedia%2Fw1920%2Fbrand-store%2Fvolkswagen%2Ftouran%2Fhero.jpg&imgrefurl=https%3A%2F%2Fwww.autotrader.co.uk%2Fcars%2Fuk%2Fvolkswagen%2Ftouran&tbnid=iBeoqxiXOpMDuM&vet=12ahUKEwjsp8L6y4X8AhV0_rsIHYlCCyMQMygJegUIARDxAQ..i&docid=C8aG3aQ2P98X8M&w=1920&h=980&q=VW%20Touran&ved=2ahUKEwjsp8L6y4X8AhV0_rsIHYlCCyMQMygJegUIARDxAQ",
+                VehicleParkId = 2,
+                ImageUrl = "https://www.topgear.com/sites/default/files/cars-car/carousel/2016/03/vw_7422.jpg?w=976&h=549",
                 Description = "A realy good and transport solution for a big family.",
                 RenterId = null,
             };
@@ -236,7 +262,7 @@ namespace MunicipalityMobilitySystem.Data
                 Rating = 6,
                 PricePerHour = 25.00M,
                 CategoryId = this.Car.Id,
-                VehicleParkId = 1,
+                VehicleParkId = 3,
                 ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFiWMRzQZJ4dYjRVlv-l25KWCVweGaWbIJOA&usqp=CAU",
                 Description = "A realy good and luxury transport solution.",
                 RenterId = null,

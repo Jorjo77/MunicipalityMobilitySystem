@@ -41,6 +41,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         [Required]
         [ForeignKey(nameof(VehiclePark))]
         public int VehicleParkId { get; set; }
+
+        [Required]
         public VehiclePark VehiclePark { get; set; } = null!;
 
         public string? RenterId { get; set; }

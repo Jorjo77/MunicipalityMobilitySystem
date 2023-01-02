@@ -12,7 +12,7 @@ using MunicipalityMobilitySystem.Data;
 namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 {
     [DbContext(typeof(MunicipalityMobilitySystemDbContext))]
-    [Migration("20221224123816_InitialMigration")]
+    [Migration("20221227112321_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,15 +145,15 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "09cda48e-4aa5-4465-bb2b-549ac9fbedad",
+                            ConcurrencyStamp = "96951d5c-3820-44c5-8954-970b5fd305a9",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAELwQq7Dq02Ty220q3lWjqw0iq/zX3q/qPurA5h95u1sB8UaZqOi8hVOHBI1P6P1WtA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMuC032bapLkjeuJQlyn0wa4EG3fxS1H81p0UgbnPKS6aJolEJNc+nsPL2cDgVUd1g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b4f53236-28a2-49f1-a7fb-4d17fdea43df",
+                            SecurityStamp = "e98eef95-d710-4b05-9741-7149f22e0bfb",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -325,13 +325,12 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("VehicleWParkId")
+                    b.Property<int>("VehicleParkId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VehicleWParkId")
-                        .IsUnique();
+                    b.HasIndex("VehicleParkId");
 
                     b.ToTable("Service");
                 });
@@ -423,24 +422,24 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             EngineType = "Electric",
                             ForCleaning = false,
                             ForRepearing = false,
-                            ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fbg.e-scooter.co%2Fi%2F17%2F72%2Fed%2Fd5015b9723a5397c924e7b797d.jpg&imgrefurl=https%3A%2F%2Fbg.e-scooter.co%2Fpiaggio-one-active%2F&tbnid=yaQ2lq0vl1LETM&vet=12ahUKEwiGv_ypyIX8AhX9l_0HHZzBBOYQMygZegUIARCZAg..i&docid=LeZmqaBlOwjRIM&w=474&h=415&q=Piaggio&ved=2ahUKEwiGv_ypyIX8AhX9l_0HHZzBBOYQMygZegUIARCZAg",
+                            ImageUrl = "https://bg.e-scooter.co/i/17/72/ed/d5015b9723a5397c924e7b797d.jpg",
                             Model = "Piaggo",
                             PricePerHour = 11.00m,
                             Rating = 5,
                             RenterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             RentsCount = 0,
                             RepairsCount = 0,
-                            VehicleParkId = 1
+                            VehicleParkId = 2
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 2,
-                            Description = "A realy good transport solution for a city center.",
+                            Description = "A realy good transport solution for a city.",
                             EngineType = "Petrol",
                             ForCleaning = false,
                             ForRepearing = false,
-                            ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages.piaggio.com%2Fpiaggio%2Fvehicles%2Fnclp000u15%2Fnclp8znu15%2Fnclp8znu15-01-s.png&imgrefurl=https%3A%2F%2Fwww.piaggio.com%2Fbg_BG%2Fmodels%2Fliberty%2Fliberty-50-4s3v-2021%2F&tbnid=dIb-qyhP2vh5mM&vet=12ahUKEwiGv_ypyIX8AhX9l_0HHZzBBOYQMygFegUIARDsAQ..i&docid=un13zXQdXG3kwM&w=750&h=500&q=Piaggio&ved=2ahUKEwiGv_ypyIX8AhX9l_0HHZzBBOYQMygFegUIARDsAQ",
+                            ImageUrl = "https://images.piaggio.com/piaggio/vehicles/nclp000u15/nclp8znu15/nclp8znu15-01-s.png",
                             Model = "Piaggo",
                             PricePerHour = 10.00m,
                             Rating = 5,
@@ -453,7 +452,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            Description = "A very good transport solution for a city center.",
+                            Description = "A very good transport solution for a city and center.",
                             EngineType = "Petrol",
                             ForCleaning = false,
                             ForRepearing = false,
@@ -464,7 +463,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             RenterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             RentsCount = 0,
                             RepairsCount = 0,
-                            VehicleParkId = 1
+                            VehicleParkId = 3
                         },
                         new
                         {
@@ -473,7 +472,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             Description = "A very good transport solution for sport people.",
                             ForCleaning = false,
                             ForRepearing = false,
-                            ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.home-max.bg%2Fstatic%2Fmedia%2Fups%2Fcached%2F781e8afa44a58ec261abdd83455444f5c203f4c5.jpg&imgrefurl=https%3A%2F%2Fwww.home-max.bg%2Fvelosiped-passati-26-mtb-3700%2F&tbnid=kA6ZVlURPKhh4M&vet=12ahUKEwj8q-zhyYX8AhXlxwIHHRaND0gQMygBegUIARC1AQ..i&docid=CRixMubXhzLYzM&w=640&h=480&q=Passati&ved=2ahUKEwj8q-zhyYX8AhXlxwIHHRaND0gQMygBegUIARC1AQ",
+                            ImageUrl = "https://www.home-max.bg/static/media/ups/cached/781e8afa44a58ec261abdd83455444f5c203f4c5.jpg",
                             Model = "Passati",
                             PricePerHour = 4.00m,
                             Rating = 4,
@@ -488,13 +487,13 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             Description = "A very good luxury transport solution for beasy people.",
                             ForCleaning = false,
                             ForRepearing = false,
-                            ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fhips.hearstapps.com%2Fhmg-prod%2Fimages%2Fpinarello-dogma-f-tested-1624463882.jpg&imgrefurl=https%3A%2F%2Fwww.bicycling.com%2Fbikes-gear%2Fa36815265%2Fpinarello-dogma-f-review%2F&tbnid=gkQMZzUwYV_bTM&vet=12ahUKEwjNk57LyYX8AhXdxgIHHYRAAgwQMygBegUIARDdAQ..i&docid=w0vXcmsF9jyIAM&w=7030&h=4912&q=Pinarello&ved=2ahUKEwjNk57LyYX8AhXdxgIHHYRAAgwQMygBegUIARDdAQ",
+                            ImageUrl = "https://hips.hearstapps.com/hmg-prod/images/pinarello-dogma-f-tested-1624463882.jpg?crop=1.00xw:0.807xh;0,0.0629xh&resize=2048:*",
                             Model = "Pinarello",
                             PricePerHour = 7.00m,
                             Rating = 6,
                             RentsCount = 0,
                             RepairsCount = 0,
-                            VehicleParkId = 1
+                            VehicleParkId = 2
                         },
                         new
                         {
@@ -509,7 +508,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             Rating = 5,
                             RentsCount = 0,
                             RepairsCount = 0,
-                            VehicleParkId = 1
+                            VehicleParkId = 3
                         },
                         new
                         {
@@ -519,7 +518,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             EngineType = "Electric",
                             ForCleaning = false,
                             ForRepearing = false,
-                            ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Ffichasmotor.com%2Fimages%2Fhyundai%2Fhyundai-eon-0-8-56-cv.webp&imgrefurl=https%3A%2F%2Ffichasmotor.com%2Fen%2Fhyundai%2Fhyundai-eon-0-8-56-cv%2F&tbnid=b5rmBwPhiJED7M&vet=12ahUKEwjonf6Hy4X8AhXSQeUKHaRRCAsQMygTegUIARCHAg..i&docid=VCMCK7OUZxeDiM&w=960&h=542&q=Hynday%20EON&ved=2ahUKEwjonf6Hy4X8AhXSQeUKHaRRCAsQMygTegUIARCHAg",
+                            ImageUrl = "https://imgd.aeplcdn.com/1056x594/cw/ec/9692/Hyundai-Eon-Right-Front-Three-Quarter-94097.jpg?v=201711021421&q=75&wm=1",
                             Model = "Hynday EON",
                             PricePerHour = 20.00m,
                             Rating = 4,
@@ -535,13 +534,13 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             EngineType = "Diesel",
                             ForCleaning = false,
                             ForRepearing = false,
-                            ImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fm.atcdn.co.uk%2Fect%2Fmedia%2Fw1920%2Fbrand-store%2Fvolkswagen%2Ftouran%2Fhero.jpg&imgrefurl=https%3A%2F%2Fwww.autotrader.co.uk%2Fcars%2Fuk%2Fvolkswagen%2Ftouran&tbnid=iBeoqxiXOpMDuM&vet=12ahUKEwjsp8L6y4X8AhV0_rsIHYlCCyMQMygJegUIARDxAQ..i&docid=C8aG3aQ2P98X8M&w=1920&h=980&q=VW%20Touran&ved=2ahUKEwjsp8L6y4X8AhV0_rsIHYlCCyMQMygJegUIARDxAQ",
+                            ImageUrl = "https://www.topgear.com/sites/default/files/cars-car/carousel/2016/03/vw_7422.jpg?w=976&h=549",
                             Model = "VW Touran",
                             PricePerHour = 23.00m,
                             Rating = 5,
                             RentsCount = 0,
                             RepairsCount = 0,
-                            VehicleParkId = 1
+                            VehicleParkId = 2
                         },
                         new
                         {
@@ -557,7 +556,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             Rating = 6,
                             RentsCount = 0,
                             RepairsCount = 0,
-                            VehicleParkId = 1
+                            VehicleParkId = 3
                         });
                 });
 
@@ -574,10 +573,19 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -589,12 +597,6 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VehicleWashId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("VehicleParks");
@@ -603,12 +605,32 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         new
                         {
                             Id = 1,
-                            Adress = "Bulgaria, Sofia City, Iskar Str. 36",
-                            Email = "vehicles_for_rent@abv.bg",
-                            Name = "Central",
-                            Phone = "+359878128344",
-                            ServiceId = 0,
-                            VehicleWashId = 0
+                            Adress = "Bulgaria Sofia City Mladost 4",
+                            Description = "Your eastern oportunity to find out the best ranting offer!",
+                            Email = "eastern_rent@abv.bg",
+                            ImageUrl = "https://travelwest.info/app/uploads/2022/04/Portway-Park-Ride-Car-Park-1349x900.jpg.webp",
+                            Name = "Eastern Park",
+                            Phone = "+359878128343"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Adress = "Bulgaria Sofia City Iskar Str. 36",
+                            Description = "Your central oportunity to find out the best ranting offer!",
+                            Email = "central_rent@abv.bg",
+                            ImageUrl = "https://s.driving-tests.org/wp-content/uploads/2012/02/back-parking.webp",
+                            Name = "Central Park",
+                            Phone = "+359878128344"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Adress = "Bulgaria Sofia City Lulin 2",
+                            Description = "Your western oportunity to find out the best ranting offer!",
+                            Email = "estern_rent@abv.bg",
+                            ImageUrl = "https://d193ppza2qrruo.cloudfront.net/production/images/Multi-storey-car-park-tips.jpg",
+                            Name = "Western Park",
+                            Phone = "+359878128345"
                         });
                 });
 
@@ -630,8 +652,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VehicleParkId")
-                        .IsUnique();
+                    b.HasIndex("VehicleParkId");
 
                     b.ToTable("VehicleWash");
                 });
@@ -701,8 +722,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Service", b =>
                 {
                     b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.VehiclePark", "VehiclePark")
-                        .WithOne("Service")
-                        .HasForeignKey("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Service", "VehicleWParkId")
+                        .WithMany("Services")
+                        .HasForeignKey("VehicleParkId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -739,8 +760,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.VehicleWash", b =>
                 {
                     b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.VehiclePark", "VehiclePark")
-                        .WithOne("VehicleWash")
-                        .HasForeignKey("MunicipalityMobilitySystem.Infrasructure.Data.Entities.VehicleWash", "VehicleParkId")
+                        .WithMany("VehicleWashes")
+                        .HasForeignKey("VehicleParkId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -764,11 +785,9 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.VehiclePark", b =>
                 {
-                    b.Navigation("Service")
-                        .IsRequired();
+                    b.Navigation("Services");
 
-                    b.Navigation("VehicleWash")
-                        .IsRequired();
+                    b.Navigation("VehicleWashes");
 
                     b.Navigation("Vehicles");
                 });

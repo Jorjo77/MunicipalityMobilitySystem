@@ -1,8 +1,8 @@
-﻿using MunicipalityMobilitySystem.Core.Contracts;
+﻿using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
 
 namespace MunicipalityMobilitySystem.Core.Models.Vehicle
 {
-    public class VehicleHomeModel : IVehicleModel
+    public class VehicleTypeModel : IVehicleModel
     {
         public int Id { get; set; }
 

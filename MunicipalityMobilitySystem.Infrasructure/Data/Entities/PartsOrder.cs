@@ -7,7 +7,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
 {
     public class PartsOrder
     {
-        [Required]
+        [Key]
         public int Id { get; set; }
 
         [Required]

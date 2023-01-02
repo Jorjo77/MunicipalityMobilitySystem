@@ -1,4 +1,4 @@
-﻿using MunicipalityMobilitySystem.Core.Contracts;
+﻿using MunicipalityMobilitySystem.Core.Contracts.Category;
 
 namespace MunicipalityMobilitySystem.Core.Models.Category
 {

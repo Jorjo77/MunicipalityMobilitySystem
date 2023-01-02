@@ -1,71 +1,64 @@
-﻿@{
-    ViewBag.Title = "Index";
-}
-
+﻿@model IEnumerable<VehicleParkModel>
 @{
-    var bike = ViewBag.Bike;
-    var scooter = ViewBag.Scooter;
-    var car = ViewBag.Car;
+    ViewData["title"] = "Home Page";
+    bool first = true;
 }
 
-@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
+<h1>Wellcome to our Mobility System</h1>
+<h2>Using this platform you can rent the vehicle you need</h2>
 
 
-    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+<div class="mb-5"></div>
 
-        @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+<div id="carouselexamplecontrols" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        @foreach (var park in Model)
         {
-            <h1 class="display-4">Select the type of the vehicle you are interested to rent:</h1>
-        }
-        else
-        {
-            <h1 class="display-4">Login to find all our vehicles for a rent:</h1>
-        }
-    </div>
-    <div class="mb-5"></div>
+            <div class="carousel-item @(first ? "active" : string.Empty)">
 
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <figure class="figure">
-                    <img src="@bike.ImageUrl" figure-img img-fluid rounded" alt="@bike.Type">
-                </figure>
-                <div class="col-12 text-center">
-                    @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
-                    {
-                        <a class="btn btn-primary" asp-controller="Bike" asp-action="All">All Bikes</a>
-                    }
+                <img class="d-block w-100" style="height:500px"
+                 src="@park.ImageUrl" alt="@park.Name">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>
+                        <a class="btn btn-primary" asp-controller="VehiclePark" asp-action="Details"
+                       asp-route-id="@park.Id"> @park.Name</a>
+                    </h5>
                 </div>
             </div>
-            <div class="col">
-                <figure class="figure">
-                    <img src="@scooter.ImageUrl" figure-img img-fluid rounded" alt="@scooter.Type">
-                </figure>
-                <div class="col-12 text-center">
-                    @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
-                    {
-                        <a class="btn btn-primary" asp-controller="Scooter" asp-action="All">All Scooters</a>
-                    }
+
+            first = false;
+        }
+    </div>
+
+
+    <form method="get">
+            <div>
+                <h5>Select your most convinient Vehicle Park:</h5>
+            </div>
+        <div class="row">
+
+            <div class="form-group col-md-3 d-flex justify-content-between">
+                <div class="form-group">
+                    <label for="parks"></label>
+                        <select name="parks" id="parks" class="form-control">
+                        <option value="">Click to select</option>
+                            @foreach (var park in Model)
+                        {
+                            <option value="@park.Id">@park.Adress - @park.Name</option>
+                        }
+
+                    </select>
+                    <div class="col-md-3">
+                        <div class="form-group mt-4 p-2">
+                            <input type="submit" value="Select" class="btn btn-primary"
+                                   asp-controller="VehiclePark" asp-action="Details" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <hr />
-        <div class="row">
-            <div class="col">
-                <figure class="figure">
-                    <img src="@car.ImageUrl" figure-img img-fluid rounded" alt="@car.Type">
-                </figure>
-                <div class="col-12 text-center">
-                    @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
-                    {
-                        <a class="btn btn-primary" asp-controller="Car" asp-action="All">All Cars</a>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
+    </form>
 </div>
+
+
+

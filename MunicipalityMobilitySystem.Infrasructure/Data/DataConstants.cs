@@ -47,6 +47,9 @@
 
             public const int AdressMaxLength = 40;
             public const int AdressMinLength = 8;
+
+            public const int DescriptionMaxLength = 5000;
+            public const int DescriptionMinLength = 5;
         }
 
         public class Service

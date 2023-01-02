@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MunicipalityMobilitySystem.Core.Contracts;
+using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
 using MunicipalityMobilitySystem.Core.Exceptions;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
 using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
@@ -26,12 +26,13 @@ namespace MunicipalityMobilitySystem.Core.Services
             this.guard = guard;
         }
 
-        public async Task<VehicleHomeModel> GetOneBike()
+        public async Task<VehicleTypeModel> GetOneBike()
         {
 
             var bike = await repo.AllReadonly<Vehicle>()
                 .Where(v => v.Category.Name == "Bike")
-            .Select(b => new VehicleHomeModel
+                .OrderByDescending(v=>v.Id)
+            .Select(b => new VehicleTypeModel
             {
                 Id = b.Id,
                 Model = b.Model,
@@ -45,11 +46,12 @@ namespace MunicipalityMobilitySystem.Core.Services
             return bike;
         }
 
-        public async Task<VehicleHomeModel> GetOneCar()
+        public async Task<VehicleTypeModel> GetOneCar()
         {
             var car = await repo.AllReadonly<Vehicle>()
                 .Where(v => v.Category.Name == "Car")
-            .Select(b => new VehicleHomeModel
+                .OrderByDescending(v => v.Id)
+            .Select(b => new VehicleTypeModel
             {
                 Id = b.Id,
                 Model = b.Model,
@@ -63,11 +65,12 @@ namespace MunicipalityMobilitySystem.Core.Services
             return car;
         }
 
-        public async Task<VehicleHomeModel> GetOneScooter()
+        public async Task<VehicleTypeModel> GetOneScooter()
         {
             var scooter = await repo.AllReadonly<Vehicle>()
                 .Where(v => v.Category.Name == "Scooter")
-            .Select(b => new VehicleHomeModel
+                .OrderByDescending(v => v.Id)
+            .Select(b => new VehicleTypeModel
             {
                 Id = b.Id,
                 Model = b.Model,
@@ -81,12 +84,12 @@ namespace MunicipalityMobilitySystem.Core.Services
             return scooter;
         }
 
-        public async Task<IEnumerable<VehicleHomeModel>> LastThreeTopRankedVehicles()
+        public async Task<IEnumerable<VehicleTypeModel>> LastThreeTopRankedVehicles()
         {
             var vehicles = await repo.AllReadonly<Vehicle>()
                 .OrderByDescending(v => v.Id)
                 .ThenByDescending(v => v.Rating)
-                .Select(v => new VehicleHomeModel
+                .Select(v => new VehicleTypeModel
                 {
                     Id = v.Id,
                     Model = v.Model,
