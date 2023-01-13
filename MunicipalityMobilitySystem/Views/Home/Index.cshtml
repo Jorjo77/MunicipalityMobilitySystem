@@ -6,7 +6,7 @@
 
 <h1>Wellcome to our Mobility System</h1>
 <h2>Using this platform you can rent the vehicle you need</h2>
-
+<h3>Select your most convinient Vehicle Park:</h3>
 
 <div class="mb-5"></div>
 
@@ -29,35 +29,6 @@
             first = false;
         }
     </div>
-
-
-    <form method="get">
-            <div>
-                <h5>Select your most convinient Vehicle Park:</h5>
-            </div>
-        <div class="row">
-
-            <div class="form-group col-md-3 d-flex justify-content-between">
-                <div class="form-group">
-                    <label for="parks"></label>
-                        <select name="parks" id="parks" class="form-control">
-                        <option value="">Click to select</option>
-                            @foreach (var park in Model)
-                        {
-                            <option value="@park.Id">@park.Adress - @park.Name</option>
-                        }
-
-                    </select>
-                    <div class="col-md-3">
-                        <div class="form-group mt-4 p-2">
-                            <input type="submit" value="Select" class="btn btn-primary"
-                                   asp-controller="VehiclePark" asp-action="Details" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
 </div>
 
 

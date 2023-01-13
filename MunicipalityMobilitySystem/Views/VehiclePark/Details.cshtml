@@ -1,12 +1,14 @@
 ﻿@model VehicleParkDetailsModel
 
 @{
-    ViewBag.Title = "Vehicle Park Details";
+    ViewBag.Title = "Details";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr/>
-<div class="card" style="width: 18rem;">
+<h3>Wellcome to @Model.Name!</h3>
+<h4>@Model.Name is your best choice of this area!</h4>
+<div class="card" style="flex-flow:column">
     <div class="card-body">
         <h5 class="card-title">Park Info</h5>
         <p class="card-text">Park Name:  @Model.Name</p>
@@ -19,3 +21,4 @@
         <p class="card-text">Description: @Model.Description</p>
     </div>
 </div>
+<h2>Login to find all our vehicles for a rent!</h2>

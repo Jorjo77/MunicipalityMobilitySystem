@@ -9,7 +9,6 @@ namespace MunicipalityMobilitySystem.Core.Contracts.VehiclePark
 {
     public interface IVehicleParkService
     {
-        Task<VehicleParkDetailsModel> DetailsById(int Id);
         Task<IEnumerable<VehicleParkModel>> AllVehicleParks();
 
         Task<VehicleParkDetailsModel> VehicleParkDetailsById(int id);

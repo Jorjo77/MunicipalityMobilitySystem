@@ -39,23 +39,6 @@ namespace MunicipalityMobilitySystem.Core.Services
                     ImageUrl = vp.ImageUrl
                 }).ToListAsync();
         }
-
-        public async Task<VehicleParkDetailsModel> DetailsById(int Id)
-        {
-            return await repo.AllReadonly<VehiclePark>()
-                .Where(vp => vp.Id == Id)
-                .Select(vp => new VehicleParkDetailsModel
-                {
-                    Id = vp.Id,
-                    Name = vp.Name,
-                    Adress = vp.Adress,
-                    Email = vp.Email,
-                    Phone = vp.Phone,
-                    ImageUrl = vp.ImageUrl,
-                    Description = vp.Description
-                }).FirstAsync();
-        }
-
         public async Task<bool> Exists(int id)
         {
             return await repo.AllReadonly<VehiclePark>()
