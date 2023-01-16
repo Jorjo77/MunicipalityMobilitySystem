@@ -37,12 +37,12 @@ namespace MunicipalityMobilitySystem.Controllers
 
         public IActionResult All()
         {
-            return View(new AllVehiclesQueryModel());
+            return View(new VehicleServiceModel());
         }
 
         public IActionResult Mine()
         {
-            return View(new AllVehiclesQueryModel());
+            return View(new VehicleServiceModel());
         }
 
         public IActionResult Details(int Id)

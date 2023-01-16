@@ -28,9 +28,12 @@ namespace MunicipalityMobilitySystem.Core.Services
                 .ToListAsync();
         }
 
-        Task<IEnumerable<CategoryServiceModel>> ICategoryService.AllCategories()
+        public async Task<IEnumerable<string>> AllCategoriesNames()
         {
-            throw new NotImplementedException();
+            return await repo.AllReadonly<Category>()
+                .Select(c => c.Name)
+                .Distinct()
+                .ToListAsync();
         }
     }
 }

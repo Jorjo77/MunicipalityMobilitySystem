@@ -37,7 +37,7 @@
                 <div class="col-12 text-center">
                     @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
                     {
-                        <a class="btn btn-primary" asp-controller="Bike" asp-action="All">Bikes</a>
+                        <a class="btn btn-primary" asp-controller="Vehicles" asp-action="AllBikes">Bikes</a>
                     }
                 </div>
             </div>
@@ -48,7 +48,7 @@
                 <div class="col-12 text-center">
                     @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
                     {
-                        <a class="btn btn-primary" asp-controller="Scooter" asp-action="All">Scooters</a>
+                        <a class="btn btn-primary" asp-controller="Vehicles" asp-action="AllScooters">Scooters</a>
                     }
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 <div class="col-12 text-center">
                     @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
                     {
-                        <a class="btn btn-primary" asp-controller="Car" asp-action="All">Cars</a>
+                        <a class="btn btn-primary" asp-controller="Vehicles" asp-action="AllCars">Cars</a>
                     }
                 </div>
             </div>

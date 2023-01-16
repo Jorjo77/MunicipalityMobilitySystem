@@ -44,11 +44,9 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
 
         [Required]
         public VehiclePark VehiclePark { get; set; } = null!;
-
         public string? RenterId { get; set; }
         public bool ForRepearing { get; set; } = false;
         public bool ForCleaning { get; set; } = false;
-
         public DateTime? RepairingTerm { get; set; }
         public string? FailureDescription { get; set; } 
 

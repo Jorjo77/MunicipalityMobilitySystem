@@ -1,4 +1,5 @@
-﻿using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
+﻿using MunicipalityMobilitySystem.Core.Contracts.Category;
+using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
 using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
 using MunicipalityMobilitySystem.Core.Exceptions;
 using MunicipalityMobilitySystem.Core.Services;
@@ -14,6 +15,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IGuard, Guard>();
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IVehicleParkService, VehicleParkService>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
 
             return services;

@@ -26,6 +26,21 @@ namespace MunicipalityMobilitySystem.Core.Services
             this.guard = guard;
         }
 
+        public Task<IEnumerable<VehicleServiceModel>> AllBikesByVehicleParkId(int VehicleParkId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<VehicleServiceModel>> AllCarsByVehicleParkId(int VehicleParkId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<VehicleServiceModel>> AllScootersByVehicleParkId(int VehicleParkId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<VehicleTypeModel> GetOneBike()
         {
 

@@ -16,9 +16,20 @@
         <p class="card-text">Phone Number: @Model.Phone</p>
         <p class="card-text">Adress: @Model.Adress</p>
         <p class="card-text">Phone Number: @Model.Phone</p>
-         <img class="d-block w-100" style="height:500px"
+         <img class="d-block w-100" style="height:380px"
              src="@Model.ImageUrl" alt="@Model.Name">
         <p class="card-text">Description: @Model.Description</p>
     </div>
 </div>
-<h2>Login to find all our vehicles for a rent!</h2>
+
+@{
+    if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+    {
+        <a class="btn btn-primary" asp-controller="VehiclePark" asp-action="All" asp-route-id="@Model.Id">Find all our vehicles</a>
+    }
+    else
+    {
+        <h2>Login to find all our vehicles for a rent!</h2>
+    }
+}
+
