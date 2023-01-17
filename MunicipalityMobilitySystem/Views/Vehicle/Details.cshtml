@@ -1,0 +1,46 @@
+﻿@model VehicleServiceModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="col-md-6">
+    <div class="card-body align-content-center">
+        <img class="card-img-top" src="@Model.ImageUrl" alt="Vehicle Image">
+        <div class="card-body text-center" style="width:fit-content">
+            <h4>@Model.Model</h4>
+            <h6>Rating: <b>@Model.Rating</b></h6>
+            <h6>
+                Price Per Hour:
+                <b>@String.Format("{0:f2}", Model.PricePerHour) BGN</b>
+            </h6>
+            <h6>(@(Model.RenterId != null ? "Rented" : "Not Rented"))</h6>
+            <br />
+            <h6>Engine type: <b>@Model.EngineType</b></h6>
+            <h6>Details: <b>@Model.Description</b></h6>
+            <br />
+
+            @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+            {
+
+                @if (Model.RenterId == null)
+                {
+                    <form class="input-group-sm" asp-area="" asp-controller="Vehicle"
+                  asp-action="Rent" asp-route-id="@Model.Id" method="post">
+                        <input class="btn btn-warning" type="submit" value="Rent" />
+                    </form>
+                }
+                else
+                {
+                    <form class="input-group-sm" asp-area="" asp-controller="Vehicle" asp-action="Leave"
+                  asp-route-id="@Model.Id" method="post">
+                        <input class="btn btn-warning" type="submit" value="Leave" />
+                    </form>
+                }
+            }
+        </div>
+    </div>
+</div>

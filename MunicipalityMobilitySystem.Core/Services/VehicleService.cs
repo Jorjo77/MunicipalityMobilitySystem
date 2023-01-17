@@ -26,95 +26,44 @@ namespace MunicipalityMobilitySystem.Core.Services
             this.guard = guard;
         }
 
-        public Task<IEnumerable<VehicleServiceModel>> AllBikesByVehicleParkId(int VehicleParkId)
+        public async Task<IEnumerable<VehicleServiceModel>> AllVehiclesByUserId(string id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<VehicleServiceModel>> AllCarsByVehicleParkId(int VehicleParkId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<VehicleServiceModel>> AllScootersByVehicleParkId(int VehicleParkId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<VehicleTypeModel> GetOneBike()
-        {
-
-            var bike = await repo.AllReadonly<Vehicle>()
-                .Where(v => v.Category.Name == "Bike")
-                .OrderByDescending(v=>v.Id)
-            .Select(b => new VehicleTypeModel
-            {
-                Id = b.Id,
-                Model = b.Model,
-                Rating = b.Rating,
-                ImageUrl = b.ImageUrl
-            })
-            .FirstOrDefaultAsync();
-
-            guard.AgainstNull(bike, "Bike can not be found");
-
-            return bike;
-        }
-
-        public async Task<VehicleTypeModel> GetOneCar()
-        {
-            var car = await repo.AllReadonly<Vehicle>()
-                .Where(v => v.Category.Name == "Car")
-                .OrderByDescending(v => v.Id)
-            .Select(b => new VehicleTypeModel
-            {
-                Id = b.Id,
-                Model = b.Model,
-                Rating = b.Rating,
-                ImageUrl = b.ImageUrl
-            })
-            .FirstOrDefaultAsync();
-
-            guard.AgainstNull(car, "Car can not be found");
-
-            return car;
-        }
-
-        public async Task<VehicleTypeModel> GetOneScooter()
-        {
-            var scooter = await repo.AllReadonly<Vehicle>()
-                .Where(v => v.Category.Name == "Scooter")
-                .OrderByDescending(v => v.Id)
-            .Select(b => new VehicleTypeModel
-            {
-                Id = b.Id,
-                Model = b.Model,
-                Rating = b.Rating,
-                ImageUrl = b.ImageUrl
-            })
-            .FirstOrDefaultAsync();
-
-            guard.AgainstNull(scooter, "Scooter can not be found");
-
-            return scooter;
-        }
-
-        public async Task<IEnumerable<VehicleTypeModel>> LastThreeTopRankedVehicles()
-        {
-            var vehicles = await repo.AllReadonly<Vehicle>()
-                .OrderByDescending(v => v.Id)
-                .ThenByDescending(v => v.Rating)
-                .Select(v => new VehicleTypeModel
+            return await repo.AllReadonly<Vehicle>()
+                .Where(v=> v.RenterId == id)
+                .Select(v => new VehicleServiceModel
                 {
-                    Id = v.Id,
-                    Model = v.Model,
-                    Rating = v.Rating,
-                    ImageUrl = v.ImageUrl
+                    Id= v.Id,
+                    ImageUrl= v.ImageUrl,
+                    VehicleParkId= v.VehicleParkId,
+                    CategoryId= v.CategoryId,
+                    Description= v.Description,
+                    EngineType= v.EngineType,
+                    Model=v.Model,
+                    PricePerHour= v.PricePerHour,
+                    Rating= v.Rating,
+                    RenterId= v.RenterId
                 })
-                .Take(3)
                 .ToListAsync();
+        }
 
-            return vehicles;
+        public async Task<VehicleServiceModel> VehicleDetails( int id)
+        {
+            return await repo.AllReadonly<Vehicle>()
+                        .Where(v=>v.Id == id)
+                        .Select(v => new VehicleServiceModel
+                        {
+                            Id = v.Id,
+                            ImageUrl = v.ImageUrl,
+                            VehicleParkId = v.VehicleParkId,
+                            CategoryId = v.CategoryId,
+                            Description = v.Description,
+                            EngineType = v.EngineType,
+                            Model = v.Model,
+                            PricePerHour = v.PricePerHour,
+                            Rating = v.Rating,
+                            RenterId = v.RenterId
+                        })
+                        .FirstAsync();
         }
     }
 }

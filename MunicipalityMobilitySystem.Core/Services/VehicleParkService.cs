@@ -89,6 +89,7 @@ namespace MunicipalityMobilitySystem.Core.Services
             result.Vehicles = await vehicles
                 .Skip((currentPage - 1) * vehiclesPerPage)
                 .Take(vehiclesPerPage)
+                .Include(v=>v.VehiclePark)
                 .Select(v => new VehicleServiceModel
                 {
                     Id = v.Id,
@@ -100,7 +101,7 @@ namespace MunicipalityMobilitySystem.Core.Services
                     Model = v.Model,
                     PricePerHour = v.PricePerHour,
                     Rating = v.Rating,
-                    RenterId = v.RenterId
+                    RenterId = v.RenterId,
                 })
                 .ToListAsync();
 

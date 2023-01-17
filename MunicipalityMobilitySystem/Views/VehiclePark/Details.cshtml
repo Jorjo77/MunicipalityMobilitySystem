@@ -10,17 +10,18 @@
 <h4>@Model.Name is your best choice of this area!</h4>
 <div class="card" style="flex-flow:column">
     <div class="card-body">
-        <h5 class="card-title">Park Info</h5>
-        <p class="card-text">Park Name:  @Model.Name</p>
-        <p class="card-text">Email:  @Model.Email</p>
-        <p class="card-text">Phone Number: @Model.Phone</p>
-        <p class="card-text">Adress: @Model.Adress</p>
-        <p class="card-text">Phone Number: @Model.Phone</p>
+        <h4 class="card-title">Park Info:</h4>
+        <h5 class="card-text">Park Name: <b>@Model.Name</b></h5>
+        <h5 class="card-text">Email: <b>@Model.Email</b></h5>
+        <h5 class="card-text">Phone Number: <b>@Model.Phone</b></h5>
+        <h5 class="card-text">Adress: <b>@Model.Adress</b></h5>
          <img class="d-block w-100" style="height:380px"
              src="@Model.ImageUrl" alt="@Model.Name">
-        <p class="card-text">Description: @Model.Description</p>
+             <p></p>
+        <h5 class="card-text">Description: <b>@Model.Description</b></h5>
     </div>
 </div>
+
 
 @{
     if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
