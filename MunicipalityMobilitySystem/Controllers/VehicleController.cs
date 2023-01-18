@@ -45,29 +45,39 @@ namespace MunicipalityMobilitySystem.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Rent(int id)
-        //{
-        //    //It is for me!
-        //    if ((await vehicleService.Exists(id)) == false)
-        //    {
-        //        return RedirectToAction(nameof(All));
-        //    }
+        [HttpPost]
+        public async Task<IActionResult> Rent(int id)
+        {
+            if ((await vehicleService.Exists(id)) == false)
+            {
+                return RedirectToAction("All", "VehiclePark");
+            }
 
-        //    //It is for me with different check!
-        //    if (await vehicleService.IsRented(id))
-        //    {
-        //        return RedirectToAction(nameof(All));
-        //    }
+            if (await vehicleService.IsRented(id))
+            {
+                return RedirectToAction("All", "VehiclePark");
+            }
 
-        //    await vehicleService.Rent(id, User.Id());
+            await vehicleService.Rent(id, User.Id());
 
-        //    return RedirectToAction(nameof(Mine));
-        //}
+            return RedirectToAction(nameof(Mine));
+        }
 
         [HttpPost]
-        public IActionResult Leave(int id)
+        public async Task<IActionResult> Leave(int id)
         {
+            if (await vehicleService.Exists(id) == false || await vehicleService.IsRented(id) == false)
+            {
+                RedirectToAction("All", "VehiclePark");
+            }
+
+            if (await vehicleService.IsRentedByUserWithId(id, User.Id()) == false)
+            {
+                RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            await vehicleService.Leave(id);
+
             return RedirectToAction(nameof(Mine));
         }
     }

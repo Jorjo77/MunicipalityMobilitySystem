@@ -46,7 +46,56 @@ namespace MunicipalityMobilitySystem.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<VehicleServiceModel> VehicleDetails( int id)
+        public async Task<bool> Exists(int id)
+        {
+            return await repo.AllReadonly<Vehicle>(v=>v.Id == id)
+                .AnyAsync();    
+        }
+
+        public async Task<bool> IsRented(int vehicleId)
+        {
+            return (await repo.GetByIdAsync<Vehicle>(vehicleId)).RenterId != null;
+        }
+
+        public async Task<bool> IsRentedByUserWithId(int vehicleId, string currentUserId)
+        {
+           return await repo.AllReadonly<Vehicle>()
+                .Where(v=>v.Id == vehicleId)
+                .AnyAsync(v=>v.RenterId == currentUserId);
+        }
+
+        public async Task Leave(int vehicleId)
+        {
+            var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
+
+            if (vehicle != null && vehicle.RenterId == null)
+            {
+                throw new ArgumentException("Vehicle is not rented");
+            }
+
+            guard.AgainstNull(vehicle, "Vehicle can not be found");
+
+            vehicle.RenterId = null;
+
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task Rent(int vehicleId, string currentUserId)
+        {
+            var vehicleForRent = await repo.GetByIdAsync<Vehicle>(vehicleId);
+
+            if (vehicleForRent!=null && vehicleForRent.RenterId != null)
+            {
+                throw new ArgumentException("Vehicle is already rented");
+            }
+
+            guard.AgainstNull(vehicleForRent, "Vehicle can not be found");
+            vehicleForRent.RenterId = currentUserId;
+
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task<VehicleServiceModel> VehicleDetails(int id)
         {
             return await repo.AllReadonly<Vehicle>()
                         .Where(v=>v.Id == id)
