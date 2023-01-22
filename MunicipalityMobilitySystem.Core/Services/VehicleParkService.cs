@@ -54,7 +54,8 @@ namespace MunicipalityMobilitySystem.Core.Services
             var result = new VehicleQueryModel();
 
             var vehicles =  repo.AllReadonly<Vehicle>()
-                .Where(v => v.VehicleParkId == id);
+                .Where(v => v.VehicleParkId == id)
+                .Where(v=>v.ForCleaning == false);
 
             if (!string.IsNullOrEmpty(category))
             {

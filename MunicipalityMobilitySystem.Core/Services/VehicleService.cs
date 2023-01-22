@@ -76,6 +76,7 @@ namespace MunicipalityMobilitySystem.Core.Services
             guard.AgainstNull(vehicle, "Vehicle can not be found");
 
             vehicle.RenterId = null;
+            vehicle.ForCleaning = true;
 
             await repo.SaveChangesAsync();
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MunicipalityMobilitySystem.Core.Constants;
 using MunicipalityMobilitySystem.Core.Contracts.Category;
 using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
 using MunicipalityMobilitySystem.Models;
@@ -20,6 +21,8 @@ namespace MunicipalityMobilitySystem.Controllers
         {
             if ((await vehicleParkService.Exists(id)) == false)
             {
+                TempData[MessageConstant.ErrorMessage] = "The vehicle park do not exists!";
+
                 return RedirectToAction("Index", "Home");
             }
 

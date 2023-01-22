@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="mt-4 p-5 bg-light text-center">
+    <h2 class="display-4">Hello, Admin!</h2>
+    <p class="lead mb-1 mt-3">
+        This is your administrator area - you can <b>read</b>, <b>create</b>,
+        <b>delete</b> and <b>edit</b> vehicles.
+        <br />You can <b>rent</b> and <b>leave</b> the free ones, too!
+    </p>
+    <p class="lead mt-1">
+        You can also see <b>all users</b> and <b>all rents</b> in the system.
+    </p>
+    <hr class="my-4">
+    <a asp-area="" asp-controller="Vehicle" asp-action="All"
+       class="btn btn-primary btn-lg">All Vehicles</a>
+    <span>  |   </span>
+    <a asp-area="Admin" asp-controller="Vehicle" asp-action="Mine"
+       class="btn btn-primary btn-lg">My Vehicles</a>
+    <a asp-area="Admin" asp-controller="Vehicle" asp-action="Add"
+       class="btn btn-primary btn-lg">Add Vehicle</a>
+    <a asp-area="Admin" asp-controller="Vehicle" asp-action="Edit"
+       class="btn btn-warning btn-lg">Edit Vehicle</a>
+    <a asp-area="Admin" asp-controller="Vehicle" asp-action="Delete"
+       class="btn btn-danger btn-lg">Delete Vehicle</a>
+    <span>  |   </span>
+    <a asp-area="Admin" asp-controller="Vehicle" asp-action="Rents"
+       class="btn btn-primary btn-lg">All Rents</a>
+    <a asp-area="Admin" asp-controller="User" asp-action="All"
+       class="btn btn-primary btn-lg">All Users</a>
+</div>

@@ -4,6 +4,8 @@ using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
 using MunicipalityMobilitySystem.Core.Models;
 using System.Diagnostics;
 
+using static MunicipalityMobilitySystem.Areas.Admin.Constants.AdminConstants;
+
 namespace MunicipalityMobilitySystem.Controllers
 {
     public class HomeController : Controller
@@ -17,11 +19,11 @@ namespace MunicipalityMobilitySystem.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            //if (User.IsInRole(AdminRolleName))
-            //{
-            //    return RedirectToAction("Index", "Admin", new { area = "Admin" });
-            //}
-            
+            if (User.IsInRole(AdminRolleName))
+            {
+                return RedirectToAction("Index", "Admin", new { area = "Admin" });
+            }
+
             var model = await vehicleParkService.AllVehicleParks();
     
             return View(model);

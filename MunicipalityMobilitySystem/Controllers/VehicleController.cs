@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MunicipalityMobilitySystem.Core.Constants;
 using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
 using MunicipalityMobilitySystem.Extensions;
+
+using static MunicipalityMobilitySystem.Areas.Admin.Constants.AdminConstants;
 
 namespace MunicipalityMobilitySystem.Controllers
 {
@@ -24,10 +27,10 @@ namespace MunicipalityMobilitySystem.Controllers
         }
         public async Task<IActionResult> Mine()
         {
-            //if (User.IsInRole(AdminRolleName))
-            //{
-            //    return RedirectToAction("Mine", "House", new { area = AreaName });
-            //}
+            if (User.IsInRole(AdminRolleName))
+            {
+                return RedirectToAction("Mine", "House", new { area = AreaName });
+            }
 
             IEnumerable<VehicleServiceModel> myVehicles = Enumerable.Empty<VehicleServiceModel>();
             string userId = User.Id();
@@ -50,11 +53,15 @@ namespace MunicipalityMobilitySystem.Controllers
         {
             if ((await vehicleService.Exists(id)) == false)
             {
+                TempData[MessageConstant.ErrorMessage] = "The vehicle do not exists!";
+
                 return RedirectToAction("All", "VehiclePark");
             }
 
             if (await vehicleService.IsRented(id))
             {
+                TempData[MessageConstant.ErrorMessage] = "The vehicle is already rented!";
+
                 return RedirectToAction("All", "VehiclePark");
             }
 
@@ -66,8 +73,17 @@ namespace MunicipalityMobilitySystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Leave(int id)
         {
-            if (await vehicleService.Exists(id) == false || await vehicleService.IsRented(id) == false)
+            if (await vehicleService.Exists(id) == false) 
             {
+                TempData[MessageConstant.ErrorMessage] = "The vehicle do not exists!";
+
+                RedirectToAction("All", "VehiclePark");
+            }
+
+            if (await vehicleService.IsRented(id) == false)
+            {
+                TempData[MessageConstant.ErrorMessage] = "The vehicle is not rented!";
+
                 RedirectToAction("All", "VehiclePark");
             }
 
