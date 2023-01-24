@@ -4,7 +4,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
     public class UserController : BaseController
     {
-        public IActionResult Index()
+        public IActionResult All()
         {
             return View();
         }

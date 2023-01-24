@@ -1,4 +1,6 @@
-﻿using MunicipalityMobilitySystem.Core.Models.Vehicle;
+﻿using MunicipalityMobilitySystem.Core.Models.Category;
+using MunicipalityMobilitySystem.Core.Models.Vehicle;
+using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 
 namespace MunicipalityMobilitySystem.Core.Contracts.Vehicle
 {
@@ -16,5 +18,12 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Vehicle
 
         Task Rent(int vehicleId, string currentUserId);
         Task Leave(int vehicleId);
+
+        Task<VehicleQueryModel> AllVehicles(
+                                    string category = null,
+                                    string searchTerm = null,
+                                    VehiclesSorting sorting = VehiclesSorting.Newest,
+                                    int currentPage = 1,
+                                    int vehiclesPerPage = 1);
     }
 }

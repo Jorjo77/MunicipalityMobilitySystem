@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MunicipalityMobilitySystem.Core.Constants;
+using MunicipalityMobilitySystem.Core.Contracts.Category;
 using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
+using MunicipalityMobilitySystem.Core.Services;
 using MunicipalityMobilitySystem.Extensions;
-
+using MunicipalityMobilitySystem.Models;
 using static MunicipalityMobilitySystem.Areas.Admin.Constants.AdminConstants;
 
 namespace MunicipalityMobilitySystem.Controllers
@@ -13,24 +15,18 @@ namespace MunicipalityMobilitySystem.Controllers
     public class VehicleController : Controller
     {
         private readonly IVehicleService vehicleService;
+        private readonly ICategoryService categoryService;
 
         public VehicleController(
-            IVehicleService vehicleService)
+            IVehicleService vehicleService,
+            ICategoryService categoryService)
         {
             this.vehicleService = vehicleService;
+            this.categoryService = categoryService;
         }
 
-
-        public IActionResult All()
-        {
-            return View(new VehicleServiceModel());
-        }
         public async Task<IActionResult> Mine()
         {
-            if (User.IsInRole(AdminRolleName))
-            {
-                return RedirectToAction("Mine", "House", new { area = AreaName });
-            }
 
             IEnumerable<VehicleServiceModel> myVehicles = Enumerable.Empty<VehicleServiceModel>();
             string userId = User.Id();

@@ -6,7 +6,14 @@
 
 <h1>Wellcome to our Mobility System</h1>
 <h2>Using this platform you can rent the vehicle you need</h2>
-<h3>Select your most convinient Vehicle Park:</h3>
+@if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+{
+    <h3>Select your most convinient Vehicle Park:</h3>
+}
+else
+{
+    <h3>Login to find all our vehicles for a rent!</h3>
+}
 
 <div class="mb-5"></div>
 
@@ -20,8 +27,11 @@
                  src="@park.ImageUrl" alt="@park.Name">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>
-                        <a class="btn btn-primary" asp-controller="VehiclePark" asp-action="Details"
+                        @if (this.User?.Identity!=null && this.User.Identity.IsAuthenticated)
+                        {
+                           <a class="btn btn-primary" asp-controller="VehiclePark" asp-action="Details"
                        asp-route-id="@park.Id"> @park.Name</a>
+                        }        
                     </h5>
                 </div>
             </div>
@@ -38,6 +48,7 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+
 
 
 

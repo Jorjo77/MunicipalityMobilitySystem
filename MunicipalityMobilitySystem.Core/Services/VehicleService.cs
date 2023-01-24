@@ -2,7 +2,9 @@
 using Microsoft.Extensions.Logging;
 using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
 using MunicipalityMobilitySystem.Core.Exceptions;
+using MunicipalityMobilitySystem.Core.Models.Category;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
+using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
 
@@ -44,6 +46,70 @@ namespace MunicipalityMobilitySystem.Core.Services
                     RenterId= v.RenterId
                 })
                 .ToListAsync();
+        }
+
+        public async Task<VehicleQueryModel> AllVehicles(string category = null, 
+                                                   string searchTerm = null, 
+                                                   VehiclesSorting sorting = VehiclesSorting.Newest, 
+                                                   int currentPage = 1, 
+                                                   int vehiclesPerPage = 1)
+        {
+            var result = new VehicleQueryModel();
+
+            var vehicles = repo.AllReadonly<Vehicle>();
+
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                vehicles = vehicles
+                    .Where(v => v.Category.Name == category);
+            }
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                searchTerm = $"%{searchTerm.ToLower()}";
+
+                vehicles = vehicles
+                    .Where(v => EF.Functions.Like(v.Model.ToLower(), searchTerm) ||
+                   EF.Functions.Like(v.VehiclePark.Adress.ToLower(), searchTerm) ||
+                   EF.Functions.Like(v.Description.ToLower(), searchTerm));
+
+            }
+
+            switch (sorting)
+            {
+                case VehiclesSorting.Price:
+                    vehicles = vehicles.OrderBy(v => v.PricePerHour);
+                    break;
+                case VehiclesSorting.Rating:
+                    vehicles = vehicles.OrderByDescending(v => v.Rating);
+                    break;
+                default:
+                    vehicles = vehicles.OrderByDescending(v => v.Id);
+                    break;
+            }
+
+            result.Vehicles = await vehicles
+                .Skip((currentPage - 1) * vehiclesPerPage)
+                .Take(vehiclesPerPage)
+                .Select(v => new VehicleServiceModel
+                {
+                    Id = v.Id,
+                    ImageUrl = v.ImageUrl,
+                    VehicleParkId = v.VehicleParkId,
+                    CategoryId = v.CategoryId,
+                    Description = v.Description,
+                    EngineType = v.EngineType,
+                    Model = v.Model,
+                    PricePerHour = v.PricePerHour,
+                    Rating = v.Rating,
+                    RenterId = v.RenterId,
+                })
+                .ToListAsync();
+
+            result.TotalVehiclesCount = await vehicles.CountAsync();
+
+            return result;
         }
 
         public async Task<bool> Exists(int id)

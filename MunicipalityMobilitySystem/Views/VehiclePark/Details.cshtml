@@ -21,16 +21,12 @@
         <h5 class="card-text">Description: <b>@Model.Description</b></h5>
     </div>
 </div>
-
-
+<hr />
 @{
     if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
     {
         <a class="btn btn-primary" asp-controller="VehiclePark" asp-action="All" asp-route-id="@Model.Id">Find all our vehicles</a>
     }
-    else
-    {
-        <h2>Login to find all our vehicles for a rent!</h2>
-    }
+
 }
 

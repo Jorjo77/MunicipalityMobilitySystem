@@ -5,28 +5,94 @@
 <div class="mt-4 p-5 bg-light text-center">
     <h2 class="display-4">Hello, Admin!</h2>
     <p class="lead mb-1 mt-3">
-        This is your administrator area - you can <b>read</b>, <b>create</b>,
-        <b>delete</b> and <b>edit</b> vehicles.
-        <br />You can <b>rent</b> and <b>leave</b> the free ones, too!
+        This is your administrator area - here you can <b>read</b>, <b>create</b>,
+        <b>edit</b> and <b>delete</b> vehicles and vehicle parks.
+        <br />You can <b>create roles</b> and <b>put users into roles!</b>
+        <br />You can <b>rent</b> and <b>leave</b> the free one vehicles, too!
     </p>
     <p class="lead mt-1">
         You can also see <b>all users</b> and <b>all rents</b> in the system.
     </p>
     <hr class="my-4">
-    <a asp-area="" asp-controller="Vehicle" asp-action="All"
-       class="btn btn-primary btn-lg">All Vehicles</a>
-    <span>  |   </span>
-    <a asp-area="Admin" asp-controller="Vehicle" asp-action="Mine"
-       class="btn btn-primary btn-lg">My Vehicles</a>
-    <a asp-area="Admin" asp-controller="Vehicle" asp-action="Add"
-       class="btn btn-primary btn-lg">Add Vehicle</a>
-    <a asp-area="Admin" asp-controller="Vehicle" asp-action="Edit"
-       class="btn btn-warning btn-lg">Edit Vehicle</a>
-    <a asp-area="Admin" asp-controller="Vehicle" asp-action="Delete"
-       class="btn btn-danger btn-lg">Delete Vehicle</a>
-    <span>  |   </span>
-    <a asp-area="Admin" asp-controller="Vehicle" asp-action="Rents"
-       class="btn btn-primary btn-lg">All Rents</a>
-    <a asp-area="Admin" asp-controller="User" asp-action="All"
-       class="btn btn-primary btn-lg">All Users</a>
+    <div />
+
+    <div>
+        <span>  |   </span>
+        <div>
+            <label>Here you can <b>read, create, edit</b> and <b>delete</b> vehicle parks</label>
+        </div>
+        <a asp-area="Admin" asp-controller="VehiclePark" asp-action="AllVehicleParks"
+           class="btn btn-primary btn-lg">Vehicle Parks</a>
+    </div>
+    <div>
+        <span>  |   </span>
+        <div>
+            <label>Here you can <b>read, create, edit</b> and <b>delete</b> vehicles</label>
+        </div>
+        <a asp-area="Admin" asp-controller="Vehicle" asp-action="All"
+           class="btn btn-primary btn-lg">Vehicles</a>
+    </div>
+    <div>
+        <span>  |   </span>
+        <div>
+            <label>Here you can <b>read or forget user</b></label>
+        </div>
+        <a asp-area="Admin" asp-controller="User" asp-action="All"
+           class="btn btn-primary btn-lg">Users</a>
+    </div>
+    <div>
+        <span>  |   </span>
+        <div>
+            <label>Here you can <b>read, create roles</b> and <b>put users into role</b></label>
+        </div>
+        <a asp-area="Admin" asp-controller="Admin" asp-action="AllRoles"
+           class="btn btn-primary btn-lg">Roles</a>
+    </div>
 </div>
+@* This is useful for the Boss!
+    <div>
+        <span>  |   </span>
+        <div>
+            <label>Here you can <b>read all rents</b> </label>
+        </div>
+        <a asp-area="" asp-controller="Vehicle" asp-action="Rents"
+           class="btn btn-primary btn-lg">All Rents</a>
+</div>*@
+
+@*<div>
+
+</div>
+        <span>  |   </span>
+
+
+<ul>
+    <li>
+        <a asp-area="Admin" asp-controller="VehiclePark" asp-action="Add"
+               class="btn btn-primary btn-lg">Add Vehicle Park</a>
+        <a asp-area="Admin" asp-controller="VehiclePark" asp-action="Edit"
+               class="btn btn-warning btn-lg">Edit Vehicle Park</a>
+        <a asp-area="Admin" asp-controller="VehiclePark" asp-action="Delete"
+               class="btn btn-danger btn-lg">Delete Vehicle Park</a>
+    </li>
+</ul>
+    <span>  |   </span>
+<ul>
+    <li>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="MakeRole"
+               class="btn btn-success btn-lg">Make Role</a>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="AddUserToRole"
+               class="btn btn-success btn-lg">Add User To Role</a>
+    </li>
+</ul>
+    <span>  |   </span>
+<ul>
+    <li>
+                 <a asp-area="Admin" asp-controller="Vehicle" asp-action="Add"
+                   class="btn btn-primary btn-lg">Add Vehicle</a>
+             <a asp-area="Admin" asp-controller="Vehicle" asp-action="Edit"
+               class="btn btn-warning btn-lg">Edit Vehicle</a>
+         <a asp-area="Admin" asp-controller="Vehicle" asp-action="Delete"
+               class="btn btn-danger btn-lg">Delete Vehicle</a>
+    </li>
+</ul>
+</div>*@
