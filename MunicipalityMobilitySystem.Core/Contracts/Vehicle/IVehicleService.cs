@@ -1,6 +1,6 @@
-﻿using MunicipalityMobilitySystem.Core.Models.Category;
+﻿using MunicipalityMobilitySystem.Core.Models;
+using MunicipalityMobilitySystem.Core.Models.Category;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
-using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 
 namespace MunicipalityMobilitySystem.Core.Contracts.Vehicle
 {
@@ -25,5 +25,14 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Vehicle
                                     VehiclesSorting sorting = VehiclesSorting.Newest,
                                     int currentPage = 1,
                                     int vehiclesPerPage = 1);
+
+        Task<bool> CategoryExists(int categoryId);
+
+        Task Create(CreateVehicleModel createVehicleModel);
+
+        Task<bool> VehiceExistsByModelEngineTypeAndDescription(string model, string engineType, string description);
+
+        Task Delete(int vehicleId);
+
     }
 }

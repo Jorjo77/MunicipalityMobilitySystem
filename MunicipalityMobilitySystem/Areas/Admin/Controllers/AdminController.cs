@@ -6,7 +6,6 @@ using static MunicipalityMobilitySystem.Areas.Admin.Constants.AdminConstants;
 
 namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
-    [Authorize(Roles = AdminRolleName)]
     public class AdminController : BaseController
     {
         public IActionResult Index()

@@ -1,9 +1,8 @@
 ﻿using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
-using MunicipalityMobilitySystem.Core.Models.Vehicle;
 
 namespace MunicipalityMobilitySystem.Core.Models.VehiclePark
 {
-    public class VehicleParkDetailsModel: IVehicleParkDetailsModel
+    public class VehicleParkDetailsModel : IVehicleParkDetailsModel
     {
         public int Id { get; set; }
 

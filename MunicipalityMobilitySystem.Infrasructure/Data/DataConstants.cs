@@ -5,7 +5,7 @@
         public class Vehicle
         {
             public const int ModelMaxLength = 50;
-            public const int ModelMinLength = 10;
+            public const int ModelMinLength = 3;
 
             public const int RatingMaxValue = 20;
             public const int RatingMinValue = 3;

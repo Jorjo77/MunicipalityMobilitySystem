@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Logging;
 using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
 using MunicipalityMobilitySystem.Core.Exceptions;
+using MunicipalityMobilitySystem.Core.Models;
 using MunicipalityMobilitySystem.Core.Models.Category;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
-using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
 
@@ -49,10 +49,10 @@ namespace MunicipalityMobilitySystem.Core.Services
         }
 
         public async Task<VehicleQueryModel> AllVehicles(string category = null, 
-                                                   string searchTerm = null, 
-                                                   VehiclesSorting sorting = VehiclesSorting.Newest, 
-                                                   int currentPage = 1, 
-                                                   int vehiclesPerPage = 1)
+                               string searchTerm = null, 
+                               VehiclesSorting sorting = VehiclesSorting.Newest, 
+                               int currentPage = 1, 
+                               int vehiclesPerPage = 1)
         {
             var result = new VehicleQueryModel();
 
@@ -180,6 +180,55 @@ namespace MunicipalityMobilitySystem.Core.Services
                             RenterId = v.RenterId
                         })
                         .FirstAsync();
+        }
+
+        public async Task<bool> CategoryExists(int categoryId)
+        {
+            return await repo.AllReadonly<Category>(c => c.Id == categoryId)
+                .AnyAsync();
+
+        }
+
+        public async Task Create(CreateVehicleModel createVehicleModel)
+        {
+            var vehicle = new Vehicle
+            { 
+                Model= createVehicleModel.ModelName,
+                CategoryId= createVehicleModel.CategoryId,
+                Description = createVehicleModel.Description,
+                EngineType = createVehicleModel.EngineType,
+                ImageUrl= createVehicleModel.ImageUrl,
+                PricePerHour= createVehicleModel.PricePerHour,
+                VehicleParkId= createVehicleModel.VehicleParkId
+            };
+
+            try
+            {
+                await repo.AddAsync(vehicle);
+                await repo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
+        }
+
+        public async Task<bool> VehiceExistsByModelEngineTypeAndDescription(string model, string engineType, string description)
+        {
+            return await repo.AllReadonly<Vehicle>()
+                .Where(v => v.Model == model
+                && v.EngineType == engineType
+                && v.Description == description)
+                .AnyAsync();
+        }
+
+        public async Task Delete(int vehicleId)
+        {
+            var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
+            repo.Delete(vehicle);
+
+            await repo.SaveChangesAsync();
         }
     }
 }

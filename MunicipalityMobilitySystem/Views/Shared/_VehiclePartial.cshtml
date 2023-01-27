@@ -1,6 +1,7 @@
 ﻿@model VehicleServiceModel
 
 <div class="col-md-4">
+    <partial name="_UserMessages" />
     <div class="card mb-3">
         <img class="card-img-top" src="@Model.ImageUrl" alt="Vehicle Image">
         <div class="card-body text-center">
@@ -15,28 +16,33 @@
 
             @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
             {
-                <a class="btn btn-primary" asp-controller="Vehicle" asp-action="Details"
-               asp-route-id="@Model.Id">Details</a>
-                <a asp-area="" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@Model.Id"
-               class="btn btn-warning">Edit</a>
-                <a asp-area="" asp-controller="Vehicle" asp-action="Delete" asp-route-id="@Model.Id"
-               class="btn btn-danger">Delete</a>
-                <p></p>
-
+                <form class="input-group-lg" style="display: inline-block;" asp-area="" asp-controller="Vehicle"
+                  asp-action="Details" asp-route-id="@Model.Id" method="post">
+                    <input class="btn btn-primary" type="submit" value="Details" />
+                </form>
                 @if (Model.RenterId == null)
                 {
-                    <form class="input-group-sm" asp-area="" asp-controller="Vehicle"
+                    <form class="input-group-lg" style="display: inline-block;" asp-area="" asp-controller="Vehicle"
                   asp-action="Rent" asp-route-id="@Model.Id" method="post">
-                        <input class="btn btn-warning" type="submit" value="Rent" />
+                        <input class="btn btn-success" type="submit" value="Rent" />
                     </form>
                 }
                 else
                 {
-                    <form class="input-group-sm" asp-area="" asp-controller="Vehicle" asp-action="Leave"
+                    <form class="input-group-lg" style="display: inline-block;" asp-area="" asp-controller="Vehicle" asp-action="Leave"
                   asp-route-id="@Model.Id" method="post">
                         <input class="btn btn-warning" type="submit" value="Leave" />
                     </form>
                 }
+                <p></p>
+                <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Vehicle"
+                  asp-action="Edit" asp-route-id="@Model.Id" method="post">
+                    <input class="btn btn-warning" type="submit" value="Edit" />
+                </form>
+                <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Vehicle"
+                       asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                            <input class="btn btn-danger" type="submit" value="Delete" />
+                </form>
             }
         </div>
     </div>

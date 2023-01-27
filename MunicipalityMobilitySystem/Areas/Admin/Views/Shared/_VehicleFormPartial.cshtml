@@ -1,0 +1,59 @@
+﻿@model CreateVehicleModel
+
+<div class="row">
+    <partial name="_UserMessages" />
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <input type="hidden" asp-for="@Model.Id" />
+            <div class="form-group">
+                <b><label asp-for="ModelName"></label></b>
+                <input asp-for="ModelName" class="form-control" placeholder="Model...">
+                <span asp-validation-for="ModelName" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b><label asp-for="Rating"></label></b>
+                <input asp-for="Rating" class="form-control" placeholder="Engine Type...">
+                <span asp-validation-for="Rating" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b><label asp-for="EngineType"></label></b>
+                <input asp-for="EngineType" class="form-control" placeholder="Engine Type...">
+                <span asp-validation-for="EngineType" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b><label asp-for="Description"></label></b>
+                <textarea asp-for="Description" rows="4" class="form-control" placeholder="..."></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b><label asp-for="ImageUrl"></label></b>
+                <input asp-for="ImageUrl" class="form-control" placeholder="Your fine URL here...">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b><label asp-for="PricePerHour"></label></b>
+                <input asp-for="PricePerHour" class="form-control" placeholder="Set the price per hour here...">
+                <span asp-validation-for="PricePerHour" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b><label asp-for="VehicleParkId"></label></b>
+                <input asp-for="VehicleParkId" class="form-control" placeholder="Set the vehicle park Id here...">
+                <span asp-validation-for="VehicleParkId" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b><label asp-for="CategoryId"></label></b>
+                <select asp-for="CategoryId" class="form-control">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="CategoryId" class="small text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

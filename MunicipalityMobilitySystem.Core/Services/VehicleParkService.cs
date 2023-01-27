@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
 using MunicipalityMobilitySystem.Core.Exceptions;
+using MunicipalityMobilitySystem.Core.Models;
 using MunicipalityMobilitySystem.Core.Models.Category;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
 using MunicipalityMobilitySystem.Core.Models.VehiclePark;
@@ -53,9 +54,9 @@ namespace MunicipalityMobilitySystem.Core.Services
         {
             var result = new VehicleQueryModel();
 
-            var vehicles =  repo.AllReadonly<Vehicle>()
+            var vehicles = repo.AllReadonly<Vehicle>()
                 .Where(v => v.VehicleParkId == id)
-                .Where(v=>v.ForCleaning == false);
+                .Where(v => v.ForCleaning == false);
 
             if (!string.IsNullOrEmpty(category))
             {
@@ -90,7 +91,6 @@ namespace MunicipalityMobilitySystem.Core.Services
             result.Vehicles = await vehicles
                 .Skip((currentPage - 1) * vehiclesPerPage)
                 .Take(vehiclesPerPage)
-                .Include(v=>v.VehiclePark)
                 .Select(v => new VehicleServiceModel
                 {
                     Id = v.Id,

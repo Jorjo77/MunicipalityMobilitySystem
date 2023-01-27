@@ -30,14 +30,14 @@
                 {
                     <form class="input-group-sm" asp-area="" asp-controller="Vehicle"
                   asp-action="Rent" asp-route-id="@Model.Id" method="post">
-                        <input class="btn btn-warning" type="submit" value="Rent" />
+                        <input class="btn-lg btn-warning" type="submit" value="Rent" />
                     </form>
                 }
                 else
                 {
                     <form class="input-group-sm" asp-area="" asp-controller="Vehicle" asp-action="Leave"
                   asp-route-id="@Model.Id" method="post">
-                        <input class="btn btn-warning" type="submit" value="Leave" />
+                        <input class="btn-lg btn-warning" type="submit" value="Leave" />
                     </form>
                 }
             }

@@ -3,7 +3,7 @@ using MunicipalityMobilitySystem.Core.Models.Vehicle;
 
 namespace MunicipalityMobilitySystem.Core.Models.VehiclePark
 {
-    public class VehicleParkModel: IVehicleParkModel
+    public class VehicleParkModel : IVehicleParkModel
     {
         public int Id { get; set; }
 

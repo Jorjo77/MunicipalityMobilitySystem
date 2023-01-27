@@ -1,4 +1,5 @@
 ﻿using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
+using MunicipalityMobilitySystem.Core.Models;
 using MunicipalityMobilitySystem.Core.Models.Category;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
 using MunicipalityMobilitySystem.Core.Models.VehiclePark;
