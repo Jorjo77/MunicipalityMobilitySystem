@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
-using MunicipalityMobilitySystem.Models;
+using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 
 namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
@@ -20,9 +20,33 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            var model = new VehicleParkDetailsModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(VehicleParkDetailsModel model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if ((await vehicleParkService.VehiceParkExistsByNameEmailAndDescription(model.Name, model.Email, model.Description)) == true)
+            {
+                ModelState.AddModelError("", "The vehicle park already exists!");
+
+                return View(model);
+            }
+
+            await vehicleParkService.Create(model);
+
+            return RedirectToAction("AllVehicleParks", "VehiclePark", new { area = "Admin" });
         }
 
         public IActionResult Edit()
@@ -30,9 +54,16 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult Delete()
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
-            return View();
+            if ((await vehicleParkService.Exists(id)) == false)
+            {
+                return RedirectToAction("AllVehicleParks", "VehiclePark", new { area = "Admin" });
+            }
+            await vehicleParkService.Delete(id);
+
+            return RedirectToAction("AllVehicleParks", "VehiclePark", new { area = "Admin" });
         }
     }
 }

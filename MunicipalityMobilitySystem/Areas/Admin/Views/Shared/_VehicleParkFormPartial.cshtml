@@ -1,0 +1,42 @@
+﻿@model VehicleParkDetailsModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <input type="hidden" asp-for="@Model.Id" />
+            <div class="form-group">
+                <b><label asp-for="Name"></label></b>
+                <input asp-for="Name" class="form-control" placeholder="Vehicle park name...">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b><label asp-for="Email"></label></b>
+                <input asp-for="Email" class="form-control" placeholder="Email...">
+                <span asp-validation-for="Email" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b><label asp-for="Phone"></label></b>
+                <input asp-for="Phone" class="form-control" placeholder="Phone number...">
+                <span asp-validation-for="Phone" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b><label asp-for="Adress"></label></b>
+                <input asp-for="Adress" class="form-control" placeholder="...">
+                <span asp-validation-for="Adress" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b><label asp-for="ImageUrl"></label></b>
+                <input asp-for="ImageUrl" class="form-control" placeholder="Your fine URL here...">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b><label asp-for="Description"></label></b>
+                <textarea asp-for="Description" rows="4" class="form-control" placeholder="..."></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

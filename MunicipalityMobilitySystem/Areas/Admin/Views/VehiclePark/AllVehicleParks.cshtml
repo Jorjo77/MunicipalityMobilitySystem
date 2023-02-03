@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VehicleParkModel>
+﻿@model IEnumerable<VehicleParkDetailsModel>
 
 @{
     ViewBag.Title = "All Vehicle Parks";
@@ -11,7 +11,7 @@
     <div>
         <label>Here you can <b> create vehicle park</b></label>
     </div>
-    <a asp-area="Admin" asp-controller="VehiclePark" asp-action="Create"
+    <a asp-area="Admin" asp-controller="VehiclePark" asp-action="Add"
        class="btn btn-success btn-lg">Create Vehicle Park</a>
 </div>
 <br />
@@ -19,29 +19,36 @@
 <div class="row">
     @foreach (var park in Model)
     {
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <img class="card-img-top" src="@park.ImageUrl" alt="Vehicle Park Image">
-                <div class="card-body text-center">
-                    <h4>@park.Name</h4>
-                    <h6>Adress: <b>@park.Adress</b></h6>
-                    <h6>
-                        Phone:
-                        <b>@park.Phone</b>
-                    </h6>
-                    <h6>
-                        Email:
-                        <b>@park.Email</b>
-                    </h6>
-                    <br />
-                    <a asp-area="" asp-controller="VehiclePark" asp-action="Details"
-                   asp-route-id="@park.Id" class="btn btn-primary">Details</a>
-                    <a asp-area="Admin" asp-controller="VehiclePark" asp-action="Edit" asp-route-id="@park.Id"
-                   class="btn btn-warning">Edit</a>
-                    <a asp-area="Admin" asp-controller="VehiclePark" asp-action="Delete" asp-route-id="@park.Id"
-                   class="btn btn-danger">Delete</a>
-                </div>
-            </div>
-        </div>
+        <partial name="_VehicleParkPartial" model="@park"/>
     }
 </div>
+@section Scripts {
+    <script>
+
+        function myConfirm(e) {
+
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your vehicle park has been deleted.',
+                        'success'
+                    ).then((resultDeleted) => {
+
+                        e.target.parentElement.submit();
+                    })
+                }
+            })
+        }
+    </script>
+}

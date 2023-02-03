@@ -1,0 +1,30 @@
+﻿@model VehicleParkDetailsModel
+
+<div class="col-md-4">
+    <div class="card mb-3">
+        <img class="card-img-top" src="@Model.ImageUrl" alt="Vehicle Park Image">
+        <div class="card-body text-center">
+            <h4>@Model.Name</h4>
+            <h6>Adress: <b>@Model.Adress</b></h6>
+            <h6>
+                Phone:
+                <b>@Model.Phone</b>
+            </h6>
+            <h6>
+                Email:
+                <b>@Model.Email</b>
+            </h6>
+            <br />
+            <a asp-area="" asp-controller="VehiclePark" asp-action="Details"
+               asp-route-id="@Model.Id" class="btn btn-primary">Details</a>
+            <a asp-area="Admin" asp-controller="VehiclePark" asp-action="Edit" asp-route-id="@Model.Id"
+               class="btn btn-warning">Edit</a>
+            <form class="input-group-md" style="display: inline-block;" asp-area="Admin" asp-controller="VehiclePark"
+                  asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                <input class="btn btn-danger" type="submit" value="Delete" onclick="myConfirm(event)" />
+            </form>
+        </div>
+    </div>
+</div>
+
+

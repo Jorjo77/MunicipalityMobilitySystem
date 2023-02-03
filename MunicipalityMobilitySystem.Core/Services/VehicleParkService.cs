@@ -28,11 +28,11 @@ namespace MunicipalityMobilitySystem.Core.Services
             this.logger = logger;
         }
 
-        public async Task<IEnumerable<VehicleParkModel>> AllVehicleParks()
+        public async Task<IEnumerable<VehicleParkDetailsModel>> AllVehicleParks()
         {
             return await repo.AllReadonly<VehiclePark>()
                 .OrderBy(vp => vp.Name)
-                .Select(vp => new VehicleParkModel
+                .Select(vp => new VehicleParkDetailsModel
                 {
                     Id = vp.Id,
                     Name = vp.Name,
@@ -111,10 +111,50 @@ namespace MunicipalityMobilitySystem.Core.Services
             return result;
         }
 
+        public async Task Create(VehicleParkDetailsModel model)
+        {
+            var vehiclePark = new VehiclePark
+            {
+                Name = model.Name,
+                Description = model.Description,
+                ImageUrl = model.ImageUrl,
+                Adress = model.Adress,
+                Phone = model.Phone,
+                Email = model.Email
+            };
+
+            try
+            {
+                await repo.AddAsync(vehiclePark);
+                await repo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
+        }
+        public async Task Delete(int vehicleParkId)
+        {
+            var vehiclePark = await repo.GetByIdAsync<VehiclePark>(vehicleParkId);
+            repo.Delete(vehiclePark);
+
+            await repo.SaveChangesAsync();
+        }
+
         public async Task<bool> Exists(int id)
         {
             return await repo.AllReadonly<VehiclePark>()
                 .AnyAsync(vp => vp.Id == id);
+        }
+
+        public async Task<bool> VehiceParkExistsByNameEmailAndDescription(string name, string email, string description)
+        {
+            return await repo.AllReadonly<VehiclePark>()
+                .Where(vp=>vp.Name == name &&
+                vp.Email == email &&
+                vp.Description == description)
+                .AnyAsync();
         }
 
         public async Task<VehicleParkDetailsModel> VehicleParkDetailsById(int id)

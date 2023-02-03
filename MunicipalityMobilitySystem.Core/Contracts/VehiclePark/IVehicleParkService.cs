@@ -13,7 +13,7 @@ namespace MunicipalityMobilitySystem.Core.Contracts.VehiclePark
 {
     public interface IVehicleParkService
     {
-        Task<IEnumerable<VehicleParkModel>> AllVehicleParks();
+        Task<IEnumerable<VehicleParkDetailsModel>> AllVehicleParks();
 
         Task<VehicleParkDetailsModel> VehicleParkDetailsById(int id);
 
@@ -26,5 +26,9 @@ namespace MunicipalityMobilitySystem.Core.Contracts.VehiclePark
             int vehiclesPerPage = 1);
 
         Task<bool> Exists(int id);
+        Task Create(VehicleParkDetailsModel model);
+        Task<bool> VehiceParkExistsByNameEmailAndDescription(string name, string email, string description);
+
+        Task Delete(int vehicleParkId);
     }
 }
