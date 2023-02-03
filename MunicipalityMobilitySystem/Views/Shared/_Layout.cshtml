@@ -4,14 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Municipality Mobility System</title>
-    <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" />
+    <link rel="stylesheet" href="~/plugins/toastr/toastr.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MunicipalityMobilitySystem.styles.css" asp-append-version="true" />
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/lib/limonte-sweetalert2/sweetalert2.css" asp-append-version="true" />
+
+
+    @await RenderSectionAsync("Head", false)
 </head>
 <body>
-    <partial name="_UserMessages" />
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -52,10 +54,12 @@
             &copy; @DateTime.UtcNow.Year - MunicipalityMobilitySystem 
         </div>
     </footer>
-
-    <script src="~/lib/toastr/toastr.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/plugins/toastr/toastr.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/limonte-sweetalert2/sweetalert2.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+    @await RenderSectionAsync("Scripts", false)
 </body>
 </html>

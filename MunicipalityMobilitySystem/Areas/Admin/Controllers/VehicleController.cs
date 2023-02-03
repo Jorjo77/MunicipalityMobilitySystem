@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MunicipalityMobilitySystem.Core.Constants;
+using Microsoft.Extensions.Logging;
 using MunicipalityMobilitySystem.Core.Contracts.Category;
 using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
@@ -51,7 +51,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(CreateVehicleModel model)
         {
-            if ((await vehicleService.CategoryExists(model.CategoryId))==false)
+            if ((await vehicleService.CategoryExists(model.CategoryId)) == false)
             {
                 ModelState.AddModelError(nameof(model.CategoryId), "Category does not exists");
             }
@@ -64,21 +64,80 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 
             if ((await vehicleService.VehiceExistsByModelEngineTypeAndDescription(model.ModelName, model.EngineType, model.Description)) == true)
             {
-                //ModelState.AddModelError("", "The vehicle already exists!");
-                TempData[MessageConstant.ErrorMessage] = "The vehicle already exists!";
+                ModelState.AddModelError("", "The vehicle already exists!");
+
                 return View(model);
             }
 
             await vehicleService.Create(model);
 
-            TempData[MessageConstant.SuccessMessage] = "The vehicle was created!";
-
-            return RedirectToAction("Index", "Admin", new { area = "Admin"});
+            return RedirectToAction("All", "Vehicle", new { area = "Admin" });
         }
 
-        public IActionResult Edit()
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            if ((await vehicleService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+
+            var vehicle = await vehicleService.VehicleDetails(id);
+            var categoryId = await vehicleService.GetVehicleCategoryId(id);
+
+            var model = new CreateVehicleModel()
+            {
+                Id = id,
+                ModelName = vehicle.Model,
+                Rating= vehicle.Rating,
+                CategoryId = categoryId,
+                Description = vehicle.Description,
+                EngineType = vehicle.EngineType,
+                ImageUrl = vehicle.ImageUrl,
+                PricePerHour = vehicle.PricePerHour,
+                VehicleParkId = vehicle.VehicleParkId,
+                Categories = await categoryService.AllCategories()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, CreateVehicleModel model)
+        {
+            if (id != model.Id)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            if ((await vehicleService.Exists(model.Id)) == false)
+            {
+                ModelState.AddModelError("", "Vehicle does not exist");
+                model.Categories = await categoryService.AllCategories();
+
+                return View(model);
+            }
+
+
+            if ((await vehicleService.CategoryExists(model.CategoryId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist");
+                model.Categories = await categoryService.AllCategories();
+
+                return View(model);
+            }
+
+            if (ModelState.IsValid == false)
+            {
+                model.Categories = await categoryService.AllCategories();
+
+                return View(model);
+            }
+
+            await vehicleService.Edit(model.Id, model);
+
+            return RedirectToAction("Details", "Vehicle", new { id = model.Id, area = "" });
         }
 
         [HttpPost]
@@ -86,11 +145,8 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
         {
             if ((await vehicleService.Exists(id)) == false)
             {
-                TempData[MessageConstant.ErrorMessage] = "The vehicle do not exists!";
                 return RedirectToAction("All", "Vehicle", new { area = "Admin" });
             }
-
-            TempData[MessageConstant.WarningMessage] = "Are you sure you want to delete the vehicle?";
             await vehicleService.Delete(id);
 
             return RedirectToAction("All", "Vehicle", new { area = "Admin" });

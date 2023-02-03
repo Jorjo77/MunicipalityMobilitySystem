@@ -34,5 +34,9 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Vehicle
 
         Task Delete(int vehicleId);
 
+        Task<int> GetVehicleCategoryId(int vehicleId);
+
+        Task Edit(int vehicleId, CreateVehicleModel createVehicleModel);
+
     }
 }

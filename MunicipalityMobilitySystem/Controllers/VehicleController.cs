@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MunicipalityMobilitySystem.Core.Constants;
 using MunicipalityMobilitySystem.Core.Contracts.Category;
 using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
@@ -49,15 +48,11 @@ namespace MunicipalityMobilitySystem.Controllers
         {
             if ((await vehicleService.Exists(id)) == false)
             {
-                TempData[MessageConstant.ErrorMessage] = "The vehicle do not exists!";
-
                 return RedirectToAction("All", "VehiclePark");
             }
 
             if (await vehicleService.IsRented(id))
             {
-                TempData[MessageConstant.ErrorMessage] = "The vehicle is already rented!";
-
                 return RedirectToAction("All", "VehiclePark");
             }
 
@@ -71,15 +66,12 @@ namespace MunicipalityMobilitySystem.Controllers
         {
             if (await vehicleService.Exists(id) == false) 
             {
-                TempData[MessageConstant.ErrorMessage] = "The vehicle do not exists!";
 
                 RedirectToAction("All", "VehiclePark");
             }
 
             if (await vehicleService.IsRented(id) == false)
             {
-                TempData[MessageConstant.ErrorMessage] = "The vehicle is not rented!";
-
                 RedirectToAction("All", "VehiclePark");
             }
 

@@ -194,6 +194,7 @@ namespace MunicipalityMobilitySystem.Core.Services
             var vehicle = new Vehicle
             { 
                 Model= createVehicleModel.ModelName,
+                Rating=createVehicleModel.Rating,
                 CategoryId= createVehicleModel.CategoryId,
                 Description = createVehicleModel.Description,
                 EngineType = createVehicleModel.EngineType,
@@ -227,6 +228,27 @@ namespace MunicipalityMobilitySystem.Core.Services
         {
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
             repo.Delete(vehicle);
+
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task<int> GetVehicleCategoryId(int id)
+        {
+            return (await repo.GetByIdAsync<Vehicle>(id)).CategoryId; 
+        }
+
+        public async Task Edit(int vehicleId, CreateVehicleModel createVehicleModel)
+        {
+            var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
+
+            vehicle.Model = createVehicleModel.ModelName;
+            vehicle.Rating= createVehicleModel.Rating;
+            vehicle.CategoryId = createVehicleModel.CategoryId;
+            vehicle.Description = createVehicleModel.Description;
+            vehicle.EngineType = createVehicleModel.EngineType;
+            vehicle.ImageUrl = createVehicleModel.ImageUrl;
+            vehicle.PricePerHour = createVehicleModel.PricePerHour;
+            vehicle.VehicleParkId = createVehicleModel.VehicleParkId;
 
             await repo.SaveChangesAsync();
         }

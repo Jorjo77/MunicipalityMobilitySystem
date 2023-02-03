@@ -10,4 +10,8 @@
     <ProjectReference Include="..\MunicipalityMobilitySystem.Infrasructure\MunicipalityMobilitySystem.Infrasructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Constants\" />
+  </ItemGroup>
+
 </Project>

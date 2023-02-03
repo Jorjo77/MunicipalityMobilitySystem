@@ -18,7 +18,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
-    <PackageReference Include="toastr" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,7 +27,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Identity\Data\" />
-    <Folder Include="wwwroot\lib\toastr\" />
+    <Folder Include="wwwroot\plugins\" />
   </ItemGroup>
 
 </Project>
