@@ -85,10 +85,19 @@
     </div>
 </div>
 
+@if (Model.Vehicles.Count() == 0)
+{
+    <h3>This vehicle park do not have any vehicle yet!</h3>
+}
+else
+{
+    <div class="row">
+        @foreach (var vehicle in Model.Vehicles)
+        {
+            <partial name="_VehiclePartial" model="@vehicle" />
+        }
+    </div>
+}
 
-<div class="row">
-    @foreach (var vehicle in Model.Vehicles)
-    {
-        <partial name="_VehiclePartial" model="@vehicle" />
-    }
-</div>
+
+

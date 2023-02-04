@@ -30,5 +30,8 @@ namespace MunicipalityMobilitySystem.Core.Contracts.VehiclePark
         Task<bool> VehiceParkExistsByNameEmailAndDescription(string name, string email, string description);
 
         Task Delete(int vehicleParkId);
+        Task<VehicleParkDetailsModel> VehicleParkDetails(int id);
+
+        Task EditVehiclePark(int id, VehicleParkDetailsModel model);
     }
 }

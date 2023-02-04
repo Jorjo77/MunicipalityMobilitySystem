@@ -1,0 +1,13 @@
+﻿@model VehicleParkDetailsModel
+@{
+    ViewBag.Title = "Edit Vehicle Park";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<partial name="_VehicleParkFormPartial" model="@Model" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -142,6 +142,22 @@ namespace MunicipalityMobilitySystem.Core.Services
             await repo.SaveChangesAsync();
         }
 
+        public async Task EditVehiclePark(int id, VehicleParkDetailsModel model)
+        {
+            var vehiclePark = await repo.GetByIdAsync<VehiclePark>(id);
+
+
+            vehiclePark.Id= model.Id;
+            vehiclePark.Name = model.Name;
+            vehiclePark.Email = model.Email;
+            vehiclePark.Phone = model.Phone;
+            vehiclePark.Adress = model.Adress;
+            vehiclePark.ImageUrl = model.ImageUrl;
+            vehiclePark.Description = model.Description;
+
+            await repo.SaveChangesAsync();
+        }
+
         public async Task<bool> Exists(int id)
         {
             return await repo.AllReadonly<VehiclePark>()
@@ -155,6 +171,22 @@ namespace MunicipalityMobilitySystem.Core.Services
                 vp.Email == email &&
                 vp.Description == description)
                 .AnyAsync();
+        }
+        public async Task<VehicleParkDetailsModel> VehicleParkDetails(int id)
+        {
+            return await repo.AllReadonly<VehiclePark>()
+                        .Where(vp => vp.Id == id)
+                        .Select(vp => new VehicleParkDetailsModel
+                        {
+                            Id = vp.Id,
+                            Name = vp.Name,
+                            Email = vp.Email,
+                            Phone = vp.Phone,
+                            Adress = vp.Adress,
+                            ImageUrl = vp.ImageUrl,
+                            Description = vp.Description,
+                        })
+                        .FirstAsync();
         }
 
         public async Task<VehicleParkDetailsModel> VehicleParkDetailsById(int id)
@@ -170,7 +202,8 @@ namespace MunicipalityMobilitySystem.Core.Services
                     Adress = vp.Adress,
                     ImageUrl = vp.ImageUrl,
                     Description = vp.Description
-                }).FirstAsync();
+                })
+                .FirstAsync();
         }
     }
 }
