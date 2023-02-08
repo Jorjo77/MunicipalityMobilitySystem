@@ -13,7 +13,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
             return View();
         }
 
-        //"MakeRole" with Service MakeRole without view
+        //"MakeRole" with Service MakeRole without view, with message
 
         //"AddUserToRole"  with Service AddUserToRole with view - use 
 

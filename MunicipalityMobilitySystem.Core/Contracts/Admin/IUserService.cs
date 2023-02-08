@@ -1,11 +1,16 @@
-﻿using HouseRentingSystem.Core.Models.Admin;
+﻿using MunicipalityMobilitySystem.Core.Models.Admin;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace HouseRentingSystem.Core.Contracts.Admin
+namespace MunicipalityMobilitySystem.Core.Contracts.Admin
 {
     public interface IUserService
     {
-        Task<string> UserFullName(string userId);
+        Task<IEnumerable<UserServiceModel>> GetUsers();
 
-        Task<IEnumerable<UserServiceModel>> All();
+        Task<IdentityUser> GetUserById(string id);
+        Task<bool> Delete(string userId);
+        Task<bool> CreateRole(string userId);
+        Task<bool> DeleteRole(string id);
     }
 }

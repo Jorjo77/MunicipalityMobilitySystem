@@ -35,18 +35,10 @@
     <div>
         <span>  |   </span>
         <div>
-            <label>Here you can <b>read list of users or forget user</b></label>
+            <label>Here you can <b>read list of users, create roles, put users into roles</b> and <b>forget user</b></label>
         </div>
-        <a asp-area="Admin" asp-controller="User" asp-action="All"
-           class="btn btn-primary btn-lg">Users</a>
-    </div>
-    <div>
-        <span>  |   </span>
-        <div>
-            <label>Here you can <b>read list of roles, create roles</b> and <b>put users into roles</b></label>
-        </div>
-        <a asp-area="Admin" asp-controller="Admin" asp-action="AllRoles"
-           class="btn btn-primary btn-lg">Roles</a>
+        <a asp-area="Admin" asp-controller="User" asp-action="Index"
+           class="btn btn-primary btn-lg">Users & Roles</a>
     </div>
 </div>
 @* This is useful for the Boss!

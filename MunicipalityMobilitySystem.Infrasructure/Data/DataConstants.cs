@@ -72,5 +72,11 @@
             public const decimal TotalPriceMaxValue = 10000.00M;
             public const decimal TotalPriceMinValue = 0.00M;
         }
+
+        public class RoleName
+        {
+            public const int NameMaxLength = 30;
+            public const int NameMinLength = 3;
+        }
     }
 }

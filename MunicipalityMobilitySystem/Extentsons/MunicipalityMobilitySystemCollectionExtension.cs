@@ -1,8 +1,10 @@
 ﻿using MunicipalityMobilitySystem.Core.Contracts.Category;
 using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
 using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
+using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Exceptions;
 using MunicipalityMobilitySystem.Core.Services;
+using MunicipalityMobility.Core.Services.Admin;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -16,6 +18,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IVehicleParkService, VehicleParkService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IUserService, UserService>();
 
 
             return services;

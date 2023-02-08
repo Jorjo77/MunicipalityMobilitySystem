@@ -1,58 +1,69 @@
-﻿//using HouseRentingSystem.Core.Contracts.Admin;
-//using HouseRentingSystem.Core.Models.Admin;
-//using HouseRentingSystem.Infrastructure.Data;
-//using HouseRentingSystem.Infrastructure.Data.Common;
-//using Microsoft.EntityFrameworkCore;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using MunicipalityMobilitySystem.Core.Contracts.Admin;
+using MunicipalityMobilitySystem.Core.Models.Admin;
 
-//namespace HouseRentingSystem.Core.Services.Admin
-//{
-//    public class UserService : IUserService
-//    {
-//        private readonly IRepository repo;
+namespace MunicipalityMobility.Core.Services.Admin
+{
+    public class UserService : IUserService
+    {
+        //private readonly IRepository repo;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-//        public UserService(IRepository _repo)
-//        {
-//            repo = _repo;
-//        }
+        public UserService(/*IRepository _repo*/
+            UserManager<IdentityUser> _userManager,
+            RoleManager<IdentityRole> _roleManager
+            )
+        {
+            //repo = _repo;
+            userManager= _userManager;
+            roleManager= _roleManager;
+        }
+        public async Task<IEnumerable<UserServiceModel>> GetUsers()
+        {
+            return await userManager.Users
+                .Select(u=> new UserServiceModel
+                {
+                   Id = u.Id,
+                   UserName=u.UserName,
+                })
+                .ToListAsync();
+        }
 
-//        public async Task<IEnumerable<UserServiceModel>> All()
-//        {
-//            List<UserServiceModel> result;
+        public async Task<bool> CreateRole(string roleName)
+        {
+            IdentityResult roleResult;
 
-//            result = await repo.AllReadonly<Agent>()
-//                .Select(a => new UserServiceModel() 
-//                {
-//                    UserId = a.UserId,
-//                    Email = a.User.Email,
-//                    FullName = $"{ a.User.FirstName } { a.User.LastName }",
-//                    PhoneNumber = a.PhoneNumber
-//                })
-//                .ToListAsync();
+            roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
 
-//            string[] agentIds = result.Select(a => a.UserId).ToArray();
+            return roleResult.Succeeded;
+        }
 
-//            result.AddRange(await repo.AllReadonly<ApplicationUser>()
-//                .Where(u => agentIds.Contains(u.Id) == false)
-//                .Select(u => new UserServiceModel() 
-//                {
-//                    UserId = u.Id,
-//                    Email = u.Email,
-//                    FullName = $"{ u.FirstName } { u.LastName }"
-//                }).ToListAsync());
+        public async Task<bool> Delete(string id)
+        {
+            var user = await GetUserById(id);
 
-//            return result;
-//        }
+            IdentityResult result = await userManager.DeleteAsync(user);
 
-//        public async Task<string> UserFullName(string userId)
-//        {
-//            var user = await repo.GetByIdAsync<ApplicationUser>(userId);
+            return result.Succeeded;
+        }
 
-//            return $"{user?.FirstName} {user?.LastName}".Trim();
-//        }
-//    }
-//}
+        public async Task<IdentityUser> GetUserById(string id)
+        {
+            return await userManager.FindByIdAsync(id);
+
+        }
+
+        public async Task<bool> DeleteRole(string id)
+        {
+            var role = await roleManager.Roles.Where(r=>r.Id == id)
+                .FirstAsync();
+
+            var result = await roleManager.DeleteAsync(role);
+
+            return result.Succeeded;
+        }
+    }
+}
