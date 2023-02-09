@@ -146,6 +146,7 @@ namespace MunicipalityMobilitySystem.Data
             this.FirstScooter = new Vehicle()
             {
                 Id = 1,
+                RegistrationNumber = "Sk000001",
                 EngineType = "Electric",
                 Model = "Piaggo",
                 Rating = 5,
@@ -161,6 +162,7 @@ namespace MunicipalityMobilitySystem.Data
             this.SecondScooter = new Vehicle()
             {
                 Id = 2,
+                RegistrationNumber = "Sk000002",
                 EngineType = "Petrol",
                 Model = "Piaggo",
                 Rating = 5,
@@ -174,6 +176,7 @@ namespace MunicipalityMobilitySystem.Data
             this.ThirdScooter = new Vehicle()
             {
                 Id = 3,
+                RegistrationNumber = "Sk000003",
                 EngineType = "Petrol",
                 Model = "Vespa",
                 Rating = 6,
@@ -191,6 +194,7 @@ namespace MunicipalityMobilitySystem.Data
             this.FirstBike = new Vehicle()
             {
                 Id = 4,
+                RegistrationNumber = "B000001",
                 Model = "Passati",
                 Rating = 4,
                 PricePerHour = 4.00M,
@@ -203,6 +207,7 @@ namespace MunicipalityMobilitySystem.Data
             this.SecondBike = new Vehicle()
             {
                 Id = 5,
+                RegistrationNumber = "B000002",
                 Model = "Pinarello",
                 Rating = 6,
                 PricePerHour = 7.00M,
@@ -216,6 +221,7 @@ namespace MunicipalityMobilitySystem.Data
             this.ThirdBike = new Vehicle()
             {
                 Id = 6,
+                RegistrationNumber = "B000003",
                 Model = "Cross",
                 Rating = 5,
                 PricePerHour = 5.00M,
@@ -231,6 +237,7 @@ namespace MunicipalityMobilitySystem.Data
             this.FirstCar = new Vehicle()
             {
                 Id = 7,
+                RegistrationNumber = "C000001",
                 EngineType = "Electric",
                 Model = "Hynday EON",
                 Rating = 4,
@@ -244,6 +251,7 @@ namespace MunicipalityMobilitySystem.Data
             this.SecondCar = new Vehicle()
             {
                 Id = 8,
+                RegistrationNumber = "C000002",
                 EngineType = "Diesel",
                 Model = "VW Touran",
                 Rating = 5,
@@ -257,6 +265,7 @@ namespace MunicipalityMobilitySystem.Data
             this.ThirdCar = new Vehicle()
             {
                 Id = 9,
+                RegistrationNumber = "C000003",
                 EngineType = "Petrol",
                 Model = "Mercedes CLS 180",
                 Rating = 6,

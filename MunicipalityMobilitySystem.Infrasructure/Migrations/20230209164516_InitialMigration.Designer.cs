@@ -12,14 +12,14 @@ using MunicipalityMobilitySystem.Data;
 namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 {
     [DbContext(typeof(MunicipalityMobilitySystemDbContext))]
-    [Migration("20221227112321_InitialMigration")]
+    [Migration("20230209164516_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "6.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -145,15 +145,15 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "96951d5c-3820-44c5-8954-970b5fd305a9",
+                            ConcurrencyStamp = "f59e4d5d-e001-4682-bf0c-087084f94cb2",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMuC032bapLkjeuJQlyn0wa4EG3fxS1H81p0UgbnPKS6aJolEJNc+nsPL2cDgVUd1g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBz+Dc55CM+PU8QlpyOXvzzcM9jxgOeAbLCjHgkQY6uK6BSJPra+KYtYYbW1p/Vl5Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e98eef95-d710-4b05-9741-7149f22e0bfb",
+                            SecurityStamp = "51c015fd-9930-4024-bffe-ec5745dd077e",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -312,13 +312,17 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.ToTable("PartsOrder");
                 });
 
-            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Service", b =>
+            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.RepairCenter", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -332,7 +336,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
                     b.HasIndex("VehicleParkId");
 
-                    b.ToTable("Service");
+                    b.ToTable("RepairCenter");
                 });
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Vehicle", b =>
@@ -368,6 +372,9 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Model")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -380,10 +387,21 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
+                    b.Property<string>("RegistrationNumber")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<TimeSpan?>("RentedPeriod")
+                        .HasColumnType("time");
+
                     b.Property<string>("RenterId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RentsCount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RepairCenterId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("RepairingTerm")
@@ -392,24 +410,21 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.Property<int>("RepairsCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ServiceId")
-                        .HasColumnType("int");
-
                     b.Property<int>("VehicleParkId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("VehicleWashId")
+                    b.Property<int?>("WashingCenterId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("ServiceId");
+                    b.HasIndex("RepairCenterId");
 
                     b.HasIndex("VehicleParkId");
 
-                    b.HasIndex("VehicleWashId");
+                    b.HasIndex("WashingCenterId");
 
                     b.ToTable("Vehicles");
 
@@ -423,9 +438,11 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             ForCleaning = false,
                             ForRepearing = false,
                             ImageUrl = "https://bg.e-scooter.co/i/17/72/ed/d5015b9723a5397c924e7b797d.jpg",
+                            IsActive = true,
                             Model = "Piaggo",
                             PricePerHour = 11.00m,
                             Rating = 5,
+                            RegistrationNumber = "Sk000001",
                             RenterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             RentsCount = 0,
                             RepairsCount = 0,
@@ -440,9 +457,11 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             ForCleaning = false,
                             ForRepearing = false,
                             ImageUrl = "https://images.piaggio.com/piaggio/vehicles/nclp000u15/nclp8znu15/nclp8znu15-01-s.png",
+                            IsActive = true,
                             Model = "Piaggo",
                             PricePerHour = 10.00m,
                             Rating = 5,
+                            RegistrationNumber = "Sk000002",
                             RenterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             RentsCount = 0,
                             RepairsCount = 0,
@@ -457,9 +476,11 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             ForCleaning = false,
                             ForRepearing = false,
                             ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4TbIp4RJgECS2py-M_zNjwLrXYIbcZ07XQA&usqp=CAU",
+                            IsActive = true,
                             Model = "Vespa",
                             PricePerHour = 9.00m,
                             Rating = 6,
+                            RegistrationNumber = "Sk000003",
                             RenterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             RentsCount = 0,
                             RepairsCount = 0,
@@ -473,9 +494,11 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             ForCleaning = false,
                             ForRepearing = false,
                             ImageUrl = "https://www.home-max.bg/static/media/ups/cached/781e8afa44a58ec261abdd83455444f5c203f4c5.jpg",
+                            IsActive = true,
                             Model = "Passati",
                             PricePerHour = 4.00m,
                             Rating = 4,
+                            RegistrationNumber = "B000001",
                             RentsCount = 0,
                             RepairsCount = 0,
                             VehicleParkId = 1
@@ -488,9 +511,11 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             ForCleaning = false,
                             ForRepearing = false,
                             ImageUrl = "https://hips.hearstapps.com/hmg-prod/images/pinarello-dogma-f-tested-1624463882.jpg?crop=1.00xw:0.807xh;0,0.0629xh&resize=2048:*",
+                            IsActive = true,
                             Model = "Pinarello",
                             PricePerHour = 7.00m,
                             Rating = 6,
+                            RegistrationNumber = "B000002",
                             RentsCount = 0,
                             RepairsCount = 0,
                             VehicleParkId = 2
@@ -503,9 +528,11 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             ForCleaning = false,
                             ForRepearing = false,
                             ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuinQIdRNjDVnCddYQFkMkFIkt3cyXVfVqPA&usqp=CAU",
+                            IsActive = true,
                             Model = "Cross",
                             PricePerHour = 5.00m,
                             Rating = 5,
+                            RegistrationNumber = "B000003",
                             RentsCount = 0,
                             RepairsCount = 0,
                             VehicleParkId = 3
@@ -519,9 +546,11 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             ForCleaning = false,
                             ForRepearing = false,
                             ImageUrl = "https://imgd.aeplcdn.com/1056x594/cw/ec/9692/Hyundai-Eon-Right-Front-Three-Quarter-94097.jpg?v=201711021421&q=75&wm=1",
+                            IsActive = true,
                             Model = "Hynday EON",
                             PricePerHour = 20.00m,
                             Rating = 4,
+                            RegistrationNumber = "C000001",
                             RentsCount = 0,
                             RepairsCount = 0,
                             VehicleParkId = 1
@@ -535,9 +564,11 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             ForCleaning = false,
                             ForRepearing = false,
                             ImageUrl = "https://www.topgear.com/sites/default/files/cars-car/carousel/2016/03/vw_7422.jpg?w=976&h=549",
+                            IsActive = true,
                             Model = "VW Touran",
                             PricePerHour = 23.00m,
                             Rating = 5,
+                            RegistrationNumber = "C000002",
                             RentsCount = 0,
                             RepairsCount = 0,
                             VehicleParkId = 2
@@ -551,9 +582,11 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             ForCleaning = false,
                             ForRepearing = false,
                             ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFiWMRzQZJ4dYjRVlv-l25KWCVweGaWbIJOA&usqp=CAU",
+                            IsActive = true,
                             Model = "Mercedes CLS 180",
                             PricePerHour = 25.00m,
                             Rating = 6,
+                            RegistrationNumber = "C000003",
                             RentsCount = 0,
                             RepairsCount = 0,
                             VehicleParkId = 3
@@ -634,13 +667,17 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.VehicleWash", b =>
+            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.WashingCenter", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -654,7 +691,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
                     b.HasIndex("VehicleParkId");
 
-                    b.ToTable("VehicleWash");
+                    b.ToTable("WashingCenter");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -719,7 +756,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.Navigation("Vehicle");
                 });
 
-            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Service", b =>
+            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.RepairCenter", b =>
                 {
                     b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.VehiclePark", "VehiclePark")
                         .WithMany("Services")
@@ -738,9 +775,9 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Service", null)
+                    b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.RepairCenter", null)
                         .WithMany("Vehicles")
-                        .HasForeignKey("ServiceId");
+                        .HasForeignKey("RepairCenterId");
 
                     b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.VehiclePark", "VehiclePark")
                         .WithMany("Vehicles")
@@ -748,16 +785,16 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.VehicleWash", null)
+                    b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.WashingCenter", null)
                         .WithMany("Vehicles")
-                        .HasForeignKey("VehicleWashId");
+                        .HasForeignKey("WashingCenterId");
 
                     b.Navigation("Category");
 
                     b.Navigation("VehiclePark");
                 });
 
-            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.VehicleWash", b =>
+            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.WashingCenter", b =>
                 {
                     b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.VehiclePark", "VehiclePark")
                         .WithMany("VehicleWashes")
@@ -773,7 +810,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.Navigation("Vehicles");
                 });
 
-            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Service", b =>
+            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.RepairCenter", b =>
                 {
                     b.Navigation("Vehicles");
                 });
@@ -792,7 +829,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.Navigation("Vehicles");
                 });
 
-            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.VehicleWash", b =>
+            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.WashingCenter", b =>
                 {
                     b.Navigation("Vehicles");
                 });

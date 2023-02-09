@@ -186,19 +186,20 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Service",
+                name: "RepairCenter",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     VehicleParkId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Service", x => x.Id);
+                    table.PrimaryKey("PK_RepairCenter", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Service_VehicleParks_VehicleParkId",
+                        name: "FK_RepairCenter_VehicleParks_VehicleParkId",
                         column: x => x.VehicleParkId,
                         principalTable: "VehicleParks",
                         principalColumn: "Id",
@@ -206,19 +207,20 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "VehicleWash",
+                name: "WashingCenter",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     VehicleParkId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VehicleWash", x => x.Id);
+                    table.PrimaryKey("PK_WashingCenter", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_VehicleWash_VehicleParks_VehicleParkId",
+                        name: "FK_WashingCenter_VehicleParks_VehicleParkId",
                         column: x => x.VehicleParkId,
                         principalTable: "VehicleParks",
                         principalColumn: "Id",
@@ -231,6 +233,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    RegistrationNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Model = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     EngineType = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     Rating = table.Column<int>(type: "int", nullable: false),
@@ -242,12 +245,14 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     RenterId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ForRepearing = table.Column<bool>(type: "bit", nullable: false),
                     ForCleaning = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    RentedPeriod = table.Column<TimeSpan>(type: "time", nullable: true),
                     RepairingTerm = table.Column<DateTime>(type: "datetime2", nullable: true),
                     FailureDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RepairsCount = table.Column<int>(type: "int", nullable: false),
                     RentsCount = table.Column<int>(type: "int", nullable: false),
-                    ServiceId = table.Column<int>(type: "int", nullable: true),
-                    VehicleWashId = table.Column<int>(type: "int", nullable: true)
+                    RepairCenterId = table.Column<int>(type: "int", nullable: true),
+                    WashingCenterId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -259,9 +264,9 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Vehicles_Service_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Service",
+                        name: "FK_Vehicles_RepairCenter_RepairCenterId",
+                        column: x => x.RepairCenterId,
+                        principalTable: "RepairCenter",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Vehicles_VehicleParks_VehicleParkId",
@@ -270,9 +275,9 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Vehicles_VehicleWash_VehicleWashId",
-                        column: x => x.VehicleWashId,
-                        principalTable: "VehicleWash",
+                        name: "FK_Vehicles_WashingCenter_WashingCenterId",
+                        column: x => x.WashingCenterId,
+                        principalTable: "WashingCenter",
                         principalColumn: "Id");
                 });
 
@@ -302,7 +307,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "96951d5c-3820-44c5-8954-970b5fd305a9", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEMuC032bapLkjeuJQlyn0wa4EG3fxS1H81p0UgbnPKS6aJolEJNc+nsPL2cDgVUd1g==", null, false, "e98eef95-d710-4b05-9741-7149f22e0bfb", false, "guest@mail.com" });
+                values: new object[] { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "f59e4d5d-e001-4682-bf0c-087084f94cb2", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEBz+Dc55CM+PU8QlpyOXvzzcM9jxgOeAbLCjHgkQY6uK6BSJPra+KYtYYbW1p/Vl5Q==", null, false, "51c015fd-9930-4024-bffe-ec5745dd077e", false, "guest@mail.com" });
 
             migrationBuilder.InsertData(
                 table: "Categorys",
@@ -326,18 +331,18 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Vehicles",
-                columns: new[] { "Id", "CategoryId", "Description", "EngineType", "FailureDescription", "ForCleaning", "ForRepearing", "ImageUrl", "Model", "PricePerHour", "Rating", "RenterId", "RentsCount", "RepairingTerm", "RepairsCount", "ServiceId", "VehicleParkId", "VehicleWashId" },
+                columns: new[] { "Id", "CategoryId", "Description", "EngineType", "FailureDescription", "ForCleaning", "ForRepearing", "ImageUrl", "IsActive", "Model", "PricePerHour", "Rating", "RegistrationNumber", "RentedPeriod", "RenterId", "RentsCount", "RepairCenterId", "RepairingTerm", "RepairsCount", "VehicleParkId", "WashingCenterId" },
                 values: new object[,]
                 {
-                    { 1, 2, "Exellent transport solution for a city center.", "Electric", null, false, false, "https://bg.e-scooter.co/i/17/72/ed/d5015b9723a5397c924e7b797d.jpg", "Piaggo", 11.00m, 5, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, null, 0, null, 2, null },
-                    { 2, 2, "A realy good transport solution for a city.", "Petrol", null, false, false, "https://images.piaggio.com/piaggio/vehicles/nclp000u15/nclp8znu15/nclp8znu15-01-s.png", "Piaggo", 10.00m, 5, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, null, 0, null, 1, null },
-                    { 3, 2, "A very good transport solution for a city and center.", "Petrol", null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4TbIp4RJgECS2py-M_zNjwLrXYIbcZ07XQA&usqp=CAU", "Vespa", 9.00m, 6, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, null, 0, null, 3, null },
-                    { 4, 1, "A very good transport solution for sport people.", null, null, false, false, "https://www.home-max.bg/static/media/ups/cached/781e8afa44a58ec261abdd83455444f5c203f4c5.jpg", "Passati", 4.00m, 4, null, 0, null, 0, null, 1, null },
-                    { 5, 1, "A very good luxury transport solution for beasy people.", null, null, false, false, "https://hips.hearstapps.com/hmg-prod/images/pinarello-dogma-f-tested-1624463882.jpg?crop=1.00xw:0.807xh;0,0.0629xh&resize=2048:*", "Pinarello", 7.00m, 6, null, 0, null, 0, null, 2, null },
-                    { 6, 1, "A realy good transport solution for sport people.", null, null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuinQIdRNjDVnCddYQFkMkFIkt3cyXVfVqPA&usqp=CAU", "Cross", 5.00m, 5, null, 0, null, 0, null, 3, null },
-                    { 7, 3, "A very good and transport solution for a city center.", "Electric", null, false, false, "https://imgd.aeplcdn.com/1056x594/cw/ec/9692/Hyundai-Eon-Right-Front-Three-Quarter-94097.jpg?v=201711021421&q=75&wm=1", "Hynday EON", 20.00m, 4, null, 0, null, 0, null, 1, null },
-                    { 8, 3, "A realy good and transport solution for a big family.", "Diesel", null, false, false, "https://www.topgear.com/sites/default/files/cars-car/carousel/2016/03/vw_7422.jpg?w=976&h=549", "VW Touran", 23.00m, 5, null, 0, null, 0, null, 2, null },
-                    { 9, 3, "A realy good and luxury transport solution.", "Petrol", null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFiWMRzQZJ4dYjRVlv-l25KWCVweGaWbIJOA&usqp=CAU", "Mercedes CLS 180", 25.00m, 6, null, 0, null, 0, null, 3, null }
+                    { 1, 2, "Exellent transport solution for a city center.", "Electric", null, false, false, "https://bg.e-scooter.co/i/17/72/ed/d5015b9723a5397c924e7b797d.jpg", true, "Piaggo", 11.00m, 5, "Sk000001", null, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, null, null, 0, 2, null },
+                    { 2, 2, "A realy good transport solution for a city.", "Petrol", null, false, false, "https://images.piaggio.com/piaggio/vehicles/nclp000u15/nclp8znu15/nclp8znu15-01-s.png", true, "Piaggo", 10.00m, 5, "Sk000002", null, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, null, null, 0, 1, null },
+                    { 3, 2, "A very good transport solution for a city and center.", "Petrol", null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4TbIp4RJgECS2py-M_zNjwLrXYIbcZ07XQA&usqp=CAU", true, "Vespa", 9.00m, 6, "Sk000003", null, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, null, null, 0, 3, null },
+                    { 4, 1, "A very good transport solution for sport people.", null, null, false, false, "https://www.home-max.bg/static/media/ups/cached/781e8afa44a58ec261abdd83455444f5c203f4c5.jpg", true, "Passati", 4.00m, 4, "B000001", null, null, 0, null, null, 0, 1, null },
+                    { 5, 1, "A very good luxury transport solution for beasy people.", null, null, false, false, "https://hips.hearstapps.com/hmg-prod/images/pinarello-dogma-f-tested-1624463882.jpg?crop=1.00xw:0.807xh;0,0.0629xh&resize=2048:*", true, "Pinarello", 7.00m, 6, "B000002", null, null, 0, null, null, 0, 2, null },
+                    { 6, 1, "A realy good transport solution for sport people.", null, null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuinQIdRNjDVnCddYQFkMkFIkt3cyXVfVqPA&usqp=CAU", true, "Cross", 5.00m, 5, "B000003", null, null, 0, null, null, 0, 3, null },
+                    { 7, 3, "A very good and transport solution for a city center.", "Electric", null, false, false, "https://imgd.aeplcdn.com/1056x594/cw/ec/9692/Hyundai-Eon-Right-Front-Three-Quarter-94097.jpg?v=201711021421&q=75&wm=1", true, "Hynday EON", 20.00m, 4, "C000001", null, null, 0, null, null, 0, 1, null },
+                    { 8, 3, "A realy good and transport solution for a big family.", "Diesel", null, false, false, "https://www.topgear.com/sites/default/files/cars-car/carousel/2016/03/vw_7422.jpg?w=976&h=549", true, "VW Touran", 23.00m, 5, "C000002", null, null, 0, null, null, 0, 2, null },
+                    { 9, 3, "A realy good and luxury transport solution.", "Petrol", null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFiWMRzQZJ4dYjRVlv-l25KWCVweGaWbIJOA&usqp=CAU", true, "Mercedes CLS 180", 25.00m, 6, "C000003", null, null, 0, null, null, 0, 3, null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -385,8 +390,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Service_VehicleParkId",
-                table: "Service",
+                name: "IX_RepairCenter_VehicleParkId",
+                table: "RepairCenter",
                 column: "VehicleParkId");
 
             migrationBuilder.CreateIndex(
@@ -395,9 +400,9 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_ServiceId",
+                name: "IX_Vehicles_RepairCenterId",
                 table: "Vehicles",
-                column: "ServiceId");
+                column: "RepairCenterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_VehicleParkId",
@@ -405,13 +410,13 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 column: "VehicleParkId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_VehicleWashId",
+                name: "IX_Vehicles_WashingCenterId",
                 table: "Vehicles",
-                column: "VehicleWashId");
+                column: "WashingCenterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_VehicleWash_VehicleParkId",
-                table: "VehicleWash",
+                name: "IX_WashingCenter_VehicleParkId",
+                table: "WashingCenter",
                 column: "VehicleParkId");
         }
 
@@ -448,10 +453,10 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 name: "Categorys");
 
             migrationBuilder.DropTable(
-                name: "Service");
+                name: "RepairCenter");
 
             migrationBuilder.DropTable(
-                name: "VehicleWash");
+                name: "WashingCenter");
 
             migrationBuilder.DropTable(
                 name: "VehicleParks");

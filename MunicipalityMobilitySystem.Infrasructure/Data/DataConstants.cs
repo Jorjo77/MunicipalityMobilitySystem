@@ -4,6 +4,9 @@
     {
         public class Vehicle
         {
+            public const int RegistrationNumberMaxLength = 8;
+            public const int RegistrationNumberMinLength = 6;
+
             public const int ModelMaxLength = 50;
             public const int ModelMinLength = 3;
 

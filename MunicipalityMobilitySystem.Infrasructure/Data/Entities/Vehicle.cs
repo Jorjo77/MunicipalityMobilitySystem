@@ -12,6 +12,10 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
 
         [Required]
         [MaxLength(ModelMaxLength)]
+        public string RegistrationNumber { get; set; } = null!;
+
+        [Required]
+        [MaxLength(ModelMaxLength)]
         public string Model { get; set; } = null!;
 
         [MaxLength(EngineTypeMaxLength)]
@@ -47,6 +51,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         public string? RenterId { get; set; }
         public bool ForRepearing { get; set; } = false;
         public bool ForCleaning { get; set; } = false;
+        public bool IsActive { get; set; } = true;
+        public TimeSpan? RentedPeriod { get; set; }
         public DateTime? RepairingTerm { get; set; }
         public string? FailureDescription { get; set; } 
 

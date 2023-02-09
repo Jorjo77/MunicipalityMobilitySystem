@@ -32,8 +32,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
-        public IEnumerable<Service> Services { get; set; } = new List<Service>();
-        public IEnumerable<VehicleWash> VehicleWashes { get; set; } = new List<VehicleWash>();
+        public IEnumerable<RepairCenter> Services { get; set; } = new List<RepairCenter>();
+        public IEnumerable<WashingCenter> VehicleWashes { get; set; } = new List<WashingCenter>();
         public IEnumerable<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
     }
 }
