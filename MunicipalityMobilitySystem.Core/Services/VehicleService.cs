@@ -8,6 +8,7 @@ using MunicipalityMobilitySystem.Core.Models.Vehicle;
 using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
 
+
 namespace MunicipalityMobilitySystem.Core.Services
 {
     public class VehicleService : IVehicleService
@@ -35,6 +36,7 @@ namespace MunicipalityMobilitySystem.Core.Services
                 .Select(v => new VehicleServiceModel
                 {
                     Id= v.Id,
+                    RegistrationNumber = v.RegistrationNumber,
                     ImageUrl= v.ImageUrl,
                     VehicleParkId= v.VehicleParkId,
                     CategoryId= v.CategoryId,
@@ -95,6 +97,7 @@ namespace MunicipalityMobilitySystem.Core.Services
                 .Select(v => new VehicleServiceModel
                 {
                     Id = v.Id,
+                    RegistrationNumber= v.RegistrationNumber,
                     ImageUrl = v.ImageUrl,
                     VehicleParkId = v.VehicleParkId,
                     CategoryId = v.CategoryId,
@@ -169,6 +172,7 @@ namespace MunicipalityMobilitySystem.Core.Services
                         .Select(v => new VehicleServiceModel
                         {
                             Id = v.Id,
+                            RegistrationNumber= v.RegistrationNumber,
                             ImageUrl = v.ImageUrl,
                             VehicleParkId = v.VehicleParkId,
                             CategoryId = v.CategoryId,
@@ -193,6 +197,7 @@ namespace MunicipalityMobilitySystem.Core.Services
         {
             var vehicle = new Vehicle
             { 
+                RegistrationNumber= createVehicleModel.RegistrationNumber,
                 Model= createVehicleModel.ModelName,
                 Rating=createVehicleModel.Rating,
                 CategoryId= createVehicleModel.CategoryId,
@@ -215,12 +220,10 @@ namespace MunicipalityMobilitySystem.Core.Services
             }
         }
 
-        public async Task<bool> VehiceExistsByModelEngineTypeAndDescription(string model, string engineType, string description)
+        public async Task<bool> VehiceExists(string registrationNumber)
         {
             return await repo.AllReadonly<Vehicle>()
-                .Where(v => v.Model == model
-                && v.EngineType == engineType
-                && v.Description == description)
+                .Where(v => v.RegistrationNumber == registrationNumber)
                 .AnyAsync();
         }
 

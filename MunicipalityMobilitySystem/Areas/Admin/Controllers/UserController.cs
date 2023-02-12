@@ -27,7 +27,6 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
            notyf = _notyf;
         }
 
-        //For Controller: Index(AllUsers), CreateRole, Roles, Forget, 
         public async Task<IActionResult> Index()
         {
             var model = await userService.GetUsers();

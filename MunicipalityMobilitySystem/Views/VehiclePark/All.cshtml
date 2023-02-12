@@ -88,6 +88,10 @@
 @if (Model.Vehicles.Count() == 0)
 {
     <h3>This vehicle park do not have any vehicle yet!</h3>
+    <p></p>
+    <h4 class="text-success">Here you can <b>add vehicles:</b></h4>
+    <a asp-area="Admin" asp-controller="Vehicle" asp-action="Add"
+   class="btn btn-outline-success btn-lg">Add Vehicle</a>
 }
 else
 {

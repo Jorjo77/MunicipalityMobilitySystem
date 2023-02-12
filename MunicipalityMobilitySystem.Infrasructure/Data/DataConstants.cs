@@ -11,7 +11,7 @@
             public const int ModelMinLength = 3;
 
             public const int RatingMaxValue = 20;
-            public const int RatingMinValue = 3;
+            public const int RatingMinValue = 1;
 
             public const decimal PricePerHourMaxValue = 200.00M;
             public const decimal PricePerHourMinValue = 10.00M;
@@ -55,16 +55,28 @@
             public const int DescriptionMinLength = 5;
         }
 
-        public class Service
+        public class RepairCenter
         {
             public const int NameMaxLength = 50;
-            public const int NameMinLength = 10;
+            public const int NameMinLength = 3;
+
+            public const int AdressMaxLength = 40;
+            public const int AdressMinLength = 8;
+
+            public const int VehicleParkMaxValue = 1000;
+            public const int VehicleParkMinValue = 0;
         }
 
-        public class VehicleWash
+        public class WashingCenter
         {
             public const int NameMaxLength = 50;
-            public const int NameMinLength = 10;
+            public const int NameMinLength = 3;
+
+            public const int AdressMaxLength = 40;
+            public const int AdressMinLength = 8;
+
+            public const int VehicleParkMaxValue = 1000;
+            public const int VehicleParkMinValue = 0;
         }
 
         public class PartsOrder

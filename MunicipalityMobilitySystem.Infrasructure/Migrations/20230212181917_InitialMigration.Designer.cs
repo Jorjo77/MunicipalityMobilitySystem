@@ -12,7 +12,7 @@ using MunicipalityMobilitySystem.Data;
 namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 {
     [DbContext(typeof(MunicipalityMobilitySystemDbContext))]
-    [Migration("20230209164516_InitialMigration")]
+    [Migration("20230212181917_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,15 +145,15 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f59e4d5d-e001-4682-bf0c-087084f94cb2",
+                            ConcurrencyStamp = "28ca2560-f08a-4815-ae9b-bc18318216db",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBz+Dc55CM+PU8QlpyOXvzzcM9jxgOeAbLCjHgkQY6uK6BSJPra+KYtYYbW1p/Vl5Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDwDAvZ9s5kV10ugfTSehKvms2zMWOswJLYqX62DwGOSZB6u3P/k9+aOysSZH7Ahfw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "51c015fd-9930-4024-bffe-ec5745dd077e",
+                            SecurityStamp = "60ff50ef-f35c-45cf-af6d-02f77099f160",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -336,7 +336,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
                     b.HasIndex("VehicleParkId");
 
-                    b.ToTable("RepairCenter");
+                    b.ToTable("RepairCenters");
                 });
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Vehicle", b =>

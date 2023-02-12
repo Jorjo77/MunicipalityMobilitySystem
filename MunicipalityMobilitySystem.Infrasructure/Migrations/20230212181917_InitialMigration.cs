@@ -186,7 +186,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RepairCenter",
+                name: "RepairCenters",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -197,9 +197,9 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RepairCenter", x => x.Id);
+                    table.PrimaryKey("PK_RepairCenters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RepairCenter_VehicleParks_VehicleParkId",
+                        name: "FK_RepairCenters_VehicleParks_VehicleParkId",
                         column: x => x.VehicleParkId,
                         principalTable: "VehicleParks",
                         principalColumn: "Id",
@@ -264,9 +264,9 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Vehicles_RepairCenter_RepairCenterId",
+                        name: "FK_Vehicles_RepairCenters_RepairCenterId",
                         column: x => x.RepairCenterId,
-                        principalTable: "RepairCenter",
+                        principalTable: "RepairCenters",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Vehicles_VehicleParks_VehicleParkId",
@@ -307,7 +307,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "f59e4d5d-e001-4682-bf0c-087084f94cb2", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEBz+Dc55CM+PU8QlpyOXvzzcM9jxgOeAbLCjHgkQY6uK6BSJPra+KYtYYbW1p/Vl5Q==", null, false, "51c015fd-9930-4024-bffe-ec5745dd077e", false, "guest@mail.com" });
+                values: new object[] { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "28ca2560-f08a-4815-ae9b-bc18318216db", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEDwDAvZ9s5kV10ugfTSehKvms2zMWOswJLYqX62DwGOSZB6u3P/k9+aOysSZH7Ahfw==", null, false, "60ff50ef-f35c-45cf-af6d-02f77099f160", false, "guest@mail.com" });
 
             migrationBuilder.InsertData(
                 table: "Categorys",
@@ -390,8 +390,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RepairCenter_VehicleParkId",
-                table: "RepairCenter",
+                name: "IX_RepairCenters_VehicleParkId",
+                table: "RepairCenters",
                 column: "VehicleParkId");
 
             migrationBuilder.CreateIndex(
@@ -453,7 +453,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 name: "Categorys");
 
             migrationBuilder.DropTable(
-                name: "RepairCenter");
+                name: "RepairCenters");
 
             migrationBuilder.DropTable(
                 name: "WashingCenter");

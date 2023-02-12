@@ -62,7 +62,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
                 return View(model);
             }
 
-            if ((await vehicleService.VehiceExistsByModelEngineTypeAndDescription(model.ModelName, model.EngineType, model.Description)) == true)
+            if ((await vehicleService.VehiceExists(model.RegistrationNumber)) == true)
             {
                 ModelState.AddModelError("", "The vehicle already exists!");
 
@@ -89,6 +89,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
             var model = new CreateVehicleModel()
             {
                 Id = id,
+                RegistrationNumber = vehicle.RegistrationNumber,
                 ModelName = vehicle.Model,
                 Rating= vehicle.Rating,
                 CategoryId = categoryId,

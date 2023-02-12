@@ -20,6 +20,12 @@ namespace MunicipalityMobilitySystem.Core.Models.Vehicle
         [Display(Name = "Model")]
         public string ModelName { get; set; } = null!;
 
+        [Required]
+        [MaxLength(RegistrationNumberMaxLength)]
+        [MinLength(RegistrationNumberMinLength)]
+        [Display(Name = "Reg. Number")]
+        public string RegistrationNumber { get; set; } = null!;
+
         [MaxLength(EngineTypeMaxLength)]
         [MinLength(EngineTypeMinLength)]
         [Display(Name = "Engine Type")]

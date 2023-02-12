@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static MunicipalityMobilitySystem.Data.DataConstants.VehicleWash;
+using static MunicipalityMobilitySystem.Data.DataConstants.WashingCenter;
 namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
 {
     public class WashingCenter

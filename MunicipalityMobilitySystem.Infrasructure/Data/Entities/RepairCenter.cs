@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static MunicipalityMobilitySystem.Data.DataConstants.Service;
+using static MunicipalityMobilitySystem.Data.DataConstants.RepairCenter;
 
 namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
 {
@@ -21,3 +21,4 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         public IEnumerable<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
     }
 }
+

@@ -30,7 +30,7 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Vehicle
 
         Task Create(CreateVehicleModel createVehicleModel);
 
-        Task<bool> VehiceExistsByModelEngineTypeAndDescription(string model, string engineType, string description);
+        Task<bool> VehiceExists(string registrationNumber);
 
         Task Delete(int vehicleId);
 
