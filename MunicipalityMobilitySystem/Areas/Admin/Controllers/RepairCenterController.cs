@@ -47,9 +47,11 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var model = new RepairCenterDetailsServiceModel();
+
+            ViewBag.RepairCentersName = await repairCenterService.GetRepairCenters();
 
             return View(model);
         }
@@ -69,7 +71,6 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
                 ModelState.AddModelError("", "The repair center already exists!");
             }
 
-            ViewBag.RepairCentersName = await repairCenterService.GetRepairCenters();
 
             await repairCenterService.Create(model);
 

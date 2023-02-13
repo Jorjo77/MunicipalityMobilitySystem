@@ -34,13 +34,18 @@
                     </form>
                 }
                 <p></p>
-                <a asp-area="Admin" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@Model.Id"
+                @if (this.User?.Identity != null
+               && this.User.Identity.IsAuthenticated
+               && this.User.IsInRole(AdminRolleName))
+                {
+                    <a asp-area="Admin" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@Model.Id"
                class="btn btn-warning btn-lg">Edit</a>
 
-                <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Vehicle"
-                       asp-action="Delete" asp-route-id="@Model.Id" method="post">
-                    <input class="btn btn-danger" type="submit" value="Delete" onclick="myConfirm(event)" />
-                </form>
+                    <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Vehicle"
+                  asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                        <input class="btn btn-danger" type="submit" value="Delete" onclick="myConfirm(event)" />
+                    </form>
+                }
             }
         </div>
     </div>

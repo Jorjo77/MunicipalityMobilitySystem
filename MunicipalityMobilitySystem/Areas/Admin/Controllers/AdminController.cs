@@ -8,6 +8,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
     public class AdminController : BaseController
     {
+        [Authorize(Roles = AdminRolleName)]
         public IActionResult Index()
         {
             return View();

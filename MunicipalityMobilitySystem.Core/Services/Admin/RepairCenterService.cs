@@ -62,7 +62,7 @@ namespace MunicipalityMobility.Core.Services.Admin
         public async Task Delete(int id)
         {
             var repairCenter = await repo.GetByIdAsync<RepairCenter>(id);
-            await repo.DeleteAsync<RepairCenter>(repairCenter);
+             repo.Delete(repairCenter);
 
             await repo.SaveChangesAsync();
         }

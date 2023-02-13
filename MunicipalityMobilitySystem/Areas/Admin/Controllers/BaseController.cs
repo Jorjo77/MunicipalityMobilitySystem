@@ -8,7 +8,10 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
     [Area(AreaName)]
     [Route("/Admin/[controller]/[Action]/{id?}")]
-    [Authorize(Roles = AdminRolleName)]
+    [Authorize(Roles = "Boss, Administrator, Manager, Mechanic, Cleaner")]
+
+
+
     public class BaseController : Controller
     {
     }

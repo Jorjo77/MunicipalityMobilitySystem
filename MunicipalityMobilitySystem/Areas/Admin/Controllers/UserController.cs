@@ -5,9 +5,12 @@ using MunicipalityMobilitySystem.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MunicipalityMobilitySystem.Core.Models.Admin;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
+using static MunicipalityMobilitySystem.Areas.Admin.Constants.AdminConstants;
 
 namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
+    [Authorize(Roles = AdminRolleName)]
     public class UserController : BaseController
     {
         private readonly UserManager<IdentityUser> userManager;

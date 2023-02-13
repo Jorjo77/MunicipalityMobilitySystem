@@ -34,7 +34,7 @@
 <hr />
 <br />
 
-@*<div class="card" style="width: 18rem;">
+<div class="card" style="width: 18rem;">
     <div class="card-header">
         <b>Avaible roles:</b>
     </div>
@@ -50,23 +50,23 @@
             {
                 @foreach (var rc in repairCentersName)
                 {
-                            <tr>
-                                <td>@rc.Name</td>
-                                <td>
-                      <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="repairCenter"
+                    <tr>
+                        <td>@rc.Name</td>
+                        <td>
+                            <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="repairCenter"
                           asp-action="Delete" asp-route-id="@rc.Id" method="post">
-                                        <input class="btn btn-block btn-outline-danger" type="submit" value="Delete" />
-                                    </form>
-                                </td>
-                            </tr>
+                                <input class="btn btn-block btn-outline-danger" type="submit" value="Delete" />
+                            </form>
+                        </td>
+                    </tr>
                 }
             }
             else
             {
-                    <tr>Repair centers do not exists!</tr>
+                <tr>Repair centers do not exists!</tr>
             }
         </tbody>
     </table>
 </div>
 
-*@
+
