@@ -90,7 +90,7 @@ namespace MunicipalityMobility.Core.Services.Admin
 
         public async Task<IEnumerable<VehicleDetailsViewModel>> GetVehiclesForRepair()
         {
-            return await repo.AllReadonly<Vehicle>()
+            return await repo.All<Vehicle>()
                 .Where(v => v.ForRepearing == true)
                 .Select(v=> new VehicleDetailsViewModel
                 {

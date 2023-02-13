@@ -93,7 +93,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
                 Adress = repairCenter.Adress,
             };
 
-            ViewBag.VehiclesForRepair = await repairCenterService.GetVehiclesForRepair();
+            ViewBag.VehiclesForRepair = await repairCenterService.GetVehiclesForRepair(); 
 
             return this.View(model);
         }

@@ -19,6 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IVehicleParkService, VehicleParkService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IRepairCenterService, RepairCenterService>();
+            services.AddScoped<IUserService, UserService>();
 
 
             return services;
