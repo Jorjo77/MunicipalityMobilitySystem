@@ -12,7 +12,7 @@ using MunicipalityMobilitySystem.Data;
 namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 {
     [DbContext(typeof(MunicipalityMobilitySystemDbContext))]
-    [Migration("20230212181917_InitialMigration")]
+    [Migration("20230213144409_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,15 +145,15 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "28ca2560-f08a-4815-ae9b-bc18318216db",
+                            ConcurrencyStamp = "4103cfa4-2915-462a-a8f1-913b43fd8df2",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDwDAvZ9s5kV10ugfTSehKvms2zMWOswJLYqX62DwGOSZB6u3P/k9+aOysSZH7Ahfw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECejgG5CgocuC8oYwnkteGHKZBYtyZTbF6DIy8ue8LkGEvYJb4qJsvjoqewSaWTJDA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "60ff50ef-f35c-45cf-af6d-02f77099f160",
+                            SecurityStamp = "2ea4fc51-3b4c-4a3b-bd21-cefbe2dce930",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -309,7 +309,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("PartsOrder");
+                    b.ToTable("PartsOrders");
                 });
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.RepairCenter", b =>
@@ -691,7 +691,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
                     b.HasIndex("VehicleParkId");
 
-                    b.ToTable("WashingCenter");
+                    b.ToTable("WashingCenters");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -747,13 +747,11 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.PartsOrder", b =>
                 {
-                    b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Vehicle", "Vehicle")
+                    b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Vehicle", null)
                         .WithMany("OrderedParts")
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Vehicle");
                 });
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.RepairCenter", b =>

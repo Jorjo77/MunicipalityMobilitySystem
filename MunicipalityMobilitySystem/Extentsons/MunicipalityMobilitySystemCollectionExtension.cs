@@ -6,6 +6,7 @@ using MunicipalityMobilitySystem.Core.Exceptions;
 using MunicipalityMobilitySystem.Core.Services;
 using MunicipalityMobility.Core.Services.Admin;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
+using MunicipalityMobilitySystem.Core.Services.Admin;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -19,6 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IVehicleParkService, VehicleParkService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IRepairCenterService, RepairCenterService>();
+            services.AddScoped<IWashingCenterService, WashingCenterService>();
+            services.AddScoped<IOfficeService, OfficeService>();
             services.AddScoped<IUserService, UserService>();
 
 

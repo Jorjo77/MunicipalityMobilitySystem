@@ -161,6 +161,7 @@ namespace MunicipalityMobilitySystem.Core.Services
 
             guard.AgainstNull(vehicleForRent, "Vehicle can not be found");
             vehicleForRent.RenterId = currentUserId;
+            vehicleForRent.RentedPeriod = DateTime.Now;
 
             await repo.SaveChangesAsync();
         }
@@ -181,7 +182,8 @@ namespace MunicipalityMobilitySystem.Core.Services
                             Model = v.Model,
                             PricePerHour = v.PricePerHour,
                             Rating = v.Rating,
-                            RenterId = v.RenterId
+                            RenterId = v.RenterId,
+                            IsActive = v.IsActive,
                         })
                         .FirstAsync();
         }
@@ -205,7 +207,8 @@ namespace MunicipalityMobilitySystem.Core.Services
                 EngineType = createVehicleModel.EngineType,
                 ImageUrl= createVehicleModel.ImageUrl,
                 PricePerHour= createVehicleModel.PricePerHour,
-                VehicleParkId= createVehicleModel.VehicleParkId
+                VehicleParkId= createVehicleModel.VehicleParkId,
+                IsActive = createVehicleModel.IsActive 
             };
 
             try
@@ -223,14 +226,14 @@ namespace MunicipalityMobilitySystem.Core.Services
         public async Task<bool> VehiceExists(string registrationNumber)
         {
             return await repo.AllReadonly<Vehicle>()
-                .Where(v => v.RegistrationNumber == registrationNumber)
+                .Where(v=>v.IsActive == true && v.RegistrationNumber == registrationNumber)
                 .AnyAsync();
         }
 
         public async Task Delete(int vehicleId)
         {
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
-            repo.Delete(vehicle);
+            vehicle.IsActive = false;
 
             await repo.SaveChangesAsync();
         }
@@ -243,7 +246,7 @@ namespace MunicipalityMobilitySystem.Core.Services
         public async Task Edit(int vehicleId, CreateVehicleModel createVehicleModel)
         {
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
-
+            vehicle.RegistrationNumber= createVehicleModel.RegistrationNumber;
             vehicle.Model = createVehicleModel.ModelName;
             vehicle.Rating= createVehicleModel.Rating;
             vehicle.CategoryId = createVehicleModel.CategoryId;

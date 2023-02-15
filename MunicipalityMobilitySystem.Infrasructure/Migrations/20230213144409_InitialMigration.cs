@@ -207,7 +207,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WashingCenter",
+                name: "WashingCenters",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -218,9 +218,9 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WashingCenter", x => x.Id);
+                    table.PrimaryKey("PK_WashingCenters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WashingCenter_VehicleParks_VehicleParkId",
+                        name: "FK_WashingCenters_VehicleParks_VehicleParkId",
                         column: x => x.VehicleParkId,
                         principalTable: "VehicleParks",
                         principalColumn: "Id",
@@ -275,14 +275,14 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Vehicles_WashingCenter_WashingCenterId",
+                        name: "FK_Vehicles_WashingCenters_WashingCenterId",
                         column: x => x.WashingCenterId,
-                        principalTable: "WashingCenter",
+                        principalTable: "WashingCenters",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "PartsOrder",
+                name: "PartsOrders",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -295,9 +295,9 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PartsOrder", x => x.Id);
+                    table.PrimaryKey("PK_PartsOrders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PartsOrder_Vehicles_VehicleId",
+                        name: "FK_PartsOrders_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
                         principalColumn: "Id",
@@ -307,7 +307,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "28ca2560-f08a-4815-ae9b-bc18318216db", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEDwDAvZ9s5kV10ugfTSehKvms2zMWOswJLYqX62DwGOSZB6u3P/k9+aOysSZH7Ahfw==", null, false, "60ff50ef-f35c-45cf-af6d-02f77099f160", false, "guest@mail.com" });
+                values: new object[] { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "4103cfa4-2915-462a-a8f1-913b43fd8df2", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAECejgG5CgocuC8oYwnkteGHKZBYtyZTbF6DIy8ue8LkGEvYJb4qJsvjoqewSaWTJDA==", null, false, "2ea4fc51-3b4c-4a3b-bd21-cefbe2dce930", false, "guest@mail.com" });
 
             migrationBuilder.InsertData(
                 table: "Categorys",
@@ -385,8 +385,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PartsOrder_VehicleId",
-                table: "PartsOrder",
+                name: "IX_PartsOrders_VehicleId",
+                table: "PartsOrders",
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
@@ -415,8 +415,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 column: "WashingCenterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WashingCenter_VehicleParkId",
-                table: "WashingCenter",
+                name: "IX_WashingCenters_VehicleParkId",
+                table: "WashingCenters",
                 column: "VehicleParkId");
         }
 
@@ -438,7 +438,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "PartsOrder");
+                name: "PartsOrders");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -456,7 +456,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 name: "RepairCenters");
 
             migrationBuilder.DropTable(
-                name: "WashingCenter");
+                name: "WashingCenters");
 
             migrationBuilder.DropTable(
                 name: "VehicleParks");

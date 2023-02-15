@@ -28,6 +28,7 @@ namespace MunicipalityMobilitySystem.Core.Models.Vehicle
         [DisplayName("Price per hour")]
         public decimal PricePerHour { get; set; }
 
+        public bool IsActive { get; set; } = true;
         public string Description { get; set; } = null!;
 
         public int CategoryId { get; set; }
@@ -35,5 +36,7 @@ namespace MunicipalityMobilitySystem.Core.Models.Vehicle
         public int VehicleParkId { get; set; }
 
         public string? RenterId { get; set; }
+
+
     }
 }

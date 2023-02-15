@@ -24,6 +24,24 @@ namespace MunicipalityMobilitySystem.Controllers
             this.categoryService = categoryService;
         }
 
+        public async Task<IActionResult> All([FromQuery] AllVehicleQueryModel queryModel)
+        {
+            var result = await vehicleService.AllVehicles(
+                queryModel.Category,
+                queryModel.SearchTerm,
+                queryModel.Sorting,
+                queryModel.CurrentPage,
+                AllVehicleQueryModel.VehiclesPerPage
+            );
+
+            queryModel.TotalVehiclesCount = result.TotalVehiclesCount;
+            queryModel.Categories = await categoryService.AllCategoriesNames();
+            queryModel.Vehicles = result.Vehicles;
+
+
+            return View(queryModel);
+        }
+
         public async Task<IActionResult> Mine()
         {
 

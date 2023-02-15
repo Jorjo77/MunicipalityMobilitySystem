@@ -23,24 +23,6 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
             this.categoryService = categoryService;
         }
 
-        public async Task<IActionResult> All([FromQuery] AllVehicleQueryModel queryModel)
-        {
-            var result = await vehicleService.AllVehicles(
-                queryModel.Category,
-                queryModel.SearchTerm,
-                queryModel.Sorting,
-                queryModel.CurrentPage,
-                AllVehicleQueryModel.VehiclesPerPage
-            );
-
-            queryModel.TotalVehiclesCount = result.TotalVehiclesCount;
-            queryModel.Categories = await categoryService.AllCategoriesNames();
-            queryModel.Vehicles = result.Vehicles;
-
-
-            return View(queryModel);
-        }
-
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -75,7 +57,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 
             await vehicleService.Create(model);
 
-            return RedirectToAction("All", "Vehicle", new { area = "Admin" });
+            return RedirectToAction("All", "Vehicle", new { area = "" });
         }
 
         [HttpGet]
@@ -83,7 +65,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
         {
             if ((await vehicleService.Exists(id)) == false)
             {
-                return RedirectToAction(nameof(All));
+                return RedirectToAction("All", "Vehicle", new { area = "" });
             }
 
 
@@ -150,11 +132,11 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
         {
             if ((await vehicleService.Exists(id)) == false)
             {
-                return RedirectToAction("All", "Vehicle", new { area = "Admin" });
+                return RedirectToAction("All", "Vehicle", new { area = "" });
             }
             await vehicleService.Delete(id);
 
-            return RedirectToAction("All", "Vehicle", new { area = "Admin" });
+            return RedirectToAction("All", "Vehicle", new { area = "" });
         }
     }
 }

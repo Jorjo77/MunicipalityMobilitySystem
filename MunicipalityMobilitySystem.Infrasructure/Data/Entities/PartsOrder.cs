@@ -15,9 +15,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         public string Title { get; set; } = null!;
 
         [Required]
-        [ForeignKey(nameof(Vehicle))]
         public int VehicleId { get; set; }
-        public Vehicle Vehicle { get; set; } = null!;
+
         public DateTime DeliveryTerm { get; set; }
 
         public bool IsDelivered { get; set; }

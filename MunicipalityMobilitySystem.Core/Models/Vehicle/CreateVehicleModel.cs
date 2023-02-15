@@ -32,7 +32,7 @@ namespace MunicipalityMobilitySystem.Core.Models.Vehicle
         public string? EngineType { get; set; }
 
         [Required]
-        [Range(1, 6)]
+        [Range(RatingMinValue, RatingMaxValue)]
         public int Rating { get; set; }
 
         [Required]
@@ -60,10 +60,12 @@ namespace MunicipalityMobilitySystem.Core.Models.Vehicle
         [Required]
         [ForeignKey(nameof(VehiclePark))]
         public int VehicleParkId { get; set; }
-        public string? RenterId { get; set; } = null;
+        public string? RenterId { get; set; } 
         public bool ForRepearing { get; set; } = false;
         public bool ForCleaning { get; set; } = false;
+        public bool IsActive { get; set; } = true;
         public DateTime? RepairingTerm { get; set; } = null;
+        public TimeSpan? RentedPeriod { get; set; }
         public string? FailureDescription { get; set; } = null;
 
         public int? RepairsCount { get; set; } = null;

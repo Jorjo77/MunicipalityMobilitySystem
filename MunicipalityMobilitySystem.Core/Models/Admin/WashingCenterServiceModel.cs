@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MunicipalityMobilitySystem.Core.Models.Admin
 {
-    public class WashingCenterServiceModel
+    public class RepairCenterServiceModel
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
