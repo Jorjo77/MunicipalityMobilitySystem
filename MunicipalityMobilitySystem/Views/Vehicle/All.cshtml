@@ -7,13 +7,16 @@
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 <h4>The Mobility System has @Model.TotalVehiclesCount vehicles:</h4>
-<div>
-    <div>
-        <label>Here you can <b> create vehicle</b></label>
-    </div>
-    <a asp-area="Admin" asp-controller="Vehicle" asp-action="Add"
-       class="btn btn-success btn-lg">Create Vehicle</a>
-</div>
+@if (User?.Identity!= null && User.Identity.IsAuthenticated && User.IsInRole(AdminRolleName))
+{
+   <div>
+       <div>
+           <label>Here you can <b> create vehicle</b></label>
+       </div>
+       <a asp-area="Admin" asp-controller="Vehicle" asp-action="Add"
+      class="btn btn-success btn-lg">Create Vehicle</a>
+   </div>
+}
 <br />
 
 <form method="get">

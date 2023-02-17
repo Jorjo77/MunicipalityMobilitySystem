@@ -38,7 +38,8 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Vehicle
         public string? RenterId { get; } 
         public bool ForRepearing { get; } 
         public bool ForCleaning { get; }
-        public DateTime? RepairingTerm { get; }
+        public DateTime? MomenOfRent { get; }
+        public DateTime? MomenOfLeave { get; }
         public string? FailureDescription { get; }
 
         public int? RepairsCount { get; }

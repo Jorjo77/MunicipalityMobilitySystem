@@ -15,5 +15,7 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Admin
         Task Delete(int id);
         Task Create(WashingCenterDetailsServiceModel model);
         Task<bool> Exists(int id);
+
+        Task WashVehicle(int id);
     }
 }

@@ -1,18 +1,19 @@
-﻿@model VehicleServiceModel
+﻿
+@model VehicleServiceModel
 
 <div class="col-md-4">
     <div class="card mb-3">
         <img class="card-img-top" src="@Model.ImageUrl" alt="Vehicle Image">
         <div class="card-body text-center">
             <h4>@Model.Model</h4>
-            <h6>Rating: <b>@Model.Rating</b></h6>
+            <h6>Rating: <b>@Model.Rating /6</b></h6>
             <h6>
                 Price Per Hour:
                 <b>@String.Format("{0:f2}", Model.PricePerHour) BGN</b>
             </h6>
             <h6>(@(Model.RenterId!= null? "Rented" : "Not Rented"))</h6>
             <br />
-
+            
             @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
             {
                 <form class="input-group-lg" style="display: inline-block;" asp-area="" asp-controller="Vehicle"
@@ -28,10 +29,19 @@
                 }
                 else
                 {
-                    <form class="input-group-lg" style="display: inline-block;" asp-area="" asp-controller="Vehicle" asp-action="Leave"
-                  asp-route-id="@Model.Id" method="post">
+                    if (Model.RenterId == User.Id())
+                    {
+                        <form class="input-group-lg" style="display: inline-block;" asp-area="" asp-controller="Vehicle" asp-action="Leave" asp-route-id="@Model.Id" method="post">
                         <input class="btn btn-warning" type="submit" value="Leave" />
-                    </form>
+                        </form>
+                    }
+                    else
+                    {
+                        <form class="input-group-lg" style="display: inline-block;" asp-area="" asp-controller="Vehicle" asp-action="Leave"
+                        asp-route-id="@Model.Id" method="post">
+                        <input class="btn btn-warning" type="submit" value="Rented" />
+                        </form>
+                    }
                 }
                 <p></p>
                 @if (this.User?.Identity != null

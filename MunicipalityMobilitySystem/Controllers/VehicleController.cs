@@ -3,10 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using MunicipalityMobilitySystem.Core.Contracts.Category;
 using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
-using MunicipalityMobilitySystem.Core.Services;
 using MunicipalityMobilitySystem.Extensions;
 using MunicipalityMobilitySystem.Models;
-using static MunicipalityMobilitySystem.Areas.Admin.Constants.AdminConstants;
 
 namespace MunicipalityMobilitySystem.Controllers
 {

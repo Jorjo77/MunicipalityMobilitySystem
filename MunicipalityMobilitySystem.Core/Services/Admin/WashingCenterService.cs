@@ -92,7 +92,7 @@ namespace MunicipalityMobility.Core.Services.Admin
         public async Task<IEnumerable<VehicleDetailsViewModel>> GetVehiclesForWashing()
         {
             return await repo.All<Vehicle>()
-                .Where(v => v.ForCleaning == true)
+                .Where(v => v.ForCleaning == true && v.IsActive)
                 .Select(v => new VehicleDetailsViewModel
                 {
                     Id = v.Id,
@@ -107,6 +107,19 @@ namespace MunicipalityMobility.Core.Services.Admin
                     ForRepearing = v.ForRepearing,
                 })
                 .ToListAsync();
+        }
+
+        public async Task WashVehicle(int id)
+        {
+            var vehicle = await repo.GetByIdAsync<Vehicle>(id);
+            vehicle.ForCleaning = false;
+            vehicle.ForRepearing = false;
+            vehicle.MomenOfLeave = null;
+            vehicle.MomenOfRent = null;
+            vehicle.RenterId = null;
+            vehicle.FailureDescription= null;
+
+            await repo.SaveChangesAsync();
         }
     }
 }

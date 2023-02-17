@@ -247,7 +247,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     ForCleaning = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     RentedPeriod = table.Column<TimeSpan>(type: "time", nullable: true),
-                    RepairingTerm = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MomenOfRent = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MomenOfLeave = table.Column<DateTime>(type: "datetime2", nullable: true),
                     FailureDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RepairsCount = table.Column<int>(type: "int", nullable: false),
                     RentsCount = table.Column<int>(type: "int", nullable: false),
@@ -307,7 +308,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "4103cfa4-2915-462a-a8f1-913b43fd8df2", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAECejgG5CgocuC8oYwnkteGHKZBYtyZTbF6DIy8ue8LkGEvYJb4qJsvjoqewSaWTJDA==", null, false, "2ea4fc51-3b4c-4a3b-bd21-cefbe2dce930", false, "guest@mail.com" });
+                values: new object[] { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "4e8bdbe2-214e-4ae8-a08a-edb8ff29b111", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEPH/a83qbQ5ZZW2/JGpw+KyAW+1ipciNlAd13GdJhv0MrI0m1PF2I1MSzlo0fFVQEw==", null, false, "31f31cd8-fe2e-4707-833d-47495f21e3c1", false, "guest@mail.com" });
 
             migrationBuilder.InsertData(
                 table: "Categorys",
@@ -331,18 +332,18 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Vehicles",
-                columns: new[] { "Id", "CategoryId", "Description", "EngineType", "FailureDescription", "ForCleaning", "ForRepearing", "ImageUrl", "IsActive", "Model", "PricePerHour", "Rating", "RegistrationNumber", "RentedPeriod", "RenterId", "RentsCount", "RepairCenterId", "RepairingTerm", "RepairsCount", "VehicleParkId", "WashingCenterId" },
+                columns: new[] { "Id", "CategoryId", "Description", "EngineType", "FailureDescription", "ForCleaning", "ForRepearing", "ImageUrl", "IsActive", "Model", "MomenOfLeave", "MomenOfRent", "PricePerHour", "Rating", "RegistrationNumber", "RentedPeriod", "RenterId", "RentsCount", "RepairCenterId", "RepairsCount", "VehicleParkId", "WashingCenterId" },
                 values: new object[,]
                 {
-                    { 1, 2, "Exellent transport solution for a city center.", "Electric", null, false, false, "https://bg.e-scooter.co/i/17/72/ed/d5015b9723a5397c924e7b797d.jpg", true, "Piaggo", 11.00m, 5, "Sk000001", null, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, null, null, 0, 2, null },
-                    { 2, 2, "A realy good transport solution for a city.", "Petrol", null, false, false, "https://images.piaggio.com/piaggio/vehicles/nclp000u15/nclp8znu15/nclp8znu15-01-s.png", true, "Piaggo", 10.00m, 5, "Sk000002", null, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, null, null, 0, 1, null },
-                    { 3, 2, "A very good transport solution for a city and center.", "Petrol", null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4TbIp4RJgECS2py-M_zNjwLrXYIbcZ07XQA&usqp=CAU", true, "Vespa", 9.00m, 6, "Sk000003", null, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, null, null, 0, 3, null },
-                    { 4, 1, "A very good transport solution for sport people.", null, null, false, false, "https://www.home-max.bg/static/media/ups/cached/781e8afa44a58ec261abdd83455444f5c203f4c5.jpg", true, "Passati", 4.00m, 4, "B000001", null, null, 0, null, null, 0, 1, null },
-                    { 5, 1, "A very good luxury transport solution for beasy people.", null, null, false, false, "https://hips.hearstapps.com/hmg-prod/images/pinarello-dogma-f-tested-1624463882.jpg?crop=1.00xw:0.807xh;0,0.0629xh&resize=2048:*", true, "Pinarello", 7.00m, 6, "B000002", null, null, 0, null, null, 0, 2, null },
-                    { 6, 1, "A realy good transport solution for sport people.", null, null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuinQIdRNjDVnCddYQFkMkFIkt3cyXVfVqPA&usqp=CAU", true, "Cross", 5.00m, 5, "B000003", null, null, 0, null, null, 0, 3, null },
-                    { 7, 3, "A very good and transport solution for a city center.", "Electric", null, false, false, "https://imgd.aeplcdn.com/1056x594/cw/ec/9692/Hyundai-Eon-Right-Front-Three-Quarter-94097.jpg?v=201711021421&q=75&wm=1", true, "Hynday EON", 20.00m, 4, "C000001", null, null, 0, null, null, 0, 1, null },
-                    { 8, 3, "A realy good and transport solution for a big family.", "Diesel", null, false, false, "https://www.topgear.com/sites/default/files/cars-car/carousel/2016/03/vw_7422.jpg?w=976&h=549", true, "VW Touran", 23.00m, 5, "C000002", null, null, 0, null, null, 0, 2, null },
-                    { 9, 3, "A realy good and luxury transport solution.", "Petrol", null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFiWMRzQZJ4dYjRVlv-l25KWCVweGaWbIJOA&usqp=CAU", true, "Mercedes CLS 180", 25.00m, 6, "C000003", null, null, 0, null, null, 0, 3, null }
+                    { 1, 2, "Exellent transport solution for a city center.", "Electric", null, false, false, "https://bg.e-scooter.co/i/17/72/ed/d5015b9723a5397c924e7b797d.jpg", true, "Piaggo", null, null, 11.00m, 5, "Sk000001", null, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, null, 0, 2, null },
+                    { 2, 2, "A realy good transport solution for a city.", "Petrol", null, false, false, "https://images.piaggio.com/piaggio/vehicles/nclp000u15/nclp8znu15/nclp8znu15-01-s.png", true, "Piaggo", null, null, 10.00m, 5, "Sk000002", null, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, null, 0, 1, null },
+                    { 3, 2, "A very good transport solution for a city and center.", "Petrol", null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4TbIp4RJgECS2py-M_zNjwLrXYIbcZ07XQA&usqp=CAU", true, "Vespa", null, null, 9.00m, 6, "Sk000003", null, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, null, 0, 3, null },
+                    { 4, 1, "A very good transport solution for sport people.", null, null, false, false, "https://www.home-max.bg/static/media/ups/cached/781e8afa44a58ec261abdd83455444f5c203f4c5.jpg", true, "Passati", null, null, 4.00m, 4, "B000001", null, null, 0, null, 0, 1, null },
+                    { 5, 1, "A very good luxury transport solution for beasy people.", null, null, false, false, "https://hips.hearstapps.com/hmg-prod/images/pinarello-dogma-f-tested-1624463882.jpg?crop=1.00xw:0.807xh;0,0.0629xh&resize=2048:*", true, "Pinarello", null, null, 7.00m, 6, "B000002", null, null, 0, null, 0, 2, null },
+                    { 6, 1, "A realy good transport solution for sport people.", null, null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuinQIdRNjDVnCddYQFkMkFIkt3cyXVfVqPA&usqp=CAU", true, "Cross", null, null, 5.00m, 5, "B000003", null, null, 0, null, 0, 3, null },
+                    { 7, 3, "A very good and transport solution for a city center.", "Electric", null, false, false, "https://imgd.aeplcdn.com/1056x594/cw/ec/9692/Hyundai-Eon-Right-Front-Three-Quarter-94097.jpg?v=201711021421&q=75&wm=1", true, "Hynday EON", null, null, 20.00m, 4, "C000001", null, null, 0, null, 0, 1, null },
+                    { 8, 3, "A realy good and transport solution for a big family.", "Diesel", null, false, false, "https://www.topgear.com/sites/default/files/cars-car/carousel/2016/03/vw_7422.jpg?w=976&h=549", true, "VW Touran", null, null, 23.00m, 5, "C000002", null, null, 0, null, 0, 2, null },
+                    { 9, 3, "A realy good and luxury transport solution.", "Petrol", null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFiWMRzQZJ4dYjRVlv-l25KWCVweGaWbIJOA&usqp=CAU", true, "Mercedes CLS 180", null, null, 25.00m, 6, "C000003", null, null, 0, null, 0, 3, null }
                 });
 
             migrationBuilder.CreateIndex(

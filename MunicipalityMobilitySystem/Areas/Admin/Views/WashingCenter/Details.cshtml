@@ -43,8 +43,10 @@
                     <td>@vehicle.RegistrationNumber</td>
                     <td>@vehicle.Model</td>
                     <td>
-                        <a asp-area="Admin" asp-action="Details" asp-controller="WashingCenter" asp-route-id="@vehicle.Id" 
-                        class="btn btn-block btn-outline-info">Washed</a>
+                        <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="WashingCenter"
+                          asp-action="Wash" asp-route-id="@vehicle.Id" method="post">
+                                <input class="btn btn-block btn-outline-info" type="submit" value="Washed" />
+                        </form>
                     </td>
                 </tr>
             }

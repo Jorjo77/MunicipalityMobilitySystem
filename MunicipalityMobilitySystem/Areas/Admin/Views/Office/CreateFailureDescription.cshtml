@@ -1,0 +1,22 @@
+﻿
+@model VehicleDetailsViewModel
+@{
+    ViewBag.Title = "Create Failure Description";
+}
+<h3>@ViewBag.Title</h3>
+<div class="row">
+    <div class="col-4">
+        <form  method="post">
+            <div class="form-group">
+                <b><label asp-for="FailureDescription" class="text-success">Enter the failure description:</label></b>
+                <textarea asp-for="FailureDescription" class="form-control" placeholder="..."></textarea>
+                <span asp-validation-for="FailureDescription" class="small text-danger"></span>
+            </div>
+            <input class="btn btn-primary mt-3" type="submit" value="Save" />
+        </form>
+    </div>
+</div>
+<hr />
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+}

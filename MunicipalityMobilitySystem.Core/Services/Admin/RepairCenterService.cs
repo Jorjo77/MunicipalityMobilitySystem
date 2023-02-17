@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Models.Admin;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
-using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
-using static MunicipalityMobilitySystem.Data.DataConstants;
 using RepairCenter = MunicipalityMobilitySystem.Infrasructure.Data.Entities.RepairCenter;
 using Vehicle = MunicipalityMobilitySystem.Infrasructure.Data.Entities.Vehicle;
 
@@ -91,7 +87,7 @@ namespace MunicipalityMobility.Core.Services.Admin
         public async Task<IEnumerable<VehicleDetailsViewModel>> GetVehiclesForRepair()
         {
             return await repo.All<Vehicle>()
-                .Where(v => v.ForRepearing == true)
+                .Where(v => v.ForRepearing == true && v.IsActive)
                 .Select(v=> new VehicleDetailsViewModel
                 {
                     Id= v.Id,

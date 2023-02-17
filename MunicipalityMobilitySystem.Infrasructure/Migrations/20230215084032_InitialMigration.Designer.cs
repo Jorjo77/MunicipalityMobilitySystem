@@ -12,7 +12,7 @@ using MunicipalityMobilitySystem.Data;
 namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 {
     [DbContext(typeof(MunicipalityMobilitySystemDbContext))]
-    [Migration("20230213144409_InitialMigration")]
+    [Migration("20230215084032_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,15 +145,15 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4103cfa4-2915-462a-a8f1-913b43fd8df2",
+                            ConcurrencyStamp = "4e8bdbe2-214e-4ae8-a08a-edb8ff29b111",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAECejgG5CgocuC8oYwnkteGHKZBYtyZTbF6DIy8ue8LkGEvYJb4qJsvjoqewSaWTJDA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPH/a83qbQ5ZZW2/JGpw+KyAW+1ipciNlAd13GdJhv0MrI0m1PF2I1MSzlo0fFVQEw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2ea4fc51-3b4c-4a3b-bd21-cefbe2dce930",
+                            SecurityStamp = "31f31cd8-fe2e-4707-833d-47495f21e3c1",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -380,6 +380,12 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime?>("MomenOfLeave")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("MomenOfRent")
+                        .HasColumnType("datetime2");
+
                     b.Property<decimal>("PricePerHour")
                         .HasPrecision(12, 2)
                         .HasColumnType("decimal(12,2)");
@@ -403,9 +409,6 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
                     b.Property<int?>("RepairCenterId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("RepairingTerm")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("RepairsCount")
                         .HasColumnType("int");

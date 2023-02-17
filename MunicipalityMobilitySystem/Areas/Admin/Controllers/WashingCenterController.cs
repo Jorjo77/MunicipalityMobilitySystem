@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Models.Admin;
+using MunicipalityMobilitySystem.Core.Services.Admin;
 
 namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
@@ -90,6 +91,17 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
             ViewBag.VehiclesForWashing = await washingCenterService.GetVehiclesForWashing(); 
 
             return this.View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Wash(int id)
+        {
+            await washingCenterService.WashVehicle(id);
+
+            notyf.Information("The vehicle was cleaned");
+
+            return RedirectToAction(nameof(Details));
         }
     }
 }

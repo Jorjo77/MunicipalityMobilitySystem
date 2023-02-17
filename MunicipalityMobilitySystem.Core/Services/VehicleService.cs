@@ -32,33 +32,36 @@ namespace MunicipalityMobilitySystem.Core.Services
         public async Task<IEnumerable<VehicleServiceModel>> AllVehiclesByUserId(string id)
         {
             return await repo.AllReadonly<Vehicle>()
-                .Where(v=> v.RenterId == id)
+                .Where(v => v.RenterId == id 
+                && v.MomenOfLeave == null
+                && v.IsActive)
                 .Select(v => new VehicleServiceModel
                 {
-                    Id= v.Id,
+                    Id = v.Id,
                     RegistrationNumber = v.RegistrationNumber,
-                    ImageUrl= v.ImageUrl,
-                    VehicleParkId= v.VehicleParkId,
-                    CategoryId= v.CategoryId,
-                    Description= v.Description,
-                    EngineType= v.EngineType,
-                    Model=v.Model,
-                    PricePerHour= v.PricePerHour,
-                    Rating= v.Rating,
-                    RenterId= v.RenterId
+                    ImageUrl = v.ImageUrl,
+                    VehicleParkId = v.VehicleParkId,
+                    CategoryId = v.CategoryId,
+                    Description = v.Description,
+                    EngineType = v.EngineType,
+                    Model = v.Model,
+                    PricePerHour = v.PricePerHour,
+                    Rating = v.Rating,
+                    RenterId = v.RenterId
                 })
                 .ToListAsync();
         }
 
-        public async Task<VehicleQueryModel> AllVehicles(string category = null, 
-                               string searchTerm = null, 
-                               VehiclesSorting sorting = VehiclesSorting.Newest, 
-                               int currentPage = 1, 
+        public async Task<VehicleQueryModel> AllVehicles(string category = null,
+                               string searchTerm = null,
+                               VehiclesSorting sorting = VehiclesSorting.Newest,
+                               int currentPage = 1,
                                int vehiclesPerPage = 1)
         {
             var result = new VehicleQueryModel();
 
-            var vehicles = repo.AllReadonly<Vehicle>();
+            var vehicles = repo.AllReadonly<Vehicle>()
+                .Where(v => v.IsActive);
 
 
             if (!string.IsNullOrEmpty(category))
@@ -97,7 +100,7 @@ namespace MunicipalityMobilitySystem.Core.Services
                 .Select(v => new VehicleServiceModel
                 {
                     Id = v.Id,
-                    RegistrationNumber= v.RegistrationNumber,
+                    RegistrationNumber = v.RegistrationNumber,
                     ImageUrl = v.ImageUrl,
                     VehicleParkId = v.VehicleParkId,
                     CategoryId = v.CategoryId,
@@ -117,8 +120,8 @@ namespace MunicipalityMobilitySystem.Core.Services
 
         public async Task<bool> Exists(int id)
         {
-            return await repo.AllReadonly<Vehicle>(v=>v.Id == id)
-                .AnyAsync();    
+            return await repo.AllReadonly<Vehicle>(v => v.Id == id && v.IsActive)
+                .AnyAsync();
         }
 
         public async Task<bool> IsRented(int vehicleId)
@@ -128,9 +131,9 @@ namespace MunicipalityMobilitySystem.Core.Services
 
         public async Task<bool> IsRentedByUserWithId(int vehicleId, string currentUserId)
         {
-           return await repo.AllReadonly<Vehicle>()
-                .Where(v=>v.Id == vehicleId)
-                .AnyAsync(v=>v.RenterId == currentUserId);
+            return await repo.AllReadonly<Vehicle>()
+                 .Where(v => v.Id == vehicleId && v.IsActive)
+                 .AnyAsync(v => v.RenterId == currentUserId);
         }
 
         public async Task Leave(int vehicleId)
@@ -144,8 +147,7 @@ namespace MunicipalityMobilitySystem.Core.Services
 
             guard.AgainstNull(vehicle, "Vehicle can not be found");
 
-            vehicle.RenterId = null;
-            vehicle.ForCleaning = true;
+            vehicle.MomenOfLeave = DateTime.Now;
 
             await repo.SaveChangesAsync();
         }
@@ -154,14 +156,15 @@ namespace MunicipalityMobilitySystem.Core.Services
         {
             var vehicleForRent = await repo.GetByIdAsync<Vehicle>(vehicleId);
 
-            if (vehicleForRent!=null && vehicleForRent.RenterId != null)
+            if (vehicleForRent != null && vehicleForRent.RenterId != null)
             {
                 throw new ArgumentException("Vehicle is already rented");
             }
 
             guard.AgainstNull(vehicleForRent, "Vehicle can not be found");
+
             vehicleForRent.RenterId = currentUserId;
-            vehicleForRent.RentedPeriod = DateTime.Now;
+            vehicleForRent.MomenOfRent = DateTime.Now;
 
             await repo.SaveChangesAsync();
         }
@@ -169,11 +172,11 @@ namespace MunicipalityMobilitySystem.Core.Services
         public async Task<VehicleServiceModel> VehicleDetails(int id)
         {
             return await repo.AllReadonly<Vehicle>()
-                        .Where(v=>v.Id == id)
+                        .Where(v => v.Id == id && v.IsActive)
                         .Select(v => new VehicleServiceModel
                         {
                             Id = v.Id,
-                            RegistrationNumber= v.RegistrationNumber,
+                            RegistrationNumber = v.RegistrationNumber,
                             ImageUrl = v.ImageUrl,
                             VehicleParkId = v.VehicleParkId,
                             CategoryId = v.CategoryId,
@@ -198,17 +201,19 @@ namespace MunicipalityMobilitySystem.Core.Services
         public async Task Create(CreateVehicleModel createVehicleModel)
         {
             var vehicle = new Vehicle
-            { 
-                RegistrationNumber= createVehicleModel.RegistrationNumber,
-                Model= createVehicleModel.ModelName,
-                Rating=createVehicleModel.Rating,
-                CategoryId= createVehicleModel.CategoryId,
+            {
+                RegistrationNumber = createVehicleModel.RegistrationNumber,
+                Model = createVehicleModel.ModelName,
+                Rating = createVehicleModel.Rating,
+                CategoryId = createVehicleModel.CategoryId,
                 Description = createVehicleModel.Description,
                 EngineType = createVehicleModel.EngineType,
-                ImageUrl= createVehicleModel.ImageUrl,
-                PricePerHour= createVehicleModel.PricePerHour,
-                VehicleParkId= createVehicleModel.VehicleParkId,
-                IsActive = createVehicleModel.IsActive 
+                ImageUrl = createVehicleModel.ImageUrl,
+                PricePerHour = createVehicleModel.PricePerHour,
+                VehicleParkId = createVehicleModel.VehicleParkId,
+                IsActive = createVehicleModel.IsActive,
+                MomenOfRent = createVehicleModel.MomenOfRent,
+                MomenOfLeave = createVehicleModel.MomenOfLeave
             };
 
             try
@@ -226,7 +231,7 @@ namespace MunicipalityMobilitySystem.Core.Services
         public async Task<bool> VehiceExists(string registrationNumber)
         {
             return await repo.AllReadonly<Vehicle>()
-                .Where(v=>v.IsActive == true && v.RegistrationNumber == registrationNumber)
+                .Where(v => v.RegistrationNumber == registrationNumber && v.IsActive)
                 .AnyAsync();
         }
 
@@ -240,21 +245,24 @@ namespace MunicipalityMobilitySystem.Core.Services
 
         public async Task<int> GetVehicleCategoryId(int id)
         {
-            return (await repo.GetByIdAsync<Vehicle>(id)).CategoryId; 
+            return (await repo.GetByIdAsync<Vehicle>(id)).CategoryId;
         }
 
         public async Task Edit(int vehicleId, CreateVehicleModel createVehicleModel)
         {
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
-            vehicle.RegistrationNumber= createVehicleModel.RegistrationNumber;
+            vehicle.RegistrationNumber = createVehicleModel.RegistrationNumber;
             vehicle.Model = createVehicleModel.ModelName;
-            vehicle.Rating= createVehicleModel.Rating;
+            vehicle.Rating = createVehicleModel.Rating;
             vehicle.CategoryId = createVehicleModel.CategoryId;
             vehicle.Description = createVehicleModel.Description;
             vehicle.EngineType = createVehicleModel.EngineType;
             vehicle.ImageUrl = createVehicleModel.ImageUrl;
             vehicle.PricePerHour = createVehicleModel.PricePerHour;
             vehicle.VehicleParkId = createVehicleModel.VehicleParkId;
+            vehicle.IsActive = createVehicleModel.IsActive;
+            vehicle.MomenOfRent = createVehicleModel.MomenOfRent;
+            vehicle.MomenOfLeave = createVehicleModel.MomenOfLeave;
 
             await repo.SaveChangesAsync();
         }
