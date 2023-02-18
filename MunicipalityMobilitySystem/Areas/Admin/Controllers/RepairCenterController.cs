@@ -8,6 +8,7 @@ using AspNetCoreHero.ToastNotification.Abstractions;
 using MunicipalityMobilitySystem.Core.Services;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using MunicipalityMobility.Core.Services.Admin;
 
 namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
@@ -94,9 +95,19 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
                 Adress = repairCenter.Adress,
             };
 
-            ViewBag.VehiclesForRepair = await repairCenterService.GetVehiclesForRepair(); 
+            ViewBag.VehiclesForRepair = await repairCenterService.GetVehiclesForRepair(repairCenter.Id); 
 
             return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Repair(int id)
+        {
+            await repairCenterService.RepairVehicle(id);
+
+            notyf.Information("The vehicle was repaired and now is avaiable for renting");
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

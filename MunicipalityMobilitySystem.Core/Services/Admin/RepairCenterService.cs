@@ -58,7 +58,7 @@ namespace MunicipalityMobility.Core.Services.Admin
         public async Task Delete(int id)
         {
             var repairCenter = await repo.GetByIdAsync<RepairCenter>(id);
-             repo.Delete(repairCenter);
+            repo.Delete(repairCenter);
 
             await repo.SaveChangesAsync();
         }
@@ -84,23 +84,42 @@ namespace MunicipalityMobility.Core.Services.Admin
                 .AnyAsync();
         }
 
-        public async Task<IEnumerable<VehicleDetailsViewModel>> GetVehiclesForRepair()
+        public async Task<IEnumerable<VehicleDetailsViewModel>> GetVehiclesForRepair(int repairingCenterId)
         {
             return await repo.All<Vehicle>()
-                .Where(v => v.ForRepearing == true && v.IsActive)
-                .Select(v=> new VehicleDetailsViewModel
+                .Where(v => v.ForRepearing == true
+                && v.VehicleParkId == repairingCenterId
+                && v.IsActive)
+                .Select(v => new VehicleDetailsViewModel
                 {
-                    Id= v.Id,
+                    Id = v.Id,
                     Model = v.Model,
-                    ImageUrl= v.ImageUrl,
-                    VehicleParkId= v.VehicleParkId,
-                    CategoryId= v.CategoryId,
+                    ImageUrl = v.ImageUrl,
+                    VehicleParkId = v.VehicleParkId,
+                    CategoryId = v.CategoryId,
                     EngineType = v.EngineType,
-                    Description= v.Description,
-                    ForCleaning= v.ForCleaning,
-                    ForRepearing= v.ForRepearing,
+                    Description = v.Description,
+                    ForCleaning = v.ForCleaning,
+                    ForRepearing = v.ForRepearing,
+                    RegistrationNumber= v.RegistrationNumber,
+                    FailureDescription= v.FailureDescription,
                 })
                 .ToListAsync();
+        }
+
+        public async Task RepairVehicle(int id)
+        {
+
+            var vehicle = await repo.GetByIdAsync<Vehicle>(id);
+            vehicle.ForCleaning = false;
+            vehicle.ForRepearing = false;
+            vehicle.MomenOfLeave = null;
+            vehicle.MomenOfRent = null;
+            vehicle.RenterId = null;
+            vehicle.FailureDescription = null;
+
+            await repo.SaveChangesAsync();
+
         }
     }
 }

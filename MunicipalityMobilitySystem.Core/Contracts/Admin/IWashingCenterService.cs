@@ -11,7 +11,7 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Admin
 
         Task<WashingCenterServiceModel> GetWashingCenterById(int id);
 
-        Task<IEnumerable<VehicleDetailsViewModel>> GetVehiclesForWashing();
+        Task<IEnumerable<VehicleDetailsViewModel>> GetVehiclesForWashing(int washingCenterId);
         Task Delete(int id);
         Task Create(WashingCenterDetailsServiceModel model);
         Task<bool> Exists(int id);

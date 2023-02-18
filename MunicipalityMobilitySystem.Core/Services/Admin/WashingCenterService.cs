@@ -89,10 +89,12 @@ namespace MunicipalityMobility.Core.Services.Admin
                 .AnyAsync();
         }
 
-        public async Task<IEnumerable<VehicleDetailsViewModel>> GetVehiclesForWashing()
+        public async Task<IEnumerable<VehicleDetailsViewModel>> GetVehiclesForWashing(int washingCenterId)
         {
             return await repo.All<Vehicle>()
-                .Where(v => v.ForCleaning == true && v.IsActive)
+                .Where(v => v.ForCleaning == true 
+                && v.VehicleParkId == washingCenterId
+                && v.IsActive)
                 .Select(v => new VehicleDetailsViewModel
                 {
                     Id = v.Id,

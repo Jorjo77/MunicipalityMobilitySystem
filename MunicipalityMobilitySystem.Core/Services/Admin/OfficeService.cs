@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Exceptions;
+using MunicipalityMobilitySystem.Core.Models.Admin;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
 using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
@@ -64,6 +67,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
             return await repo.All<Vehicle>()
                 .Where(v=>v.MomenOfLeave != null 
                 && v. ForCleaning == false
+                && v.ForRepearing == false
                 && v.IsActive)
                 .Select(v=> new VehicleDetailsViewModel
                 {
@@ -100,6 +104,15 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
 
             vehicle.ForCleaning = true;
+
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task SetVehicleForRepairing(int vehicleId)
+        {
+            var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
+
+            vehicle.ForRepearing = true;
 
             await repo.SaveChangesAsync();
         }

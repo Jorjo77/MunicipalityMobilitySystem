@@ -11,9 +11,10 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Admin
 
         Task<RepairCenterServiceModel> GetRepairCenterById(int id);
 
-        Task<IEnumerable<VehicleDetailsViewModel>> GetVehiclesForRepair();
+        Task<IEnumerable<VehicleDetailsViewModel>> GetVehiclesForRepair(int repairingCenterId);
         Task Delete(int id);
         Task Create(RepairCenterDetailsServiceModel model);
         Task<bool> Exists(int id);
+        public Task RepairVehicle(int id);
     }
 }

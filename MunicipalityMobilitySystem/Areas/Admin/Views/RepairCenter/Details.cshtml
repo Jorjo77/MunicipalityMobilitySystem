@@ -13,7 +13,7 @@
 <h5 class="card-text">Adress: <b>@Model.Adress</b></h5>
 <div class="card" style="flex-flow:column">
     <div class="card-body">
-        <img class="card-img-top" src="@Model.ImageUrl" alt="Vehicle Image">
+        <img class="card-img-top" style="height:500px" src="@Model.ImageUrl" alt="Vehicle Image">
     </div>
 </div>
 <hr />
@@ -30,6 +30,7 @@
             <tr class="table-info">
                 <th>Registration number</th>
                 <th>Model</th>
+                <th>Failure Description</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -42,9 +43,12 @@
                 <tr>
                     <td>@vehicle.RegistrationNumber</td>
                     <td>@vehicle.Model</td>
+                    <td>@vehicle.FailureDescription</td>
                     <td>
-                        ///ToDo: To build buttons functionality!!!!!!
-                        <a asp-area="Admin" asp-action="Details" asp-controller="RepairCenter" asp-route-id="@vehicle.Id" class="btn btn-block btn-outline-info">Repair</a>
+                            <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="RepairCenter"
+                          asp-action="Repair" asp-route-id="@vehicle.Id" method="post">
+                            <input class="btn btn-block btn-outline-info" type="submit" value="Repaired" />
+                        </form>
                         <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="RepairCenter"
                           asp-action="Delete" asp-route-id="@vehicle.Id" method="post">
                             <input class="btn btn-block btn-outline-danger" type="submit" value="Order parts"/>

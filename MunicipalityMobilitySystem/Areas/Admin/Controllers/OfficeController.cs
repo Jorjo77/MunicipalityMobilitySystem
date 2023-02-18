@@ -1,10 +1,12 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MunicipalityMobility.Core.Services.Admin;
 using MunicipalityMobilitySystem.Areas.Admin.Models;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
+using MunicipalityMobilitySystem.Core.Models.Admin;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
 using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 using MunicipalityMobilitySystem.Core.Services;
@@ -14,11 +16,14 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
     public class OfficeController : BaseController
     {
         private readonly IOfficeService officeService;
+        private readonly IWashingCenterService washingCenterService;
         private readonly INotyfService notyf;
         public OfficeController(IOfficeService _officeService,
+                   IWashingCenterService _washingCenterService,
                     INotyfService _notif)
         {
             officeService= _officeService;
+            washingCenterService= _washingCenterService;
             notyf= _notif;
         }
         public async Task<IActionResult> Index()
@@ -54,6 +59,16 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
             await officeService.SetVehicleForCleaning(id);
 
             notyf.Information("You successfuly send vehicle for cleaning");
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SetForRepairing(int id)
+        {
+            await officeService.SetVehicleForRepairing(id);
+
+            notyf.Information("You successfuly send vehicle for repairing");
 
             return RedirectToAction(nameof(Index));
         }

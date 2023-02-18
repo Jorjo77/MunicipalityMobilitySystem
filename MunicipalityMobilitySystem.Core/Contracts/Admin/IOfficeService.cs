@@ -1,4 +1,5 @@
-﻿using MunicipalityMobilitySystem.Core.Models.Vehicle;
+﻿using MunicipalityMobilitySystem.Core.Models.Admin;
+using MunicipalityMobilitySystem.Core.Models.Vehicle;
 using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,7 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Admin
         Task EditLeftVehicleById(VehicleDetailsViewModel model);
 
         Task SetVehicleForCleaning(int vehicleId);
+
+        Task SetVehicleForRepairing(int vehicleId);
     }
 }

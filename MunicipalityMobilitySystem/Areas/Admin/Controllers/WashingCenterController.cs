@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Models.Admin;
 using MunicipalityMobilitySystem.Core.Services.Admin;
+using MunicipalityMobilitySystem.Models;
 
 namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
@@ -88,7 +89,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
                 Adress = washingCenter.Adress,
             };
 
-            ViewBag.VehiclesForWashing = await washingCenterService.GetVehiclesForWashing(); 
+            ViewBag.VehiclesForWashing = await washingCenterService.GetVehiclesForWashing(id); 
 
             return this.View(model);
         }
@@ -99,9 +100,9 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
         {
             await washingCenterService.WashVehicle(id);
 
-            notyf.Information("The vehicle was cleaned");
+            notyf.Information("The vehicle was cleaned and now is avaiable for renting");
 
-            return RedirectToAction(nameof(Details));
+            return RedirectToAction(nameof(Index));
         }
     }
 }
