@@ -103,7 +103,11 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
 
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
 
+            TimeSpan? rentedPeriod = vehicle.MomenOfLeave - vehicle.MomenOfRent;
+
             vehicle.ForCleaning = true;
+
+            vehicle.RentedPeriod= rentedPeriod;
 
             await repo.SaveChangesAsync();
         }
@@ -112,7 +116,13 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
         {
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
 
+            TimeSpan? rentedPeriod = vehicle.MomenOfLeave - vehicle.MomenOfRent;
+
             vehicle.ForRepearing = true;
+
+            vehicle.RentedPeriod = rentedPeriod;
+
+            vehicle.RepairsCount++;
 
             await repo.SaveChangesAsync();
         }

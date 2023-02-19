@@ -105,7 +105,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
         {
             await repairCenterService.RepairVehicle(id);
 
-            notyf.Information("The vehicle was repaired and now is avaiable for renting");
+            notyf.Information("The vehicle was repaired and sent for washing");
 
             return RedirectToAction(nameof(Index));
         }

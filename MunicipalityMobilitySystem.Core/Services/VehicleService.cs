@@ -149,6 +149,8 @@ namespace MunicipalityMobilitySystem.Core.Services
 
             vehicle.MomenOfLeave = DateTime.Now;
 
+            vehicle.RentsCount++;
+
             await repo.SaveChangesAsync();
         }
 
