@@ -21,5 +21,13 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Admin
         Task SetVehicleForCleaning(int vehicleId);
 
         Task SetVehicleForRepairing(int vehicleId);
+
+        Task MakeAndPostTheBill(VehicleDetailsViewModel model);
+
+        Task<IEnumerable<TheBillViewModel>> GetTheBills();
+
+        Task<IEnumerable<TheBillViewModel>> AllBillsByUserId(string id);
+
+        Task DeleteBillById(int id);
     }
 }

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<TheBillViewModel>
+
+@{
+    ViewBag.Title = "My Bills";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+@if (Model.Any())
+{
+    <div class="row">
+        
+        @foreach (var bill in Model)
+        {
+            var rentedPeriod = (bill.MomenOfLeave.GetValueOrDefault() - bill.MomenOfRent.GetValueOrDefault()).TotalHours;
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body text-center">
+                        <h4>@bill.Title</h4>
+                        <h6>Model: <b>@bill.Model</b></h6>
+                        <h6>Rented on: <b>@bill.MomenOfRent</b></h6>
+                        <h6>Lived on: <b>@bill.MomenOfLeave</b></h6>
+                        <h6>Rented period: <b>@rentedPeriod.ToString("f2") hours</b></h6>
+                        <h6>
+                            Price Per Hour:
+                            <b>@String.Format("{0:f2}", bill.PricePerHour) BGN</b>
+                        </h6>
+                        <br />
+                        <h5>Total Price: <b>@bill.TotalPrice BGN</b></h5>
+                        <br />
+                        <form class="input-group-md" style="display: inline-block;" asp-area="" asp-controller=""
+                      asp-action="" asp-route-id="@bill.Id" method="post">
+                            <input class="btn btn-primary" type="submit" value="Pay" />
+                        </form>
+                        <form class="input-group-md" style="display: inline-block;" asp-area="Admin" asp-controller="Office"
+                      asp-action="DeleteBill" asp-route-id="@bill.Id" method="post">
+                            <input class="btn btn-danger" type="submit" value="Delete" onclick="myConfirm(event)">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h3 class="text-center">You don't have bills yet!</h3>
+}
+@section Scripts {
+    <script>
+
+        function myConfirm(e) {
+
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your bill has been deleted.',
+                        'success'
+                    ).then((resultDeleted) => {
+
+                        e.target.parentElement.submit();
+                    })
+                }
+            })
+        }
+    </script>
+}

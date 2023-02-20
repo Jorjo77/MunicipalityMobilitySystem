@@ -53,5 +53,6 @@ namespace MunicipalityMobilitySystem.Core.Models.Vehicle
         [Required]
         public int RentsCount { get; set; }
         public IEnumerable<PartsOrder> OrderedParts { get; set; } = new List<PartsOrder>();
+        public IEnumerable<Bill> Bills { get; set; } = new List<Bill>();
     }
 }

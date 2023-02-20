@@ -79,8 +79,10 @@
                     <td>@theBill.ToString("F2") BGN
                             <div class="col-8">
                                 <p></p>
-                            <a asp-area="Admin" asp-controller="Office" asp-action="CreateAndSendTheBill"
-                           class="btn btn-outline-success btn-lg mb-3">Create&Send</a>
+                                <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Office"
+                                      asp-action="MakeTheBill" asp-route-id="@vehicle.Id" method="post">
+                                <input class="btn btn-outline-success btn-lg mb-3" type="submit" value="Make&Send" />
+                                </form>
                             </div>
                     </td>
                 </tr>

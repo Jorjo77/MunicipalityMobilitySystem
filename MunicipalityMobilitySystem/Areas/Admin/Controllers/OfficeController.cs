@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MunicipalityMobility.Core.Services.Admin;
 using MunicipalityMobilitySystem.Areas.Admin.Models;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
+using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
 using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
 using MunicipalityMobilitySystem.Core.Models.Admin;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
 using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 using MunicipalityMobilitySystem.Core.Services;
+using MunicipalityMobilitySystem.Extensions;
 
 namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
@@ -71,6 +73,35 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
             notyf.Information("You successfuly send vehicle for repairing");
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MakeTheBill(int id)
+        {
+            var vehicle = await officeService.GetLeftVehicleById(id);
+
+            await officeService.MakeAndPostTheBill(vehicle);
+
+            notyf.Information("You successfuly create and post the bill");
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> AllBills()
+        {
+            var model = await officeService.GetTheBills();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteBill(int id)
+        {
+            await officeService.DeleteBillById(id);
+
+            notyf.Success("Bill is deleted");
+
+            return RedirectToAction("MineBills", "Home", new { area = "" });
         }
     }
 }

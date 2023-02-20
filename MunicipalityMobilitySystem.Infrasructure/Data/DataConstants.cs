@@ -93,5 +93,32 @@
             public const int NameMaxLength = 30;
             public const int NameMinLength = 3;
         }
+
+        public class Bill
+        {
+            public const int RegistrationNumberMaxLength = 8;
+            public const int RegistrationNumberMinLength = 6;
+
+            public const int TitleMaxLength = 50;
+            public const int TitleMinLength = 3;
+
+            public const int ModelMaxLength = 50;
+            public const int ModelMinLength = 3;
+
+            public const decimal PricePerHourMaxValue = 200.00M;
+            public const decimal PricePerHourMinValue = 10.00M;
+
+            public const decimal TotalPriceMaxValue = 100000.00M;
+            public const decimal TotalPriceMinValue = 10.00M;
+        }
+
+        public class Part
+        {
+            public const int NameMaxLength = 50;
+            public const int NameMinLength = 3;
+
+            public const decimal PriceMaxValue = 20000.00M;
+            public const decimal PriceMinValue = 5.00M;
+        }
     }
 }

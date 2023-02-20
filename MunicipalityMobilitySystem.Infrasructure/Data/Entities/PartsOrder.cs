@@ -15,15 +15,14 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         public string Title { get; set; } = null!;
 
         [Required]
+        [ForeignKey(nameof(Vehicle))]
         public int VehicleId { get; set; }
-
-        public DateTime DeliveryTerm { get; set; }
-
-        public bool IsDelivered { get; set; }
+        public Vehicle Vehicle { get; set; } = null!;
+        public string? RenterId { get; set; }
+        public IEnumerable<Part> Parts { get; set; } = new List<Part>();
 
         [Required]
         [Precision(12, 2)]
         public decimal TotalPrice { get; set; }
     }
-
 }

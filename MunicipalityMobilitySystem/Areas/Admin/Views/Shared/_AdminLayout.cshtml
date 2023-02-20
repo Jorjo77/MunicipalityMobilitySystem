@@ -40,6 +40,17 @@
                 && this.User.IsInRole(Manager))
                 {
                     <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="Index"> Manager work area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="AllBills"> All Bills</a>
+                }
+                @if (this.User?.Identity != null
+                && this.User.Identity.IsAuthenticated
+                && this.User.IsInRole(Boss))
+                {
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="Admin" asp-action="Index"> Administrator home area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="Index"> Manager work area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="AllBills"> All Bills</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="Index"> Mechanic home area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="WashingCenter" asp-action="Index"> Cleaner home area</a>
                 }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -51,6 +62,9 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Vehicle" asp-action="Mine"> My Rented Vehicles</a>
+                            </li>
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MineBills"> My Bills</a>
                             </li>
                         }
                     </ul>

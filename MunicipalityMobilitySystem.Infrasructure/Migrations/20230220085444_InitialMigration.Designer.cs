@@ -12,7 +12,7 @@ using MunicipalityMobilitySystem.Data;
 namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 {
     [DbContext(typeof(MunicipalityMobilitySystemDbContext))]
-    [Migration("20230215084032_InitialMigration")]
+    [Migration("20230220085444_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,15 +145,15 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4e8bdbe2-214e-4ae8-a08a-edb8ff29b111",
+                            ConcurrencyStamp = "cc1d8131-67ce-49d8-83c3-756ffca0fe9a",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPH/a83qbQ5ZZW2/JGpw+KyAW+1ipciNlAd13GdJhv0MrI0m1PF2I1MSzlo0fFVQEw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP7UsDzwkF0iJWC22oX/xCL3rJ+KMocrmVE1UQ4fyM+ES5F65rksMPRoSytTmBxkHA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "31f31cd8-fe2e-4707-833d-47495f21e3c1",
+                            SecurityStamp = "d758968e-fcbc-4b03-99e0-f9dbe25c5e6d",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -244,6 +244,59 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Bill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("MomenOfLeave")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("MomenOfRent")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("PricePerHour")
+                        .HasPrecision(12, 2)
+                        .HasColumnType("decimal(12,2)");
+
+                    b.Property<string>("RegistrationNumber")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<TimeSpan?>("RentedPeriod")
+                        .HasColumnType("time");
+
+                    b.Property<string>("RenterId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasPrecision(12, 2)
+                        .HasColumnType("decimal(12,2)");
+
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("Bills");
+                });
+
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -279,6 +332,33 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Part", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("PartsOrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(12, 2)
+                        .HasColumnType("decimal(12,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PartsOrderId");
+
+                    b.ToTable("Parts");
+                });
+
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.PartsOrder", b =>
                 {
                     b.Property<int>("Id")
@@ -287,11 +367,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("DeliveryTerm")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDelivered")
-                        .HasColumnType("bit");
+                    b.Property<string>("RenterId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -337,6 +414,29 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.HasIndex("VehicleParkId");
 
                     b.ToTable("RepairCenters");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImageUrl = "https://media.istockphoto.com/id/628096148/vector/auto-repair.jpg?s=612x612&w=0&k=20&c=GCVOh9kmmlYAoRvT_g86559RDmGA06w5m4nEYqsfE9w=",
+                            Name = "Central repair center",
+                            VehicleParkId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImageUrl = "https://mybayutcdn.bayut.com/mybayut/wp-content/uploads/Cars-lifted-in-a-service-centre.jpg",
+                            Name = "Eastern repair center",
+                            VehicleParkId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImageUrl = "https://conceptualminds.com/wp-content/uploads/2022/10/auto-repair-shop-bays.jpg ",
+                            Name = "Western repair center",
+                            VehicleParkId = 3
+                        });
                 });
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Vehicle", b =>
@@ -446,7 +546,6 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             PricePerHour = 11.00m,
                             Rating = 5,
                             RegistrationNumber = "Sk000001",
-                            RenterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             RentsCount = 0,
                             RepairsCount = 0,
                             VehicleParkId = 2
@@ -465,7 +564,6 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             PricePerHour = 10.00m,
                             Rating = 5,
                             RegistrationNumber = "Sk000002",
-                            RenterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             RentsCount = 0,
                             RepairsCount = 0,
                             VehicleParkId = 1
@@ -484,7 +582,6 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             PricePerHour = 9.00m,
                             Rating = 6,
                             RegistrationNumber = "Sk000003",
-                            RenterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             RentsCount = 0,
                             RepairsCount = 0,
                             VehicleParkId = 3
@@ -641,21 +738,21 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         new
                         {
                             Id = 1,
-                            Adress = "Bulgaria Sofia City Mladost 4",
-                            Description = "Your eastern oportunity to find out the best ranting offer!",
-                            Email = "eastern_rent@abv.bg",
+                            Adress = "Bulgaria Sofia City Iskar Str. 36",
+                            Description = "Your central oportunity to find out the best ranting offer!",
+                            Email = "central_rent@abv.bg",
                             ImageUrl = "https://travelwest.info/app/uploads/2022/04/Portway-Park-Ride-Car-Park-1349x900.jpg.webp",
-                            Name = "Eastern Park",
+                            Name = "Central Park",
                             Phone = "+359878128343"
                         },
                         new
                         {
                             Id = 2,
-                            Adress = "Bulgaria Sofia City Iskar Str. 36",
-                            Description = "Your central oportunity to find out the best ranting offer!",
-                            Email = "central_rent@abv.bg",
+                            Adress = "Bulgaria Sofia City Mladost 4",
+                            Description = "Your eastern oportunity to find out the best ranting offer!",
+                            Email = "eastern_rent@abv.bg",
                             ImageUrl = "https://s.driving-tests.org/wp-content/uploads/2012/02/back-parking.webp",
-                            Name = "Central Park",
+                            Name = "Eastern Park",
                             Phone = "+359878128344"
                         },
                         new
@@ -695,6 +792,29 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.HasIndex("VehicleParkId");
 
                     b.ToTable("WashingCenters");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImageUrl = "https://tommys-express.com/wp-content/uploads/2022/11/hero.jpg",
+                            Name = "Central washing center",
+                            VehicleParkId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImageUrl = "http://ultrasonicexpress.com/wp-content/uploads/2020/12/DSC_4331-scaled.jpg",
+                            Name = "Eastern washing center",
+                            VehicleParkId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImageUrl = "https://imocarwash.com/media/5688/wetherill-park.png?anchor=center&mode=crop&width=851&height=381&rnd=133173853890000000",
+                            Name = "Western washing center",
+                            VehicleParkId = 3
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -748,13 +868,33 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Bill", b =>
+                {
+                    b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Vehicle", "Vehicle")
+                        .WithMany("Bills")
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Part", b =>
+                {
+                    b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.PartsOrder", null)
+                        .WithMany("Parts")
+                        .HasForeignKey("PartsOrderId");
+                });
+
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.PartsOrder", b =>
                 {
-                    b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Vehicle", null)
+                    b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Vehicle", "Vehicle")
                         .WithMany("OrderedParts")
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Vehicle");
                 });
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.RepairCenter", b =>
@@ -811,6 +951,11 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.Navigation("Vehicles");
                 });
 
+            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.PartsOrder", b =>
+                {
+                    b.Navigation("Parts");
+                });
+
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.RepairCenter", b =>
                 {
                     b.Navigation("Vehicles");
@@ -818,6 +963,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Vehicle", b =>
                 {
+                    b.Navigation("Bills");
+
                     b.Navigation("OrderedParts");
                 });
 
