@@ -1,14 +1,7 @@
-﻿using MunicipalityMobilitySystem.Core.Contracts.Admin;
-using Microsoft.AspNetCore.Identity;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
-using MunicipalityMobilitySystem.Areas.Admin.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Models.Admin;
-using AspNetCoreHero.ToastNotification.Abstractions;
-using MunicipalityMobilitySystem.Core.Services;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using MunicipalityMobility.Core.Services.Admin;
 
 namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
@@ -16,6 +9,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
     {
         private readonly IRepairCenterService repairCenterService;
         private readonly INotyfService notyf;
+
         public RepairCenterController(
                          IRepairCenterService _repairCenterService,
                          INotyfService _notyf)
@@ -24,14 +18,12 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
             notyf = _notyf;
         }
 
-        //For Controller: Index(AllUsers), CreateRole, Roles, Forget, 
         public async Task<IActionResult> Index()
         {
             var model = await repairCenterService.GetRepairCenters();
 
             return View(model);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
@@ -95,8 +87,9 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
                 Adress = repairCenter.Adress,
             };
 
-            ViewBag.VehiclesForRepair = await repairCenterService.GetVehiclesForRepair(repairCenter.Id); 
+            ViewBag.VehiclesForRepair = await repairCenterService.GetVehiclesForRepair(repairCenter.Id);
 
+            await repairCenterService.GetVehiclesForRepair(repairCenter.Id);
             return this.View(model);
         }
 

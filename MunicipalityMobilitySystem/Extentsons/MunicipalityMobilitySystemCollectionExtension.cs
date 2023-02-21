@@ -22,8 +22,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IRepairCenterService, RepairCenterService>();
             services.AddScoped<IWashingCenterService, WashingCenterService>();
             services.AddScoped<IOfficeService, OfficeService>();
+            services.AddScoped<IStatisticService, StatisticService>();
             services.AddScoped<IUserService, UserService>();
-
 
             return services;
         }

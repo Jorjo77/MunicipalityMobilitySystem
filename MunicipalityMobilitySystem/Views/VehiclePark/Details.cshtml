@@ -16,7 +16,7 @@
         <h5 class="card-text">Adress: <b>@Model.Adress</b></h5>
         <div class="mapouter">
             <div class="gmap_canvas">
-                <iframe width="1200" height="510" id="gmap_canvas" src="https://maps.google.com/maps?q=Bulgaria @Model.Adress &t=&z=10&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://2yu.co">2yu</a><br><style>
+                <iframe width="1600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Bulgaria @Model.Adress &t=&z=10&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://2yu.co">2yu</a><br><style>
                                                                                                                                                                                                                                                                                      .mapouter {
                                                                                                                                                                                                                                                                                          position: relative;
                                                                                                                                                                                                                                                                                          text-align: right;
@@ -33,14 +33,11 @@
         </div>
         <p></p>
         <h5 class="card-text">Description: <b>@Model.Description</b></h5>
+        @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+        {
+           <a asp-area="" class="btn btn-primary align-self-lg-center" asp-controller="Vehicle" asp-action="All" asp-route-id="@Model.Id">Find all our vehicles for rent</a>
+        }
     </div>
 </div>
-<hr />
-@{
-    if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
-    {
-        <a asp-area="" class="btn btn-primary" asp-controller="Vehicle" asp-action="All" asp-route-id="@Model.Id">Find all our vehicles</a>
-    }
 
-}
 

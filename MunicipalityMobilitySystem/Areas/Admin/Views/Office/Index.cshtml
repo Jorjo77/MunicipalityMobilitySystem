@@ -26,16 +26,16 @@
                 <th>Model</th>
                 <th>Rented period</th>
                 <th>Price per hour</th>
-                <th>RenterId</th>
+                <th>The bill</th>
                 <th>Check</th>
                 <th>Failure description</th>
                 <th>Actions</th>
-                <th>The bill</th>
             </tr>
         </thead>
         <tbody>
             @{
                 decimal theBill;
+                bool first = true;
             }
             @foreach (var vehicle in Model)
             {
@@ -46,7 +46,15 @@
                     <td>@vehicle.Model</td>
                     <td>@rentedPeriod.ToString("F2") hours</td>
                     <td>@vehicle.PricePerHour BGN</td>
-                    <td>@vehicle.RenterId</td>
+                    <td>@theBill.ToString("F2") BGN
+                            <div class="col-8">
+                                <p></p>
+                                <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Office"
+                                      asp-action="MakeTheBill" asp-route-id="@vehicle.Id" method="post">
+                                <input class="btn btn-outline-success btn-lg mb-3" type="submit" value="Make&Send" />
+                                </form>
+                            </div>
+                    </td>
                     <td>
                         <ul>
                             <li>Interior</li>
@@ -75,15 +83,6 @@
                           asp-action="SetForRepairing" asp-route-id="@vehicle.Id" method="post">
                             <input class="btn btn-block btn-warning" type="submit" value="Send for repairing" />
                         </form>
-                    </td>
-                    <td>@theBill.ToString("F2") BGN
-                            <div class="col-8">
-                                <p></p>
-                                <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Office"
-                                      asp-action="MakeTheBill" asp-route-id="@vehicle.Id" method="post">
-                                <input class="btn btn-outline-success btn-lg mb-3" type="submit" value="Make&Send" />
-                                </form>
-                            </div>
                     </td>
                 </tr>
             }

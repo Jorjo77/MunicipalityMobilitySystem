@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Exceptions;
 using MunicipalityMobilitySystem.Core.Models.Admin;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
-using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
-using static MunicipalityMobilitySystem.Data.DataConstants;
 using Bill = MunicipalityMobilitySystem.Infrasructure.Data.Entities.Bill;
 using Vehicle = MunicipalityMobilitySystem.Infrasructure.Data.Entities.Vehicle;
 

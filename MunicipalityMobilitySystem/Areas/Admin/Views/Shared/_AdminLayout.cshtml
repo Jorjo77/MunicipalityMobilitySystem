@@ -46,6 +46,7 @@
                 && this.User.Identity.IsAuthenticated
                 && this.User.IsInRole(Boss))
                 {
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="Statistic" asp-action="Index"> Boss home area</a>
                     <a class="navbar-brand" asp-area="Admin" asp-controller="Admin" asp-action="Index"> Administrator home area</a>
                     <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="Index"> Manager work area</a>
                     <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="AllBills"> All Bills</a>

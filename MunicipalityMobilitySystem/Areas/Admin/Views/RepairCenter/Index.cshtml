@@ -9,11 +9,11 @@
     && this.User.Identity.IsAuthenticated
     && this.User.IsInRole(AdminRolleName))
     {
-    <div class="col-8">
-        <h3 class="text-success">Here you can <b>create a Repair Centers:</b> </h3>
-        <a asp-area="Admin" asp-controller="RepairCenter" asp-action="Create"
+        <div class="col-8">
+            <h3 class="text-success">Here you can <b>create a Repair Centers:</b> </h3>
+            <a asp-area="Admin" asp-controller="RepairCenter" asp-action="Create"
            class="btn btn-outline-success btn-lg">Create</a>
-    </div>
+        </div>
     }
     @if (this.User?.Identity != null
     && this.User.Identity.IsAuthenticated
@@ -23,9 +23,6 @@
     }
 
 </div>
-
-
-
 <br />
 <div class="row">
     <div class="col-6">
@@ -41,7 +38,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Adress</th>
-                <th>Actions</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -57,10 +54,10 @@
                        && this.User.Identity.IsAuthenticated
                        && this.User.IsInRole(AdminRolleName))
                         {
-                        <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="RepairCenter"
+                            <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="RepairCenter"
                           asp-action="Delete" asp-route-id="@center.Id" method="post">
-                            <input class="btn btn-block btn-outline-danger" type="submit" value="Delete" onclick="myConfirm(event)" />
-                        </form>
+                                <input class="btn btn-block btn-outline-danger" type="submit" value="Delete" onclick="myConfirm(event)" />
+                            </form>
                         }
                     </td>
                 </tr>

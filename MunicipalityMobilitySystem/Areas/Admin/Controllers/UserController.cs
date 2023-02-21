@@ -10,7 +10,7 @@ using static MunicipalityMobilitySystem.Areas.Admin.Constants.AdminConstants;
 
 namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
-    [Authorize(Roles = AdminRolleName)]
+    //[Authorize(Roles = AdminRolleName)]
     public class UserController : BaseController
     {
         private readonly UserManager<IdentityUser> userManager;
