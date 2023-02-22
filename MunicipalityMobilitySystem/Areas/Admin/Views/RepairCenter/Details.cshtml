@@ -7,7 +7,7 @@
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
-<hr/>
+<hr />
 <h3>Wellcome to @Model.Name!</h3>
 <h4>@Model.Name is your working place</h4>
 <h5 class="card-text">Adress: <b>@Model.Adress</b></h5>
@@ -32,37 +32,42 @@
             </tr>
         </thead>
         <tbody>
-        @if (vehiclesForRepair != null)
-        {
-            
-            @foreach (var vehicle in vehiclesForRepair)
+            @if (vehiclesForRepair != null)
             {
-                <tr>
-                    <td>@vehicle.RegistrationNumber</td>
-                    <td>@vehicle.Model</td>
-                    <td>@vehicle.FailureDescription</td>
-                    <td>
-                            <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="RepairCenter"
+
+                @foreach (var vehicle in vehiclesForRepair)
+                {
+                    <tr>
+                        <td>@vehicle.RegistrationNumber</td>
+                        <td>@vehicle.Model</td>
+                        <td>@vehicle.FailureDescription</td>
+                        <td>
+                            @if (this.User?.Identity != null
+                           && this.User.Identity.IsAuthenticated
+                           && this.User.IsInRole(Mechanic))
+                            {
+                                <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="RepairCenter"
                           asp-action="Repair" asp-route-id="@vehicle.Id" method="post">
-                            <input class="btn btn-block btn-outline-info" type="submit" value="Repaired" />
-                        </form>
-@*                        <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="RepairCenter"
-                          asp-action="Delete" asp-route-id="@vehicle.Id" method="post">
-                            <input class="btn btn-block btn-outline-danger" type="submit" value="Order parts"/>
-                        </form>*@
-                    </td>
-                </tr>
-                
+                                    <input class="btn btn-block btn-outline-info" type="submit" value="Repaired" />
+                                </form>
+                            }
+                            @*<form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="RepairCenter"
+                    asp-action="Delete" asp-route-id="@vehicle.Id" method="post">
+                    <input class="btn btn-block btn-outline-danger" type="submit" value="Order parts"/>
+                    </form>*@
+                        </td>
+                    </tr>
+
+                }
             }
-        }
-        else
-        {
+            else
+            {
                 <tr>
                     <td>There are no vehicles for repair yet!</td>
                     <td></td>
                     <td></td>
                 </tr>
-        }
+            }
         </tbody>
     </table>
 </div>

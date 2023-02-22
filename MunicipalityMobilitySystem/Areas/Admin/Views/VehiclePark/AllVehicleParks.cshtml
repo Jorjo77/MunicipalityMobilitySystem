@@ -11,8 +11,13 @@
     <div>
         <label>Here you can <b> create vehicle park</b></label>
     </div>
-    <a asp-area="Admin" asp-controller="VehiclePark" asp-action="Add"
+    @if (this.User?.Identity != null
+    && this.User.Identity.IsAuthenticated
+    && this.User.IsInRole(AdminRolleName))
+    {
+            <a asp-area="Admin" asp-controller="VehiclePark" asp-action="Add"
        class="btn btn-success btn-lg">Create Vehicle Park</a>
+    }
 </div>
 <br />
 

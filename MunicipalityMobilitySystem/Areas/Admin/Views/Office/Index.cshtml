@@ -46,14 +46,20 @@
                     <td>@vehicle.Model</td>
                     <td>@rentedPeriod.ToString("F2") hours</td>
                     <td>@vehicle.PricePerHour BGN</td>
-                    <td>@theBill.ToString("F2") BGN
-                            <div class="col-8">
-                                <p></p>
+                    <td>
+                        @theBill.ToString("F2") BGN
+                        <div class="col-8">
+                            <p></p>
+                            @if (this.User?.Identity != null
+                           && this.User.Identity.IsAuthenticated
+                           && this.User.IsInRole(Manager))
+                            {
                                 <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Office"
-                                      asp-action="MakeTheBill" asp-route-id="@vehicle.Id" method="post">
-                                <input class="btn btn-outline-success btn-lg mb-3" type="submit" value="Make&Send" />
+                              asp-action="MakeTheBill" asp-route-id="@vehicle.Id" method="post">
+                                    <input class="btn btn-outline-success btn-lg mb-3" type="submit" value="Make&Send">
                                 </form>
-                            </div>
+                            }
+                        </div>
                     </td>
                     <td>
                         <ul>
@@ -68,26 +74,36 @@
                     <td>
                         <div class="col-8">
                             <p></p>
-                               <a asp-area="Admin" asp-controller="Office" asp-action="CreateFailureDescription" asp-route-id="@vehicle.Id"
+                            @if (this.User?.Identity != null
+                           && this.User.Identity.IsAuthenticated
+                           && this.User.IsInRole(Manager))
+                            {
+                                <a asp-area="Admin" asp-controller="Office" asp-action="CreateFailureDescription" asp-route-id="@vehicle.Id"
                            class="btn btn-outline-success btn-lg mb-3 @(vehicle.FailureDescription != null ? "disabled" : string.Empty)">Create</a>
+                            }
                         </div>
                     </td>
                     <td>
-                        <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Office"
+                        @if (this.User?.Identity != null
+                       && this.User.Identity.IsAuthenticated
+                       && this.User.IsInRole(Manager))
+                        {
+                            <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Office"
                           asp-action="SetForCleaning" asp-route-id="@vehicle.Id" method="post">
-                            <input class="btn btn-block btn-primary @(vehicle.FailureDescription != null ? "disabled" : string.Empty)" type="submit" value="Send for cleaning" />
-                        </form>
-                        
-                        <p></p>
-                        <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Office"
+                                <input class="btn btn-block btn-primary @(vehicle.FailureDescription != null ? "disabled" : string.Empty)" type="submit" value="Send for cleaning" />
+                            </form>
+                            <p></p>
+                            <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Office"
                           asp-action="SetForRepairing" asp-route-id="@vehicle.Id" method="post">
-                            <input class="btn btn-block btn-warning" type="submit" value="Send for repairing" />
-                        </form>
+                                <input class="btn btn-block btn-warning" type="submit" value="Send for repairing" />
+                            </form>
+                        }
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
 
 

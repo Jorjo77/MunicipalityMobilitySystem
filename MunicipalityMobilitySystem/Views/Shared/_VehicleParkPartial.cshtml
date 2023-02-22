@@ -17,12 +17,17 @@
             <br />
             <a asp-area="" asp-controller="VehiclePark" asp-action="Details"
                asp-route-id="@Model.Id" class="btn btn-primary">Details</a>
-            <a asp-area="Admin" asp-controller="VehiclePark" asp-action="Edit" asp-route-id="@Model.Id"
+            @if (this.User?.Identity != null
+            && this.User.Identity.IsAuthenticated
+            && this.User.IsInRole(AdminRolleName))
+            {
+                <a asp-area="Admin" asp-controller="VehiclePark" asp-action="Edit" asp-route-id="@Model.Id"
                class="btn btn-warning">Edit</a>
-            <form class="input-group-md" style="display: inline-block;" asp-area="Admin" asp-controller="VehiclePark"
+                <form class="input-group-md" style="display: inline-block;" asp-area="Admin" asp-controller="VehiclePark"
                   asp-action="Delete" asp-route-id="@Model.Id" method="post">
-                <input class="btn btn-danger" type="submit" value="Delete" onclick="myConfirm(event)" />
-            </form>
+                    <input class="btn btn-danger" type="submit" value="Delete" onclick="myConfirm(event)" />
+                </form>
+            }
         </div>
     </div>
 </div>

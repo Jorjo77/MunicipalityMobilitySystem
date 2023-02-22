@@ -59,8 +59,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         @if (this.User?.Identity!= null 
-                        && this.User.Identity.IsAuthenticated
-                        && this.User.IsInRole(Boss) == false)
+                        && this.User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Vehicle" asp-action="Mine"> My Rented Vehicles</a>

@@ -6,9 +6,14 @@
 <br />
 <div class="row">
     <div class="col-8">
-        <h3 class="text-success">Here you can <b>create a role:</b> </h3>
-        <a asp-area="Admin" asp-controller="User" asp-action="CreateRole"
+        @if (this.User?.Identity != null
+        && this.User.Identity.IsAuthenticated
+        && this.User.IsInRole(AdminRolleName))
+        {
+            <h3 class="text-success">Here you can <b>create a role:</b> </h3>
+            <a asp-area="Admin" asp-controller="User" asp-action="CreateRole"
            class="btn btn-outline-success btn-lg">Create Role</a>
+        }
     </div>
 </div>
 
@@ -36,11 +41,16 @@
                     <td>@user.Id</td>
                     <td>@user.UserName</td>
                     <td>
-                        <a asp-area="Admin" asp-action="Roles" asp-controller="User" asp-route-id="@user.Id" class="btn btn-block btn-outline-info">Add user to Roles</a>
-                        <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="User"
+                        @if (this.User?.Identity != null
+                       && this.User.Identity.IsAuthenticated
+                       && this.User.IsInRole(AdminRolleName))
+                        {
+                            <a asp-area="Admin" asp-action="Roles" asp-controller="User" asp-route-id="@user.Id" class="btn btn-block btn-outline-info">Add user to Roles</a>
+                            <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="User"
                           asp-action="Delete" asp-route-id="@user.Id" method="post">
-                            <input class="btn btn-block btn-outline-danger" type="submit" value="Delete user" onclick="myConfirm(event)" />
-                        </form>
+                                <input class="btn btn-block btn-outline-danger" type="submit" value="Delete user" onclick="myConfirm(event)" />
+                            </form>
+                        }
                     </td>
                 </tr>
             }

@@ -37,7 +37,8 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
         public async Task<VehicleDetailsViewModel> GetLeftVehicleById(int vehicleId)
         {
             var vehicle =  await repo.All<Vehicle>()
-                .Where(v=>v.MomenOfLeave != null && v.IsActive)
+                .Where(v=> v.Id == vehicleId
+                    && v.IsActive)
                 .Select( v => new VehicleDetailsViewModel 
                 {
                     Id = v.Id,
@@ -51,7 +52,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     PricePerHour = v.PricePerHour,
                     MomenOfLeave = v.MomenOfLeave,
                     MomenOfRent = v.MomenOfRent,
-                    FailureDescription= v.FailureDescription,
+                    FailureDescription= v.FailureDescription
                 }).FirstOrDefaultAsync();
 
 
@@ -117,35 +118,21 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                 .ToListAsync();
         }
 
-        public async Task MakeAndPostTheBill(VehicleDetailsViewModel vehicle)
+        public async Task MakeAndPostTheBill(VehicleDetailsViewModel vehicleModel)
         {
-            var model = new TheBillViewModel
-            {
-                RegistrationNumber = vehicle.RegistrationNumber,
-                Model = vehicle.Model,
-                Title = vehicle.RegistrationNumber,
-                //Title = String.Format("The bill for your rented {0}, with Reg. Number: {1}", vehicle.Model, vehicle.RegistrationNumber),
-                MomenOfRent = vehicle.MomenOfRent,
-                MomenOfLeave = vehicle.MomenOfLeave,
-                PricePerHour = vehicle.PricePerHour,
-                RentedPeriod = vehicle.RentedPeriod,
-                RenterId = vehicle.RenterId,
-                VehicleId = vehicle.Id,
-                TotalPrice = await GetTheBill(vehicle.Id)
-            };
 
             var theBill = new Bill
             {
-                Title = model.Title,
-                RegistrationNumber= model.RegistrationNumber,
-                Model = model.Model,
-                MomenOfRent = model.MomenOfRent,
-                MomenOfLeave = model.MomenOfLeave,
-                PricePerHour = model.PricePerHour,
-                RentedPeriod = model.RentedPeriod,
-                RenterId = model.RenterId,
-                VehicleId = model.VehicleId,
-                TotalPrice = model.TotalPrice
+                Title = vehicleModel.RegistrationNumber + vehicleModel.Model, // $"{ a.User.FirstName } { a.User.LastName }"
+                RegistrationNumber = vehicleModel.RegistrationNumber,
+                Model = vehicleModel.Model,
+                MomenOfRent = vehicleModel.MomenOfRent,
+                MomenOfLeave = vehicleModel.MomenOfLeave,
+                PricePerHour = vehicleModel.PricePerHour,
+                RentedPeriod = vehicleModel.RentedPeriod,
+                RenterId = vehicleModel.RenterId,
+                VehicleId = vehicleModel.Id,
+                TotalPrice = await GetTheBill(vehicleModel.Id)
             };
 
             await repo.AddAsync<Bill>(theBill);
