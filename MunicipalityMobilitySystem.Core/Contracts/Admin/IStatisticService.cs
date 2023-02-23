@@ -1,4 +1,5 @@
 ﻿using MunicipalityMobilitySystem.Core.Models.Admin;
+using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 
 namespace MunicipalityMobilitySystem.Core.Contracts.Admin
 {
@@ -8,6 +9,8 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Admin
         int GetRentedVehiclesCount();
         int GetVehicleParksCount();
         IEnumerable<StatisticVehicleModel> GetTopVehicles();
+        IEnumerable<VehicleParkModel> GetVehicleParks();
+        IEnumerable<IEnumerable<StatisticVehicleParkModel>>  GetTopVehicleParks();
         StatisticVehicleModel GetTopBike();
         StatisticVehicleModel GetTopCar();
         StatisticVehicleModel GetTopScooter();

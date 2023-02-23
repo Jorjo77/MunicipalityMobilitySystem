@@ -1,18 +1,21 @@
-﻿
-namespace MunicipalityMobilitySystem.Core.Models.Admin
+﻿namespace MunicipalityMobilitySystem.Core.Models.Admin
 {
     public class StatisticVehicleParkModel
     {
-        public string Name { get; set; } = null!;
+        public int PricePerHour { get; set; }
 
-        public string Adress { get; set; } = null!;
+        public TimeSpan? RentedPeriod { get; set; }
 
-        public int VehiclesCount { get; set; }
+        public int RepairsCount { get; set; }
 
         public int RentsCount { get; set; }
 
-        public double TotalRentedPeriod { get; set; }
+        public int VehiclesCount { get; set; }
 
-        public decimal TotalIncome { get; set; }
+        public string VehicleParkName { get; set; } = null!;
+
+        public string VehicleParkAdress { get; set; } = null!;
+        public double TotalProfit
+            => RentedPeriod.GetValueOrDefault().TotalHours * PricePerHour;
     }
 }

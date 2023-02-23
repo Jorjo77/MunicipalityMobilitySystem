@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Exceptions;
 using MunicipalityMobilitySystem.Core.Models.Admin;
+using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
 
@@ -130,10 +132,54 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                 TopBike = GetTopBike(),
                 TopCar = GetTopCar(),
                 TopScooter = GetTopScooter(),
-                TopVehicles = GetTopVehicles()
+                TopVehicles = GetTopVehicles(),
+                TopVehicleParks = GetTopVehicleParks(),
             };
 
             return statisticModel;
-        }  
+        }
+
+        public IEnumerable<IEnumerable<StatisticVehicleParkModel>> GetTopVehicleParks()
+        {
+            var groupedVehicles = new List<List<StatisticVehicleParkModel>>();
+            var vehicleParks = GetVehicleParks();
+
+            foreach (var vehiclePark in vehicleParks)
+            {
+                var vehiclesStatistic = repo.AllReadonly<Vehicle>()
+                    .Where(v => v.VehicleParkId == vehiclePark.Id)
+                    .Select(v => new StatisticVehicleParkModel
+                    {
+                        VehicleParkName = vehiclePark.Name,
+                        VehicleParkAdress= vehiclePark.Adress,
+                        PricePerHour = (int)v.PricePerHour,
+                        RentedPeriod = v.RentedPeriod,
+                        RentsCount = v.RentsCount,
+                        RepairsCount = v.RepairsCount,
+                    })
+                    .ToList();
+
+                groupedVehicles.Add(vehiclesStatistic);
+            }
+
+            //var orderedVehicles = groupedVehicles.OrderByDescending(vg=>vg.OrderByDescending(v=>v.TotalProfit));
+
+            return groupedVehicles;
+        }
+
+        public IEnumerable<VehicleParkModel> GetVehicleParks()
+        {
+            return repo.All<VehiclePark>()
+                .Select(v=> new VehicleParkModel
+                {
+                    Name= v.Name,
+                    Id= v.Id,
+                    ImageUrl= v.ImageUrl,
+                    Adress= v.Adress,
+                    Email= v.Email,
+                    Phone= v.Phone,
+                })
+                .ToList();
+        }
     }
 }

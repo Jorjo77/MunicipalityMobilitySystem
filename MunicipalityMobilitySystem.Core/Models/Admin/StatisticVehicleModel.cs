@@ -17,5 +17,11 @@
         public int RepairsCount { get; set; }
 
         public int RentsCount { get; set; }
+
+        public string VehicleParkName { get; set; } = null!;
+
+        public string VehicleParkAdress { get; set; } = null!;
+        public double TotalProfit
+            => RentedPeriod.GetValueOrDefault().TotalHours * PricePerHour;
     }
 }
