@@ -138,7 +138,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
                 }
             }
 
-            return this.RedirectToAction(nameof(this.Index));
+            return this.RedirectToAction(nameof(Index));
         }
     }
 }

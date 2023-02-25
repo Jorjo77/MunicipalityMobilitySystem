@@ -5,6 +5,7 @@ using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
 using MunicipalityMobilitySystem.Extensions;
 using MunicipalityMobilitySystem.Models;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace MunicipalityMobilitySystem.Controllers
 {
@@ -13,13 +14,16 @@ namespace MunicipalityMobilitySystem.Controllers
     {
         private readonly IVehicleService vehicleService;
         private readonly ICategoryService categoryService;
+        private readonly INotyfService notyf;
 
         public VehicleController(
             IVehicleService vehicleService,
-            ICategoryService categoryService)
+            ICategoryService categoryService,
+            INotyfService notyf)
         {
             this.vehicleService = vehicleService;
             this.categoryService = categoryService;
+            this.notyf = notyf;
         }
 
         public async Task<IActionResult> All([FromQuery] AllVehicleQueryModel queryModel)
@@ -74,6 +78,8 @@ namespace MunicipalityMobilitySystem.Controllers
 
             await vehicleService.Rent(id, User.Id());
 
+            notyf.Success("Great choise! The key is waiting you in office manager of the selected vehicle park. Have a nice drive!");
+
             return RedirectToAction(nameof(Mine));
         }
 
@@ -97,6 +103,8 @@ namespace MunicipalityMobilitySystem.Controllers
             }
 
             await vehicleService.Leave(id);
+
+            notyf.Success("Thank you for use our services! Your bill will be send as soon as posible. Have a nice day, and see you soon!");
 
             return RedirectToAction(nameof(Mine));
         }

@@ -159,7 +159,7 @@ namespace MunicipalityMobilitySystem.Data
                 Id = 3,
                 Name = "Western Park",
                 Adress = "Bulgaria Sofia City Lulin 2",
-                Email = "estern_rent@abv.bg",
+                Email = "western_rent@abv.bg",
                 Phone = "+359878128345",
                 ImageUrl = "https://d193ppza2qrruo.cloudfront.net/production/images/Multi-storey-car-park-tips.jpg",
                 Description = "Your western oportunity to find out the best ranting offer!",

@@ -123,7 +123,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
 
             var theBill = new Bill
             {
-                Title = vehicleModel.RegistrationNumber + vehicleModel.Model, // $"{ a.User.FirstName } { a.User.LastName }"
+                Title = vehicleModel.RegistrationNumber, 
                 RegistrationNumber = vehicleModel.RegistrationNumber,
                 Model = vehicleModel.Model,
                 MomenOfRent = vehicleModel.MomenOfRent,
@@ -149,7 +149,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
 
             vehicle.ForCleaning = true;
 
-            vehicle.RentedPeriod= rentedPeriod;
+            vehicle.RentedPeriod = vehicle.RentedPeriod + rentedPeriod;
 
             await repo.SaveChangesAsync();
         }

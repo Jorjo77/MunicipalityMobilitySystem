@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
-using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
 using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
 using MunicipalityMobilitySystem.Core.Models;
 using MunicipalityMobilitySystem.Core.Models.Admin;
@@ -15,13 +15,16 @@ namespace MunicipalityMobilitySystem.Controllers
     {
         private readonly IVehicleParkService vehicleParkService;
         private readonly IOfficeService officeService;
+        private readonly INotyfService notyf;
 
         public HomeController(
             IVehicleParkService _vehicleParkService,
+            INotyfService _notyf,
             IOfficeService _officeService)
         {
             vehicleParkService = _vehicleParkService;
             officeService = _officeService;
+            notyf = _notyf;
         }
         public async Task<IActionResult> Index()
         {
@@ -45,6 +48,16 @@ namespace MunicipalityMobilitySystem.Controllers
             myBills = await officeService.AllBillsByUserId(userId);
 
             return View(myBills);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteBill(int id)
+        {
+            await officeService.DeleteBillById(id);
+
+            notyf.Success("Bill is deleted");
+
+            return RedirectToAction("MineBills", "Home", new { area = "" });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

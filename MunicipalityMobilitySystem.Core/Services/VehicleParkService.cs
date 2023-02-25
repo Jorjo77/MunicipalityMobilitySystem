@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
 using MunicipalityMobilitySystem.Core.Exceptions;
 using MunicipalityMobilitySystem.Core.Models;
+using MunicipalityMobilitySystem.Core.Models.Admin;
 using MunicipalityMobilitySystem.Core.Models.Category;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
 using MunicipalityMobilitySystem.Core.Models.VehiclePark;
@@ -42,7 +43,6 @@ namespace MunicipalityMobilitySystem.Core.Services
                     ImageUrl = vp.ImageUrl
                 }).ToListAsync();
         }
-
 
         public async Task<VehicleQueryModel> AllVehiclesByVehicleParkId(
             int id,

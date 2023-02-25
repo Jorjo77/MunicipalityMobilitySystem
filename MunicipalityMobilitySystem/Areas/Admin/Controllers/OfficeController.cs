@@ -1,17 +1,7 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using MunicipalityMobility.Core.Services.Admin;
-using MunicipalityMobilitySystem.Areas.Admin.Models;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
-using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
-using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
-using MunicipalityMobilitySystem.Core.Models.Admin;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
-using MunicipalityMobilitySystem.Core.Models.VehiclePark;
-using MunicipalityMobilitySystem.Core.Services;
-using MunicipalityMobilitySystem.Extensions;
 
 namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
@@ -82,7 +72,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 
             await officeService.MakeAndPostTheBill(vehicle);
 
-            notyf.Information("You successfuly create and post the bill");
+            notyf.Information("You successfuly create and send the bill");
 
             return RedirectToAction(nameof(Index));
         }
@@ -94,14 +84,6 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> DeleteBill(int id)
-        {
-            await officeService.DeleteBillById(id);
 
-            notyf.Success("Bill is deleted");
-
-            return RedirectToAction("MineBills", "Home", new { area = "" });
-        }
     }
 }
