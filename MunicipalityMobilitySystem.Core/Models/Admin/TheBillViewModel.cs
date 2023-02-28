@@ -31,7 +31,7 @@ namespace MunicipalityMobilitySystem.Core.Models.Admin
         [Required]
         public int VehicleId { get; set; }
         public string? RenterId { get; set; }
-        public TimeSpan? RentedPeriod { get; set; }
+        public double RentedPeriod { get; set; }
         public DateTime? MomenOfRent { get; set; }
         public DateTime? MomenOfLeave { get; set; }
 

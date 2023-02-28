@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static MunicipalityMobilitySystem.Data.DataConstants.Part;
+using static MunicipalityMobilitySystem.Data.DataConstants.Expense;
 
 namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
 {
-    public class Part
+    public class Expense
     {
         [Key]
         public int Id { get; set; }
@@ -19,7 +19,10 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         public string Name { get; set; } = null!;
 
         [Required]
+        public int Quantity { get; set; }
+
+        [Required]
         [Precision(12, 2)]
-        public decimal Price { get; set; }
+        public decimal UnutPrice { get; set; }
     }
 }

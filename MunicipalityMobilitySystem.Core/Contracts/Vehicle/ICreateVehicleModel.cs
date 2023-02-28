@@ -21,7 +21,7 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Vehicle
 
         public string? EngineType { get; }
 
-        public int Rating { get; } 
+        public double Rating { get; } 
 
         public decimal PricePerHour { get; }
 

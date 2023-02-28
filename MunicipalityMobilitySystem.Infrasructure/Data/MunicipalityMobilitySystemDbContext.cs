@@ -19,7 +19,7 @@ namespace MunicipalityMobilitySystem.Data
         public DbSet<WashingCenter> WashingCenters { get; set; } = null!;
         public DbSet<PartsOrder> PartsOrders { get; set; } = null!;
         public DbSet<Bill> Bills { get; set; } = null!;
-        public DbSet<Part> Parts { get; set; } = null!;
+        public DbSet<Expense> Expenses { get; set; } = null!;
         private IdentityUser GuestUser { get; set; } = null!;
         private Category Bike { get; set; } = null!;
         private Category Scooter { get; set; } = null!;

@@ -4,7 +4,7 @@
     {
         public int PricePerHour { get; set; }
 
-        public TimeSpan? RentedPeriod { get; set; }
+        public double RentedPeriod { get; set; }
 
         public int RepairsCount { get; set; }
 
@@ -16,6 +16,6 @@
 
         public string VehicleParkAdress { get; set; } = null!;
         public double TotalProfit
-            => RentedPeriod.GetValueOrDefault().TotalHours * PricePerHour;
+            => RentedPeriod * PricePerHour;
     }
 }

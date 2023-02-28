@@ -43,7 +43,7 @@ namespace MunicipalityMobilitySystem.Core.Models.Vehicle
         public bool ForRepearing { get; set; } = false;
         public bool ForCleaning { get; set; } = false;
         public bool IsActive { get; set; } = true;
-        public TimeSpan? RentedPeriod { get; set; }
+        public double RentedPeriod { get; set; }
         public DateTime? MomenOfRent { get; set; }
         public DateTime? MomenOfLeave { get; set; }
         public string? FailureDescription { get; set; }

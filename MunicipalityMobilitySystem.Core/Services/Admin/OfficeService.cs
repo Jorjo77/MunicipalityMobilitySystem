@@ -93,9 +93,18 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
 
             TimeSpan? rentedPeriod = rentedVehicle.MomenOfLeave - rentedVehicle.MomenOfRent;
 
-            decimal theBill = (decimal)rentedPeriod.Value.TotalHours * rentedVehicle.PricePerHour;
+            decimal theBill = Math.Ceiling((decimal)rentedPeriod.GetValueOrDefault().TotalHours) * rentedVehicle.PricePerHour;
 
             return theBill;
+        }
+
+        public async Task<bool> BillExists(VehicleDetailsViewModel model)
+        {
+            return await repo.AllReadonly<Bill>()
+                .Where(b => b.VehicleId == model.Id
+                && b.MomenOfRent == model.MomenOfRent
+                && b.MomenOfLeave == model.MomenOfLeave)
+                .AnyAsync();
         }
 
         public async Task<IEnumerable<TheBillViewModel>> GetTheBills()
@@ -145,11 +154,13 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
 
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
 
-            TimeSpan? rentedPeriod = vehicle.MomenOfLeave - vehicle.MomenOfRent;
+            TimeSpan? rentPeriod = vehicle.MomenOfLeave - vehicle.MomenOfRent;
+
+            double rentedPeriod = Math.Ceiling(rentPeriod.GetValueOrDefault().TotalHours);
 
             vehicle.ForCleaning = true;
 
-            vehicle.RentedPeriod = vehicle.RentedPeriod + rentedPeriod;
+            vehicle.RentedPeriod +=  rentedPeriod;
 
             await repo.SaveChangesAsync();
         }
@@ -158,11 +169,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
         {
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
 
-            TimeSpan? rentedPeriod = vehicle.MomenOfLeave - vehicle.MomenOfRent;
-
             vehicle.ForRepearing = true;
-
-            vehicle.RentedPeriod = rentedPeriod;
 
             vehicle.RepairsCount++;
 

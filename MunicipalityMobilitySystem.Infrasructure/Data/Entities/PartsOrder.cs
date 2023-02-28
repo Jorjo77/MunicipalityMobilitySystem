@@ -18,8 +18,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         [ForeignKey(nameof(Vehicle))]
         public int VehicleId { get; set; }
         public Vehicle Vehicle { get; set; } = null!;
-        public string? RenterId { get; set; }
-        public IEnumerable<Part> Parts { get; set; } = new List<Part>();
+        public IEnumerable<Expense> Expenses { get; set; } = new List<Expense>();
 
         [Required]
         [Precision(12, 2)]

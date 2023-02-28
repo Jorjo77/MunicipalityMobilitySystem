@@ -236,7 +236,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     RegistrationNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Model = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     EngineType = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    Rating = table.Column<int>(type: "int", nullable: false),
+                    Rating = table.Column<double>(type: "float", nullable: false),
+                    RatingCounter = table.Column<int>(type: "int", nullable: false),
                     PricePerHour = table.Column<decimal>(type: "decimal(12,2)", precision: 12, scale: 2, nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
@@ -246,12 +247,13 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     ForRepearing = table.Column<bool>(type: "bit", nullable: false),
                     ForCleaning = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    RentedPeriod = table.Column<TimeSpan>(type: "time", nullable: true),
+                    RentedPeriod = table.Column<double>(type: "float", nullable: false),
                     MomenOfRent = table.Column<DateTime>(type: "datetime2", nullable: true),
                     MomenOfLeave = table.Column<DateTime>(type: "datetime2", nullable: true),
                     FailureDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RepairsCount = table.Column<int>(type: "int", nullable: false),
                     RentsCount = table.Column<int>(type: "int", nullable: false),
+                    CustomerFeedback = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RepairCenterId = table.Column<int>(type: "int", nullable: true),
                     WashingCenterId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -294,7 +296,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     PricePerHour = table.Column<decimal>(type: "decimal(12,2)", precision: 12, scale: 2, nullable: false),
                     VehicleId = table.Column<int>(type: "int", nullable: false),
                     RenterId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RentedPeriod = table.Column<TimeSpan>(type: "time", nullable: true),
+                    RentedPeriod = table.Column<double>(type: "float", nullable: false),
                     MomenOfRent = table.Column<DateTime>(type: "datetime2", nullable: true),
                     MomenOfLeave = table.Column<DateTime>(type: "datetime2", nullable: true),
                     TotalPrice = table.Column<decimal>(type: "decimal(12,2)", precision: 12, scale: 2, nullable: false)
@@ -318,7 +320,6 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     VehicleId = table.Column<int>(type: "int", nullable: false),
-                    RenterId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TotalPrice = table.Column<decimal>(type: "decimal(12,2)", precision: 12, scale: 2, nullable: false)
                 },
                 constraints: table =>
@@ -333,20 +334,21 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Parts",
+                name: "Expenses",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(12,2)", precision: 12, scale: 2, nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    UnutPrice = table.Column<decimal>(type: "decimal(12,2)", precision: 12, scale: 2, nullable: false),
                     PartsOrderId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Parts", x => x.Id);
+                    table.PrimaryKey("PK_Expenses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Parts_PartsOrders_PartsOrderId",
+                        name: "FK_Expenses_PartsOrders_PartsOrderId",
                         column: x => x.PartsOrderId,
                         principalTable: "PartsOrders",
                         principalColumn: "Id");
@@ -355,7 +357,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "cc1d8131-67ce-49d8-83c3-756ffca0fe9a", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEP7UsDzwkF0iJWC22oX/xCL3rJ+KMocrmVE1UQ4fyM+ES5F65rksMPRoSytTmBxkHA==", null, false, "d758968e-fcbc-4b03-99e0-f9dbe25c5e6d", false, "guest@mail.com" });
+                values: new object[] { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "10506240-5514-4efe-9be8-9fd3fdb1d2ea", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEJ2m8yRUzklZ+dc/6GCin2dthoT6hThsI1deN7cxNk1fHxU5QgZI2WL3VgLmiGiFLA==", null, false, "67d69b94-989e-43fd-a188-e849d5111839", false, "guest@mail.com" });
 
             migrationBuilder.InsertData(
                 table: "Categorys",
@@ -374,7 +376,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 {
                     { 1, "Bulgaria Sofia City Iskar Str. 36", "Your central oportunity to find out the best ranting offer!", "central_rent@abv.bg", "https://travelwest.info/app/uploads/2022/04/Portway-Park-Ride-Car-Park-1349x900.jpg.webp", "Central Park", "+359878128343" },
                     { 2, "Bulgaria Sofia City Mladost 4", "Your eastern oportunity to find out the best ranting offer!", "eastern_rent@abv.bg", "https://s.driving-tests.org/wp-content/uploads/2012/02/back-parking.webp", "Eastern Park", "+359878128344" },
-                    { 3, "Bulgaria Sofia City Lulin 2", "Your western oportunity to find out the best ranting offer!", "estern_rent@abv.bg", "https://d193ppza2qrruo.cloudfront.net/production/images/Multi-storey-car-park-tips.jpg", "Western Park", "+359878128345" }
+                    { 3, "Bulgaria Sofia City Lulin 2", "Your western oportunity to find out the best ranting offer!", "western_rent@abv.bg", "https://d193ppza2qrruo.cloudfront.net/production/images/Multi-storey-car-park-tips.jpg", "Western Park", "+359878128345" }
                 });
 
             migrationBuilder.InsertData(
@@ -389,18 +391,18 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Vehicles",
-                columns: new[] { "Id", "CategoryId", "Description", "EngineType", "FailureDescription", "ForCleaning", "ForRepearing", "ImageUrl", "IsActive", "Model", "MomenOfLeave", "MomenOfRent", "PricePerHour", "Rating", "RegistrationNumber", "RentedPeriod", "RenterId", "RentsCount", "RepairCenterId", "RepairsCount", "VehicleParkId", "WashingCenterId" },
+                columns: new[] { "Id", "CategoryId", "CustomerFeedback", "Description", "EngineType", "FailureDescription", "ForCleaning", "ForRepearing", "ImageUrl", "IsActive", "Model", "MomenOfLeave", "MomenOfRent", "PricePerHour", "Rating", "RatingCounter", "RegistrationNumber", "RentedPeriod", "RenterId", "RentsCount", "RepairCenterId", "RepairsCount", "VehicleParkId", "WashingCenterId" },
                 values: new object[,]
                 {
-                    { 1, 2, "Exellent transport solution for a city center.", "Electric", null, false, false, "https://bg.e-scooter.co/i/17/72/ed/d5015b9723a5397c924e7b797d.jpg", true, "Piaggo", null, null, 11.00m, 5, "Sk000001", null, null, 0, null, 0, 2, null },
-                    { 2, 2, "A realy good transport solution for a city.", "Petrol", null, false, false, "https://images.piaggio.com/piaggio/vehicles/nclp000u15/nclp8znu15/nclp8znu15-01-s.png", true, "Piaggo", null, null, 10.00m, 5, "Sk000002", null, null, 0, null, 0, 1, null },
-                    { 3, 2, "A very good transport solution for a city and center.", "Petrol", null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4TbIp4RJgECS2py-M_zNjwLrXYIbcZ07XQA&usqp=CAU", true, "Vespa", null, null, 9.00m, 6, "Sk000003", null, null, 0, null, 0, 3, null },
-                    { 4, 1, "A very good transport solution for sport people.", null, null, false, false, "https://www.home-max.bg/static/media/ups/cached/781e8afa44a58ec261abdd83455444f5c203f4c5.jpg", true, "Passati", null, null, 4.00m, 4, "B000001", null, null, 0, null, 0, 1, null },
-                    { 5, 1, "A very good luxury transport solution for beasy people.", null, null, false, false, "https://hips.hearstapps.com/hmg-prod/images/pinarello-dogma-f-tested-1624463882.jpg?crop=1.00xw:0.807xh;0,0.0629xh&resize=2048:*", true, "Pinarello", null, null, 7.00m, 6, "B000002", null, null, 0, null, 0, 2, null },
-                    { 6, 1, "A realy good transport solution for sport people.", null, null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuinQIdRNjDVnCddYQFkMkFIkt3cyXVfVqPA&usqp=CAU", true, "Cross", null, null, 5.00m, 5, "B000003", null, null, 0, null, 0, 3, null },
-                    { 7, 3, "A very good and transport solution for a city center.", "Electric", null, false, false, "https://imgd.aeplcdn.com/1056x594/cw/ec/9692/Hyundai-Eon-Right-Front-Three-Quarter-94097.jpg?v=201711021421&q=75&wm=1", true, "Hynday EON", null, null, 20.00m, 4, "C000001", null, null, 0, null, 0, 1, null },
-                    { 8, 3, "A realy good and transport solution for a big family.", "Diesel", null, false, false, "https://www.topgear.com/sites/default/files/cars-car/carousel/2016/03/vw_7422.jpg?w=976&h=549", true, "VW Touran", null, null, 23.00m, 5, "C000002", null, null, 0, null, 0, 2, null },
-                    { 9, 3, "A realy good and luxury transport solution.", "Petrol", null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFiWMRzQZJ4dYjRVlv-l25KWCVweGaWbIJOA&usqp=CAU", true, "Mercedes CLS 180", null, null, 25.00m, 6, "C000003", null, null, 0, null, 0, 3, null }
+                    { 1, 2, null, "Exellent transport solution for a city center.", "Electric", null, false, false, "https://bg.e-scooter.co/i/17/72/ed/d5015b9723a5397c924e7b797d.jpg", true, "Piaggo", null, null, 11.00m, 5.0, 0, "Sk000001", 0.0, null, 0, null, 0, 2, null },
+                    { 2, 2, null, "A realy good transport solution for a city.", "Petrol", null, false, false, "https://images.piaggio.com/piaggio/vehicles/nclp000u15/nclp8znu15/nclp8znu15-01-s.png", true, "Piaggo", null, null, 10.00m, 5.0, 0, "Sk000002", 0.0, null, 0, null, 0, 1, null },
+                    { 3, 2, null, "A very good transport solution for a city and center.", "Petrol", null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4TbIp4RJgECS2py-M_zNjwLrXYIbcZ07XQA&usqp=CAU", true, "Vespa", null, null, 9.00m, 6.0, 0, "Sk000003", 0.0, null, 0, null, 0, 3, null },
+                    { 4, 1, null, "A very good transport solution for sport people.", null, null, false, false, "https://www.home-max.bg/static/media/ups/cached/781e8afa44a58ec261abdd83455444f5c203f4c5.jpg", true, "Passati", null, null, 4.00m, 4.0, 0, "B000001", 0.0, null, 0, null, 0, 1, null },
+                    { 5, 1, null, "A very good luxury transport solution for beasy people.", null, null, false, false, "https://hips.hearstapps.com/hmg-prod/images/pinarello-dogma-f-tested-1624463882.jpg?crop=1.00xw:0.807xh;0,0.0629xh&resize=2048:*", true, "Pinarello", null, null, 7.00m, 6.0, 0, "B000002", 0.0, null, 0, null, 0, 2, null },
+                    { 6, 1, null, "A realy good transport solution for sport people.", null, null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuinQIdRNjDVnCddYQFkMkFIkt3cyXVfVqPA&usqp=CAU", true, "Cross", null, null, 5.00m, 5.0, 0, "B000003", 0.0, null, 0, null, 0, 3, null },
+                    { 7, 3, null, "A very good and transport solution for a city center.", "Electric", null, false, false, "https://imgd.aeplcdn.com/1056x594/cw/ec/9692/Hyundai-Eon-Right-Front-Three-Quarter-94097.jpg?v=201711021421&q=75&wm=1", true, "Hynday EON", null, null, 20.00m, 4.0, 0, "C000001", 0.0, null, 0, null, 0, 1, null },
+                    { 8, 3, null, "A realy good and transport solution for a big family.", "Diesel", null, false, false, "https://www.topgear.com/sites/default/files/cars-car/carousel/2016/03/vw_7422.jpg?w=976&h=549", true, "VW Touran", null, null, 23.00m, 5.0, 0, "C000002", 0.0, null, 0, null, 0, 2, null },
+                    { 9, 3, null, "A realy good and luxury transport solution.", "Petrol", null, false, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFiWMRzQZJ4dYjRVlv-l25KWCVweGaWbIJOA&usqp=CAU", true, "Mercedes CLS 180", null, null, 25.00m, 6.0, 0, "C000003", 0.0, null, 0, null, 0, 3, null }
                 });
 
             migrationBuilder.InsertData(
@@ -458,8 +460,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Parts_PartsOrderId",
-                table: "Parts",
+                name: "IX_Expenses_PartsOrderId",
+                table: "Expenses",
                 column: "PartsOrderId");
 
             migrationBuilder.CreateIndex(
@@ -519,7 +521,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                 name: "Bills");
 
             migrationBuilder.DropTable(
-                name: "Parts");
+                name: "Expenses");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

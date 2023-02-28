@@ -25,14 +25,14 @@
     <div class="carousel-inner">
         @foreach (var vehicle in topVehicles)
         {
-            var totalIncome = (vehicle.RentedPeriod.GetValueOrDefault().TotalHours * vehicle.PricePerHour);
+            var totalIncome = Math.Ceiling(vehicle.RentedPeriod * vehicle.PricePerHour);
 
             <div class="carousel-item @(first ? "active" : string.Empty)">
                 <img class="d-block w-90" style="height:400px"
                  src="@vehicle.ImageUrl" alt="@vehicle.Model">
                 <h5>Model: <b>@vehicle.Model</b></h5>
                 <h5>Price her hour: <b>@vehicle.PricePerHour BGN</b></h5>
-                <h5>Rented Period: <b>@vehicle.RentedPeriod.GetValueOrDefault().Hours.ToString("F2") hours</b></h5>
+                <h5>Rented Period: <b>@Math.Ceiling(vehicle.RentedPeriod).ToString("F2") hours</b></h5>
                 <h5>Total income: <b>@totalIncome.ToString("F2") BGN</b></h5>
             </div>
 
@@ -84,7 +84,7 @@
                     vehicleParkName = v.VehicleParkName;
                     vehicleParkAdress = v.VehicleParkAdress;
                     totalProfit += v.TotalProfit;
-                    rentedPeriod += (double)v.RentedPeriod.GetValueOrDefault().Hours;
+                    rentedPeriod += Math.Ceiling(v.RentedPeriod);
                     rentsCount += v.RentsCount;
                     repairsCount += v.RepairsCount;
                 }
@@ -120,18 +120,17 @@
 
             @foreach (var vehicle in topVehiclesCollection)
             {
-                var rentedPeriod = vehicle.RentedPeriod.GetValueOrDefault().Hours.ToString("F2");
-                var totalIncome = (vehicle.RentedPeriod.GetValueOrDefault().Hours * vehicle.PricePerHour);
+                var rentedPeriod = Math.Ceiling(vehicle.RentedPeriod);
+                var totalIncome = rentedPeriod * vehicle.PricePerHour;
                 <tr>
                     <td>@vehicle.RegistrationNumber</td>
                     <td>@vehicle.Model</td>
                     <td>@vehicle.EngineType</td>
-                    <td>@rentedPeriod hours</td>
+                    <td>@rentedPeriod.ToString("F2") hours</td>
                     <td>@vehicle.PricePerHour.ToString("F2") BGN</td>
                     <td>@totalIncome.ToString("F2") BGN</td>
                     <td>@vehicle.RentsCount</td>
                     <td>@vehicle.RepairsCount</td>
-
                 </tr>
             }
         </tbody>

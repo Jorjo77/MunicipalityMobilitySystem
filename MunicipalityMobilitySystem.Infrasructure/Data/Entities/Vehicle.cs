@@ -22,7 +22,10 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         public string? EngineType { get; set; }
 
         [Required]
-        public int Rating { get; set; }
+        public double Rating { get; set; }
+
+        [Required]
+        public int RatingCounter { get; set; }     
 
         [Required]
         [Precision(12, 2)]
@@ -52,7 +55,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         public bool ForRepearing { get; set; } = false;
         public bool ForCleaning { get; set; } = false;
         public bool IsActive { get; set; } = true;
-        public TimeSpan? RentedPeriod { get; set; }
+        public double RentedPeriod { get; set; }
         public DateTime? MomenOfRent { get; set; }
         public DateTime? MomenOfLeave { get; set; }
         public string? FailureDescription { get; set; } 
@@ -61,6 +64,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         public int RepairsCount { get; set; }
         [Required]
         public int RentsCount { get; set; }
+
+        public string? CustomerFeedback { get; set; }
         public IEnumerable<PartsOrder> OrderedParts { get; set; } = new List<PartsOrder>();
         public IEnumerable<Bill> Bills { get; set; } = new List<Bill>();
     }

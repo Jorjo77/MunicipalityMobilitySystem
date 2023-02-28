@@ -36,7 +36,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         public int VehicleId { get; set; }
         public Vehicle Vehicle { get; set; } = null!;
         public string? RenterId { get; set; }
-        public TimeSpan? RentedPeriod { get; set; }
+        public double RentedPeriod { get; set; }
         public DateTime? MomenOfRent { get; set; }
         public DateTime? MomenOfLeave { get; set; }
 

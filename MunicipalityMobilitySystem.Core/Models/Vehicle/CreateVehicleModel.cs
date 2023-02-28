@@ -33,7 +33,7 @@ namespace MunicipalityMobilitySystem.Core.Models.Vehicle
 
         [Required]
         [Range(RatingMinValue, RatingMaxValue)]
-        public int Rating { get; set; }
+        public double Rating { get; set; }
 
         [Required]
         [Precision(12, 2)]
@@ -66,7 +66,7 @@ namespace MunicipalityMobilitySystem.Core.Models.Vehicle
         public bool IsActive { get; set; } = true;
         public DateTime? MomenOfRent { get; set; }
         public DateTime? MomenOfLeave { get; set; }
-        public TimeSpan? RentedPeriod { get; set; }
+        public double RentedPeriod { get; set; }
         public string? FailureDescription { get; set; } = null;
 
         public int? RepairsCount { get; set; } = null;

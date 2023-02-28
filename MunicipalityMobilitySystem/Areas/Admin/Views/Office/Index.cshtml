@@ -39,7 +39,7 @@
             }
             @foreach (var vehicle in Model)
             {
-                var rentedPeriod = (vehicle.MomenOfLeave.GetValueOrDefault() - vehicle.MomenOfRent.GetValueOrDefault()).TotalHours;
+                var rentedPeriod = Math.Ceiling((vehicle.MomenOfLeave.GetValueOrDefault() - vehicle.MomenOfRent.GetValueOrDefault()).TotalHours);
                 theBill = (decimal)rentedPeriod * vehicle.PricePerHour;
                 <tr>
                     <td>@vehicle.RegistrationNumber</td>

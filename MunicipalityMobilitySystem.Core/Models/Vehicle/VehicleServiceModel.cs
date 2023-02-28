@@ -23,7 +23,7 @@ namespace MunicipalityMobilitySystem.Core.Models.Vehicle
 
         public string ImageUrl { get; set; } = null!;
 
-        public int Rating { get; set; }
+        public double Rating { get; set; }
 
         [DisplayName("Price per hour")]
         public decimal PricePerHour { get; set; }

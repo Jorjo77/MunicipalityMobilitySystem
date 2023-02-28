@@ -70,6 +70,13 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
         {
             var vehicle = await officeService.GetLeftVehicleById(id);
 
+            if (await officeService.BillExists(vehicle) == true)
+            {
+                notyf.Warning("The bill already exists and was send to the client!");
+
+                return RedirectToAction(nameof(Index));
+            }
+
             await officeService.MakeAndPostTheBill(vehicle);
 
             notyf.Information("You successfuly create and send the bill");

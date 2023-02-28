@@ -10,7 +10,7 @@
 
         public string ImageUrl { get; }
 
-        public int Rating { get; }
+        public double Rating { get; }
 
         public decimal PricePerHour { get; }
 

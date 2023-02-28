@@ -10,8 +10,8 @@
             public const int ModelMaxLength = 50;
             public const int ModelMinLength = 3;
 
-            public const int RatingMaxValue = 20;
-            public const int RatingMinValue = 1;
+            public const double RatingMaxValue = 6.00;
+            public const double RatingMinValue = 1.00;
 
             public const decimal PricePerHourMaxValue = 200.00M;
             public const decimal PricePerHourMinValue = 10.00M;
@@ -112,13 +112,16 @@
             public const decimal TotalPriceMinValue = 10.00M;
         }
 
-        public class Part
+        public class Expense
         {
             public const int NameMaxLength = 50;
             public const int NameMinLength = 3;
 
             public const decimal PriceMaxValue = 20000.00M;
             public const decimal PriceMinValue = 5.00M;
+
+            public const int QuantityMaxValue = 10000;
+            public const int QuantityMinValue = 0;
         }
     }
 }
