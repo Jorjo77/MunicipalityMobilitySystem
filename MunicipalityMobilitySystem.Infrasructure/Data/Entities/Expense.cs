@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 using static MunicipalityMobilitySystem.Data.DataConstants.Expense;
 
 namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
@@ -20,6 +16,13 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
 
         [Required]
         public int Quantity { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(PartsOrder))]
+        public int PartsOrderId { get; set; }
+
+        [Required]
+        public PartsOrder PartsOrder { get; set; } = null!;
 
         [Required]
         [Precision(12, 2)]

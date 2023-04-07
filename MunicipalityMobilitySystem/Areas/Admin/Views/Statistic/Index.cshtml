@@ -25,7 +25,7 @@
     <div class="carousel-inner">
         @foreach (var vehicle in topVehicles)
         {
-            var totalIncome = Math.Ceiling(vehicle.RentedPeriod * vehicle.PricePerHour);
+            //var totalIncome = Math.Ceiling(vehicle.RentedPeriod * vehicle.PricePerHour);//was totalIncome
 
             <div class="carousel-item @(first ? "active" : string.Empty)">
                 <img class="d-block w-90" style="height:400px"
@@ -33,7 +33,7 @@
                 <h5>Model: <b>@vehicle.Model</b></h5>
                 <h5>Price her hour: <b>@vehicle.PricePerHour BGN</b></h5>
                 <h5>Rented Period: <b>@Math.Ceiling(vehicle.RentedPeriod).ToString("F2") hours</b></h5>
-                <h5>Total income: <b>@totalIncome.ToString("F2") BGN</b></h5>
+                <h5>Total profit: <b>@vehicle.TotalProfit.ToString("F2") BGN</b></h5>
             </div>
 
             first = false;
@@ -63,6 +63,8 @@
             <tr class="table-info">
                 <th>Vehicle park name</th>
                 <th>Vehicle park adress</th>
+                <th>Total income</th>
+                <th>Total expenses</th>
                 <th>Total profit</th>
                 <th>Total rented period</th>
                 <th>Total rents count</th>
@@ -74,6 +76,8 @@
             {
                 string vehicleParkName = null;
                 string vehicleParkAdress = null;
+                double totalIncome = 0;
+                double totalExpenses = 0;
                 double totalProfit = 0;
                 double rentedPeriod = 0;
                 int rentsCount = 0;
@@ -83,6 +87,8 @@
                 {
                     vehicleParkName = v.VehicleParkName;
                     vehicleParkAdress = v.VehicleParkAdress;
+                    totalIncome += v.TotalIncome;
+                    totalExpenses += v.TotalExpenses;
                     totalProfit += v.TotalProfit;
                     rentedPeriod += Math.Ceiling(v.RentedPeriod);
                     rentsCount += v.RentsCount;
@@ -91,6 +97,8 @@
                 <tr>
                     <td>@vehicleParkName</td>
                     <td>@vehicleParkAdress</td>
+                    <td>@totalIncome.ToString("F2") BGN</td>
+                    <td>@totalExpenses.ToString("F2") BGN</td>
                     <td>@totalProfit.ToString("F2") BGN</td>
                     <td>@rentedPeriod.ToString("F2") hours</td>
                     <td>@rentsCount</td>
@@ -112,6 +120,8 @@
                 <th>Rented Period</th>
                 <th>Price per hour</th>
                 <th>Total income</th>
+                <th>Total expenses</th>
+                <th>Total profit</th>
                 <th>Rents count</th>
                 <th>Repairs count</th>
             </tr>
@@ -128,7 +138,9 @@
                     <td>@vehicle.EngineType</td>
                     <td>@rentedPeriod.ToString("F2") hours</td>
                     <td>@vehicle.PricePerHour.ToString("F2") BGN</td>
-                    <td>@totalIncome.ToString("F2") BGN</td>
+                    <td>@vehicle.TotalIncome.ToString("F2") BGN</td>
+                    <td>@vehicle.TotalExpenses.ToString("F2") BGN</td>
+                    <td>@vehicle.TotalProfit.ToString("F2") BGN</td>
                     <td>@vehicle.RentsCount</td>
                     <td>@vehicle.RepairsCount</td>
                 </tr>

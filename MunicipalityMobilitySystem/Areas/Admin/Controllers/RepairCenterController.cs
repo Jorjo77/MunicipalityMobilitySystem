@@ -22,6 +22,19 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
         {
             var model = await repairCenterService.GetRepairCenters();
 
+            foreach (var repairCenter in model)
+            {
+
+                if ((await repairCenterService.Exists(repairCenter.Id)) == false)
+                {
+                    notyf.Error("The repair center do not exists!");
+                    ModelState.AddModelError("", "The repair center do not exists!");
+                    return RedirectToAction(nameof(Index));
+                }
+
+                repairCenter.VehiclesForRepair = await repairCenterService.GetVehiclesForRepair(repairCenter.Id);
+            }
+
             return View(model);
         }
 
@@ -64,33 +77,9 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
                 ModelState.AddModelError("", "The repair center already exists!");
             }
 
-
             await repairCenterService.Create(model);
 
             return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            if ((await repairCenterService.Exists(id)) == false)
-            {
-                notyf.Error("The repair center do not exists!");
-                ModelState.AddModelError("", "The repair center do not exists!");
-                return RedirectToAction(nameof(Index));
-            }
-            var repairCenter = await repairCenterService.GetRepairCenterById(id);
-            var model = new RepairCenterServiceModel()
-            {
-                Id = repairCenter.Id,
-                Name = repairCenter.Name,
-                ImageUrl = repairCenter.ImageUrl,
-                Adress = repairCenter.Adress,
-            };
-
-            ViewBag.VehiclesForRepair = await repairCenterService.GetVehiclesForRepair(repairCenter.Id);
-
-            await repairCenterService.GetVehiclesForRepair(repairCenter.Id);
-            return this.View(model);
         }
 
         [HttpPost]
@@ -101,6 +90,63 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
             notyf.Information("The vehicle was repaired and sent for washing");
 
             return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> CreateOrder(int id)
+        {
+            var vehicle = await repairCenterService.GetVehicleForRepairById(id);
+
+            var model = new PartsOrderServiceModel
+            {
+                VehicleId = id,
+                RegistrationNumber = vehicle.RegistrationNumber,
+                Title = $"{vehicle.Model} - {DateTime.UtcNow}",
+                Expenses = new List<ExpenseServiceModel>(),
+            };
+            
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateOrder(PartsOrderServiceModel queryModel)
+        {
+            
+            if (ModelState.IsValid == false)
+            {
+                return View(queryModel);
+            }
+
+            if (await repairCenterService.ExistsOrder(queryModel) == true)
+            {
+                notyf.Error("The order already exists!");
+                ModelState.AddModelError("", "The order already exists!");
+                return View(queryModel);
+            }
+
+            await repairCenterService.CreateOrder(queryModel);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteOrder(int id)
+        {
+            if (await repairCenterService.ExistsOrderById(id) == false)
+            {
+                notyf.Error("Order do not exists!");
+            }
+
+            await repairCenterService.DeleteOrder(id);
+
+            notyf.Success("Order is now deleted");
+
+            return RedirectToAction(nameof(AllOrders));
+        }
+
+        public async Task<IActionResult> AllOrders()
+        {
+            var model = await repairCenterService.GetOrders();
+
+            return View(model);
         }
     }
 }

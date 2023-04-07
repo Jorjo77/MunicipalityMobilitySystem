@@ -1,9 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MunicipalityMobilitySystem.Data;
-using AspNetCoreHero.ToastNotification;
-using AspNetCoreHero.ToastNotification.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

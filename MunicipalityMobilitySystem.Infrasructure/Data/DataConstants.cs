@@ -82,10 +82,7 @@
         public class PartsOrder
         {
             public const int TitleMaxLength = 50;
-            public const int TitleMinLength = 10;
-
-            public const decimal TotalPriceMaxValue = 10000.00M;
-            public const decimal TotalPriceMinValue = 0.00M;
+            public const int TitleMinLength = 5;
         }
 
         public class RoleName
@@ -116,9 +113,6 @@
         {
             public const int NameMaxLength = 50;
             public const int NameMinLength = 3;
-
-            public const decimal PriceMaxValue = 20000.00M;
-            public const decimal PriceMinValue = 5.00M;
 
             public const int QuantityMaxValue = 10000;
             public const int QuantityMinValue = 0;

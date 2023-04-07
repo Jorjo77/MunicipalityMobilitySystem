@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using MunicipalityMobility.Core.Services.Admin;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Models.Admin;
 using MunicipalityMobilitySystem.Core.Services.Admin;
@@ -21,7 +22,21 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
+
             var model = await washingCenterService.GetWashingCenters();
+
+            foreach (var washingCenter in model)
+            {
+
+                if ((await washingCenterService.Exists(washingCenter.Id)) == false)
+                {
+                    notyf.Error("The washing center do not exists!");
+                    ModelState.AddModelError("", "The washing center do not exists!");
+                    return RedirectToAction(nameof(Index));
+                }
+
+                washingCenter.VehiclesForCleaning = await washingCenterService.GetVehiclesForWashing(washingCenter.Id);
+            }
 
             return View(model);
         }
@@ -71,29 +86,6 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            if ((await washingCenterService.Exists(id)) == false)
-            {
-                notyf.Error("The washing center do not exists!");
-                ModelState.AddModelError("", "The washing center do not exists!");
-                return RedirectToAction(nameof(Index));
-            }
-            var washingCenter = await washingCenterService.GetWashingCenterById(id);
-            var model = new WashingCenterServiceModel()
-            {
-                Id = washingCenter.Id,
-                Name = washingCenter.Name,
-                ImageUrl = washingCenter.ImageUrl,
-                Adress = washingCenter.Adress,
-            };
-
-            ViewBag.VehiclesForWashing = await washingCenterService.GetVehiclesForWashing(id); 
-
-            return this.View(model);
-        }
-
 
         [HttpPost]
         public async Task<IActionResult> Wash(int id)

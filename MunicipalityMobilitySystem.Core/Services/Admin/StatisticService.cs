@@ -48,8 +48,6 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
         {
             return repo.AllReadonly<Vehicle>()
                 .Where(v => v.IsActive)
-                .OrderByDescending(v => v.RentedPeriod)
-                .ThenByDescending(v => v.PricePerHour)
                 .Select(v => new StatisticVehicleModel
                 {
                     RentedPeriod = v.RentedPeriod,
@@ -59,7 +57,12 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     EngineType = v.EngineType,
                     PricePerHour = (int)v.PricePerHour,
                     Model = v.Model,
+                    TotalExpenses = (double)v.OrderedParts.Sum(op=>op.TotalPrice),
+                    TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
+                    TotalProfit = ((double)v.PricePerHour * v.RentedPeriod)- (double)v.OrderedParts.Sum(op => op.TotalPrice)
                 })
+                .OrderByDescending(v => v.TotalProfit)
+                .ThenByDescending(v => v.RentedPeriod)
                 .ToList();
         }
         public StatisticVehicleModel GetTopBike()
@@ -67,8 +70,6 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
             return repo.AllReadonly<Vehicle>()
                 .Where(v => v.Category.Name == "Bike"
                 && v.IsActive)
-                .OrderByDescending(v => v.RentedPeriod)
-                .ThenByDescending(v => v.PricePerHour)
                 .Select(v => new StatisticVehicleModel
                 {
                     RegistrationNumber = v.RegistrationNumber,
@@ -77,8 +78,13 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     RepairsCount = v.RepairsCount,
                     PricePerHour = (int)v.PricePerHour,
                     ImageUrl = v.ImageUrl,
-                    Model = v.Model
+                    Model = v.Model,
+                    TotalExpenses = (double)v.OrderedParts.Sum(op => op.TotalPrice),
+                    TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
+                    TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice)
                 })
+                .OrderByDescending(v => v.TotalProfit)
+                .ThenByDescending(v => v.RentedPeriod)
                 .First();
         }
 
@@ -87,8 +93,6 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
             return repo.AllReadonly<Vehicle>()
                 .Where(v => v.Category.Name == "Car"
                 && v.IsActive)
-                .OrderByDescending(v => v.RentedPeriod)
-                .ThenByDescending(v => v.PricePerHour)
                 .Select(v => new StatisticVehicleModel
                 {
                     RegistrationNumber = v.RegistrationNumber,
@@ -97,18 +101,21 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     RepairsCount = v.RepairsCount,
                     PricePerHour = (int)v.PricePerHour,
                     ImageUrl = v.ImageUrl,
-                    Model = v.Model
+                    Model = v.Model,
+                    TotalExpenses = (double)v.OrderedParts.Sum(op => op.TotalPrice),
+                    TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
+                    TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice)
                 })
+                .OrderByDescending(v => v.TotalProfit)
+                .ThenByDescending(v => v.RentedPeriod)
                 .First();
         }
 
         public StatisticVehicleModel GetTopScooter()
         {
             return repo.AllReadonly<Vehicle>()
-                .Where(v => v.Category.Name == "Scooter"
+                .Where(v => v.Category.Name == "Scooter" 
                 && v.IsActive)
-                .OrderByDescending(v => v.RentedPeriod)
-                .ThenByDescending(v => v.PricePerHour)
                 .Select(v => new StatisticVehicleModel
                 {
                     RegistrationNumber = v.RegistrationNumber,
@@ -117,7 +124,10 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     RepairsCount = v.RepairsCount,
                     PricePerHour = (int)v.PricePerHour,
                     ImageUrl = v.ImageUrl,
-                    Model = v.Model
+                    Model = v.Model,
+                    TotalExpenses = (double)v.OrderedParts.Sum(op => op.TotalPrice),
+                    TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
+                    TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice)
                 })
                 .First();
         }
@@ -156,6 +166,9 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                         RentedPeriod = v.RentedPeriod,
                         RentsCount = v.RentsCount,
                         RepairsCount = v.RepairsCount,
+                        TotalExpenses = (double)v.OrderedParts.Sum(op => op.TotalPrice),
+                        TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
+                        TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice)
                     })
                     .ToList();
 

@@ -18,10 +18,11 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         [ForeignKey(nameof(Vehicle))]
         public int VehicleId { get; set; }
         public Vehicle Vehicle { get; set; } = null!;
-        public IEnumerable<Expense> Expenses { get; set; } = new List<Expense>();
+        public ICollection<Expense> Expenses { get; set; } = new List<Expense>();
 
         [Required]
         [Precision(12, 2)]
         public decimal TotalPrice { get; set; }
+
     }
 }

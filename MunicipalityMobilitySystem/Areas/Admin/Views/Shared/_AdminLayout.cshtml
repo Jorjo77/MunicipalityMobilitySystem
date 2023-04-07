@@ -28,6 +28,7 @@
                 && this.User.IsInRole(Mechanic))
                 {
                     <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="Index"> Mechanic home area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="AllOrders"> All Orders</a>
                 }
                 @if (this.User?.Identity != null
                 && this.User.Identity.IsAuthenticated

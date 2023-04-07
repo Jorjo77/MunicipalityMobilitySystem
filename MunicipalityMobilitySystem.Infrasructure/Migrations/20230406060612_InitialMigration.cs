@@ -341,8 +341,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    UnutPrice = table.Column<decimal>(type: "decimal(12,2)", precision: 12, scale: 2, nullable: false),
-                    PartsOrderId = table.Column<int>(type: "int", nullable: true)
+                    PartsOrderId = table.Column<int>(type: "int", nullable: false),
+                    UnutPrice = table.Column<decimal>(type: "decimal(12,2)", precision: 12, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -351,13 +351,14 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         name: "FK_Expenses_PartsOrders_PartsOrderId",
                         column: x => x.PartsOrderId,
                         principalTable: "PartsOrders",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "10506240-5514-4efe-9be8-9fd3fdb1d2ea", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEJ2m8yRUzklZ+dc/6GCin2dthoT6hThsI1deN7cxNk1fHxU5QgZI2WL3VgLmiGiFLA==", null, false, "67d69b94-989e-43fd-a188-e849d5111839", false, "guest@mail.com" });
+                values: new object[] { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "907a9522-e0af-47b0-80af-6079740fbe9f", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAELuJQxxHM7uMbwti+uGHG8HoV+J2hxvdEAweIMWriEIp8Zvs/fDluuJJH7EEVhAc+A==", null, false, "1871b3bb-f3b1-41f1-9e83-d9968b86e9b3", false, "guest@mail.com" });
 
             migrationBuilder.InsertData(
                 table: "Categorys",

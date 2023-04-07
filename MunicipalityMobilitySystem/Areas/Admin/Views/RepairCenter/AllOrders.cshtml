@@ -1,28 +1,14 @@
-﻿@model IEnumerable<UserServiceModel>
+﻿@model IEnumerable<OrderViewModel>
 
 @{
-    ViewBag.Title = "Users Page";
+    ViewBag.Title = "Orders Page";
 }
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 <br />
 <div class="row">
-    <div class="col-8">
-        @if (this.User?.Identity != null
-        && this.User.Identity.IsAuthenticated
-        && this.User.IsInRole(AdminRolleName))
-        {
-            <h3 class="text-success">Here you can <b>create a role:</b> </h3>
-            <a asp-area="Admin" asp-controller="User" asp-action="CreateRole"
-           class="btn btn-outline-success btn-lg">Create Role</a>
-        }
-    </div>
-</div>
-
-<br />
-<div class="row">
     <div class="col-6">
-        <h2 class="text-primary">Users List </h2>
+        <h2 class="text-primary">Orders List </h2>
     </div>
 </div>
 
@@ -32,25 +18,28 @@
         <thead class="thead-dark">
             <tr class="table-info">
                 <th>ID</th>
-                <th>Username</th>
+                <th>Title</th>
+                <th>RegistrationNumber</th>
+                <th>TotalPrice</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var user in Model)
+            @foreach (var order in Model)
             {
                 <tr>
-                    <td>@user.Id</td>
-                    <td>@user.UserName</td>
+                    <td>@order.Id</td>
+                    <td>@order.Title</td>
+                    <td>@order.RegistrationNumber</td>
+                    <td>@order.TotalPrice</td>
                     <td>
                         @if (this.User?.Identity != null
                        && this.User.Identity.IsAuthenticated
-                       && this.User.IsInRole(AdminRolleName))
+                       && this.User.IsInRole(Mechanic))
                         {
-                            <a asp-area="Admin" asp-action="Roles" asp-controller="User" asp-route-id="@user.Id" class="btn btn-block btn-outline-primary">Add user to Roles</a>
-                            <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="User"
-                          asp-action="Delete" asp-route-id="@user.Id" method="post">
-                                <input class="btn btn-block btn-outline-danger" type="submit" value="Delete user" onclick="myConfirm(event)" />
+                            <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="RepairCenter"
+                          asp-action="DeleteOrder" asp-route-id="@order.Id" method="post">
+                                <input class="btn btn-block btn-outline-danger" type="submit" value="Delete" onclick="myConfirm(event)" />
                             </form>
                         }
                     </td>
@@ -67,7 +56,7 @@
             e.preventDefault();
 
             Swal.fire({
-                title: 'Are you sure you want to delete user?',
+                title: 'Are you sure you want to delete the order?',
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -78,7 +67,7 @@
                 if (result.isConfirmed) {
                     Swal.fire(
                         'Deleted!',
-                        'The user has been deleted.',
+                        'The order has been deleted.',
                         'success'
                     ).then((resultDeleted) => {
 

@@ -143,15 +143,15 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "10506240-5514-4efe-9be8-9fd3fdb1d2ea",
+                            ConcurrencyStamp = "907a9522-e0af-47b0-80af-6079740fbe9f",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ2m8yRUzklZ+dc/6GCin2dthoT6hThsI1deN7cxNk1fHxU5QgZI2WL3VgLmiGiFLA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELuJQxxHM7uMbwti+uGHG8HoV+J2hxvdEAweIMWriEIp8Zvs/fDluuJJH7EEVhAc+A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "67d69b94-989e-43fd-a188-e849d5111839",
+                            SecurityStamp = "1871b3bb-f3b1-41f1-9e83-d9968b86e9b3",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -343,7 +343,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("PartsOrderId")
+                    b.Property<int>("PartsOrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -903,9 +903,13 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Expense", b =>
                 {
-                    b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.PartsOrder", null)
+                    b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.PartsOrder", "PartsOrder")
                         .WithMany("Expenses")
-                        .HasForeignKey("PartsOrderId");
+                        .HasForeignKey("PartsOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PartsOrder");
                 });
 
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.PartsOrder", b =>

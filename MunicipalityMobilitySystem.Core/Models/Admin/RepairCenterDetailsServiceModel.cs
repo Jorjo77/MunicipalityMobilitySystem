@@ -8,8 +8,6 @@ namespace MunicipalityMobilitySystem.Core.Models.Admin
 {
     public class RepairCenterDetailsServiceModel
     {
-        //ToDo: To make validation and build create view
-
         [Key]
         public int Id { get; set; }
 

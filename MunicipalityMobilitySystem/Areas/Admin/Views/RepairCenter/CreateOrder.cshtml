@@ -1,0 +1,65 @@
+﻿@model PartsOrderServiceModel
+@{
+    ViewBag.Title = "Create Order";
+}
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+
+<form method="post">
+    <div class="text-center">
+        <input type="hidden" asp-for="@Model.VehicleId" />
+        <b><label asp-for="Title" class="text-success">Order Title&Time:</label></b>
+        <input type="text" class="col-md-4" asp-for="@Model.Title" />
+        <b><label asp-for="RegistrationNumber" class="text-success">Registration Number:</label></b>
+        <input type="text" class="col-md-2" asp-for="@Model.RegistrationNumber" />
+    </div>
+    <div id="ExpensesContainer">
+        <b><label asp-for="Expenses" class="text-success"></label></b>
+        <a class="btn btn-success" onclick="AddMoreExpenses()">+</a>
+    </div>
+    <input type="submit" class="btn btn-primary mb-3" onclick="myConfirm(event)" />
+</form>
+
+
+@section Scripts {
+    <script>
+        var expenseIndex = 0;
+        function AddMoreExpenses() {
+            $("#ExpensesContainer").append("<div class='form-control'>Name: <Input type='text' name = 'Expenses["
+                + expenseIndex + "].Name' />Quantity: <Input type='number' name = 'Expenses["
+                + expenseIndex + "].Quantity' />Price per unit: <input type='number' name= 'Expenses["
+                + expenseIndex + "].UnutPrice' /></div>");
+            expenseIndex++;
+        }
+    </script>
+    <script>
+
+        function myConfirm(e) {
+
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure you want to save the order?',
+                text: "You will be able to revert this, delating the order!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, save it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Saved!',
+                        'The order has been saved.',
+                        'success'
+                    ).then((resultDeleted) => {
+
+                        e.target.parentElement.submit();
+                    })
+                }
+            })
+        }
+    </script>
+}
+

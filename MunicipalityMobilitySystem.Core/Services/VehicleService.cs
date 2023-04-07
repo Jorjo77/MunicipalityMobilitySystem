@@ -149,6 +149,11 @@ namespace MunicipalityMobilitySystem.Core.Services
 
             vehicle.MomenOfLeave = DateTime.Now;
 
+            guard.AgainstNull(vehicle.MomenOfLeave, "Vehicle can not be found");
+            guard.AgainstNull(vehicle.MomenOfRent, "Vehicle can not be found");
+
+            vehicle.RentedPeriod = vehicle.MomenOfLeave.Value.Hour - vehicle.MomenOfRent.Value.Hour;
+
             vehicle.RentsCount++;
 
             await repo.SaveChangesAsync();

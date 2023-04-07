@@ -1,7 +1,7 @@
-﻿using MunicipalityMobilitySystem.Core.Models.Admin;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿
+using MunicipalityMobilitySystem.Core.Models.Admin;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
+using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 
 namespace MunicipalityMobilitySystem.Core.Contracts.Admin
 {
@@ -16,5 +16,12 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Admin
         Task Create(RepairCenterDetailsServiceModel model);
         Task<bool> Exists(int id);
         public Task RepairVehicle(int id);
+        Task CreateOrder(PartsOrderServiceModel model);
+        Task<bool> ExistsOrder(PartsOrderServiceModel queryModel);
+        Task<VehicleDetailsViewModel> GetVehicleForRepairById(int vehicleId);
+        Task<bool> ExistsOrderById(int id);
+        Task<OrderViewModel> GetOrderById(int id);
+        Task<ICollection<OrderViewModel>>GetOrders();
+        Task DeleteOrder(int id);
     }
 }

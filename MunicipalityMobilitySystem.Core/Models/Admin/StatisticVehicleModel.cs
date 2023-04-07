@@ -21,7 +21,9 @@
         public string VehicleParkName { get; set; } = null!;
 
         public string VehicleParkAdress { get; set; } = null!;
-        public double TotalProfit
-            => RentedPeriod * PricePerHour;
+
+        public double TotalExpenses { get; set; }
+        public double TotalIncome { get; set; }  
+        public double TotalProfit { get; set; }
     }
 }
