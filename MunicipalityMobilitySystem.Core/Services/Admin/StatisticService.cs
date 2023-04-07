@@ -144,6 +144,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                 TopScooter = GetTopScooter(),
                 TopVehicles = GetTopVehicles(),
                 TopVehicleParks = GetTopVehicleParks(),
+                ThreeMostReparedVehicles = GetThreeMostReparedVehicles(),
             };
 
             return statisticModel;
@@ -182,7 +183,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
 
         public IEnumerable<VehicleParkModel> GetVehicleParks()
         {
-            return repo.All<VehiclePark>()
+            return repo.AllReadonly<VehiclePark>()
                 .Select(v=> new VehicleParkModel
                 {
                     Name= v.Name,
@@ -192,6 +193,28 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     Email= v.Email,
                     Phone= v.Phone,
                 })
+                .ToList();
+        }
+
+        public IEnumerable<StatisticVehicleModel> GetThreeMostReparedVehicles()
+        {
+            return repo.AllReadonly<Vehicle>()
+                .Select(v=> new StatisticVehicleModel
+                {
+                    RegistrationNumber = v.RegistrationNumber,
+                    RentedPeriod = v.RentedPeriod,
+                    RentsCount = v.RentsCount,
+                    RepairsCount = v.RepairsCount,
+                    PricePerHour = (int)v.PricePerHour,
+                    ImageUrl = v.ImageUrl,
+                    Model = v.Model,
+                    TotalExpenses = (double)v.OrderedParts.Sum(op => op.TotalPrice),
+                    TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
+                    TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice)
+                })
+                .OrderByDescending(v=>v.TotalExpenses)
+                .ThenByDescending(v => v.RepairsCount)
+                .Take(3)
                 .ToList();
         }
     }

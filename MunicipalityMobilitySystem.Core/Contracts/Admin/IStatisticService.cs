@@ -15,5 +15,6 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Admin
         StatisticVehicleModel GetTopCar();
         StatisticVehicleModel GetTopScooter();
         StatisticViewModel GetStatistic();
+        IEnumerable<StatisticVehicleModel> GetThreeMostReparedVehicles();
     }
 }

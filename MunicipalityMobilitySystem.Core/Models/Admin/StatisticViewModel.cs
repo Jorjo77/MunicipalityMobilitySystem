@@ -11,6 +11,7 @@
         public StatisticVehicleModel TopBike { get; set; } = null!;
 
         public IEnumerable<StatisticVehicleModel> TopVehicles { get; set; } = new List<StatisticVehicleModel>();
+        public IEnumerable<StatisticVehicleModel> ThreeMostReparedVehicles { get; set; } = new List<StatisticVehicleModel>();
         public IEnumerable<IEnumerable<StatisticVehicleParkModel>> TopVehicleParks { get; set; } = new List<IEnumerable<StatisticVehicleParkModel>>();
     }
 }
