@@ -1,41 +1,26 @@
-﻿@model VehicleServiceModel
+﻿
+@model VehicleServiceModel
 
 <div class="col-md-4">
     <div class="card mb-3">
         <img class="card-img-top" src="@Model.ImageUrl" alt="Vehicle Image">
         <div class="card-body text-center">
             <h4>@Model.Model</h4>
-            <div class="row mb-4">
-                <div class="col-xl-9 col-12">
-                    <ul class="entry-meta">
-                        <li class="single-meta">
-                            <ul class="item-rating">
-                                Rating:
-                                <li class="star-fill" data-vote="1"><i class="fas fa-star"></i></li>
-                                <li class="star-fill" data-vote="2"><i class="fas fa-star"></i></li>
-                                <li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
-                                <li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
-                                <li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
-                                <li class="star-fill" data-vote="6"><i class="fas fa-star"></i></li>
-                                <li><span id="averageVoteValue">@Model.Rating.ToString("0.0")</span><span> / 6</span> </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-@*                Rating:
-                @for (int i = 0; i < @Model.Rating; i++)
+            <h6>
+                Rating: @for (int i = 0; i < @Model.Rating; i++)
                 {
-                    <li class="star-fill"><i class="fas fa-star"></i></li>
+                    <span style="color: goldenrod">
+                        <i class="fas fa-star fa-fade"></i>
+                    </span>
                 }
-                <span>@Model.Rating /6</span>*@
+                <b>@Model.Rating /6</b></h6>
             <h6>
                 Price Per Hour:
                 <b>@String.Format("{0:f2}", Model.PricePerHour) BGN</b>
             </h6>
-            <h6>(@(Model.RenterId != null ? "Rented" : "Not Rented"))</h6>
+            <h6>(@(Model.RenterId!= null? "Rented" : "Not Rented"))</h6>
             <br />
-
+            
             @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
             {
                 <form class="input-group-lg" style="display: inline-block;" asp-area="" asp-controller="Vehicle"
@@ -54,14 +39,14 @@
                     if (Model.RenterId == User.Id())
                     {
                         <form class="input-group-lg" style="display: inline-block;" asp-area="" asp-controller="Vehicle" asp-action="Leave" asp-route-id="@Model.Id" method="post">
-                            <input class="btn btn-warning" type="submit" value="Leave" />
+                        <input class="btn btn-warning" type="submit" value="Leave" />
                         </form>
                     }
                     else
                     {
                         <form class="input-group-lg" style="display: inline-block;" asp-area="" asp-controller="Vehicle" asp-action="Leave"
-                  asp-route-id="@Model.Id" method="post">
-                            <input class="btn btn-warning" type="submit" value="Rented" />
+                        asp-route-id="@Model.Id" method="post">
+                        <input class="btn btn-warning" type="submit" value="Rented" />
                         </form>
                     }
                 }
@@ -71,7 +56,7 @@
                && this.User.IsInRole(AdminRolleName))
                 {
                     <a asp-area="Admin" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@Model.Id"
-                       class="btn btn-warning btn-lg">Edit</a>
+               class="btn btn-warning btn-lg">Edit</a>
 
                     <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Vehicle"
                   asp-action="Delete" asp-route-id="@Model.Id" method="post">

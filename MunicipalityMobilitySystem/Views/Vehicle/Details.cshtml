@@ -12,7 +12,16 @@
         <img class="card-img-top" src="@Model.ImageUrl" alt="Vehicle Image">
         <div class="card-body text-center" style="width:fit-content">
             <h4>@Model.Model</h4>
-            <h6>Rating: <b>@Model.Rating</b></h6>
+            <h6>
+                Rating: @for (int i = 0; i < @Model.Rating; i++)
+                {
+                    <span style="color: goldenrod">
+                        <i class="fas fa-star fa-fade"></i>
+                    </span>
+                }
+                <b>@Model.Rating/6</b>
+                
+            </h6>
             <h6>
                 Price Per Hour:
                 <b>@String.Format("{0:f2}", Model.PricePerHour) BGN</b>
