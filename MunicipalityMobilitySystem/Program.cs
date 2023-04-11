@@ -1,6 +1,7 @@
 using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MunicipalityMobilitySystem.Data;
 
@@ -18,11 +19,16 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
         options.Password.RequireLowercase = false;
         options.Password.RequireNonAlphanumeric = false;
         options.Password.RequireUppercase = false;
+        options.Lockout.MaxFailedAccessAttempts = 5;
     })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<MunicipalityMobilitySystemDbContext>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(
+    options =>
+    {
+        options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+    });
 
 builder.Services.AddApplicationServices();
 

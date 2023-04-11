@@ -110,10 +110,6 @@ namespace MunicipalityMobility.Core.Services.Admin
             var vehicle = await repo.GetByIdAsync<Vehicle>(id);
             vehicle.ForCleaning = true;
             vehicle.ForRepearing = false;
-            vehicle.MomenOfLeave = null;
-            vehicle.MomenOfRent = null;
-            vehicle.RenterId = null;
-            vehicle.FailureDescription = null;
 
             await repo.SaveChangesAsync();
         }

@@ -28,10 +28,10 @@ namespace MunicipalityMobilitySystem.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            //if (User.IsInRole(Boss))
-            //{
-            //    return RedirectToAction("Index", "Statistic", new { area = "Admin" });
-            //}
+            if (User.IsInRole(Boss))
+            {
+                return RedirectToAction("Index", "Statistic", new { area = "Admin" });
+            }
 
             var model = await vehicleParkService.AllVehicleParks();
     
