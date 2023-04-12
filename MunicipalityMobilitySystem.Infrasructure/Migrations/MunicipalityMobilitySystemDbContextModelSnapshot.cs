@@ -143,15 +143,15 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "907a9522-e0af-47b0-80af-6079740fbe9f",
+                            ConcurrencyStamp = "5bfc5907-188b-4675-883e-dfa43d31d926",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAELuJQxxHM7uMbwti+uGHG8HoV+J2hxvdEAweIMWriEIp8Zvs/fDluuJJH7EEVhAc+A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDzikr/zbwhtKJJvFoy4dmcvu4lyJeiPM7XI11WN1ieztiVulBp7y2KsFjXslLaL/g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1871b3bb-f3b1-41f1-9e83-d9968b86e9b3",
+                            SecurityStamp = "550315db-3dfd-454d-b94a-4c931abfa4c6",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -330,6 +330,35 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.CustomerFeedback", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Feedback")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Vote")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("CustomersFeedbacks");
+                });
+
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Expense", b =>
                 {
                     b.Property<int>("Id")
@@ -448,9 +477,6 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CustomerFeedback")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(5000)
@@ -493,9 +519,6 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
 
                     b.Property<double>("Rating")
                         .HasColumnType("float");
-
-                    b.Property<int>("RatingCounter")
-                        .HasColumnType("int");
 
                     b.Property<string>("RegistrationNumber")
                         .IsRequired()
@@ -548,8 +571,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             IsActive = true,
                             Model = "Piaggo",
                             PricePerHour = 11.00m,
-                            Rating = 5.0,
-                            RatingCounter = 0,
+                            Rating = 0.0,
                             RegistrationNumber = "Sk000001",
                             RentedPeriod = 0.0,
                             RentsCount = 0,
@@ -568,8 +590,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             IsActive = true,
                             Model = "Piaggo",
                             PricePerHour = 10.00m,
-                            Rating = 5.0,
-                            RatingCounter = 0,
+                            Rating = 0.0,
                             RegistrationNumber = "Sk000002",
                             RentedPeriod = 0.0,
                             RentsCount = 0,
@@ -588,8 +609,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             IsActive = true,
                             Model = "Vespa",
                             PricePerHour = 9.00m,
-                            Rating = 6.0,
-                            RatingCounter = 0,
+                            Rating = 0.0,
                             RegistrationNumber = "Sk000003",
                             RentedPeriod = 0.0,
                             RentsCount = 0,
@@ -607,8 +627,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             IsActive = true,
                             Model = "Passati",
                             PricePerHour = 4.00m,
-                            Rating = 4.0,
-                            RatingCounter = 0,
+                            Rating = 0.0,
                             RegistrationNumber = "B000001",
                             RentedPeriod = 0.0,
                             RentsCount = 0,
@@ -626,8 +645,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             IsActive = true,
                             Model = "Pinarello",
                             PricePerHour = 7.00m,
-                            Rating = 6.0,
-                            RatingCounter = 0,
+                            Rating = 0.0,
                             RegistrationNumber = "B000002",
                             RentedPeriod = 0.0,
                             RentsCount = 0,
@@ -645,8 +663,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             IsActive = true,
                             Model = "Cross",
                             PricePerHour = 5.00m,
-                            Rating = 5.0,
-                            RatingCounter = 0,
+                            Rating = 0.0,
                             RegistrationNumber = "B000003",
                             RentedPeriod = 0.0,
                             RentsCount = 0,
@@ -665,8 +682,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             IsActive = true,
                             Model = "Hynday EON",
                             PricePerHour = 20.00m,
-                            Rating = 4.0,
-                            RatingCounter = 0,
+                            Rating = 0.0,
                             RegistrationNumber = "C000001",
                             RentedPeriod = 0.0,
                             RentsCount = 0,
@@ -685,8 +701,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             IsActive = true,
                             Model = "VW Touran",
                             PricePerHour = 23.00m,
-                            Rating = 5.0,
-                            RatingCounter = 0,
+                            Rating = 0.0,
                             RegistrationNumber = "C000002",
                             RentedPeriod = 0.0,
                             RentsCount = 0,
@@ -705,8 +720,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                             IsActive = true,
                             Model = "Mercedes CLS 180",
                             PricePerHour = 25.00m,
-                            Rating = 6.0,
-                            RatingCounter = 0,
+                            Rating = 0.0,
                             RegistrationNumber = "C000003",
                             RentedPeriod = 0.0,
                             RentsCount = 0,
@@ -901,6 +915,17 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
                     b.Navigation("Vehicle");
                 });
 
+            modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.CustomerFeedback", b =>
+                {
+                    b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Vehicle", "Vehicle")
+                        .WithMany("CustomersFeedback")
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Vehicle");
+                });
+
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Expense", b =>
                 {
                     b.HasOne("MunicipalityMobilitySystem.Infrasructure.Data.Entities.PartsOrder", "PartsOrder")
@@ -990,6 +1015,8 @@ namespace MunicipalityMobilitySystem.Infrasructure.Migrations
             modelBuilder.Entity("MunicipalityMobilitySystem.Infrasructure.Data.Entities.Vehicle", b =>
                 {
                     b.Navigation("Bills");
+
+                    b.Navigation("CustomersFeedback");
 
                     b.Navigation("OrderedParts");
                 });

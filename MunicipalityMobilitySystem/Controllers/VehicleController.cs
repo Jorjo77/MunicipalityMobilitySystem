@@ -106,6 +106,40 @@ namespace MunicipalityMobilitySystem.Controllers
 
             notyf.Success("Thank you for use our services! Your bill will be send as soon as posible. Have a nice day, and see you soon!");
 
+            return RedirectToAction("LeaveFeedback", "Vehicle",  new { id, area = "" });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> LeaveFeedback(int id)
+        {
+            if ((await vehicleService.Exists(id)) == false)
+            {
+                return RedirectToAction("All", "Vehicle", new { area = "" });
+            }
+
+
+            var vehicle = await vehicleService.VehicleDetails(id);
+
+            var model = new VehicleFeedbackServiceModel()
+            {
+                Id = id,
+                Model = vehicle.Model,
+                Rating = vehicle.Rating,
+                ImageUrl = vehicle.ImageUrl,
+                UserId = vehicle.RenterId,
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LeaveFeedback(int id, VehicleFeedbackServiceModel vehicleModel)
+        {
+
+            await vehicleService.AddFeedback(id, vehicleModel);
+
+            notyf.Success("Thank you for your feedback, it helps us to be better!");
+
             return RedirectToAction(nameof(Mine));
         }
     }

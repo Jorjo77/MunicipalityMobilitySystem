@@ -31,6 +31,15 @@
                 <img class="d-block w-90" style="height:400px"
                  src="@vehicle.ImageUrl" alt="@vehicle.Model">
                 <h5>Model: <b>@vehicle.Model</b></h5>
+                <h6>
+                    Rating: @for (int i = 0; i < vehicle.Rating; i++)
+                    {
+                        <span style="color: goldenrod">
+                            <i class="fas fa-star fa-fade"></i>
+                        </span>
+                    }
+                    <b>@vehicle.Rating /6</b>
+                </h6>
                 <h5>Price her hour: <b>@vehicle.PricePerHour BGN</b></h5>
                 <h5>Rented Period: <b>@Math.Ceiling(vehicle.RentedPeriod).ToString("F2") hours</b></h5>
                 <h5>Total profit: <b>@vehicle.TotalProfit.ToString("F2") BGN</b></h5>

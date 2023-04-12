@@ -117,5 +117,14 @@
             public const int QuantityMaxValue = 10000;
             public const int QuantityMinValue = 0;
         }
+
+        public class CustomerFeedback
+        {
+            public const int FeedbackMaxLength = 1000;
+            public const int FeedbackMinLength = 2;
+
+            public const int VoteMaxValue = 6;
+            public const int VoteMinValue = 1;
+        }
     }
 }

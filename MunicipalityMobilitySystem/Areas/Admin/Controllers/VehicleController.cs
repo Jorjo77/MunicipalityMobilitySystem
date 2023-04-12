@@ -77,7 +77,6 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
                 Id = id,
                 RegistrationNumber = vehicle.RegistrationNumber,
                 ModelName = vehicle.Model,
-                Rating= vehicle.Rating,
                 CategoryId = categoryId,
                 Description = vehicle.Description,
                 EngineType = vehicle.EngineType,

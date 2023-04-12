@@ -32,10 +32,6 @@ namespace MunicipalityMobilitySystem.Core.Models.Vehicle
         public string? EngineType { get; set; }
 
         [Required]
-        [Range(RatingMinValue, RatingMaxValue)]
-        public double Rating { get; set; }
-
-        [Required]
         [Precision(12, 2)]
         [Range(2.00, 200.00)]
         [Display(Name = "Price per hour")]

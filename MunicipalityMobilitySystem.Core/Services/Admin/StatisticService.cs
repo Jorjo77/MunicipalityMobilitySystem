@@ -79,6 +79,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     PricePerHour = (int)v.PricePerHour,
                     ImageUrl = v.ImageUrl,
                     Model = v.Model,
+                    Rating = (int)v.Rating,
                     TotalExpenses = (double)v.OrderedParts.Sum(op => op.TotalPrice),
                     TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
                     TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice)
@@ -102,6 +103,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     PricePerHour = (int)v.PricePerHour,
                     ImageUrl = v.ImageUrl,
                     Model = v.Model,
+                    Rating = (int)v.Rating,
                     TotalExpenses = (double)v.OrderedParts.Sum(op => op.TotalPrice),
                     TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
                     TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice)
@@ -125,6 +127,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     PricePerHour = (int)v.PricePerHour,
                     ImageUrl = v.ImageUrl,
                     Model = v.Model,
+                    Rating = (int)v.Rating,
                     TotalExpenses = (double)v.OrderedParts.Sum(op => op.TotalPrice),
                     TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
                     TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice)

@@ -37,6 +37,6 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Vehicle
         Task<int> GetVehicleCategoryId(int vehicleId);
 
         Task Edit(int vehicleId, CreateVehicleModel createVehicleModel);
-
+        Task AddFeedback(int vehicleId, VehicleFeedbackServiceModel vehicleModel);
     }
 }

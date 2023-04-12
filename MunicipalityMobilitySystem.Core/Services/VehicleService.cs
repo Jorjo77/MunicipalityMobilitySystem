@@ -211,7 +211,6 @@ namespace MunicipalityMobilitySystem.Core.Services
             {
                 RegistrationNumber = createVehicleModel.RegistrationNumber,
                 Model = createVehicleModel.ModelName,
-                Rating = createVehicleModel.Rating,
                 CategoryId = createVehicleModel.CategoryId,
                 Description = createVehicleModel.Description,
                 EngineType = createVehicleModel.EngineType,
@@ -260,7 +259,6 @@ namespace MunicipalityMobilitySystem.Core.Services
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
             vehicle.RegistrationNumber = createVehicleModel.RegistrationNumber;
             vehicle.Model = createVehicleModel.ModelName;
-            vehicle.Rating = createVehicleModel.Rating;
             vehicle.CategoryId = createVehicleModel.CategoryId;
             vehicle.Description = createVehicleModel.Description;
             vehicle.EngineType = createVehicleModel.EngineType;
@@ -270,6 +268,26 @@ namespace MunicipalityMobilitySystem.Core.Services
             vehicle.IsActive = createVehicleModel.IsActive;
             vehicle.MomenOfRent = createVehicleModel.MomenOfRent;
             vehicle.MomenOfLeave = createVehicleModel.MomenOfLeave;
+
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task AddFeedback(int vehicleId, VehicleFeedbackServiceModel vehicleModel)
+        {
+            var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
+
+
+            var feedback = new CustomerFeedback
+            {
+                VehicleId = vehicleModel.Id,
+                UserId = vehicle.RenterId,
+                Vote = vehicleModel.Vote,
+                Feedback = vehicleModel.Feedback,
+            };
+            vehicle.CustomersFeedback.Add(feedback);
+            vehicle.Rating = vehicleModel.Vote;
+
+            await repo.AddAsync<CustomerFeedback>(feedback);
 
             await repo.SaveChangesAsync();
         }

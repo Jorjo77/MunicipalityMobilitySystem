@@ -25,9 +25,6 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         public double Rating { get; set; }
 
         [Required]
-        public int RatingCounter { get; set; }     
-
-        [Required]
         [Precision(12, 2)]
         public decimal PricePerHour { get; set; }
 
@@ -64,8 +61,7 @@ namespace MunicipalityMobilitySystem.Infrasructure.Data.Entities
         public int RepairsCount { get; set; }
         [Required]
         public int RentsCount { get; set; }
-
-        public string? CustomerFeedback { get; set; }
+        public ICollection<CustomerFeedback> CustomersFeedback { get; set; } = new List<CustomerFeedback>();
         public IEnumerable<PartsOrder> OrderedParts { get; set; } = new List<PartsOrder>();
         public IEnumerable<Bill> Bills { get; set; } = new List<Bill>();
     }

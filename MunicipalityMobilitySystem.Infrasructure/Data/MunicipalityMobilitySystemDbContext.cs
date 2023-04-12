@@ -20,6 +20,7 @@ namespace MunicipalityMobilitySystem.Data
         public DbSet<PartsOrder> PartsOrders { get; set; } = null!;
         public DbSet<Bill> Bills { get; set; } = null!;
         public DbSet<Expense> Expenses { get; set; } = null!;
+        public DbSet<CustomerFeedback> CustomersFeedbacks { get; set; } = null!;
         private IdentityUser GuestUser { get; set; } = null!;
         private Category Bike { get; set; } = null!;
         private Category Scooter { get; set; } = null!;
@@ -224,7 +225,6 @@ namespace MunicipalityMobilitySystem.Data
                 RegistrationNumber = "Sk000001",
                 EngineType = "Electric",
                 Model = "Piaggo",
-                Rating = 5,
                 PricePerHour = 11.00M,
                 CategoryId = this.Scooter.Id,
                 VehicleParkId = 2,
@@ -239,7 +239,6 @@ namespace MunicipalityMobilitySystem.Data
                 RegistrationNumber = "Sk000002",
                 EngineType = "Petrol",
                 Model = "Piaggo",
-                Rating = 5,
                 PricePerHour = 10.00M,
                 CategoryId = this.Scooter.Id,
                 VehicleParkId = 1,
@@ -253,7 +252,6 @@ namespace MunicipalityMobilitySystem.Data
                 RegistrationNumber = "Sk000003",
                 EngineType = "Petrol",
                 Model = "Vespa",
-                Rating = 6,
                 PricePerHour = 9.00M,
                 CategoryId = this.Scooter.Id,
                 VehicleParkId = 3,
@@ -270,7 +268,6 @@ namespace MunicipalityMobilitySystem.Data
                 Id = 4,
                 RegistrationNumber = "B000001",
                 Model = "Passati",
-                Rating = 4,
                 PricePerHour = 4.00M,
                 CategoryId = this.Bike.Id,
                 VehicleParkId = 1,
@@ -283,7 +280,6 @@ namespace MunicipalityMobilitySystem.Data
                 Id = 5,
                 RegistrationNumber = "B000002",
                 Model = "Pinarello",
-                Rating = 6,
                 PricePerHour = 7.00M,
                 CategoryId = this.Bike.Id,
                 VehicleParkId = 2,
@@ -297,7 +293,6 @@ namespace MunicipalityMobilitySystem.Data
                 Id = 6,
                 RegistrationNumber = "B000003",
                 Model = "Cross",
-                Rating = 5,
                 PricePerHour = 5.00M,
                 CategoryId = this.Bike.Id,
                 VehicleParkId = 3,
@@ -314,7 +309,6 @@ namespace MunicipalityMobilitySystem.Data
                 RegistrationNumber = "C000001",
                 EngineType = "Electric",
                 Model = "Hynday EON",
-                Rating = 4,
                 PricePerHour = 20.00M,
                 CategoryId = this.Car.Id,
                 VehicleParkId = 1,
@@ -328,7 +322,6 @@ namespace MunicipalityMobilitySystem.Data
                 RegistrationNumber = "C000002",
                 EngineType = "Diesel",
                 Model = "VW Touran",
-                Rating = 5,
                 PricePerHour = 23.00M,
                 CategoryId = this.Car.Id,
                 VehicleParkId = 2,
@@ -342,7 +335,6 @@ namespace MunicipalityMobilitySystem.Data
                 RegistrationNumber = "C000003",
                 EngineType = "Petrol",
                 Model = "Mercedes CLS 180",
-                Rating = 6,
                 PricePerHour = 25.00M,
                 CategoryId = this.Car.Id,
                 VehicleParkId = 3,

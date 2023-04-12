@@ -11,6 +11,7 @@
         public string ImageUrl { get; set; } = null!;
 
         public int PricePerHour { get; set; }
+        public int Rating { get; set; }
 
         public double RentedPeriod { get; set; }
 
