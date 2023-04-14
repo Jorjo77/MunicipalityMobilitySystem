@@ -23,7 +23,7 @@
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Municipality Mobility System</a>
                 }
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Municipality Mobility System</a>
+
                 @if (this.User?.Identity != null 
                 && this.User.Identity.IsAuthenticated
                 && this.User.IsInRole(AdminRolleName))

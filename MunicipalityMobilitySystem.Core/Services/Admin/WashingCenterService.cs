@@ -114,6 +114,13 @@ namespace MunicipalityMobility.Core.Services.Admin
         public async Task WashVehicle(int id)
         {
             var vehicle = await repo.GetByIdAsync<Vehicle>(id);
+
+            TimeSpan? rentPeriod = vehicle.MomenOfLeave - vehicle.MomenOfRent;
+
+            double rentedPeriod = Math.Ceiling(rentPeriod.GetValueOrDefault().TotalHours);
+
+            vehicle.RentedPeriod += rentedPeriod;
+
             vehicle.ForCleaning = false;
             vehicle.ForRepearing = false;
             vehicle.MomenOfLeave = null;

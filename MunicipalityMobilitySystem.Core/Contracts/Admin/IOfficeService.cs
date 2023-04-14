@@ -31,5 +31,7 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Admin
         Task DeleteBillById(int id);
 
         Task<bool> BillExists(VehicleDetailsViewModel model);
+
+        Task<TheBillViewModel> GetBillById( int id);
     }
 }

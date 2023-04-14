@@ -1,0 +1,27 @@
+﻿@model TheBillViewModel
+
+@{
+    ViewBag.Title = "Bill Details";
+    //var rentedPeriod = Math.Ceiling((bill.MomenOfLeave.GetValueOrDefault() - bill.MomenOfRent.GetValueOrDefault()).TotalHours);
+}
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-3">
+            <div class="card-body text-center">
+                <h4>Model: <b>@Model.Model</b></h4>
+                <h6>Reg. number: <b>@Model.Title</b></h6>
+                <h6>Rented on: <b>@Model.MomenOfRent</b></h6>
+                <h6>Lived on: <b>@Model.MomenOfLeave</b></h6>
+                <h6>Rented period: <b>@Model.RentedPeriod.ToString("f2") hours</b></h6>
+                <h6>
+                    Price Per Hour:
+                    <b>@String.Format("{0:f2}", Model.PricePerHour) BGN</b>
+                </h6>
+                <br />
+                <h5>Total Price: <b>@Model.TotalPrice BGN</b></h5>
+            </div>
+        </div>
+    </div>
+</div>

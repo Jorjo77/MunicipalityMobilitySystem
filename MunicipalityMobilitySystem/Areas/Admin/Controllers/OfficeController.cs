@@ -91,6 +91,21 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> BillDetails(int id)
+        {
+            var model = await officeService.GetBillById(id);
 
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteBill(int id)
+        {
+            await officeService.DeleteBillById(id);
+
+            notyf.Success("Bill is deleted");
+
+            return RedirectToAction(nameof(AllBills));
+        }
     }
 }

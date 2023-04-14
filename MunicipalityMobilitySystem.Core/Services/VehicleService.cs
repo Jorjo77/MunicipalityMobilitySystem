@@ -9,6 +9,7 @@ using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
 
 
+
 namespace MunicipalityMobilitySystem.Core.Services
 {
     public class VehicleService : IVehicleService
@@ -147,12 +148,14 @@ namespace MunicipalityMobilitySystem.Core.Services
 
             guard.AgainstNull(vehicle, "Vehicle can not be found");
 
-            vehicle.MomenOfLeave = DateTime.Now;
+            vehicle.MomenOfLeave = DateTime.UtcNow;
 
             guard.AgainstNull(vehicle.MomenOfLeave, "Vehicle can not be found");
             guard.AgainstNull(vehicle.MomenOfRent, "Vehicle can not be found");
 
-            vehicle.RentedPeriod = vehicle.MomenOfLeave.Value.Hour - vehicle.MomenOfRent.Value.Hour;
+            //vehicle.RentedPeriod = vehicle.MomenOfLeave.Value.Hour - vehicle.MomenOfRent.Value.Hour;
+            //vehicle.RentedPeriod = Math.Ceiling((vehicle.MomenOfLeave.GetValueOrDefault() - vehicle.MomenOfRent.GetValueOrDefault()).TotalHours);
+            //vehicle.RentedPeriod = Math.Ceiling((vehicle.MomenOfLeave - vehicle.MomenOfRent).GetValueOrDefault().TotalHours);//To find if on this way works correctly!!!!
 
             vehicle.RentsCount++;
 
@@ -171,7 +174,7 @@ namespace MunicipalityMobilitySystem.Core.Services
             guard.AgainstNull(vehicleForRent, "Vehicle can not be found");
 
             vehicleForRent.RenterId = currentUserId;
-            vehicleForRent.MomenOfRent = DateTime.Now;
+            vehicleForRent.MomenOfRent = DateTime.UtcNow;
 
             await repo.SaveChangesAsync();
         }

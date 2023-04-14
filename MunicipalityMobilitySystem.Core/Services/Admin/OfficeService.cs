@@ -91,9 +91,12 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
         {
             var rentedVehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
 
-            TimeSpan? rentedPeriod = rentedVehicle.MomenOfLeave - rentedVehicle.MomenOfRent;
+            //TimeSpan? rentedPeriod = rentedVehicle.MomenOfLeave - rentedVehicle.MomenOfRent;
 
-            decimal theBill = Math.Ceiling((decimal)rentedPeriod.GetValueOrDefault().TotalHours) * rentedVehicle.PricePerHour;
+            //decimal theBill = Math.Ceiling((decimal)rentedPeriod.GetValueOrDefault().Hours) * rentedVehicle.PricePerHour;
+
+            var rentedPeriod = Math.Ceiling((rentedVehicle.MomenOfLeave.GetValueOrDefault() - rentedVehicle.MomenOfRent.GetValueOrDefault()).TotalHours);
+            var theBill = (decimal)rentedPeriod * rentedVehicle.PricePerHour;
 
             return theBill;
         }
@@ -138,7 +141,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                 MomenOfRent = vehicleModel.MomenOfRent,
                 MomenOfLeave = vehicleModel.MomenOfLeave,
                 PricePerHour = vehicleModel.PricePerHour,
-                RentedPeriod = vehicleModel.RentedPeriod,
+                RentedPeriod = Math.Ceiling((vehicleModel.MomenOfLeave - vehicleModel.MomenOfRent).GetValueOrDefault().TotalHours),
                 RenterId = vehicleModel.RenterId,
                 VehicleId = vehicleModel.Id,
                 TotalPrice = await GetTheBill(vehicleModel.Id)
@@ -154,13 +157,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
 
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
 
-            TimeSpan? rentPeriod = vehicle.MomenOfLeave - vehicle.MomenOfRent;
-
-            double rentedPeriod = Math.Ceiling(rentPeriod.GetValueOrDefault().TotalHours);
-
             vehicle.ForCleaning = true;
-
-            vehicle.RentedPeriod +=  rentedPeriod;
 
             await repo.SaveChangesAsync();
         }
@@ -212,6 +209,27 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                 logger.LogError(nameof(DeleteBillById), ex);
                 throw new ApplicationException("Database failed to delete info", ex);
             }
+        }
+
+        public async Task<TheBillViewModel>GetBillById(int id)
+        {
+            return await repo.AllReadonly<Bill>()
+                .Where(b => b.Id == id)
+                .Select(b => new TheBillViewModel
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    RegistrationNumber = b.RegistrationNumber,
+                    VehicleId = b.VehicleId,
+                    Model = b.Model,
+                    PricePerHour = b.PricePerHour,
+                    RenterId = b.RenterId,
+                    MomenOfRent = b.MomenOfRent,
+                    MomenOfLeave = b.MomenOfLeave,
+                    RentedPeriod = b.RentedPeriod,
+                    TotalPrice = b.TotalPrice
+                })
+                .FirstAsync();
         }
     }
 }

@@ -13,7 +13,7 @@
         
         @foreach (var bill in Model)
         {
-            var rentedPeriod = Math.Ceiling((bill.MomenOfLeave.GetValueOrDefault() - bill.MomenOfRent.GetValueOrDefault()).TotalHours);
+            //var rentedPeriod = Math.Ceiling((bill.MomenOfLeave.GetValueOrDefault() - bill.MomenOfRent.GetValueOrDefault()).TotalHours);
             <div class="col-md-4">
                 <div class="card mb-3">
                     <div class="card-body text-center">
@@ -21,7 +21,7 @@
                         <h6>Reg. number: <b>@bill.Title</b></h6>
                         <h6>Rented on: <b>@bill.MomenOfRent</b></h6>
                         <h6>Lived on: <b>@bill.MomenOfLeave</b></h6>
-                        <h6>Rented period: <b>@rentedPeriod.ToString("f2") hours</b></h6>
+                        <h6>Rented period: <b>@bill.RentedPeriod.ToString("f2") hours</b></h6>
                         <h6>
                             Price Per Hour:
                             <b>@String.Format("{0:f2}", bill.PricePerHour) BGN</b>

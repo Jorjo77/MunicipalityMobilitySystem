@@ -38,9 +38,22 @@
                         && this.User.Identity.IsAuthenticated
                         &&this.User.IsInRole(Manager))
                         {
-                            <form class="input-group-lg" style="display: inline-block;" asp-area="" asp-controller="Home"
-                          asp-action="MineBills" asp-route-id="@bill.Id" method="post">
+                            <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Office"
+                          asp-action="BillDetails" asp-route-id="@bill.Id" method="post">
+                                <input class="btn btn-outline-info" type="submit" value="Details" />
+                            </form>
+                            <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Office"
+                          asp-action="DeleteBill" asp-route-id="@bill.Id" method="post">
                                 <input class="btn btn-outline-danger" type="submit" value="Delete" onclick="MyConfirm(event)"/>
+                            </form>
+                        }
+                        @if (this.User?.Identity != null
+                       && this.User.Identity.IsAuthenticated
+                       && this.User.IsInRole(Boss))
+                        {
+                            <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="Office"
+                          asp-action="BillDetails" asp-route-id="@bill.Id" method="post">
+                                <input class="btn btn-outline-info" type="submit" value="Details" />
                             </form>
                         }
                     </td>
