@@ -153,10 +153,6 @@ namespace MunicipalityMobilitySystem.Core.Services
             guard.AgainstNull(vehicle.MomenOfLeave, "Vehicle can not be found");
             guard.AgainstNull(vehicle.MomenOfRent, "Vehicle can not be found");
 
-            //vehicle.RentedPeriod = vehicle.MomenOfLeave.Value.Hour - vehicle.MomenOfRent.Value.Hour;
-            //vehicle.RentedPeriod = Math.Ceiling((vehicle.MomenOfLeave.GetValueOrDefault() - vehicle.MomenOfRent.GetValueOrDefault()).TotalHours);
-            //vehicle.RentedPeriod = Math.Ceiling((vehicle.MomenOfLeave - vehicle.MomenOfRent).GetValueOrDefault().TotalHours);//To find if on this way works correctly!!!!
-
             vehicle.RentsCount++;
 
             await repo.SaveChangesAsync();

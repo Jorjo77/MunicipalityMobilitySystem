@@ -16,13 +16,14 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
         private readonly IRepository repo;
         private readonly IGuard guard;
 
+
         public OfficeService(ILogger<OfficeService> _logger,
             IGuard _guard,
             IRepository _repo)
         {
-            logger= _logger;
-            guard= _guard;
-            repo= _repo;
+            logger = _logger;
+            guard = _guard;
+            repo = _repo;
         }
 
         public async Task EditLeftVehicleById(VehicleDetailsViewModel model)
@@ -91,10 +92,6 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
         {
             var rentedVehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
 
-            //TimeSpan? rentedPeriod = rentedVehicle.MomenOfLeave - rentedVehicle.MomenOfRent;
-
-            //decimal theBill = Math.Ceiling((decimal)rentedPeriod.GetValueOrDefault().Hours) * rentedVehicle.PricePerHour;
-
             var rentedPeriod = Math.Ceiling((rentedVehicle.MomenOfLeave.GetValueOrDefault() - rentedVehicle.MomenOfRent.GetValueOrDefault()).TotalHours);
             var theBill = (decimal)rentedPeriod * rentedVehicle.PricePerHour;
 
@@ -130,12 +127,12 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                 .ToListAsync();
         }
 
-        public async Task MakeAndPostTheBill(VehicleDetailsViewModel vehicleModel)
+        public async Task MakeAndPostTheBill(VehicleDetailsViewModel vehicleModel, string username)
         {
 
             var theBill = new Bill
             {
-                Title = vehicleModel.RegistrationNumber, 
+                Title = username, 
                 RegistrationNumber = vehicleModel.RegistrationNumber,
                 Model = vehicleModel.Model,
                 MomenOfRent = vehicleModel.MomenOfRent,

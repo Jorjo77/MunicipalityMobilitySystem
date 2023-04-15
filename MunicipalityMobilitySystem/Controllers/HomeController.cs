@@ -55,8 +55,6 @@ namespace MunicipalityMobilitySystem.Controllers
         {
             await officeService.DeleteBillById(id);
 
-            notyf.Success("Bill is deleted");
-
             return RedirectToAction("MineBills", "Home", new { area = "" });
         }
 

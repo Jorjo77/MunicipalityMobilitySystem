@@ -10,13 +10,16 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
         private readonly IOfficeService officeService;
         private readonly IWashingCenterService washingCenterService;
         private readonly INotyfService notyf;
+        private readonly IUserService userservice;
         public OfficeController(IOfficeService _officeService,
                    IWashingCenterService _washingCenterService,
+                   IUserService _userservice,
                     INotyfService _notif)
         {
             officeService= _officeService;
             washingCenterService= _washingCenterService;
             notyf= _notif;
+            userservice= _userservice;
         }
         public async Task<IActionResult> Index()
         {
@@ -77,7 +80,9 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            await officeService.MakeAndPostTheBill(vehicle);
+            string userName = userservice.GetUserNameById(vehicle.RenterId);
+
+            await officeService.MakeAndPostTheBill(vehicle, userName);
 
             notyf.Information("You successfuly create and send the bill");
 
@@ -103,7 +108,6 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
         {
             await officeService.DeleteBillById(id);
 
-            notyf.Success("Bill is deleted");
 
             return RedirectToAction(nameof(AllBills));
         }

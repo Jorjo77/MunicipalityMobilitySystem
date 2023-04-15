@@ -50,11 +50,6 @@ namespace MunicipalityMobility.Core.Services.Admin
             return result.Succeeded;
         }
 
-        public async Task<IdentityUser> GetUserById(string id)
-        {
-            return await userManager.FindByIdAsync(id);
-
-        }
 
         public async Task<bool> DeleteRole(string id)
         {
@@ -64,6 +59,16 @@ namespace MunicipalityMobility.Core.Services.Admin
             var result = await roleManager.DeleteAsync(role);
 
             return result.Succeeded;
+        }
+
+        public async Task<IdentityUser> GetUserById(string id)
+        {
+            return await userManager.FindByIdAsync(id);
+        }
+        public string GetUserNameById(string id)
+        {
+            var user = userManager.FindByIdAsync(id);
+            return user.Result.UserName;
         }
     }
 }

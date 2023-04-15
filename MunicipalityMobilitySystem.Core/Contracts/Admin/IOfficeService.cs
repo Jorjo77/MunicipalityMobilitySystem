@@ -22,7 +22,7 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Admin
 
         Task SetVehicleForRepairing(int vehicleId);
 
-        Task MakeAndPostTheBill(VehicleDetailsViewModel model);
+        Task MakeAndPostTheBill(VehicleDetailsViewModel model, string name);
 
         Task<IEnumerable<TheBillViewModel>> GetTheBills();
 
