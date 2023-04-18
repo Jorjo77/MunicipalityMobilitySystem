@@ -124,17 +124,14 @@ namespace MunicipalityMobility.Core.Services.Admin
 
             foreach (var modelExpense in model.Expenses)
             {
-                var expense = repo.All<Expense>()
-                    .FirstOrDefault(e => e.Name == modelExpense.Name);
-                if (expense == null)
+
+                var expense = new Expense
                 {
-                    expense = new Expense
-                    {
-                        Name = modelExpense.Name,
-                        Quantity = modelExpense.Quantity,
-                        UnutPrice = modelExpense.UnutPrice, 
-                    };
-                }
+                    Name = modelExpense.Name,
+                    Quantity = modelExpense.Quantity,
+                    UnutPrice = modelExpense.UnutPrice,
+                };
+
 
                 order.Expenses.Add(expense);
             }
@@ -192,10 +189,10 @@ namespace MunicipalityMobility.Core.Services.Admin
         public async Task<OrderViewModel> GetOrderById(int id)
         {
             return await repo.AllReadonly<PartsOrder>()
-                .Where(o=>o.Id == id)
-                .Select(o=> new OrderViewModel
+                .Where(o => o.Id == id)
+                .Select(o => new OrderViewModel
                 {
-                    Id=o.Id,
+                    Id = o.Id,
                     Title = o.Title,
                     RegistrationNumber = o.Vehicle.RegistrationNumber,
                     TotalPrice = o.TotalPrice,
@@ -205,8 +202,8 @@ namespace MunicipalityMobility.Core.Services.Admin
         public async Task<ICollection<OrderViewModel>> GetOrders()
         {
             return await repo.AllReadonly<PartsOrder>()
-                .OrderBy(or=>or.VehicleId)
-                .Select(or => new OrderViewModel 
+                .OrderBy(or => or.VehicleId)
+                .Select(or => new OrderViewModel
                 {
                     Id = or.Id,
                     Title = or.Title,
@@ -219,8 +216,30 @@ namespace MunicipalityMobility.Core.Services.Admin
         {
             var order = await repo.GetByIdAsync<PartsOrder>(id);
 
-            await repo.DeleteAsync<PartsOrder> (order);
-            await repo.SaveChangesAsync();
+            try
+            {
+                repo.Delete(order);
+
+                await repo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(DeleteOrder), ex);
+                throw new ApplicationException("Database failed to delete info", ex);
+            }
+        }
+
+        public async Task<ICollection<ExpenseServiceModel>> GetExpensesByOrderId(int id)
+        {
+            return await repo.AllReadonly<Expense>()
+                .Where(e => e.PartsOrderId == id)
+                .Select(e => new ExpenseServiceModel
+                {
+                    Name = e.Name,
+                    Quantity = e.Quantity,
+                    UnutPrice = e.UnutPrice
+                })
+                .ToListAsync();
         }
     }
 }

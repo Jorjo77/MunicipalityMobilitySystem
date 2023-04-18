@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Models.Admin;
+using MunicipalityMobilitySystem.Core.Services.Admin;
 
 namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
@@ -145,6 +146,24 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
         public async Task<IActionResult> AllOrders()
         {
             var model = await repairCenterService.GetOrders();
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> OrderDetails(int id)
+        {
+            var order = await repairCenterService.GetOrderById(id);
+
+            var expenses = await repairCenterService.GetExpensesByOrderId(id);
+
+            var model = new OrderDetailsViewModel
+            {
+                Id = order.Id,
+                Title = order.Title,
+                TotalPrice = order.TotalPrice,
+                RegistrationNumber = order.RegistrationNumber,
+                Expenses = expenses,
+            };
 
             return View(model);
         }

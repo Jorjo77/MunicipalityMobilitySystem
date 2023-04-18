@@ -23,5 +23,6 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Admin
         Task<OrderViewModel> GetOrderById(int id);
         Task<ICollection<OrderViewModel>>GetOrders();
         Task DeleteOrder(int id);
+        Task<ICollection<ExpenseServiceModel>> GetExpensesByOrderId(int id);
     }
 }

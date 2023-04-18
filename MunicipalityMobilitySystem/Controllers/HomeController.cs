@@ -8,6 +8,7 @@ using MunicipalityMobilitySystem.Extensions;
 using System.Diagnostics;
 
 using static MunicipalityMobilitySystem.Areas.Admin.Constants.RoleConstants;
+using static MunicipalityMobilitySystem.Areas.Admin.Constants.AdminConstants;
 
 namespace MunicipalityMobilitySystem.Controllers
 {
@@ -31,6 +32,26 @@ namespace MunicipalityMobilitySystem.Controllers
             if (User.IsInRole(Boss))
             {
                 return RedirectToAction("Index", "Statistic", new { area = "Admin" });
+            }
+
+            if (User.IsInRole(Mechanic))
+            {
+                return RedirectToAction("Index", "RepairCenter", new { area = "Admin" });
+            }
+
+            if (User.IsInRole(Cleaner))
+            {
+                return RedirectToAction("Index", "WashingCenter", new { area = "Admin" });
+            }
+
+            if (User.IsInRole(Manager))
+            {
+                return RedirectToAction("Index", "Office", new { area = "Admin" });
+            }
+
+            if (User.IsInRole(AdminRolleName))
+            {
+                return RedirectToAction("Index", "Admin", new { area = "Admin" });
             }
 
             var model = await vehicleParkService.AllVehicleParks();

@@ -38,8 +38,21 @@
                        && this.User.IsInRole(Mechanic))
                         {
                             <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="RepairCenter"
+                          asp-action="OrderDetails" asp-route-id="@order.Id" method="post">
+                                <input class="btn btn-outline-info" type="submit" value="Details" />
+                            </form>
+                            <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="RepairCenter"
                           asp-action="DeleteOrder" asp-route-id="@order.Id" method="post">
                                 <input class="btn btn-block btn-outline-danger" type="submit" value="Delete" onclick="myConfirm(event)" />
+                            </form>
+                        }
+                        @if (this.User?.Identity != null
+                       && this.User.Identity.IsAuthenticated
+                       && this.User.IsInRole(Boss))
+                        {
+                            <form class="input-group-lg" style="display: inline-block;" asp-area="Admin" asp-controller="RepairCenter"
+                          asp-action="OrderDetails" asp-route-id="@order.Id" method="post">
+                                <input class="btn btn-outline-info" type="submit" value="Details" />
                             </form>
                         }
                     </td>
