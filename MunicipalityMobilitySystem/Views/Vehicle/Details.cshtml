@@ -13,14 +13,14 @@
         <div class="card-body text-center" style="width:fit-content">
             <h4>@Model.Model</h4>
             <h6>
-                Rating: @for (int i = 0; i < @Model.Rating; i++)
+                Rating: @for (int i = 0; i < Model.Rating; i++)
                 {
                     <span style="color: goldenrod">
                         <i class="fas fa-star fa-fade"></i>
                     </span>
                 }
                 <b>@Model.Rating/6</b>
-                
+
             </h6>
             <h6>
                 Price Per Hour:
@@ -31,7 +31,6 @@
             <h6>Engine type: <b>@Model.EngineType</b></h6>
             <h6>Details: <b>@Model.Description</b></h6>
             <br />
-
             @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
             {
 
@@ -44,10 +43,18 @@
                 }
                 else
                 {
-                    <form class="input-group-sm" asp-area="" asp-controller="Vehicle" asp-action="Leave"
-                  asp-route-id="@Model.Id" method="post">
-                        <input class="btn-lg btn-warning" type="submit" value="Leave" />
-                    </form>
+                    if (Model.RenterId == User.Id())
+                    {
+                        <form class="input-group-lg" style="display: inline-block;" asp-area="" asp-controller="Vehicle" asp-action="Leave" asp-route-id="@Model.Id" method="post">
+                            <input class="btn btn-warning" type="submit" value="Leave" />
+                        </form>
+                    }
+                    else
+                    {
+                        <form class="input-group-lg" style="display: inline-block;" asp-area="" asp-controller="Vehicle" asp-action="Leave" asp-route-id="@Model.Id" method="post">
+                            <input class="btn btn-warning" type="submit" value="Rented" />
+                        </form>
+                    }
                 }
             }
         </div>

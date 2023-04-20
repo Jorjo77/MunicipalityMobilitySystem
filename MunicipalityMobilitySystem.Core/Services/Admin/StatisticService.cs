@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Exceptions;
 using MunicipalityMobilitySystem.Core.Models.Admin;
+using MunicipalityMobilitySystem.Core.Models.Vehicle;
 using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
@@ -50,6 +51,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                 .Where(v => v.IsActive)
                 .Select(v => new StatisticVehicleModel
                 {
+                    Id = v.Id,
                     RentedPeriod = v.RentedPeriod,
                     RegistrationNumber = v.RegistrationNumber,
                     RentsCount = v.RentsCount,
@@ -59,7 +61,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     Model = v.Model,
                     TotalExpenses = (double)v.OrderedParts.Sum(op=>op.TotalPrice),
                     TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
-                    TotalProfit = ((double)v.PricePerHour * v.RentedPeriod)- (double)v.OrderedParts.Sum(op => op.TotalPrice)
+                    TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice)
                 })
                 .OrderByDescending(v => v.TotalProfit)
                 .ThenByDescending(v => v.RentedPeriod)
@@ -218,6 +220,78 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                 .OrderByDescending(v=>v.TotalExpenses)
                 .ThenByDescending(v => v.RepairsCount)
                 .Take(3)
+                .ToList();
+        }
+
+        public StatisticDetailsVehicleModel GetVehicleStatisticDetailsById(int id)
+        {
+            return repo.AllReadonly<Vehicle>()
+                .Where(v=>v.Id == id)
+                .Select(v => new StatisticDetailsVehicleModel
+                {
+                    Model = v.Model,
+                    EngineType = v.EngineType,
+                    ImageUrl = v.ImageUrl,
+                    PricePerHour = v.PricePerHour,
+                    Rating = v.Rating,
+                    RentedPeriod = v.RentedPeriod,
+                    RepairsCount = v.RepairsCount,
+                    RentsCount = v.RentsCount,
+                    VehicleParkName = v.VehiclePark.Name,
+                    VehicleParkAdress = v.VehiclePark.Adress,
+                    TotalExpenses = (double)v.OrderedParts.Sum(op => op.TotalPrice),
+                    TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
+                    TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice),
+                }).First();
+        }
+
+        public ICollection<TheBillViewModel> AllBillsByVehicleId(int id)
+        {
+            return repo.AllReadonly<Bill>()
+                .Where(b=>b.VehicleId == id)
+                .Select(b => new TheBillViewModel
+                {
+                    Id = b.Id,
+                    VehicleId = b.VehicleId,
+                    RenterId = b.RenterId,
+                    RegistrationNumber = b.RegistrationNumber,
+                    RentedPeriod = b.RentedPeriod,
+                    Title = b.Title,
+                    Model = b.Model,
+                    MomenOfLeave = b.MomenOfLeave,
+                    MomenOfRent = b.MomenOfRent,
+                    PricePerHour = b.PricePerHour,
+                    TotalPrice = b.TotalPrice
+                })
+                .ToList();
+        }
+        public ICollection<OrderViewModel> AllOrdersByVehicleId(int id)
+        {
+            return repo.AllReadonly<PartsOrder>()
+                .Where(po => po.VehicleId == id)
+                .Select(po => new OrderViewModel
+                {
+                    Id = po.Id,
+                    RegistrationNumber = po.Vehicle.RegistrationNumber,
+                    Title = po.Title,
+                    TotalPrice = po.TotalPrice
+                })
+                .ToList();
+        }
+        public ICollection<VehicleFeedbackServiceModel> AllCustomerFeedbacksByVehicleId(int id)
+        {
+            return repo.AllReadonly<CustomerFeedback>()
+                .Where(cf => cf.VehicleId == id)
+                .Select(cf => new VehicleFeedbackServiceModel
+                {
+                    Id=cf.Id,
+                    Model = cf.Vehicle.Model,
+                    Rating = cf.Vehicle.Rating,
+                    ImageUrl = cf.Vehicle.ImageUrl,
+                    UserId = cf.UserId,
+                    Feedback = cf.Feedback,
+                    Vote = cf.Vote
+                })
                 .ToList();
         }
     }

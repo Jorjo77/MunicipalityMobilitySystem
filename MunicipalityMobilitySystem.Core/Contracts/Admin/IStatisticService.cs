@@ -1,4 +1,5 @@
 ﻿using MunicipalityMobilitySystem.Core.Models.Admin;
+using MunicipalityMobilitySystem.Core.Models.Vehicle;
 using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 
 namespace MunicipalityMobilitySystem.Core.Contracts.Admin
@@ -16,5 +17,10 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Admin
         StatisticVehicleModel GetTopScooter();
         StatisticViewModel GetStatistic();
         IEnumerable<StatisticVehicleModel> GetThreeMostReparedVehicles();
+        StatisticDetailsVehicleModel GetVehicleStatisticDetailsById(int id);
+        ICollection<TheBillViewModel> AllBillsByVehicleId(int id);
+        ICollection<OrderViewModel> AllOrdersByVehicleId(int id);
+
+        ICollection<VehicleFeedbackServiceModel> AllCustomerFeedbacksByVehicleId(int id);
     }
 }

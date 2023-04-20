@@ -127,6 +127,7 @@ namespace MunicipalityMobilitySystem.Controllers
                 Rating = vehicle.Rating,
                 ImageUrl = vehicle.ImageUrl,
                 UserId = vehicle.RenterId,
+              
             };
 
             return View(model);

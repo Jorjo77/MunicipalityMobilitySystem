@@ -284,7 +284,7 @@ namespace MunicipalityMobilitySystem.Core.Services
                 Feedback = vehicleModel.Feedback,
             };
             vehicle.CustomersFeedback.Add(feedback);
-            vehicle.Rating = vehicleModel.Vote;
+            vehicle.Rating = Math.Ceiling(vehicle.CustomersFeedback.Average(cf => cf.Vote));
 
             await repo.AddAsync<CustomerFeedback>(feedback);
 

@@ -30,7 +30,6 @@
                 && this.User.IsInRole(AdminRolleName))
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Municipality Mobility System</a>
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="Admin" asp-action="Index"> Administrator home area</a>
                 }
                 @if (this.User?.Identity != null
                 && this.User.Identity.IsAuthenticated
@@ -44,25 +43,22 @@
                 && this.User.IsInRole(Cleaner))
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Municipality Mobility System</a>
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="WashingCenter" asp-action="Index"> Cleaner home area</a>
                 }
                 @if (this.User?.Identity != null
                 && this.User.Identity.IsAuthenticated
                 && this.User.IsInRole(Manager))
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Municipality Mobility System</a>
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="Index"> Manager work area</a>
                     <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="AllBills"> All Bills</a>
                 }
                 @if (this.User?.Identity != null
                 && this.User.Identity.IsAuthenticated
                 && this.User.IsInRole(Boss))
                 {
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="Statistic" asp-action="Index"> Boss home area</a>
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="Admin" asp-action="Index"> Administrator home area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="Admin" asp-action="Index"> Administrator work area</a>
                     <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="Index"> Manager work area</a>
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="Index"> Mechanic home area</a>
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="WashingCenter" asp-action="Index"> Cleaner home area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="Index"> Mechanic work area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="WashingCenter" asp-action="Index"> Cleaner work area</a>
                     <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="AllBills"> All Bills</a>
                     <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="AllOrders"> All Orders</a>
                 }
