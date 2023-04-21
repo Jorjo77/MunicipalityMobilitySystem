@@ -31,6 +31,6 @@ namespace MunicipalityMobilitySystem.Core.Models.Admin
 
         public ICollection<TheBillViewModel> Bills { get; set; } = new List<TheBillViewModel>();
         public ICollection<OrderViewModel> Orders { get; set; } = new List<OrderViewModel>();
-        public ICollection<VehicleFeedbackServiceModel> CustomerFeedback { get; set; } = new List<VehicleFeedbackServiceModel>();
+        public ICollection<VehicleDetailsFeedbackServiceModel> CustomerFeedback { get; set; } = new List<VehicleDetailsFeedbackServiceModel>();
     }
 }

@@ -120,21 +120,21 @@ namespace MunicipalityMobilitySystem.Controllers
 
             var vehicle = await vehicleService.VehicleDetails(id);
 
-            var model = new VehicleFeedbackServiceModel()
+            var model = new VehicleDetailsFeedbackServiceModel()
             {
                 Id = id,
                 Model = vehicle.Model,
                 Rating = vehicle.Rating,
                 ImageUrl = vehicle.ImageUrl,
-                UserId = vehicle.RenterId,
-              
+                UserId = vehicle.RenterId
+
             };
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> LeaveFeedback(int id, VehicleFeedbackServiceModel vehicleModel)
+        public async Task<IActionResult> LeaveFeedback(int id, VehicleDetailsFeedbackServiceModel vehicleModel)
         {
 
             await vehicleService.AddFeedback(id, vehicleModel);

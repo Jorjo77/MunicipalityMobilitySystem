@@ -1,5 +1,4 @@
 ﻿using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 using static MunicipalityMobilitySystem.Data.DataConstants.CustomerFeedback;
@@ -10,15 +9,12 @@ namespace MunicipalityMobilitySystem.Core.Models.Vehicle
     {
         public int Id { get; set; }
 
-        public string Model { get; set; } = null!;
-
-        [DisplayName("Image URL")]
-        public string ImageUrl { get; set; } = null!;
-
-        public double Rating { get; set; }
 
         [Required]
         public string UserId { get; set; } = null!;
+
+        [Required]
+        public int VehicleId { get; set; }
 
         [MaxLength(FeedbackMaxLength)]
         [MinLength(FeedbackMinLength)]

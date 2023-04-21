@@ -1,8 +1,6 @@
 ﻿using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
-using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
 
 namespace MunicipalityMobilitySystem.Core.Models.Vehicle
 {

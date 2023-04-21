@@ -1,8 +1,12 @@
 ﻿namespace MunicipalityMobilitySystem.Core.Contracts.Vehicle
 {
-    public interface IVehicleFeedbackServiceModel
+    public interface IVehicleDetailsFeedbackServiceModel
     {
         public int Id { get; }
+
+        public string Model { get; }
+        public string ImageUrl { get; }
+        public double Rating { get; }
 
         public int VehicleId { get; }
 

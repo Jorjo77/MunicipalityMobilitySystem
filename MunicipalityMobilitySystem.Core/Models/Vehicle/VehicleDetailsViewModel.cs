@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace MunicipalityMobilitySystem.Core.Models.Vehicle
 {

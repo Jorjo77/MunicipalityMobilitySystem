@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Models.Admin;
@@ -8,16 +7,14 @@ namespace MunicipalityMobility.Core.Services.Admin
 {
     public class UserService : IUserService
     {
-        //private readonly IRepository repo;
         private readonly UserManager<IdentityUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
-        public UserService(/*IRepository _repo*/
+        public UserService(
             UserManager<IdentityUser> _userManager,
             RoleManager<IdentityRole> _roleManager
             )
         {
-            //repo = _repo;
             userManager= _userManager;
             roleManager= _roleManager;
         }

@@ -21,6 +21,6 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Admin
         ICollection<TheBillViewModel> AllBillsByVehicleId(int id);
         ICollection<OrderViewModel> AllOrdersByVehicleId(int id);
 
-        ICollection<VehicleFeedbackServiceModel> AllCustomerFeedbacksByVehicleId(int id);
+        ICollection<VehicleDetailsFeedbackServiceModel> AllCustomerFeedbacksByVehicleId(int id);
     }
 }

@@ -1,7 +1,6 @@
 ﻿
 using MunicipalityMobilitySystem.Core.Models.Admin;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
-using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 
 namespace MunicipalityMobilitySystem.Core.Contracts.Admin
 {

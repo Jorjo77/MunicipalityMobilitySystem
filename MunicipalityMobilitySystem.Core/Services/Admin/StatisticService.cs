@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Exceptions;
 using MunicipalityMobilitySystem.Core.Models.Admin;
@@ -278,11 +277,11 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                 })
                 .ToList();
         }
-        public ICollection<VehicleFeedbackServiceModel> AllCustomerFeedbacksByVehicleId(int id)
+        public ICollection<VehicleDetailsFeedbackServiceModel> AllCustomerFeedbacksByVehicleId(int id)
         {
             return repo.AllReadonly<CustomerFeedback>()
                 .Where(cf => cf.VehicleId == id)
-                .Select(cf => new VehicleFeedbackServiceModel
+                .Select(cf => new VehicleDetailsFeedbackServiceModel
                 {
                     Id=cf.Id,
                     Model = cf.Vehicle.Model,

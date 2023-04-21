@@ -271,7 +271,7 @@ namespace MunicipalityMobilitySystem.Core.Services
             await repo.SaveChangesAsync();
         }
 
-        public async Task AddFeedback(int vehicleId, VehicleFeedbackServiceModel vehicleModel)
+        public async Task AddFeedback(int vehicleId, VehicleDetailsFeedbackServiceModel vehicleModel)
         {
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
 
@@ -283,12 +283,33 @@ namespace MunicipalityMobilitySystem.Core.Services
                 Vote = vehicleModel.Vote,
                 Feedback = vehicleModel.Feedback,
             };
+
             vehicle.CustomersFeedback.Add(feedback);
-            vehicle.Rating = Math.Ceiling(vehicle.CustomersFeedback.Average(cf => cf.Vote));
+
+            var customerFeedback = CustomerVotesByVehicleId(vehicleId);
+
+            var averageRating = Math.Ceiling(customerFeedback.Result.Average(cf => cf.Vote));
+            
+            vehicle.Rating = averageRating;
 
             await repo.AddAsync<CustomerFeedback>(feedback);
 
             await repo.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<VehicleFeedbackServiceModel>> CustomerVotesByVehicleId(int vehicleId)
+        {
+            return await repo.AllReadonly<CustomerFeedback>()
+                .Where(cf=>cf.VehicleId == vehicleId)
+                .Select(cf=> new VehicleFeedbackServiceModel
+                {
+                    Id = cf.Id,
+                    VehicleId= cf.VehicleId,
+                    UserId= cf.UserId,
+                    Vote = cf.Vote,
+                    Feedback= cf.Feedback,
+                })
+                .ToListAsync();
         }
     }
 }

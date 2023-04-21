@@ -1,14 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Models.Admin;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
-using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
-using static MunicipalityMobilitySystem.Data.DataConstants;
-using RepairCenter = MunicipalityMobilitySystem.Infrasructure.Data.Entities.RepairCenter;
 using Vehicle = MunicipalityMobilitySystem.Infrasructure.Data.Entities.Vehicle;
 using WashingCenter = MunicipalityMobilitySystem.Infrasructure.Data.Entities.WashingCenter;
 
@@ -46,7 +41,7 @@ namespace MunicipalityMobility.Core.Services.Admin
                 Name = model.Name,
                 ImageUrl = model.ImageUrl,
                 VehicleParkId = model.VehicleParkId,
-            };//When create RepairCenter I do not add property Vehicles (like when I create Vehicle park)
+            };
 
             try
             {

@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using static MunicipalityMobilitySystem.Data.DataConstants.PartsOrder;
-using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MunicipalityMobilitySystem.Core.Models.Admin;
 

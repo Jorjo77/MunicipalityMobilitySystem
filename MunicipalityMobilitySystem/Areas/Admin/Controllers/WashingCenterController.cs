@@ -1,10 +1,7 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
-using MunicipalityMobility.Core.Services.Admin;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Models.Admin;
-using MunicipalityMobilitySystem.Core.Services.Admin;
-using MunicipalityMobilitySystem.Models;
 
 namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {

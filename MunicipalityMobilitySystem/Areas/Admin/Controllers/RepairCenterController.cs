@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
 using MunicipalityMobilitySystem.Core.Models.Admin;
-using MunicipalityMobilitySystem.Core.Services.Admin;
 
 namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {

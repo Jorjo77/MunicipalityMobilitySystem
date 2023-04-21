@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MunicipalityMobility.Core.Services.Admin;
 using MunicipalityMobilitySystem.Core.Contracts.Admin;
-using static NuGet.Packaging.PackagingConstants;
 
 namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
 {
