@@ -14,17 +14,12 @@ namespace MunicipalityMobilitySystem.Core.Services
     public class VehicleParkService : IVehicleParkService
     {
         private readonly IRepository repo;
-
-        private readonly IGuard guard;
-
         private readonly ILogger logger;
 
         public VehicleParkService(IRepository repo,
-                                  IGuard guard,
                                   ILogger<VehicleParkService> logger)
         {
             this.repo = repo;
-            this.guard = guard;
             this.logger = logger;
         }
 
@@ -39,7 +34,8 @@ namespace MunicipalityMobilitySystem.Core.Services
                     Adress = vp.Adress,
                     Email = vp.Email,
                     Phone = vp.Phone,
-                    ImageUrl = vp.ImageUrl
+                    ImageUrl = vp.ImageUrl,
+                    Description = vp.Description,
                 }).ToListAsync();
         }
 

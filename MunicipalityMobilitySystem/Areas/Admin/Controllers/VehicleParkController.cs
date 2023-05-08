@@ -58,9 +58,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
                 return RedirectToAction(nameof(AllVehicleParks));
             }
 
-
             var vehiclePark = await vehicleParkService.VehicleParkDetails(id);
-
 
             var model = new VehicleParkDetailsModel()
             {
@@ -99,7 +97,6 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
             await vehicleParkService.EditVehiclePark(model.Id, model);
             return RedirectToAction("Details", "VehiclePark", new { id = model.Id, area = "" });
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)

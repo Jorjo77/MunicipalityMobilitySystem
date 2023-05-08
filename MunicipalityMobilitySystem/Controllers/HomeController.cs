@@ -16,16 +16,13 @@ namespace MunicipalityMobilitySystem.Controllers
     {
         private readonly IVehicleParkService vehicleParkService;
         private readonly IOfficeService officeService;
-        private readonly INotyfService notyf;
 
         public HomeController(
             IVehicleParkService _vehicleParkService,
-            INotyfService _notyf,
             IOfficeService _officeService)
         {
             vehicleParkService = _vehicleParkService;
             officeService = _officeService;
-            notyf = _notyf;
         }
         public async Task<IActionResult> Index()
         {

@@ -5,6 +5,6 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Category
     public interface ICategoryService
     {
         Task<IEnumerable<string>> AllCategoriesNames();
-        Task<IEnumerable<CategoryServiceModel>> AllCategories();
+        Task<IEnumerable<VehicleParkServiceModel>> AllCategories();
     }
 }

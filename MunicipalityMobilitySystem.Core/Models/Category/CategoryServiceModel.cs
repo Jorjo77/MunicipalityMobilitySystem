@@ -2,7 +2,7 @@
 
 namespace MunicipalityMobilitySystem.Core.Models.Category
 {
-    public class CategoryServiceModel : ICategoryServiceModel
+    public class VehicleParkServiceModel : ICategoryServiceModel
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;

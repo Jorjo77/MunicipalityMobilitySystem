@@ -29,7 +29,7 @@ namespace MunicipalityMobilitySystem.Core.Contracts.Vehicle
 
         public int CategoryId { get; }
 
-        public IEnumerable<CategoryServiceModel> Categories { get; }
+        public IEnumerable<VehicleParkServiceModel> Categories { get; }
 
         public int VehicleParkId { get; }
 

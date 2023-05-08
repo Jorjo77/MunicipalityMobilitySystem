@@ -16,11 +16,11 @@ namespace MunicipalityMobilitySystem.Core.Services
             this.repo = repo;
         }
 
-        public async Task<IEnumerable<CategoryServiceModel>> AllCategories()
+        public async Task<IEnumerable<VehicleParkServiceModel>> AllCategories()
         {
             return await repo.AllReadonly<Category>()
                 .OrderBy(c => c.Id)
-                .Select(c => new CategoryServiceModel
+                .Select(c => new VehicleParkServiceModel
                 {
                     Id = c.Id,
                     Name = c.Name

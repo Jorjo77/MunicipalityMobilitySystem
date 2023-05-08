@@ -51,7 +51,7 @@ namespace MunicipalityMobilitySystem.Core.Models.Vehicle
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
-        public IEnumerable<CategoryServiceModel> Categories { get; set; } = new List<CategoryServiceModel>();
+        public IEnumerable<VehicleParkServiceModel> Categories { get; set; } = new List<VehicleParkServiceModel>();
 
         [Required]
         [ForeignKey(nameof(VehiclePark))]
