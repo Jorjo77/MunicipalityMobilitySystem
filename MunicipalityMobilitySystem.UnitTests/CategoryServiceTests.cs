@@ -98,53 +98,6 @@ namespace MunicipalityMobilitySystem.UnitTests
             Assert.IsTrue(dbCategoryNames.Skip(2).First() == "Car");
         }
 
-        //[Test]
-        //public async Task TestLast3HousesInMemory()
-        //{
-        //    var loggerMock = new Mock<ILogger<HouseService>>();
-        //    logger = loggerMock.Object;
-        //    var repo = new Repository(applicationDbContext);
-        //    houseService = new HouseService(repo, guard, logger);
-
-        //    await repo.AddRangeAsync(new List<House>()
-        //    {
-        //        new House() { Id = 1, Address = "", ImageUrl = "", Title = "", Description = "" },
-        //        new House() { Id = 3, Address = "", ImageUrl = "", Title = "", Description = "" },
-        //        new House() { Id = 5, Address = "", ImageUrl = "", Title = "", Description = "" },
-        //        new House() { Id = 2, Address = "", ImageUrl = "", Title = "", Description = "" }
-        //    });
-
-        //    await repo.SaveChangesAsync();
-        //    var hoseCollection = await houseService.LastThreeHouses();
-
-        //    Assert.That(3, Is.EqualTo(hoseCollection.Count()));
-        //    Assert.That(hoseCollection.Any(h => h.Id == 1), Is.False);
-        //}
-
-        //[Test]
-        //public async Task TestLast3HousesNumberAndOrder()
-        //{
-        //    var loggerMock = new Mock<ILogger<HouseService>>();
-        //    logger = loggerMock.Object;
-        //    var repoMock = new Mock<IRepository>();
-        //    IQueryable<House> houses = new List<House>()
-        //    {
-        //        new House() { Id = 1 },
-        //        new House() { Id = 3 },
-        //        new House() { Id = 5 },
-        //        new House() { Id = 2 }
-        //    }.AsQueryable();
-        //    repoMock.Setup(r => r.AllReadonly<House>())
-        //        .Returns(houses);
-        //    repo = repoMock.Object;
-        //    houseService = new HouseService(repo, guard, logger);
-
-        //    var hoseCollection = await houseService.LastThreeHouses();
-
-        //    Assert.That(3, Is.EqualTo(hoseCollection.Count()));
-        //    Assert.That(hoseCollection.Any(h => h.Id == 1), Is.False);
-        //}
-
         [TearDown]
         public void TearDown()
         {

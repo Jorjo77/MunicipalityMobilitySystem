@@ -19,9 +19,9 @@ namespace MunicipalityMobilitySystem.Controllers
         public async Task<IActionResult> Details(int id)
         {
             if ((await vehicleParkService.Exists(id)) == false)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+                {
+                    return RedirectToAction("Index", "Home");
+                }
 
             var model = await vehicleParkService.VehicleParkDetailsById(id);
 

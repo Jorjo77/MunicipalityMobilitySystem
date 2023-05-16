@@ -1,22 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
-using MunicipalityMobilitySystem.Core.Contracts.Category;
 using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
-using MunicipalityMobilitySystem.Core.Exceptions;
-using MunicipalityMobilitySystem.Core.Models.Category;
 using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 using MunicipalityMobilitySystem.Core.Services;
 using MunicipalityMobilitySystem.Data;
 using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace MunicipalityMobilitySystem.UnitTests
 {
@@ -122,6 +112,139 @@ namespace MunicipalityMobilitySystem.UnitTests
             Assert.IsTrue(dbVehicleParks.Skip(2).First().Phone == seededVehiclePark3.Phone);      
             Assert.IsTrue(dbVehicleParks.Skip(2).First().ImageUrl == seededVehiclePark3.ImageUrl);   
             Assert.IsTrue(dbVehicleParks.Skip(2).First().Description == seededVehiclePark3.Description);
+        }
+
+        [Test]
+        public async Task AllVehiclesByVehicleParkIdShouldReturnCorrectVehiclesNumber()
+        {
+
+            var mokedLogger = new Mock<ILogger<VehicleParkService>>();
+            logger = mokedLogger.Object;
+            repo = new Repository(applicationDbContext);
+            
+            vehicleParkService = new VehicleParkService(repo, logger);
+
+            var vehiclesInDBinVehiclePark1 = await vehicleParkService.AllVehiclesByVehicleParkId(1);
+            var vehiclesInDBinVehiclePark2 = await vehicleParkService.AllVehiclesByVehicleParkId(2);
+            var vehiclesInDBinVehiclePark3 = await vehicleParkService.AllVehiclesByVehicleParkId(3);
+
+            Assert.That(vehiclesInDBinVehiclePark1.TotalVehiclesCount, Is.EqualTo(3));
+            Assert.That(vehiclesInDBinVehiclePark2.TotalVehiclesCount, Is.EqualTo(3));
+            Assert.That(vehiclesInDBinVehiclePark3.TotalVehiclesCount, Is.EqualTo(3));
+        }
+
+        [Test]
+
+        public async Task CreateShouldMakeAndSaveNewCorrectVehiclePark()
+        {
+            var mokedLogger = new Mock<ILogger<VehicleParkService>>();
+            logger = mokedLogger.Object;
+            repo = new Repository(applicationDbContext);
+
+            vehicleParkService = new VehicleParkService(repo, logger);
+
+            await vehicleParkService.Create(new VehicleParkDetailsModel()
+            {
+                Name = "TestName",
+                Adress = "TestAdress",
+                ImageUrl = "TestImageUrl",
+                Phone = "TestPhone",
+                Email = "TestEmail",
+                Description = "This vehicle park is created",
+            });
+
+            var createdVehiclePark = await vehicleParkService.VehicleParkDetailsById(4);
+
+            Assert.That(createdVehiclePark.Description, Is.EqualTo("This vehicle park is created"));
+            Assert.That(createdVehiclePark.Name, Is.EqualTo("TestName"));
+            Assert.That(createdVehiclePark.Adress, Is.EqualTo("TestAdress"));
+            Assert.That(createdVehiclePark.ImageUrl, Is.EqualTo("TestImageUrl"));
+            Assert.That(createdVehiclePark.Phone, Is.EqualTo("TestPhone"));
+            Assert.That(createdVehiclePark.Email, Is.EqualTo("TestEmail"));
+        }
+
+        [Test]
+        public async Task DeleteShouldRemoveVehicleParkFromDB()
+        {
+            var mokedLogger = new Mock<ILogger<VehicleParkService>>();
+            logger = mokedLogger.Object;
+
+            repo = new Repository(applicationDbContext);
+
+            vehicleParkService = new VehicleParkService(repo, logger);
+
+            await vehicleParkService.Delete(1);
+
+            var vehicleParksInMemory = await vehicleParkService.AllVehicleParks();
+
+            Assert.That(vehicleParksInMemory.Count(), Is.EqualTo(2));
+
+            await vehicleParkService.Delete(2);
+
+            vehicleParksInMemory = await vehicleParkService.AllVehicleParks();
+
+            Assert.That(vehicleParksInMemory.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public async Task EditShouldChangeCorrectVP()
+        {
+            var mokedLogger = new Mock<ILogger<VehicleParkService>>();
+            logger = mokedLogger.Object;
+            repo = new Repository(applicationDbContext);
+
+            vehicleParkService = new VehicleParkService(repo, logger);
+
+            var model = new VehicleParkDetailsModel()
+            {
+                Id = 1,
+                Name = "TestName",
+                Adress = "TestAdress",
+                ImageUrl = "TestImageUrl",
+                Phone = "TestPhone",
+                Email = "TestEmail",
+                Description = "This vehicle park is edited"
+            };
+
+            await vehicleParkService.EditVehiclePark(1, model);
+
+            var editedVehiclePark = await vehicleParkService.VehicleParkDetails(1);
+
+            Assert.That(editedVehiclePark.Name, Is.EqualTo("TestName"));
+            Assert.That(editedVehiclePark.Adress, Is.EqualTo("TestAdress"));
+            Assert.That(editedVehiclePark.ImageUrl, Is.EqualTo("TestImageUrl"));
+            Assert.That(editedVehiclePark.Phone, Is.EqualTo("TestPhone"));
+            Assert.That(editedVehiclePark.Email, Is.EqualTo("TestEmail"));
+            Assert.That(editedVehiclePark.Description, Is.EqualTo("This vehicle park is edited"));
+        }
+
+        [Test]
+        public async Task ExistsShouldReturnCorrectCondition()
+         {
+            var mokedLogger = new Mock<ILogger<VehicleParkService>>();
+            logger = mokedLogger.Object;
+            repo = new Repository(applicationDbContext);
+
+            vehicleParkService = new VehicleParkService(repo, logger);
+
+            Assert.That(await vehicleParkService.Exists(1), Is.True);
+            Assert.That(await vehicleParkService.Exists(2), Is.True);
+            Assert.That(await vehicleParkService.Exists(3), Is.True);
+            Assert.That(await vehicleParkService.Exists(4), Is.False);
+        }
+
+        [Test]
+        public async Task ExistsByNameEmailAndDescriptionShouldReturnCorrectCondition()
+        {
+            var mokedLogger = new Mock<ILogger<VehicleParkService>>();
+            logger = mokedLogger.Object;
+            repo = new Repository(applicationDbContext);
+
+            vehicleParkService = new VehicleParkService(repo, logger);
+
+            Assert.That(await vehicleParkService.VehiceParkExistsByNameEmailAndDescription("North park", "park@abv.bg", "Your best northen possibility for renting a vehicle!"), Is.False);
+            Assert.That(await vehicleParkService.VehiceParkExistsByNameEmailAndDescription("Test", "", ""), Is.False);
+            Assert.That(await vehicleParkService.VehiceParkExistsByNameEmailAndDescription("Western Park", "western_rent@abv.bg", "Your western oportunity to find out the best ranting offer!"), Is.True);
         }
 
         [TearDown]
