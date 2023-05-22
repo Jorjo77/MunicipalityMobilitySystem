@@ -151,7 +151,6 @@ namespace MunicipalityMobilitySystem.Core.Services
             vehicle.MomenOfLeave = DateTime.UtcNow;
 
             guard.AgainstNull(vehicle.MomenOfLeave, "Vehicle can not be found");
-            guard.AgainstNull(vehicle.MomenOfRent, "Vehicle can not be found");
 
             vehicle.RentsCount++;
 
@@ -170,6 +169,7 @@ namespace MunicipalityMobilitySystem.Core.Services
             guard.AgainstNull(vehicleForRent, "Vehicle can not be found");
 
             vehicleForRent.RenterId = currentUserId;
+
             vehicleForRent.MomenOfRent = DateTime.UtcNow;
 
             await repo.SaveChangesAsync();
@@ -286,13 +286,15 @@ namespace MunicipalityMobilitySystem.Core.Services
 
             vehicle.CustomersFeedback.Add(feedback);
 
-            var customerFeedback = CustomerVotesByVehicleId(vehicleId);
+            await repo.AddAsync<CustomerFeedback>(feedback);
 
-            var averageRating = Math.Ceiling(customerFeedback.Result.Average(cf => cf.Vote));
+            await repo.SaveChangesAsync();
+
+            var customerFeedback = await CustomerVotesByVehicleId(vehicleId);
+
+            var averageRating = Math.Ceiling(customerFeedback.Average(cf => cf.Vote));
             
             vehicle.Rating = averageRating;
-
-            await repo.AddAsync<CustomerFeedback>(feedback);
 
             await repo.SaveChangesAsync();
         }

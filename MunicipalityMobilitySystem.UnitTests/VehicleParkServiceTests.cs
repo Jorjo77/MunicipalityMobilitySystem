@@ -5,7 +5,6 @@ using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
 using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 using MunicipalityMobilitySystem.Core.Services;
 using MunicipalityMobilitySystem.Data;
-using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
 
 namespace MunicipalityMobilitySystem.UnitTests
@@ -154,13 +153,15 @@ namespace MunicipalityMobilitySystem.UnitTests
             });
 
             var createdVehiclePark = await vehicleParkService.VehicleParkDetailsById(4);
-
-            Assert.That(createdVehiclePark.Description, Is.EqualTo("This vehicle park is created"));
-            Assert.That(createdVehiclePark.Name, Is.EqualTo("TestName"));
-            Assert.That(createdVehiclePark.Adress, Is.EqualTo("TestAdress"));
-            Assert.That(createdVehiclePark.ImageUrl, Is.EqualTo("TestImageUrl"));
-            Assert.That(createdVehiclePark.Phone, Is.EqualTo("TestPhone"));
-            Assert.That(createdVehiclePark.Email, Is.EqualTo("TestEmail"));
+            Assert.Multiple(() =>
+            {
+                Assert.That(createdVehiclePark.Description, Is.EqualTo("This vehicle park is created"));
+                Assert.That(createdVehiclePark.Name, Is.EqualTo("TestName"));
+                Assert.That(createdVehiclePark.Adress, Is.EqualTo("TestAdress"));
+                Assert.That(createdVehiclePark.ImageUrl, Is.EqualTo("TestImageUrl"));
+                Assert.That(createdVehiclePark.Phone, Is.EqualTo("TestPhone"));
+                Assert.That(createdVehiclePark.Email, Is.EqualTo("TestEmail"));
+            });
         }
 
         [Test]
@@ -220,17 +221,19 @@ namespace MunicipalityMobilitySystem.UnitTests
 
         [Test]
         public async Task ExistsShouldReturnCorrectCondition()
-         {
+        {
             var mokedLogger = new Mock<ILogger<VehicleParkService>>();
             logger = mokedLogger.Object;
             repo = new Repository(applicationDbContext);
 
             vehicleParkService = new VehicleParkService(repo, logger);
-
-            Assert.That(await vehicleParkService.Exists(1), Is.True);
-            Assert.That(await vehicleParkService.Exists(2), Is.True);
-            Assert.That(await vehicleParkService.Exists(3), Is.True);
-            Assert.That(await vehicleParkService.Exists(4), Is.False);
+            Assert.Multiple(async () =>
+            {
+                Assert.That(await vehicleParkService.Exists(1), Is.True);
+                Assert.That(await vehicleParkService.Exists(2), Is.True);
+                Assert.That(await vehicleParkService.Exists(3), Is.True);
+                Assert.That(await vehicleParkService.Exists(4), Is.False);
+            });
         }
 
         [Test]
@@ -241,10 +244,12 @@ namespace MunicipalityMobilitySystem.UnitTests
             repo = new Repository(applicationDbContext);
 
             vehicleParkService = new VehicleParkService(repo, logger);
-
-            Assert.That(await vehicleParkService.VehiceParkExistsByNameEmailAndDescription("North park", "park@abv.bg", "Your best northen possibility for renting a vehicle!"), Is.False);
-            Assert.That(await vehicleParkService.VehiceParkExistsByNameEmailAndDescription("Test", "", ""), Is.False);
-            Assert.That(await vehicleParkService.VehiceParkExistsByNameEmailAndDescription("Western Park", "western_rent@abv.bg", "Your western oportunity to find out the best ranting offer!"), Is.True);
+            Assert.Multiple(async () =>
+            {
+                Assert.That(await vehicleParkService.VehiceParkExistsByNameEmailAndDescription("North park", "park@abv.bg", "Your best northen possibility for renting a vehicle!"), Is.False);
+                Assert.That(await vehicleParkService.VehiceParkExistsByNameEmailAndDescription("Test", "", ""), Is.False);
+                Assert.That(await vehicleParkService.VehiceParkExistsByNameEmailAndDescription("Western Park", "western_rent@abv.bg", "Your western oportunity to find out the best ranting offer!"), Is.True);
+            });
         }
 
         [TearDown]

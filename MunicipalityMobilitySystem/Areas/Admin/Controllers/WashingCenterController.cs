@@ -32,7 +32,7 @@ namespace MunicipalityMobilitySystem.Areas.Admin.Controllers
                     return RedirectToAction(nameof(Index));
                 }
 
-                washingCenter.VehiclesForCleaning = await washingCenterService.GetVehiclesForWashing(washingCenter.Id);
+                washingCenter.VehiclesForCleaning = await washingCenterService.GetVehiclesForWashing(washingCenter.Adress);
             }
 
             return View(model);

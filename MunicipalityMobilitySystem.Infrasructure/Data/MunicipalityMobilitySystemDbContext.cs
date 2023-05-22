@@ -243,7 +243,7 @@ namespace MunicipalityMobilitySystem.Data
                 CategoryId = this.Scooter.Id,
                 VehicleParkId = 1,
                 ImageUrl = "https://images.piaggio.com/piaggio/vehicles/nclp000u15/nclp8znu15/nclp8znu15-01-s.png",
-                Description = "A realy good transport solution for a city.",
+                Description = "A really good transport solution for a city.",
                 RenterId = null
             };
             this.ThirdScooter = new Vehicle()
@@ -313,7 +313,7 @@ namespace MunicipalityMobilitySystem.Data
                 CategoryId = this.Car.Id,
                 VehicleParkId = 1,
                 ImageUrl = "https://imgd.aeplcdn.com/1056x594/cw/ec/9692/Hyundai-Eon-Right-Front-Three-Quarter-94097.jpg?v=201711021421&q=75&wm=1",
-                Description = "A very good and transport solution for a city center.",
+                Description = "A very good transport solution for a city centre.",
                 RenterId = null
             };
             this.SecondCar = new Vehicle()
