@@ -15,19 +15,15 @@ namespace MunicipalityMobilitySystem.Core.Services
     public class VehicleService : IVehicleService
     {
         private readonly IRepository repo;
-
         private readonly IGuard guard;
-
         private readonly ILogger logger;
-
-        public VehicleService(
-            IRepository repo,
-            IGuard guard,
-            ILogger<VehicleService> logger)
+        public VehicleService(IRepository _repo,
+                              IGuard _guard,
+                              ILogger<VehicleService> _logger)
         {
-            this.repo = repo;
-            this.logger = logger;
-            this.guard = guard;
+            repo = _repo;
+            logger = _logger;
+            guard = _guard;
         }
 
         public async Task<IEnumerable<VehicleServiceModel>> AllVehiclesByUserId(string id)

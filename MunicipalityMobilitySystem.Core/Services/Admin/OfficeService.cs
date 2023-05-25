@@ -18,8 +18,8 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
 
 
         public OfficeService(ILogger<OfficeService> _logger,
-            IGuard _guard,
-            IRepository _repo)
+                             IGuard _guard,
+                             IRepository _repo)
         {
             logger = _logger;
             guard = _guard;
@@ -30,17 +30,17 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
         {
             var vehicle = await repo.GetByIdAsync<Vehicle>(model.Id);
 
-            vehicle.FailureDescription= model.FailureDescription;
+            vehicle.FailureDescription = model.FailureDescription;
 
             await repo.SaveChangesAsync();
         }
 
         public async Task<VehicleDetailsViewModel> GetLeftVehicleById(int vehicleId)
         {
-            var vehicle =  await repo.All<Vehicle>()
-                .Where(v=> v.Id == vehicleId
+            var vehicle = await repo.All<Vehicle>()
+                .Where(v => v.Id == vehicleId
                     && v.IsActive)
-                .Select( v => new VehicleDetailsViewModel 
+                .Select(v => new VehicleDetailsViewModel
                 {
                     Id = v.Id,
                     RegistrationNumber = v.RegistrationNumber,
@@ -53,24 +53,23 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     PricePerHour = v.PricePerHour,
                     MomenOfLeave = v.MomenOfLeave,
                     MomenOfRent = v.MomenOfRent,
-                    FailureDescription= v.FailureDescription
-                }).FirstOrDefaultAsync();
-
+                    FailureDescription = v.FailureDescription
+                })
+                .FirstOrDefaultAsync();
 
             guard.AgainstNull(vehicle, "Vehicle can not be found");
 
             return vehicle;
-
         }
 
         public async Task<IEnumerable<VehicleDetailsViewModel>> GetLeftVehicles()
         {
             return await repo.All<Vehicle>()
-                .Where(v=>v.MomenOfLeave != null 
-                && v. ForCleaning == false
+                .Where(v => v.MomenOfLeave != null
+                && v.ForCleaning == false
                 && v.ForRepearing == false
                 && v.IsActive)
-                .Select(v=> new VehicleDetailsViewModel
+                .Select(v => new VehicleDetailsViewModel
                 {
                     Id = v.Id,
                     RegistrationNumber = v.RegistrationNumber,
@@ -78,12 +77,12 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     VehicleParkId = v.VehicleParkId,
                     ForCleaning = v.ForCleaning,
                     ForRepearing = v.ForRepearing,
-                    RentedPeriod= v.RentedPeriod,
-                    RenterId= v.RenterId,
-                    PricePerHour= v.PricePerHour,
+                    RentedPeriod = v.RentedPeriod,
+                    RenterId = v.RenterId,
+                    PricePerHour = v.PricePerHour,
                     MomenOfLeave = v.MomenOfLeave,
                     MomenOfRent = v.MomenOfRent,
-                    FailureDescription= v.FailureDescription
+                    FailureDescription = v.FailureDescription
                 })
                 .ToListAsync();
         }
@@ -112,17 +111,17 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
             return await repo.AllReadonly<Bill>()
                 .Select(b => new TheBillViewModel
                 {
-                    Id= b.Id,
-                    Title= b.Title,
+                    Id = b.Id,
+                    Title = b.Title,
                     RegistrationNumber = b.RegistrationNumber,
                     Model = b.Model,
-                    MomenOfLeave= b.MomenOfLeave,
-                    MomenOfRent= b.MomenOfRent,
+                    MomenOfLeave = b.MomenOfLeave,
+                    MomenOfRent = b.MomenOfRent,
                     PricePerHour = b.PricePerHour,
-                    RentedPeriod= b.RentedPeriod,
-                    RenterId= b.RenterId,
-                    VehicleId= b.VehicleId,
-                    TotalPrice= b.TotalPrice
+                    RentedPeriod = b.RentedPeriod,
+                    RenterId = b.RenterId,
+                    VehicleId = b.VehicleId,
+                    TotalPrice = b.TotalPrice
                 })
                 .ToListAsync();
         }
@@ -132,7 +131,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
 
             var theBill = new Bill
             {
-                Title = username, 
+                Title = username,
                 RegistrationNumber = vehicleModel.RegistrationNumber,
                 Model = vehicleModel.Model,
                 MomenOfRent = vehicleModel.MomenOfRent,
@@ -177,16 +176,16 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                 .Select(b => new TheBillViewModel
                 {
                     Id = b.Id,
-                    Title= b.Title,
+                    Title = b.Title,
                     RegistrationNumber = b.RegistrationNumber,
                     VehicleId = b.VehicleId,
                     Model = b.Model,
                     PricePerHour = b.PricePerHour,
                     RenterId = b.RenterId,
-                    MomenOfRent= b.MomenOfRent,
-                    MomenOfLeave= b.MomenOfLeave,
-                    RentedPeriod= b.RentedPeriod,
-                    TotalPrice= b.TotalPrice
+                    MomenOfRent = b.MomenOfRent,
+                    MomenOfLeave = b.MomenOfLeave,
+                    RentedPeriod = b.RentedPeriod,
+                    TotalPrice = b.TotalPrice
                 })
                 .ToListAsync();
         }
@@ -208,7 +207,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
             }
         }
 
-        public async Task<TheBillViewModel>GetBillById(int id)
+        public async Task<TheBillViewModel> GetBillById(int id)
         {
             return await repo.AllReadonly<Bill>()
                 .Where(b => b.Id == id)

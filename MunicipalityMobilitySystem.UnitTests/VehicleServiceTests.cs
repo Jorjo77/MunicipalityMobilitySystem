@@ -2,15 +2,11 @@
 using Microsoft.Extensions.Logging;
 using Moq;
 using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
-using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
 using MunicipalityMobilitySystem.Core.Exceptions;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
-using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 using MunicipalityMobilitySystem.Core.Services;
 using MunicipalityMobilitySystem.Data;
-using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
-using static MunicipalityMobilitySystem.Data.DataConstants;
 
 namespace MunicipalityMobilitySystem.UnitTests
 {
