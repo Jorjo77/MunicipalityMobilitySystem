@@ -57,11 +57,21 @@ namespace MunicipalityMobility.Core.Services.Admin
         }
         public async Task Delete(int id)
         {
+
             var repairCenter = await repo.GetByIdAsync<RepairCenter>(id);
 
-            await repo.DeleteAsync<RepairCenter>(repairCenter);
+            try
+            {
+                repo.Delete(repairCenter);
 
-            await repo.SaveChangesAsync();
+                await repo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Delete), ex);
+                throw new ApplicationException("Database failed to delete info", ex);
+            }
+
         }
         public async Task<RepairCenterServiceModel> GetRepairCenterById(int id)
         {
@@ -159,24 +169,27 @@ namespace MunicipalityMobility.Core.Services.Admin
         }
         public async Task<VehicleDetailsViewModel> GetVehicleForRepairById(int vehicleId)
         {
-            return await repo.AllReadonly<Vehicle>()
-                .Where(v => v.Id == vehicleId
-                && v.IsActive)
-                .Select(v => new VehicleDetailsViewModel
-                {
-                    Id = v.Id,
-                    Model = v.Model,
-                    ImageUrl = v.ImageUrl,
-                    VehicleParkId = v.VehicleParkId,
-                    CategoryId = v.CategoryId,
-                    EngineType = v.EngineType,
-                    Description = v.Description,
-                    ForCleaning = v.ForCleaning,
-                    ForRepearing = v.ForRepearing,
-                    RegistrationNumber = v.RegistrationNumber,
-                    FailureDescription = v.FailureDescription,
-                })
-                .FirstAsync();
+
+            return await repo.All<Vehicle>()
+               .Where(v => v.ForRepearing == true
+               && v.Id == vehicleId
+               && v.IsActive)
+               .Select(v => new VehicleDetailsViewModel
+               {
+                   Id = v.Id,
+                   Model = v.Model,
+                   ImageUrl = v.ImageUrl,
+                   VehicleParkId = v.VehicleParkId,
+                   CategoryId = v.CategoryId,
+                   EngineType = v.EngineType,
+                   Description = v.Description,
+                   ForCleaning = v.ForCleaning,
+                   ForRepearing = v.ForRepearing,
+                   RegistrationNumber = v.RegistrationNumber,
+                   FailureDescription = v.FailureDescription,
+               })
+               .FirstAsync();
+
         }
 
         public async Task<bool> ExistsOrderById(int id)
