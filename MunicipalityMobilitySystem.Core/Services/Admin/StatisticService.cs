@@ -38,9 +38,9 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                 .Where(v => v.IsActive
                         && v.RenterId != null)
                 .Count();
-            
+
         }
-        public int GetVehicleParksCount() 
+        public int GetVehicleParksCount()
         {
             return repo.AllReadonly<VehiclePark>().Count();
         }
@@ -58,7 +58,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     EngineType = v.EngineType,
                     PricePerHour = (int)v.PricePerHour,
                     Model = v.Model,
-                    TotalExpenses = (double)v.OrderedParts.Sum(op=>op.TotalPrice),
+                    TotalExpenses = (double)v.OrderedParts.Sum(op => op.TotalPrice),
                     TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
                     TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice)
                 })
@@ -117,7 +117,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
         public StatisticVehicleModel GetTopScooter()
         {
             return repo.AllReadonly<Vehicle>()
-                .Where(v => v.Category.Name == "Scooter" 
+                .Where(v => v.Category.Name == "Scooter"
                 && v.IsActive)
                 .Select(v => new StatisticVehicleModel
                 {
@@ -133,6 +133,8 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
                     TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice)
                 })
+                .OrderByDescending(v => v.TotalProfit)
+                .ThenByDescending(v => v.RentedPeriod)
                 .First();
         }
         public StatisticViewModel GetStatistic()
@@ -166,7 +168,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     .Select(v => new StatisticVehicleParkModel
                     {
                         VehicleParkName = vehiclePark.Name,
-                        VehicleParkAdress= vehiclePark.Adress,
+                        VehicleParkAdress = vehiclePark.Adress,
                         PricePerHour = (int)v.PricePerHour,
                         RentedPeriod = v.RentedPeriod,
                         RentsCount = v.RentsCount,
@@ -180,22 +182,20 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                 groupedVehicles.Add(vehiclesStatistic);
             }
 
-            //var orderedVehicles = groupedVehicles.OrderByDescending(vg=>vg.OrderByDescending(v=>v.TotalProfit));
-
-            return groupedVehicles;
+            return groupedVehicles.OrderByDescending(gv => gv.Sum(v => v.TotalProfit));
         }
 
         public IEnumerable<VehicleParkModel> GetVehicleParks()
         {
             return repo.AllReadonly<VehiclePark>()
-                .Select(v=> new VehicleParkModel
+                .Select(v => new VehicleParkModel
                 {
-                    Name= v.Name,
-                    Id= v.Id,
-                    ImageUrl= v.ImageUrl,
-                    Adress= v.Adress,
-                    Email= v.Email,
-                    Phone= v.Phone,
+                    Name = v.Name,
+                    Id = v.Id,
+                    ImageUrl = v.ImageUrl,
+                    Adress = v.Adress,
+                    Email = v.Email,
+                    Phone = v.Phone,
                 })
                 .ToList();
         }
@@ -203,7 +203,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
         public IEnumerable<StatisticVehicleModel> GetThreeMostReparedVehicles()
         {
             return repo.AllReadonly<Vehicle>()
-                .Select(v=> new StatisticVehicleModel
+                .Select(v => new StatisticVehicleModel
                 {
                     RegistrationNumber = v.RegistrationNumber,
                     RentedPeriod = v.RentedPeriod,
@@ -216,7 +216,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
                     TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice)
                 })
-                .OrderByDescending(v=>v.TotalExpenses)
+                .OrderByDescending(v => v.TotalExpenses)
                 .ThenByDescending(v => v.RepairsCount)
                 .Take(3)
                 .ToList();
@@ -225,7 +225,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
         public StatisticDetailsVehicleModel GetVehicleStatisticDetailsById(int id)
         {
             return repo.AllReadonly<Vehicle>()
-                .Where(v=>v.Id == id)
+                .Where(v => v.Id == id)
                 .Select(v => new StatisticDetailsVehicleModel
                 {
                     Model = v.Model,
@@ -241,13 +241,14 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     TotalExpenses = (double)v.OrderedParts.Sum(op => op.TotalPrice),
                     TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
                     TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice),
-                }).First();
+                })
+                .First();
         }
 
         public ICollection<TheBillViewModel> AllBillsByVehicleId(int id)
         {
             return repo.AllReadonly<Bill>()
-                .Where(b=>b.VehicleId == id)
+                .Where(b => b.VehicleId == id)
                 .Select(b => new TheBillViewModel
                 {
                     Id = b.Id,
@@ -283,7 +284,7 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                 .Where(cf => cf.VehicleId == id)
                 .Select(cf => new VehicleDetailsFeedbackServiceModel
                 {
-                    Id=cf.Id,
+                    Id = cf.Id,
                     Model = cf.Vehicle.Model,
                     Rating = cf.Vehicle.Rating,
                     ImageUrl = cf.Vehicle.ImageUrl,

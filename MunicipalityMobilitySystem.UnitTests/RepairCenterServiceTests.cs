@@ -261,7 +261,6 @@ namespace MunicipalityMobilitySystem.UnitTests
             });
         }
 
-
         [Test]
         public async Task RepairVehicleShuldWorksCorrectly()
         {
