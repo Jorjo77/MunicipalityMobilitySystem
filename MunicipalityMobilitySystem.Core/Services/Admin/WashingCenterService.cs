@@ -58,9 +58,18 @@ namespace MunicipalityMobility.Core.Services.Admin
         public async Task Delete(int id)
         {
             var washingCenter = await repo.GetByIdAsync<WashingCenter>(id);
-            repo.Delete(washingCenter);
 
-            await repo.SaveChangesAsync();
+            try
+            {
+                repo.Delete(washingCenter);
+
+                await repo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Delete), ex);
+                throw new ApplicationException("Database failed to delete info", ex);
+            }
         }
 
         public async Task<WashingCenterServiceModel> GetWashingCenterById(int id)

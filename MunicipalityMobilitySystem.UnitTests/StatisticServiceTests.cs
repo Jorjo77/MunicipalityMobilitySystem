@@ -609,7 +609,7 @@ namespace MunicipalityMobilitySystem.UnitTests
 
             var vehicle = new Vehicle
             {
-                Id= 10,
+                Id = 10,
                 RegistrationNumber = "Test",
                 Model = "Test",
                 CategoryId = 0,
