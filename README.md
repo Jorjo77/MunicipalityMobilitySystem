@@ -42,7 +42,7 @@ Mobility System е проект, който обединява на едно м�
 
 ### Home View
 
-![Home View](https://github.com/Jorjo77/[MunicipalityMobilitySystem]/blob/master/Screenshots/MainView.jpg)
+![Home View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/MainView.jpg)
 
 ### Details Vehicle Park
 
