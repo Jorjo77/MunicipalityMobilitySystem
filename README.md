@@ -36,31 +36,31 @@ Mobility System е проект, който обединява на едно м�
 
 ## Диаграма на базата
 
-![Database diagram](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/DatabaseDiagram.jpg "Database diagram")
+![Database diagram](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/DatabaseDiagram.jpg "Database diagram")
 
 ## Екранни снимки (Screenshots)
 
-![Home View](https://github.com/Jorjo77/[MunicipalityMobilitySystem]/blob/master/MainView.jpg "Home View")
+![Home View](https://github.com/Jorjo77/[MunicipalityMobilitySystem]/blob/master/Screenshots/MainView.jpg "Home View")
 
-![Details Vehicle Park](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/DetailsVehicleParkView.jpg "Details Vehicle Park")
+![Details Vehicle Park](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/DetailsVehicleParkView.jpg "Details Vehicle Park")
 
-![Vehicle Parks View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/VehicleParksView.jpg "Vehicle Parks View")
+![Vehicle Parks View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/VehicleParksView.jpg "Vehicle Parks View")
 
-![Vehicle Park Vehicles View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/VehicleParkVehiclesView.jpg "Vehicle Park Vehicles View")
+![Vehicle Park Vehicles View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/VehicleParkVehiclesView.jpg "Vehicle Park Vehicles View")
 
-![My Vehicles View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/MyVehiclesView.jpg "My Vehicles View")
+![My Vehicles View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/MyVehiclesView.jpg "My Vehicles View")
 
-![Admin Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/AdminHomeArea.jpg "Admin Home Area")
+![Admin Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/AdminHomeArea.jpg "Admin Home Area")
 
-![Admin Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/AdminHomeArea.jpg "Admin Home Area")
+![Admin Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/AdminHomeArea.jpg "Admin Home Area")
 
-![Boss Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/BossHomeArea.jpg "Boss Home Area")
+![Boss Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/BossHomeArea.jpg "Boss Home Area")
 
-![Manager Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/ManagerHomeArea.jpg "Manager Home Area")
+![Manager Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/Screenshots/master/ManagerHomeArea.jpg "Manager Home Area")
 
-![Mechanic Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/MechanicHomeArea.jpg "Mechanic Home Area")
+![Mechanic Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/MechanicHomeArea.jpg "Mechanic Home Area")
 
-![Cleaner Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/CleanerHomeArea.jpg "Cleaner Home Area")
+![Cleaner Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/CleanerHomeArea.jpg "Cleaner Home Area")
 
 ## Автор
 
