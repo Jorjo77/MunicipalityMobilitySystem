@@ -44,13 +44,14 @@ Mobility System е проект, който обединява на едно м�
 
 ![Home View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/MainView.jpg)
 
-### Details Vehicle Park
-
-![Details Vehicle Park](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/DetailsVehicleParkView.jpg)
 
 ### Vehicle Parks View
 
 ![Vehicle Parks View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/VehicleParksView.jpg)
+
+### Details Vehicle Park
+
+![Details Vehicle Park](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/DetailsVehicleParkView.jpg)
 
 ### Vehicle Park Vehicles View
 
