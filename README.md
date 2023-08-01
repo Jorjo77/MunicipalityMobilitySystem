@@ -70,7 +70,7 @@ Mobility System е проект, който обединява на едно м�
 
 ### Manager Home Area
 
-![Manager Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/Screenshots/master/ManagerHomeArea.jpg)
+![Manager Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/ManagerHomeArea.jpg)
 
 ### Mechanic Home Area
 
@@ -82,8 +82,8 @@ Mobility System е проект, който обединява на едно м�
 
 ## Автор
 
-[Георги Колев](https://https://github.com/Jorjo77 "My Git Hub")
-<jorjo7@abv.bg>
+*	[Георги Колев](https://https://github.com/Jorjo77 "My Git Hub")				
+*   <jorjo7@abv.bg>
 
 
 ## Лиценз
