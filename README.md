@@ -18,49 +18,67 @@
 Mobility System е проект, който обединява на едно място удобен потребителски интерфейс, възможност за преглед и наемане на превозни средства с интегрирана рейтинг система, която е допълнително потребителско изживяване. В бъдеще се планира изграждането на реална система за плащане на сметките от наем както и създаване на чат система за комуникация. 
 
 ### Използвани технологии
-
-•	Microsoft .NET 6 
-•	MVC Architecture
-•	Entity Framework Core 
-•	SQL Server
-•	C#
-•	Java Script
-•	HTML
-•	CSS
-•	Toast Notification
-•	Sweet Alert 2
-•	jQuery
-•	Font Awesome
-•	Bootstrap 5
-•	Toastr
+*
+*	Microsoft .NET 6 
+*	MVC Architecture
+*	Entity Framework Core 
+*	SQL Server
+*	C#
+*	Java Script
+*	HTML
+*	CSS
+*	Toast Notification
+*	Sweet Alert 2
+*	jQuery
+*	Font Awesome
+*	Bootstrap 5
+*	Toastr
 
 ## Диаграма на базата
 
-![Database diagram](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/DatabaseDiagram.jpg "Database diagram")
+![Database diagram](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/DatabaseDiagram.jpg)
 
 ## Екранни снимки (Screenshots)
 
-![Home View](https://github.com/Jorjo77/[MunicipalityMobilitySystem]/blob/master/Screenshots/MainView.jpg "Home View")
+### Home View
 
-![Details Vehicle Park](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/DetailsVehicleParkView.jpg "Details Vehicle Park")
+![Home View](https://github.com/Jorjo77/[MunicipalityMobilitySystem]/blob/master/Screenshots/MainView.jpg)
 
-![Vehicle Parks View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/VehicleParksView.jpg "Vehicle Parks View")
+### Details Vehicle Park
 
-![Vehicle Park Vehicles View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/VehicleParkVehiclesView.jpg "Vehicle Park Vehicles View")
+![Details Vehicle Park](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/DetailsVehicleParkView.jpg)
 
-![My Vehicles View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/MyVehiclesView.jpg "My Vehicles View")
+### Vehicle Parks View
 
-![Admin Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/AdminHomeArea.jpg "Admin Home Area")
+![Vehicle Parks View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/VehicleParksView.jpg)
 
-![Admin Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/AdminHomeArea.jpg "Admin Home Area")
+### Vehicle Park Vehicles View
 
-![Boss Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/BossHomeArea.jpg "Boss Home Area")
+![Vehicle Park Vehicles View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/VehicleParkVehiclesView.jpg)
 
-![Manager Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/Screenshots/master/ManagerHomeArea.jpg "Manager Home Area")
+### My Vehicles View
 
-![Mechanic Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/MechanicHomeArea.jpg "Mechanic Home Area")
+![My Vehicles View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/MyVehiclesView.jpg)
 
-![Cleaner Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/CleanerHomeArea.jpg "Cleaner Home Area")
+### Admin Home Area
+
+![Admin Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/AdminHomeArea.jpg)
+
+### Boss Home Area
+
+![Boss Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/BossHomeArea.jpg)
+
+### Manager Home Area
+
+![Manager Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/Screenshots/master/ManagerHomeArea.jpg)
+
+### Mechanic Home Area
+
+![Mechanic Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/MechanicHomeArea.jpg)
+
+### Cleaner Home Area
+
+![Cleaner Home Area](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/CleanerHomeArea.jpg)
 
 ## Автор
 
