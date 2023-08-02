@@ -61,7 +61,7 @@ Mobility System е проект, който обединява на едно м�
 
 ![My Vehicles View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/MyVehiclesView.jpg)
 
-### My Vehicles View
+### My Bills View
 
 ![My Vehicles View](https://github.com/Jorjo77/MunicipalityMobilitySystem/blob/master/Screenshots/MyBillsView.jpg)
 
