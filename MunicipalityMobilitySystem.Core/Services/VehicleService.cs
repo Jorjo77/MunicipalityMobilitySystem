@@ -146,12 +146,11 @@ namespace MunicipalityMobilitySystem.Core.Services
 
             vehicle.MomenOfLeave = DateTime.UtcNow;
 
-            guard.AgainstNull(vehicle.MomenOfLeave, "Vehicle can not be found");
-
             vehicle.RentsCount++;
 
             await repo.SaveChangesAsync();
         }
+
 
         public async Task Rent(int vehicleId, string currentUserId)
         {

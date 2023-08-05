@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
+using MunicipalityMobility.Core.Services.Admin;
 using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
 using MunicipalityMobilitySystem.Core.Models.VehiclePark;
 using MunicipalityMobilitySystem.Core.Services;
@@ -133,6 +134,33 @@ namespace MunicipalityMobilitySystem.UnitTests
         }
 
         [Test]
+        public async Task AllVehiclesByVehicleParkIdShouldReturnCorrectVehiclesNumberWhenCategoryAdded()
+        {
+
+            var mokedLogger = new Mock<ILogger<VehicleParkService>>();
+            logger = mokedLogger.Object;
+            repo = new Repository(applicationDbContext);
+
+            vehicleParkService = new VehicleParkService(repo, logger);
+
+            var vehiclesInDBinVehiclePark1 = await vehicleParkService.AllVehiclesByVehicleParkId(1, "Bike");
+            var vehiclesInDBinVehiclePark2 = await vehicleParkService.AllVehiclesByVehicleParkId(2, "Bike");
+            var vehiclesInDBinVehiclePark3 = await vehicleParkService.AllVehiclesByVehicleParkId(3, "Bike");
+
+            Assert.That(vehiclesInDBinVehiclePark1.TotalVehiclesCount, Is.EqualTo(1));
+            Assert.That(vehiclesInDBinVehiclePark2.TotalVehiclesCount, Is.EqualTo(1));
+            Assert.That(vehiclesInDBinVehiclePark3.TotalVehiclesCount, Is.EqualTo(1));
+
+            var vehiclesInDBinVehiclePark1SecCategory = await vehicleParkService.AllVehiclesByVehicleParkId(1, "Car");
+            var vehiclesInDBinVehiclePark2SecCategory = await vehicleParkService.AllVehiclesByVehicleParkId(2, "Car");
+            var vehiclesInDBinVehiclePark3SecCategory = await vehicleParkService.AllVehiclesByVehicleParkId(3, "Car");
+
+            Assert.That(vehiclesInDBinVehiclePark1SecCategory.TotalVehiclesCount, Is.EqualTo(1));
+            Assert.That(vehiclesInDBinVehiclePark2SecCategory.TotalVehiclesCount, Is.EqualTo(1));
+            Assert.That(vehiclesInDBinVehiclePark3SecCategory.TotalVehiclesCount, Is.EqualTo(1));
+        }
+
+        [Test]
 
         public async Task CreateShouldMakeAndSaveNewCorrectVehiclePark()
         {
@@ -162,6 +190,26 @@ namespace MunicipalityMobilitySystem.UnitTests
                 Assert.That(createdVehiclePark.Phone, Is.EqualTo("TestPhone"));
                 Assert.That(createdVehiclePark.Email, Is.EqualTo("TestEmail"));
             });
+        }
+
+        [Test]
+        public async Task CreateShouldThrowApplicationExceptionIfDoNotReceiveCorrectVehiclePark()
+        {
+            var mokedLogger = new Mock<ILogger<VehicleParkService>>();
+            logger = mokedLogger.Object;
+            repo = new Repository(applicationDbContext);
+
+            vehicleParkService = new VehicleParkService(repo, logger);
+
+
+            Assert.ThrowsAsync<ApplicationException>(async () => await vehicleParkService.Create(new VehicleParkDetailsModel()
+            {
+                Name = "TestName",
+                Adress = "TestAdress",
+                ImageUrl = "TestImageUrl",
+                Phone = "TestPhone",
+                Email = "TestEmail",
+            }));
         }
 
         [Test]

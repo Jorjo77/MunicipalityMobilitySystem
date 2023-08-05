@@ -2,10 +2,12 @@
 using Microsoft.Extensions.Logging;
 using Moq;
 using MunicipalityMobilitySystem.Core.Contracts.Vehicle;
+using MunicipalityMobilitySystem.Core.Contracts.VehiclePark;
 using MunicipalityMobilitySystem.Core.Exceptions;
 using MunicipalityMobilitySystem.Core.Models.Vehicle;
 using MunicipalityMobilitySystem.Core.Services;
 using MunicipalityMobilitySystem.Data;
+using MunicipalityMobilitySystem.Infrasructure.Data.Entities;
 using MunicipalityMobilitySystem.Infrastructure.Data.Common;
 
 
@@ -88,6 +90,25 @@ namespace MunicipalityMobilitySystem.UnitTests
         }
 
         [Test]
+        public async Task AllVehiclesShouldReturnCorrectVehiclesNumberWhenCategoryAdded()
+        {
+
+            var mokedLogger = new Mock<ILogger<VehicleService>>();
+            logger = mokedLogger.Object;
+            repo = new Repository(applicationDbContext);
+
+            vehicleService = new VehicleService(repo, guard, logger);
+
+            var vehiclesInDBbyCategory = await vehicleService.AllVehicles("Bike");
+            var vehiclesInDBbyCategory2 = await vehicleService.AllVehicles("Car");
+            var vehiclesInDBbyCategory3 = await vehicleService.AllVehicles("Scooter");
+
+            Assert.That( vehiclesInDBbyCategory.TotalVehiclesCount, Is.EqualTo(3));
+            Assert.That( vehiclesInDBbyCategory2.TotalVehiclesCount, Is.EqualTo(3));
+            Assert.That(vehiclesInDBbyCategory3.TotalVehiclesCount, Is.EqualTo(3));
+        }
+
+        [Test]
         public async Task ExistsShouldReturnCorrectCondition()
         {
             var mokedLogger = new Mock<ILogger<VehicleService>>();
@@ -161,6 +182,35 @@ namespace MunicipalityMobilitySystem.UnitTests
             Assert.IsFalse(await vehicleService.IsRentedByUserWithId(2, "TestRenter"));
         }
 
+        [Test]
+        public async Task LeaveShouldWorksCorrectlyWhenRentedVehicleLeave()
+        {
+            var mokedLogger = new Mock<ILogger<VehicleService>>();
+            logger = mokedLogger.Object;
+            var repo = new Repository(applicationDbContext);
+
+            vehicleService = new VehicleService(repo, guard, logger);
+
+            var vehicle = await repo.GetByIdAsync<Vehicle>(1);
+            vehicle.RenterId = "c4994c60-af11-4deb-ad0c-d021ace3e1b2";
+            vehicle.RentsCount = 1;
+          
+            await vehicleService.Leave(1);
+
+            Assert.That(vehicle.RentsCount, Is.EqualTo(2));
+        }
+
+        [Test]//To find can I Test Guard !????
+        public async Task GuargShouldWorksCorrectly()
+        {
+            var mokedLogger = new Mock<ILogger<VehicleService>>();
+            logger = mokedLogger.Object;
+            var repo = new Repository(applicationDbContext);
+
+            vehicleService = new VehicleService(repo, guard, logger);
+
+            Assert.ThrowsAsync<VehicleRentingException>(async () => await vehicleService.Leave(111));
+        }
 
         [Test]
         public async Task LeaveShouldThrowArgumentExceptionWhenLeaveNotRentedVehicle()
