@@ -36,7 +36,7 @@
                 && this.User.IsInRole(Mechanic))
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Municipality Mobility System</a>
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="AllOrders"> All Expenses</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="AllOrders"> All Orders</a>
                 }
                 @if (this.User?.Identity != null
                 && this.User.Identity.IsAuthenticated
@@ -49,7 +49,7 @@
                 && this.User.IsInRole(Manager))
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Municipality Mobility System</a>
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="AllBills"> All Incomes</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="AllBills"> All Bills</a>
                 }
                 @if (this.User?.Identity != null
                 && this.User.Identity.IsAuthenticated
@@ -59,8 +59,8 @@
                     <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="Index"> Manager work area</a>
                     <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="Index"> Mechanic work area</a>
                     <a class="navbar-brand" asp-area="Admin" asp-controller="WashingCenter" asp-action="Index"> Cleaner work area</a>
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="AllBills"> All Bills</a>
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="AllOrders"> All Orders</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="AllBills"> All Incomes</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="AllOrders"> All Expenses</a>
                 }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
