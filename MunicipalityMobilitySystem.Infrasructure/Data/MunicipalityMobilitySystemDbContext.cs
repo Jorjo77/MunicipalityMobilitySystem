@@ -242,7 +242,7 @@ namespace MunicipalityMobilitySystem.Data
                 PricePerHour = 10.00M,
                 CategoryId = this.Scooter.Id,
                 VehicleParkId = 1,
-                ImageUrl = "https://images.piaggio.com/piaggio/vehicles/nclp000u15/nclp8znu15/nclp8znu15-01-s.png",
+                ImageUrl = "https://gerlimoto.com/wp-content/uploads/2021/05/2022_01_Piaggio_1_3-4AntDX_NerooVerdeOpaco_bianco-scaled.jpg",
                 Description = "A really good transport solution for a city.",
                 RenterId = null
             };
