@@ -25,8 +25,6 @@
     <div class="carousel-inner">
         @foreach (var vehicle in topVehicles)
         {
-            //var totalIncome = Math.Ceiling(vehicle.RentedPeriod * vehicle.PricePerHour);//was totalIncome
-
             <div class="carousel-item @(first ? "active" : string.Empty)">
                 <img class="d-block w-90" style="height:400px"
                      src="@vehicle.ImageUrl" alt="@vehicle.Model">
