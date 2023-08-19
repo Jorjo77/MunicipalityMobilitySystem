@@ -50,8 +50,9 @@ namespace MunicipalityMobilitySystem.Core.Services
             var result = new VehicleQueryModel();
 
             var vehicles = repo.AllReadonly<Vehicle>()
-                .Where(v => v.VehicleParkId == id)
-                .Where(v => v.ForCleaning == false);
+                .Where(v => v.VehicleParkId == id
+                        && v.IsActive
+                        && v.ForCleaning == false);
 
             if (!string.IsNullOrEmpty(category))
             {
@@ -98,6 +99,7 @@ namespace MunicipalityMobilitySystem.Core.Services
                     PricePerHour = v.PricePerHour,
                     Rating = v.Rating,
                     RenterId = v.RenterId,
+                    IsActive = v.IsActive
                 })
                 .ToListAsync();
 

@@ -107,6 +107,7 @@ namespace MunicipalityMobilitySystem.Core.Services
                     PricePerHour = v.PricePerHour,
                     Rating = v.Rating,
                     RenterId = v.RenterId,
+                    IsActive = v.IsActive
                 })
                 .ToListAsync();
 
