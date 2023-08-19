@@ -71,7 +71,7 @@ namespace MunicipalityMobilitySystem.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteBill(int id)
         {
-            await officeService.DeleteBillById(id);
+            await officeService.DeleteMyBillById(id);
 
             return RedirectToAction("MineBills", "Home", new { area = "" });
         }

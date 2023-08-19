@@ -583,6 +583,70 @@ namespace MunicipalityMobilitySystem.UnitTests
         }
 
         [Test]
+        public async Task DeleteMyBillByIdShouldWorkCorrectly()
+        {
+            var mokedLogger = new Mock<ILogger<OfficeService>>();
+            logger = mokedLogger.Object;
+            repo = new Repository(applicationDbContext);
+
+            officeService = new OfficeService(logger, guard, repo);
+
+            var vehicle = new Vehicle
+            {
+                Id = 10,
+                RegistrationNumber = "Test",
+                Model = "Test",
+                CategoryId = 0,
+                Description = "Test",
+                EngineType = "Test",
+                ImageUrl = "Test",
+                MomenOfLeave = new DateTime(2019, 05, 09, 19, 15, 0),
+                MomenOfRent = new DateTime(2019, 05, 09, 9, 15, 0),
+                PricePerHour = 10,
+                RentedPeriod = 10,
+                VehicleParkId = 0,
+                RenterId = "004bb11b-754a-422d-917b-27729dd1af3c",
+                FailureDescription = "Test",
+                IsActive = true
+            };
+
+            var model = new VehicleDetailsViewModel
+            {
+                Id = 10,
+                RegistrationNumber = "Test",
+                Model = "Test",
+                CategoryId = 0,
+                Description = "Test",
+                EngineType = "Test",
+                ImageUrl = "Test",
+                MomenOfLeave = new DateTime(2019, 05, 09, 19, 15, 0),
+                MomenOfRent = new DateTime(2019, 05, 09, 9, 15, 0),
+                PricePerHour = 10m,
+                RentedPeriod = 10,
+                VehicleParkId = 0,
+                RenterId = "004bb11b-754a-422d-917b-27729dd1af3c",
+                FailureDescription = "Test",
+                IsActive = true
+            };
+
+            await repo.AddAsync(vehicle);
+
+            await repo.SaveChangesAsync();
+
+            await officeService.MakeAndPostTheBill(model, "User");
+
+            await officeService.DeleteMyBillById(1);
+
+            var bills = await officeService.AllBillsByUserId("004bb11b-754a-422d-917b-27729dd1af3c");
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(bills.Any(), Is.False);
+                Assert.That(bills.Count, Is.EqualTo(0));
+            });
+        }
+
+        [Test]
         public async Task AllBillsByUserIdShouldWorkCorrectly()
         {
             var mokedLogger = new Mock<ILogger<OfficeService>>();
