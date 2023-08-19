@@ -216,8 +216,8 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
                     TotalIncome = (double)v.PricePerHour * v.RentedPeriod,
                     TotalProfit = ((double)v.PricePerHour * v.RentedPeriod) - (double)v.OrderedParts.Sum(op => op.TotalPrice)
                 })
-                .OrderByDescending(v => v.TotalExpenses)
-                .ThenByDescending(v => v.RepairsCount)
+                .OrderByDescending(v => v.RepairsCount)
+                .ThenByDescending(v => v.TotalExpenses)
                 .Take(3)
                 .ToList();
         }

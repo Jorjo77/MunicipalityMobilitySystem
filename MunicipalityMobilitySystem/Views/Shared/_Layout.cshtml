@@ -17,40 +17,40 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Municipality Mobility System</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Mobility System</a>
                 @if (this.User?.Identity != null 
                 && this.User.Identity.IsAuthenticated
                 && this.User.IsInRole(AdminRolleName))
                 {
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="Admin" asp-action="Index"> Administrator work area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="Admin" asp-action="Index">Administrator work area</a>
                 }
                 @if (this.User?.Identity != null
                 && this.User.Identity.IsAuthenticated
                 && this.User.IsInRole(Mechanic))
                 {
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="Index"> Mechanic work area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="Index">Mechanic work area</a>
                 }
                 @if (this.User?.Identity != null
                 && this.User.Identity.IsAuthenticated
                 && this.User.IsInRole(Cleaner))
                 {
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="WashingCenter" asp-action="Index"> Cleaner work area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="WashingCenter" asp-action="Index">Cleaner work area</a>
                 }
                 @if (this.User?.Identity != null
                 && this.User.Identity.IsAuthenticated
                 && this.User.IsInRole(Manager))
                 {
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="Index"> Manager work area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="Index">Manager work area</a>
                 }
                 @if (this.User?.Identity != null
                 && this.User.Identity.IsAuthenticated
                 && this.User.IsInRole(Boss))
                 {
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="Statistic" asp-action="Index"> Boss home area</a>
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="Admin" asp-action="Index"> Administrator home area</a>
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="Index"> Manager work area</a>
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="Index"> Mechanic home area</a>
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="WashingCenter" asp-action="Index"> Cleaner home area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="Statistic" asp-action="Index">Boss home area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="Admin" asp-action="Index">Administrator home area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="Index">Manager work area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="Index">Mechanic home area</a>
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="WashingCenter" asp-action="Index">Cleaner home area</a>
                 }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -62,10 +62,10 @@
                         && this.User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehicle" asp-action="Mine"> My Rented Vehicles</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehicle" asp-action="Mine">My Rented Vehicles</a>
                             </li>
                             <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MineBills"> My Bills</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MineBills">My Bills</a>
                             </li>
                         }
                     </ul>
@@ -83,7 +83,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.UtcNow.Year - MunicipalityMobilitySystem 
+            &copy; @DateTime.UtcNow.Year - Mobility System 
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

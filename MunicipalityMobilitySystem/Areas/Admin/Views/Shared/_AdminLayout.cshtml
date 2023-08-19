@@ -21,7 +21,7 @@
                         &&this.User.Identity.IsAuthenticated
                         &&this.User.IsInRole(Boss))
                 {
-                    <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Municipality Mobility System</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Mobility System</a>
                 }
 
 
@@ -29,26 +29,26 @@
                 && this.User.Identity.IsAuthenticated
                 && this.User.IsInRole(AdminRolleName))
                 {
-                    <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Municipality Mobility System</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Mobility System</a>
                 }
                 @if (this.User?.Identity != null
                 && this.User.Identity.IsAuthenticated
                 && this.User.IsInRole(Mechanic))
                 {
-                    <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Municipality Mobility System</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Mobility System</a>
                     <a class="navbar-brand" asp-area="Admin" asp-controller="RepairCenter" asp-action="AllOrders"> All Orders</a>
                 }
                 @if (this.User?.Identity != null
                 && this.User.Identity.IsAuthenticated
                 && this.User.IsInRole(Cleaner))
                 {
-                    <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Municipality Mobility System</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Mobility System</a>
                 }
                 @if (this.User?.Identity != null
                 && this.User.Identity.IsAuthenticated
                 && this.User.IsInRole(Manager))
                 {
-                    <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Municipality Mobility System</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Vehicle" asp-action="All">Mobility System</a>
                     <a class="navbar-brand" asp-area="Admin" asp-controller="Office" asp-action="AllBills"> All Bills</a>
                 }
                 @if (this.User?.Identity != null
@@ -93,7 +93,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.UtcNow.Year - MunicipalityMobilitySystem
+            &copy; @DateTime.UtcNow.Year - Mobility System
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
