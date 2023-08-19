@@ -207,14 +207,6 @@ namespace MunicipalityMobilitySystem.Core.Services.Admin
             }
         }
 
-        public async Task DeleteMyBillById(int id)
-        {
-            var bill = await repo.GetByIdAsync<Bill>(id);
-            bill.RenterId = null;
-
-            await repo.SaveChangesAsync();
-        }
-
         public async Task<TheBillViewModel> GetBillById(int id)
         {
             return await repo.AllReadonly<Bill>()
